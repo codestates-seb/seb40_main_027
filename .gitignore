@@ -2,6 +2,6 @@
 
 !/server/src/main/java/*
 
-server/*
+server/gradle/*
 
 
