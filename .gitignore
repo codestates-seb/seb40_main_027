@@ -3,3 +3,5 @@
 server/.gradle
 server/build
 server/HELP.md
+
+server/src/main/resources
