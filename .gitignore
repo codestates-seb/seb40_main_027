@@ -1,0 +1,5 @@
+.idea/
+
+server/.gradle
+server/build
+server/HELP.md
