@@ -1,7 +1,12 @@
 import { RegisterButton } from './RegisterButton';
 import { LoginButton } from './LoginButton';
-import { BigTagButton, SmallTagButton } from './TagButton';
+import {
+  BigBorderTagButton,
+  SmallBorderTagButton,
+  BigBackgroundTagButton,
+  SmallBackgroundTagButton,
+} from './TagButton';
 
 export { RegisterButton };
 export { LoginButton };
-export { BigTagButton, SmallTagButton };
+export { BigBorderTagButton, SmallBorderTagButton, BigBackgroundTagButton, SmallBackgroundTagButton };
