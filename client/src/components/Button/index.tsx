@@ -6,9 +6,9 @@ import {
   BigBackgroundTagButton,
   SmallBackgroundTagButton,
 } from './TagButton';
-import { WritePostButton } from './WritePostButton';
+import { WriteButton } from './WriteButton';
 
 export { RegisterButton };
 export { LoginButton };
 export { BigBorderTagButton, SmallBorderTagButton, BigBackgroundTagButton, SmallBackgroundTagButton };
-export { WritePostButton };
+export { WriteButton };

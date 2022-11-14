@@ -30,7 +30,7 @@ const StyledButton = styled(StyledBackgroundButton)`
   }
 `;
 
-export const WritePostButton = () => {
+export const WriteButton = () => {
   return (
     <StyledButton>
       <InlineIcon icon="bi:pencil" />
