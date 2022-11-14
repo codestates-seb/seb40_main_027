@@ -25,11 +25,11 @@ const HeaderContent = styled.div`
     align-items: center;
     justify-content: space-around;
     header {
-      margin-left: 8rem;
+      margin-left: 7.5rem;
       width: 100%;
     }
     img {
-      width: 130px;
+      width: 140px;
       height: 60px;
     }
   }
