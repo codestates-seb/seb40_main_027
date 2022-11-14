@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 const SearchWrapper = styled.form`
+  width: 200px; // 임시 조정(추후 페이지에 따라 조정 또는 리펙토링 필요)
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,13 +12,12 @@ const SearchWrapper = styled.form`
   input {
     padding-left: 1rem;
     width: 100%;
-    height: 100%;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    /* height: 100%;  */
     border: none;
     outline: none;
     font-size: 80%;
-    :focus {
-      outline: #00ff00 dotted thick;
-    }
   }
 `;
 
