@@ -18,6 +18,22 @@ const HeaderContent = styled.div`
     width: 150px;
     height: 60px;
   }
+
+  @media screen and (max-width: 414px) and (max-height: 667px) {
+    background-color: red;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    header {
+      margin-left: 8rem;
+      width: 100%;
+    }
+    img {
+      width: 130px;
+      height: 60px;
+    }
+  }
 `;
 
 const Header = () => {
