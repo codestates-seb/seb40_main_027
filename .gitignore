@@ -1,7 +1,7 @@
 .idea/
 
-!/server/src/main/java/*
+server/.gradle
+server/build
+server/HELP.md
 
-server/gradle/*
-
-
+server/src/main/resources
