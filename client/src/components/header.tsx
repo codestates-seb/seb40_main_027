@@ -20,7 +20,6 @@ const HeaderContent = styled.div`
   }
 
   @media screen and (max-width: 414px) and (max-height: 667px) {
-    background-color: red;
     width: 100%;
     display: flex;
     align-items: center;
