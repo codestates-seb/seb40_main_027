@@ -1,4 +1,3 @@
-import Some from './some';
 // import logo from './image/logo.png';
 import Header from './components/header';
 
