@@ -11,7 +11,6 @@ function App() {
           {/* <img src={logo} alt="logo" /> */}
         </div>
         <div>hi</div>
-        <Some />
       </header>
     </div>
   );
