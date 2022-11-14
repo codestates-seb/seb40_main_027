@@ -55,6 +55,11 @@ const GlobalStyle = createGlobalStyle`
     border-collapse: collapse;
     border-spacing: 0;
   }
+  
+  button {
+    cursor: pointer;
+    padding: 0;
+  }
 
   * {
     box-sizing: border-box;
@@ -62,24 +67,25 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
-    color: #000;
+    color: #000000;
     margin: 0;
 
-    --bg: white;
-    --textNormal: #222;
-    --textTitle: #222;
-    --reviewPurple: #B832F8;
-    --studyBlue: #39739D;
+    --whiteBackground: #FFFFFF;
+    --greenMain: #1DCA89;
+    --blackTextNormal: #222222;
+    --blackTextTitle: #222222;
+    --purpleReview: #B832F8;
+    --blueStudy: #39739D;
     --grayHeaderBorder: #D6D6D6;
     --grayContentsBorder: #B6B6B6;
     --grayBoardAreaBorder: #DDDDDD;
     --grayListFill: #EEEEEE;
     --redButtonDelete: #CA471D;
 
-    background-color: var(--bg);
+    background-color: var(--whiteBackground);
 
     a, a.logo {
-      color: black;
+      color: #000000;
     }
   }
 `;
