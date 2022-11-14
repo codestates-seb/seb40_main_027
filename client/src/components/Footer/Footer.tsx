@@ -11,8 +11,6 @@ const FooterWrapper = styled.footer`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    .inner_left {
-    }
     a:first-child {
       margin-right: 1rem;
     }
@@ -20,7 +18,7 @@ const FooterWrapper = styled.footer`
   @media ${theme.mobile} {
     width: 100vw;
     font-size: 10px;
-    .footer_inner {
+    .footer-inner {
       width: 375px;
       display: flex;
       justify-content: space-between;
@@ -48,19 +46,19 @@ const footerText = [
 const Footer = () => {
   return (
     <FooterWrapper>
-      <div className="footer_inner">
-        <div className="inner_left">
+      <div className="footer-inner">
+        <div>
           {footerText.map((el, idx) =>
-            idx < 2 ? (
+            idx <= 1 ? (
               <a key={idx} href={el.link} target="_blank" rel="noopener noreferrer">
                 {el.text}
               </a>
             ) : null
           )}
         </div>
-        <div className="inner_rigth">
+        <div>
           {footerText.map((el, idx) =>
-            idx > 1 ? (
+            idx >= 2 ? (
               <a key={idx} href={el.link} target="_blank" rel="noopener noreferrer">
                 {el.text}
               </a>
