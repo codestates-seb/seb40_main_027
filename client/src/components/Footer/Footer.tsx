@@ -45,7 +45,7 @@ const footerText = [
   { text: '깃허브링크(GitHub)', link: 'https://github.com/codestates-seb/seb40_main_027/tree/main' },
 ];
 
-const Footer: any = () => {
+const Footer = () => {
   return (
     <FooterWrapper>
       <div className="footer_inner">
