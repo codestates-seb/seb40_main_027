@@ -3,40 +3,33 @@ import logo from '../image/logo.png';
 import { useState } from 'react';
 import Nickname from './Nickname';
 
-const HeaderLine = styled.div`
-  border-bottom: 1px solid #d6d6d6;
+const HeaderContent = styled.div`
+  width: 100%;
+  height: 4rem;
+  border: 1px solid #d6d6d6;
 
-  @media all and (max-width: 4400px) and (max-height: 480px) {
-    background-color: red;
+  header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
   }
-`;
 
-const HeaderContent = styled.header`
-  /* width: 1160px; */
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 3rem;
-
-  @media all and (max-width: 320px) and (max-height: 480px) {
-    background-color: red;
-  }
   img {
-    width: 130px;
-    height: 50px;
+    width: 150px;
+    height: 60px;
   }
 `;
 
 const Header = () => {
-  const [islogin, setIslogin] = useState(false);
+  const [islogin, setIslogin] = useState(true);
 
   const clickLogin = () => {
     //임의로 오류안나게하기 위해 넣은 함수
     setIslogin(!islogin);
   };
   return (
-    <HeaderLine>
-      <HeaderContent>
+    <HeaderContent>
+      <header>
         <img src={logo} alt="logo" />
         {islogin ? (
           <div>
@@ -48,8 +41,8 @@ const Header = () => {
             <Nickname />
           </div>
         )}
-      </HeaderContent>
-    </HeaderLine>
+      </header>
+    </HeaderContent>
   );
 };
 
