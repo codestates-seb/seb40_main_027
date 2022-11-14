@@ -1,6 +1,6 @@
 // import logo from './image/logo.png';
 // import Header from './components/Mainheader';
-import PageHeader from './components/PageHeader';
+import PageHeader from './components/Header/PageHeader';
 
 function App() {
   return (
