@@ -2,27 +2,32 @@ import styled from 'styled-components';
 import theme from '../../styles/theme';
 
 const FooterWrapper = styled.footer`
-  width: 1920px; // 이거 어떻게 불러오지??
-  border-top: 1px solid black;
+  width: 100vw;
+  border-top: 1px solid var(--grayHeaderBorder);
   display: flex;
   justify-content: center;
   .footer_inner {
     width: 1160px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    .inner_left {
+    }
     a:first-child {
       margin-right: 1rem;
     }
   }
   @media ${theme.mobile} {
-    width: 414px;
+    width: 100vw;
     font-size: 10px;
     .footer_inner {
       width: 375px;
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       align-items: center;
+      a {
+        color: red;
+      }
       a:first-child {
         margin-right: 1rem;
       }
@@ -33,7 +38,10 @@ const FooterWrapper = styled.footer`
 const footerText = [
   { text: '개인정보처리방침', link: 'https://github.com/codestates-seb/seb40_main_027/tree/main' },
   { text: '약관', link: 'https://github.com/codestates-seb/seb40_main_027/tree/main' },
-  { text: '수정요청', link: 'https://github.com/codestates-seb/seb40_main_027/tree/main' },
+  {
+    text: '수정요청',
+    link: 'https://forms.gle/3iHGo1VEHx58p85a7',
+  },
   { text: '깃허브링크(GitHub)', link: 'https://github.com/codestates-seb/seb40_main_027/tree/main' },
 ];
 
@@ -44,7 +52,7 @@ const Footer: any = () => {
         <div className="inner_left">
           {footerText.map((el, idx) =>
             idx < 2 ? (
-              <a key={idx} href={el.link}>
+              <a key={idx} href={el.link} target="_blank" rel="noopener noreferrer">
                 {el.text}
               </a>
             ) : null
@@ -53,7 +61,7 @@ const Footer: any = () => {
         <div className="inner_rigth">
           {footerText.map((el, idx) =>
             idx > 1 ? (
-              <a key={idx} href={el.link}>
+              <a key={idx} href={el.link} target="_blank" rel="noopener noreferrer">
                 {el.text}
               </a>
             ) : null
