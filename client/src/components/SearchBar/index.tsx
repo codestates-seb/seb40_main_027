@@ -7,7 +7,7 @@ const SearchWrapper = styled.form`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid lightgray;
+  border: 1px solid var(--grayContentsBorder);
   border-radius: 3px;
   input {
     padding-left: 1rem;
