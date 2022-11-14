@@ -3,12 +3,12 @@ import logo from '../image/logo.png';
 import { useState } from 'react';
 import Nickname from './Nickname';
 
-const HeaderContent = styled.div`
+const HeaderContent = styled.header`
   width: 100%;
   height: 4rem;
   border-bottom: 1px solid var(--grayHeaderBorder);
 
-  header {
+  .header-component {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -24,7 +24,7 @@ const HeaderContent = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-around;
-    header {
+    .header-component {
       margin-left: 7.5rem;
       width: 100%;
     }
@@ -44,7 +44,7 @@ const Header = () => {
   };
   return (
     <HeaderContent>
-      <header>
+      <div className="header-component">
         <img src={logo} alt="logo" />
         {islogin ? (
           <div>
@@ -56,7 +56,7 @@ const Header = () => {
             <Nickname />
           </div>
         )}
-      </header>
+      </div>
     </HeaderContent>
   );
 };
