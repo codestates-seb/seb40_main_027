@@ -9,7 +9,6 @@ function App() {
           <Header />
           {/* <img src={logo} alt="logo" /> */}
         </div>
-        <div>hi</div>
       </header>
     </div>
   );
