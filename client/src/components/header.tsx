@@ -6,7 +6,7 @@ import Nickname from './Nickname';
 const HeaderContent = styled.div`
   width: 100%;
   height: 4rem;
-  border: 1px solid #d6d6d6;
+  border-bottom: 1px solid #d6d6d6;
 
   header {
     display: flex;
