@@ -6,7 +6,7 @@ const FooterWrapper = styled.footer`
   border-top: 1px solid var(--grayHeaderBorder);
   display: flex;
   justify-content: center;
-  .footer_inner {
+  .footer-inner {
     width: 1160px;
     display: flex;
     justify-content: space-between;
