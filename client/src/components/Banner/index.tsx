@@ -35,7 +35,7 @@ const BannerWrap = styled.div`
     }
     .character {
       min-width: 100px;
-      height: 25%;
+      height: 50%;
     }
     .page-img {
       background-image: url();
