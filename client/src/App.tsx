@@ -1,16 +1,11 @@
-// import logo from './image/logo.png';
-// import Header from './components/Mainheader';
-import PageHeader from './components/Header/PageHeader';
+import { Routes, Route } from 'react-router-dom';
+import Main from './pages/Main';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <div>
-          <PageHeader />
-        </div>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<Main />} />
+    </Routes>
   );
 }
 
