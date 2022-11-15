@@ -11,13 +11,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
-
+@RestController
+@RequestMapping("/postscript")
+@Validated
 public class PostscriptController {
 
     private final PostscriptService postscriptService;
@@ -34,7 +37,7 @@ public class PostscriptController {
 
     }
 
-    @PostMapping("/postscript") //선택 조언, 후기 글 게시
+    @PostMapping //선택 조언, 후기 글 게시
     public ResponseEntity postPostscript(@Valid @RequestBody PostscriptDto.Post postscriptPostDto){
 
     Postscript postscript = postscriptService.createPostscript(
@@ -44,7 +47,7 @@ public class PostscriptController {
             new SingleResponseDto<>(postscriptMapper.postscriptToPostscriptResponseDto(postscript)), HttpStatus.CREATED);
     }
 
-    @PatchMapping("/postscript/{postscript-Id}") //선택 조언, 후기 글 수정
+    @PatchMapping("/{postscript-Id}") //선택 조언, 후기 글 수정
     public ResponseEntity patchPostscript(@PathVariable("postscript-Id") @Positive @NotNull long postscriptId,
                                           @Valid @RequestBody PostscriptDto.Patch postscriptPatchDto) {
         postscriptPatchDto.setPostscriptId(postscriptId);
@@ -76,7 +79,7 @@ public class PostscriptController {
                 postscriptMapper.postscriptsToPostscriptResponseDtos(postscripts), pagePostscripts),HttpStatus.OK);}
 
 
-    @DeleteMapping("/{postscript-Id}") //선택 조언, 후기 글 삭제
+    @DeleteMapping("/delete/{postscript-Id}") //선택 조언, 후기 글 삭제
     public ResponseEntity deletePostscript(@PathVariable("postscript-id") @Positive long postscriptId) {
         postscriptService.deletePostscript(postscriptId);
 

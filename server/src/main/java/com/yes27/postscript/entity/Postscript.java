@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -34,6 +36,9 @@ public class Postscript extends Auditable{
 
     @Column(length = 5, nullable = false)
     private Integer postscriptView = 0;
+
+    @OneToMany(mappedBy = "postscript", cascade = CascadeType.ALL, orphanRemoval = true)  // 댓글 추가
+    private List<PostscriptComment> postComments = new ArrayList<>();
 
     public enum PostscriptStatus {
         POSTSCRIPT_EXIST("존재하는 후기"),

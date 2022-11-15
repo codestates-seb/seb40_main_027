@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,7 +50,7 @@ public class PostscriptService {
 
         Optional.ofNullable(postscript.getPostscriptContent())
                 .ifPresent(findPostscript::setPostscriptContent);
-
+        findPostscript.setUpdatedAt(LocalDateTime.now());
 
         Postscript updatedPostscript = postscriptRepository.save(findPostscript);
         return updatedPostscript;
