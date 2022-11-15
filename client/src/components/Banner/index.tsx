@@ -16,6 +16,7 @@ const BannerWrap = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: end;
+    border-radius: 15px;
   }
   .character {
     width: 20%;
@@ -36,11 +37,11 @@ const BannerWrap = styled.div`
       min-width: 100px;
       height: 25%;
     }
+    .page-img {
+      background-image: url();
+    }
   }
 `;
-
-// class page-img 사진 작업 필요
-// 아래와 같이 하면 넘어갈 수는 있지만 왜 interface로 작업하면 not defined가 뜰까?
 
 interface PropType {
   text: string;
