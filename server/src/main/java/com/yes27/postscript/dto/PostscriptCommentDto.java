@@ -8,9 +8,6 @@ import java.time.LocalDateTime;
 public class PostscriptCommentDto {
 
     @Getter
-    @Setter
-    @AllArgsConstructor
-    @NoArgsConstructor
     public static class Post {
 
         private long postCommentId;
@@ -22,10 +19,9 @@ public class PostscriptCommentDto {
 
     @Getter
     @Setter
-    @AllArgsConstructor
     public static class Patch {
 
-        private long postCommentId;
+        private Long postCommentId;
 
         @NotBlank(message = "내용을 입력하세요.")
         private String postCommentContent;
@@ -34,9 +30,9 @@ public class PostscriptCommentDto {
 
     @Getter
     @Setter
-    @AllArgsConstructor
+    @NoArgsConstructor
     public static class Response {
-        private long postCommentId;
+        private Long postCommentId;
         private String postCommentContent;
 
         private LocalDateTime createdAt;

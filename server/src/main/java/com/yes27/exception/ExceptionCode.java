@@ -11,6 +11,8 @@ public enum ExceptionCode {
     POSTSCRIPT_NOT_FOUND(404, "Postscript not found"),
     POSTSCRIPT_EXISTS(409, "Postscript exists"),
 
+    COMMENT_NOT_FOUND(404, "Comment not found"),
+
     MENTOR_NOT_FOUND(404, "Mentor not found"),
     MENTOR_EXISTS(409, "Mentor exists");
 

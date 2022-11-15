@@ -1,6 +1,6 @@
 package com.yes27.postscript.entity;
 
-import com.yes27.audit.Auditable;
+import com.yes27.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @Entity
 @NoArgsConstructor
-public class Postscript extends Auditable{
+public class Postscript extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postscriptId; // 후기 생성 게시물 번호

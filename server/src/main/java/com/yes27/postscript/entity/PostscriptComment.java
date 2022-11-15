@@ -1,6 +1,6 @@
 package com.yes27.postscript.entity;
 
-import com.yes27.audit.Auditable;
+import com.yes27.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @NoArgsConstructor
-public class PostscriptComment extends Auditable {
+public class PostscriptComment extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

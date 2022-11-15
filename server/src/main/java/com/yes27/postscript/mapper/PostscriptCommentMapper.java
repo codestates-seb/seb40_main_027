@@ -36,7 +36,6 @@ public interface PostscriptCommentMapper {
         return postscriptComment;
     }
 
-    // 조회
     default PostscriptCommentDto.Response postCommentToPostCommentResponseDto(PostscriptComment postscriptComment){
 
         PostscriptCommentDto.Response postCommentResponseDto = new PostscriptCommentDto.Response();
