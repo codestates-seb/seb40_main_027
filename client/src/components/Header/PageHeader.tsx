@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import logo from '../../image/logo.png';
 import Nickname from './Nickname';
+import { Icon } from '@iconify/react';
 
 const PageMenu = styled.header`
   width: 100%;
@@ -45,6 +46,7 @@ const PageMenu = styled.header`
     .hamburger {
       display: flex;
       width: 50px;
+      justify-content: center;
     }
   }
 `;
@@ -57,26 +59,28 @@ const PageHeader = () => {
     setIslogin(!islogin);
   };
 
-  const headermenu = ['분야선택', '로드맵', '학원일정', '수료후기', '스터디모집', '멘토링'];
+  const headerMenu = ['분야선택', '로드맵', '학원일정', '수료후기', '스터디모집', '멘토링'];
   return (
     <PageMenu>
       <div className="page-header-content">
-        <span className="hamburger">햄버거</span>
+        <span className="hamburger">
+          <Icon icon="mdi:menu" />
+        </span>
         <img src={logo} alt="logo" />
-        {headermenu.map((el, idx) => (
+        {headerMenu.map((el, idx) => (
           <span className="page-menu" key={idx}>
             {el}
           </span>
         ))}
         {islogin ? (
-          <div>
+          <span>
             <button onClick={clickLogin}>로그인</button>
             <button>회원가입</button>
-          </div>
+          </span>
         ) : (
-          <div>
+          <span>
             <Nickname />
-          </div>
+          </span>
         )}
       </div>
     </PageMenu>
