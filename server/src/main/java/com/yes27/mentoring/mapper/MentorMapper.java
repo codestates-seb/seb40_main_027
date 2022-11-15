@@ -3,8 +3,8 @@ package com.yes27.mentoring.mapper;
 
 import com.yes27.mentoring.dto.MentorDto;
 import com.yes27.mentoring.entity.Mentor;
-import com.yes27.mentoringcomment.Comment;
-import com.yes27.mentoringcomment.CommentDto;
+import com.yes27.mentoringcomment.entity.Comment;
+import com.yes27.mentoringcomment.dto.CommentDto;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -26,6 +26,8 @@ public interface MentorMapper {
                         .builder()
                         .commentId(mentoringComment.getCommentId())
                         .commentContent(mentoringComment.getCommentContent())
+                        .createdAt(mentoringComment.getCreatedAt())
+                        .updatedAt(mentoringComment.getUpdatedAt())
                         .build())
                 .collect(Collectors.toList());
     }

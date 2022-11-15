@@ -10,13 +10,16 @@ import com.yes27.response.MultiResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
 @RequestMapping("/mentoring")
+@Validated
 public class MentorController {
 
     private final MentorService mentorService;
@@ -29,7 +32,7 @@ public class MentorController {
     }
 
     @PostMapping
-    public ResponseEntity addMentor(@RequestBody MentorDto.Post mentorDto){
+    public ResponseEntity addMentor(@Valid @RequestBody MentorDto.Post mentorDto){
 
         Mentor mentor = mapper.mentorPostDtoToMentor(mentorDto);
         MentorDto.Response response = mapper.mentorToMentorResponseDto(mentorService.create(mentor));
@@ -38,8 +41,8 @@ public class MentorController {
     }
 
     @PatchMapping("/{mentorId}")
-    public ResponseEntity updateMentor(@PathVariable("mentorId") long mentorId,
-                                       @RequestBody MentorDto.Patch mentorPatchDto){
+    public ResponseEntity updateMentor(@PathVariable("mentorId") @Positive long mentorId,
+                                       @Valid @RequestBody MentorDto.Patch mentorPatchDto){
         Mentor mentor = mapper.mentorPatchDtoToMentor(mentorPatchDto);
 
         MentorDto.Response response = mapper.mentorToMentorResponseDto(mentorService.update(mentorId,mentor));
@@ -49,7 +52,7 @@ public class MentorController {
 
     //게시글 상세조회
     @GetMapping("/{mentorId}")
-    public ResponseEntity getMentor(@PathVariable("mentorId") long mentorId){
+    public ResponseEntity getMentor(@PathVariable("mentorId") @Positive long mentorId){
         MentorDto.MentorsResponse response = mapper.mentoringToMentoringDetailsResponse(mentorService.findMentor(mentorId));
         return new ResponseEntity(response, HttpStatus.OK);
     }
