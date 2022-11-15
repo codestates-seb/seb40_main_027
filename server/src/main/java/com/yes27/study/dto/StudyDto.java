@@ -28,8 +28,6 @@ public class StudyDto {
 
         private int view;
         private int vote;
-        private LocalDateTime createdTime;
-        private LocalDateTime modifiedTime = LocalDateTime.now();
     }
 
     @Getter
@@ -44,8 +42,8 @@ public class StudyDto {
         private int vote;
 
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-        private LocalDateTime createdTime;
+        private LocalDateTime createdAt;
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-        private LocalDateTime modifiedTime;
+        private LocalDateTime updatedAt;
     }
 }

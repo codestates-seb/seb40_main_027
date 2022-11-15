@@ -4,9 +4,7 @@ import com.yes27.exception.BusinessLogicException;
 import com.yes27.exception.ExceptionCode;
 import com.yes27.study.entity.Study;
 import com.yes27.study.repository.StudyRepository;
-import java.time.LocalDateTime;
 import java.util.Optional;
-import javax.swing.text.html.Option;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -31,8 +29,6 @@ public class StudyService {
             .ifPresent(title -> findStudy.setStudyTitle(title));
         Optional.ofNullable(study.getStudyContent())
             .ifPresent(content -> findStudy.setStudyContent(content));
-        Optional.ofNullable(study.getModifiedTime())
-            .ifPresent(modifiedTime -> findStudy.setModifiedTime(LocalDateTime.now()));
 
         return studyRepository.save(findStudy);
     }
