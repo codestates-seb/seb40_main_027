@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+// import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
 const SearchWrapper = styled.form`
@@ -21,6 +21,20 @@ const SearchWrapper = styled.form`
     font-size: 80%;
   }
 `;
+
+// const SearchBar = () => {
+//   const { register, watch, handleSubmit } = useForm();
+//   console.log(watch());
+//   const onSubmit = (data: string): void => {
+//     console.log(data);
+//   };
+//   return (
+//     <SearchWrapper onSubmit={handleSubmit(onSubmit)}>
+//       <Icon icon="ant-design:search-outlined" />
+//       <input type="text" placeholder="검색" {...register('username')} />
+//     </SearchWrapper>
+//   );
+// };
 
 const SearchBar = () => {
   const [searchText, setSearchText] = useState('');
