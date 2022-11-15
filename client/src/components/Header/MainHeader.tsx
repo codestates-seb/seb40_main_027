@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import logo from '../image/logo.png';
+import logo from '../../image/logo.png';
 import { useState } from 'react';
 import Nickname from './Nickname';
 
