@@ -43,6 +43,7 @@ interface Title {
   title: string;
 }
 
+// class page-img 사진 작업 필요
 const Banner = ({ title }: Title) => {
   return (
     <BannerWrap>
