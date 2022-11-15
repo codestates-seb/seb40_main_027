@@ -5,7 +5,7 @@ const Main = () => {
   return (
     <>
       <MainHeader />
-      <Banner title="수료" />
+      <Banner text="수료" />
     </>
   );
 };

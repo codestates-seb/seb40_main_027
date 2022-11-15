@@ -41,17 +41,17 @@ const BannerWrap = styled.div`
 
 // class page-img 사진 작업 필요
 // 아래와 같이 하면 넘어갈 수는 있지만 왜 interface로 작업하면 not defined가 뜰까?
-/* 
-interface propType {
-  title: string;
+
+interface PropType {
+  text: string;
 }
-*/
-const Banner = ({ title = '제목' }) => {
+
+const Banner = ({ text }: PropType) => {
   return (
     <BannerWrap>
       <div className="banner-inner">
         <img className="character" src={icon} alt="icon" />
-        <div className="title">{title}</div>
+        <div className="title">{text}</div>
         <div className="page-img">right column</div>
       </div>
     </BannerWrap>
