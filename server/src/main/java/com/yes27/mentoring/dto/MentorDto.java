@@ -1,7 +1,6 @@
 package com.yes27.mentoring.dto;
 
-import com.yes27.mentoringcomment.Comment;
-import com.yes27.mentoringcomment.CommentDto;
+import com.yes27.mentoringcomment.dto.CommentDto;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -33,6 +32,7 @@ public class MentorDto {
 
     @Builder
     @Getter
+    @AllArgsConstructor
     public static class Response{
 
         private Long mentoringId;

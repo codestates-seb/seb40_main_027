@@ -1,15 +1,13 @@
 package com.yes27.mentoring.entity;
 
 import com.yes27.BaseEntity;
-import com.yes27.mentoringcomment.Comment;
-import lombok.Builder;
+import com.yes27.mentoringcomment.entity.Comment;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
