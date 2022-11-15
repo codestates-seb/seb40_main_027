@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class PostscriptDto {
     @Getter
@@ -20,7 +21,7 @@ public class PostscriptDto {
             private String postscriptContent;
 
             @NotBlank(message = "부트캠프 조언, 후기 중 골라주세요")
-            private String postTags;
+            private String postTags;  // choice 로 변경?
         }
 
     @Getter
@@ -30,14 +31,14 @@ public class PostscriptDto {
         private Long postscriptId;
         private String postscriptTitle;
         private String postscriptContent;
-        private String Tag;
+        private String Tag; // choice 로 변경?
     }
 
     @Getter
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class Response{  // 선택후기 등록 response
+    public static class PostscriptResponse{  // 선택후기 등록 response
         private Long postscriptId;
         private String postscriptTitle;
         private String postscriptContent;
@@ -47,7 +48,7 @@ public class PostscriptDto {
         private String postTags;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
-
+        private List<PostscriptCommentDto> postComments;
     }
 
 }
