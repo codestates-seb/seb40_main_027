@@ -1,18 +1,11 @@
-import { RegisterButton } from './RegisterButton';
-import { LoginButton } from './LoginButton';
-import {
+export { RegisterButton } from './RegisterButton';
+export { LoginButton } from './LoginButton';
+export {
   BigBorderTagButton,
   SmallBorderTagButton,
   BigBackgroundTagButton,
   SmallBackgroundTagButton,
 } from './TagButton';
-import { WriteButton } from './WriteButton';
-import { BorderOtherButton, BackgroundOtherButton } from './OtherButton';
-import { FilterButton } from './FilterButton';
-
-export { RegisterButton };
-export { LoginButton };
-export { BigBorderTagButton, SmallBorderTagButton, BigBackgroundTagButton, SmallBackgroundTagButton };
-export { WriteButton };
-export { BorderOtherButton, BackgroundOtherButton };
-export { FilterButton };
+export { WriteButton } from './WriteButton';
+export { BorderOtherButton, BackgroundOtherButton } from './OtherButton';
+export { FilterButton } from './FilterButton';
