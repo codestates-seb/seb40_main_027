@@ -1,0 +1,11 @@
+export const WHITE_BACKGROUND = '#FFFFFF';
+export const GREEN_MAIN = '#1DCA89';
+export const BLACK_TEXT_NORMAL = '#222222';
+export const BLACK_TEXT_TITLE = '#222222';
+export const PURPLE_REVIEW = '#B832F8';
+export const BLUE_STUDY = '#39739D';
+export const GRAY_HEADER_BORDER = '#D6D6D6';
+export const GRAY_CONTENTS_BORDER = '#B6B6B6';
+export const GRAY_BOARD_AREA_BORDER = '#DDDDDD';
+export const GRAY_LIST_FILL = '#EEEEEE';
+export const RED_BUTTON_DELETE = '#CA471D';

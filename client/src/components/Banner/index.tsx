@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import icon from '../../image/icon.png';
+import icon from '../../assets/image/icon.png';
+import boardimage from '../../assets/image/boardimage.png';
+import bootimage from '../../assets/image/bootimage.png';
 import theme from '../../styles/theme';
 
 // height: desktop=150px / mobile=83px
@@ -14,17 +16,35 @@ const BannerWrap = styled.div`
     height: 150px;
     background-color: var(--grayBanner);
     display: flex;
-    justify-content: space-between;
-    align-items: end;
     border-radius: 15px;
+    box-sizing: border-box;
   }
   .character {
-    width: 20%;
-    min-width: 225px;
-    height: 50%;
+    width: calc(100% / 3);
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    > img {
+      width: 15%;
+      min-width: 225px;
+      height: 50%;
+    }
   }
   .title {
-    height: 50%;
+    width: calc(100% / 3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .banner-img {
+    width: calc(100% / 3);
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+    > img {
+      width: 91px;
+      height: 50%;
+    }
   }
   @media ${theme.mobile} {
     width: 100vw;
@@ -34,26 +54,40 @@ const BannerWrap = styled.div`
       height: 83px;
     }
     .character {
-      min-width: 100px;
-      height: 50%;
+      width: calc(100% / 3);
+      > img {
+        min-width: 100px;
+        height: 50%;
+      }
     }
-    .page-img {
-      background-image: url();
+    .title {
+      width: calc(100% / 3);
+    }
+    .banner-img {
+      width: calc(100% / 3);
+      > img {
+        width: 40px;
+        height: 50%;
+      }
     }
   }
 `;
 
 interface PropType {
   text: string;
+  pageType: string | null;
 }
 
-const Banner = ({ text }: PropType) => {
+const Banner = ({ text, pageType }: PropType) => {
   return (
     <BannerWrap>
       <div className="banner-inner">
-        <img className="character" src={icon} alt="icon" />
+        <div className="character">{pageType === 'post' ? <img src={icon} alt="icon" /> : null}</div>
+
         <div className="title">{text}</div>
-        <div className="page-img">right column</div>
+        <div className="banner-img">
+          <img src={pageType === 'post' ? boardimage : bootimage} alt="rightimg" />
+        </div>
       </div>
     </BannerWrap>
   );
