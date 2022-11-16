@@ -1,12 +1,15 @@
 package com.yes27.study.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import java.time.LocalDateTime;
-import javax.persistence.Column;
+import com.yes27.BaseEntity;
+import com.yes27.study_comment.entity.StudyComment;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Study {
+public class Study extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long studyId;
@@ -25,11 +28,13 @@ public class Study {
     private int view = 0;
     private int vote = 0;
 
-    @Column(nullable = false, updatable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-    private LocalDateTime createdTime = LocalDateTime.now();
+    @OneToMany(mappedBy = "study", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<StudyComment> studyComments = new ArrayList<>();
 
-    @Column(nullable = false, updatable = true)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-    private LocalDateTime modifiedTime = LocalDateTime.now();
+    public void addStudyComment(StudyComment studyComment) {
+        this.studyComments.add(studyComment);
+        if (studyComment.getStudy() != this) {
+            studyComment.addStudy(this);
+        }
+    }
 }

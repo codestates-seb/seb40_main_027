@@ -1,4 +1,4 @@
-package com.yes27.study.dto;
+package com.yes27.study_comment.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
@@ -6,39 +6,33 @@ import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
-public class StudyDto {
+public class StudyCommentDto {
     @Getter
     @Setter
     public static class Post {
         @NotBlank
-        private String studyTitle;
-        @NotBlank
-        private String studyContent;
+        private String comment;
     }
 
     @Getter
     @Setter
     public static class Patch {
-        private Long studyId;
+        private Long studyCommentId;
 
         @NotBlank
-        private String studyTitle;
-        @NotBlank
-        private String studyContent;
+        private String comment;
 
-        private int view;
         private int vote;
     }
 
     @Getter
     @Setter
     public static class Response {
-        private Long studyId;
+        private Long studyCommentId;
 
-        private String studyTitle;
-        private String studyContent;
+        @NotBlank
+        private String comment;
 
-        private int view;
         private int vote;
 
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
