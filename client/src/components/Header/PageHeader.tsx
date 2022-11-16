@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import logo from '../../assets/image/logo.png';
 import Nickname from './Nickname';
 import { Icon } from '@iconify/react';
+import { RegisterButton, LoginButton } from '../Button/index';
 
 const PageMenu = styled.header`
   width: 100%;
@@ -74,8 +75,9 @@ const PageHeader = () => {
         ))}
         {islogin ? (
           <span>
-            <button onClick={clickLogin}>로그인</button>
-            <button>회원가입</button>
+            {/* <button onClick={clickLogin}>로그인</button> */}
+            <LoginButton onClick={clickLogin} />
+            <RegisterButton />
           </span>
         ) : (
           <span>
