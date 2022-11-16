@@ -1,5 +1,6 @@
 package com.yes27.postscript.dto;
 
+import com.yes27.postscripcomment.dto.PostscriptCommentDto;
 import com.yes27.postscript.entity.Postscript;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

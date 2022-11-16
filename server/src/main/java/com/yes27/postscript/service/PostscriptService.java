@@ -3,6 +3,7 @@ package com.yes27.postscript.service;
 import com.yes27.exception.BusinessLogicException;
 import com.yes27.exception.ExceptionCode;
 import com.yes27.postscript.entity.Postscript;
+import com.yes27.postscript.entity.PostscriptLike;
 import com.yes27.postscript.repository.PostscriptRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,12 +19,13 @@ import java.util.Optional;
 public class PostscriptService {
 
     private final PostscriptRepository postscriptRepository;
+    private final PostscriptLikeService postscriptLikeService;
 
-    public PostscriptService(PostscriptRepository postscriptRepository
-//                             PostscriptLikeService postscriptLikeService
+    public PostscriptService(PostscriptRepository postscriptRepository,
+                             PostscriptLikeService postscriptLikeService
                             ) {
         this.postscriptRepository = postscriptRepository;
-//        this.postscriptLikeService = postscriptLikeService;
+        this.postscriptLikeService = postscriptLikeService;
     }
 
     public Postscript createPostscript(Postscript postscript) {
@@ -76,5 +78,12 @@ public class PostscriptService {
             throw new BusinessLogicException(ExceptionCode.POSTSCRIPT_NOT_FOUND);
         }
         return findPostscript;
+    }
+
+    // 좋아요 수 새로 갱신
+    public void refreshLikes(long postscriptId) {
+        Postscript postscript = findVerifiedPostscript(postscriptId);
+        postscript.setPostscriptLikes(postscriptLikeService.getPostscriptLikes(postscriptId));
+        postscriptRepository.save(postscript);
     }
 }

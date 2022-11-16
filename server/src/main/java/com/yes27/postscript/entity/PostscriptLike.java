@@ -1,16 +1,33 @@
 package com.yes27.postscript.entity;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.yes27.BaseEntity;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public class PostscriptLike {
+import javax.persistence.*;
+
+@Getter
+@Setter
+@Entity
+@NoArgsConstructor
+public class PostscriptLike extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long postscript_id;
+    private Long postscriptLikeId;
 
     @Column
-    private int PostscriptLike = 0;
+    private int PostLike = 0;
+
+    @ManyToOne
+    @JoinColumn
+    private Postscript postscript;
+
+    public void addPoscript(Postscript postscript){
+        if(this.postscript == null && postscript != null)
+            this.postscript = postscript;
+    }
+
+    // 유저에 해당하는 컬럼 매핑, 추가 기능 구현하기
 }
