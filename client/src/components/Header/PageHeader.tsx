@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import logo from '../../image/logo.png';
+import logo from '../../assets/image/logo.png';
 import Nickname from './Nickname';
 import { Icon } from '@iconify/react';
 
