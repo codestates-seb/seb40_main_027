@@ -1,5 +1,6 @@
 package com.yes27.study.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.yes27.BaseEntity;
 import com.yes27.study_comment.entity.StudyComment;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class Study extends BaseEntity {
     private int view = 0;
     private int vote = 0;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "study", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<StudyComment> studyComments = new ArrayList<>();
 

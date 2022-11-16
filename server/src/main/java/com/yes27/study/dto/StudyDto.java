@@ -1,7 +1,10 @@
 package com.yes27.study.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.yes27.study_comment.entity.StudyComment;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,5 +45,7 @@ public class StudyDto {
         private LocalDateTime createdAt;
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
         private LocalDateTime updatedAt;
+
+        private List<StudyComment> studyComments = new ArrayList<>();
     }
 }
