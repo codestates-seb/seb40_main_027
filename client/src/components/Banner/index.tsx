@@ -14,7 +14,7 @@ const BannerWrap = styled.div`
   .banner-inner {
     width: 1160px;
     height: 150px;
-    background-color: var(--grayBanner);
+    background-color: var(--grayBannerBackground);
     display: flex;
     border-radius: 15px;
     box-sizing: border-box;
@@ -86,7 +86,7 @@ const Banner = ({ text, pageType }: PropType) => {
 
         <div className="title">{text}</div>
         <div className="banner-img">
-          <img src={pageType === 'post' ? boardimage : bootimage} alt="rightimg" />
+          <img src={pageType === 'post' ? boardimage : bootimage} alt="right-img" />
         </div>
       </div>
     </BannerWrap>
