@@ -1,9 +1,8 @@
 import MainHeader from '../components/Header/MainHeader';
-import mainbanner from '../image/mainbanner.png';
+import mainbanner from '../assets/image/mainbanner.png';
 import styled from 'styled-components';
 import { Icon } from '@iconify/react';
-import mainmobile from '../image/mainmobile.png';
-import Footer from '../components/Footer/Footer';
+import mainmobile from '../assets/image/mainmobile.png';
 
 const MainPage = styled.div`
   height: 90vh;
@@ -17,10 +16,7 @@ const MainPage = styled.div`
   }
 
   .icon-box {
-    /* margin-top: 7rem;
-    margin-left: 10rem;
-    margin-right: 10rem; */
-    margin: 8rem 10rem 0rem 10rem;
+    margin: 5% 10% 0rem 10%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,19 +46,22 @@ const MainPage = styled.div`
 const IconContent = styled.span`
   background-color: var(--grayListFill);
   height: 7rem;
-  width: 9rem;
+  width: 11%;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 20px;
-  margin: 0px 20px 0px 20px;
+  margin: 0px 1% 0px 1%;
 
   @media screen and (max-width: 414px) {
-    margin-bottom: 20px;
     display: flex;
     justify-content: center;
-    width: 6rem;
+    flex-wrap: wrap;
+    width: 40%;
+    height: 50%;
+    margin: 5%;
   }
 `;
 
@@ -100,7 +99,6 @@ const Main = () => {
           </IconContent>
         </div>
       </MainPage>
-      <Footer />
     </div>
   );
 };
