@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import logo from '../../assets/image/logo.png';
 import { useState } from 'react';
 import Nickname from './Nickname';
+import { RegisterButton, LoginButton } from '../Button/index';
 
 const HeaderContent = styled.header`
   width: 100%;
@@ -35,6 +36,7 @@ const HeaderContent = styled.header`
   }
 `;
 
+//onChange={clickLogin}
 const Header = () => {
   const [islogin, setIslogin] = useState(true);
 
@@ -48,14 +50,21 @@ const Header = () => {
         <img src={logo} alt="logo" />
         {islogin ? (
           <div>
-            <button onClick={clickLogin}>로그인</button>
-            <button>회원가입</button>
+            <LoginButton onClick={clickLogin} />
+
+            <button>
+              <RegisterButton />
+            </button>
           </div>
         ) : (
           <div>
             <Nickname />
           </div>
         )}
+        {/* <div>
+          <LoginButton />
+          <RegisterButton />
+        </div> */}
       </div>
     </HeaderContent>
   );
