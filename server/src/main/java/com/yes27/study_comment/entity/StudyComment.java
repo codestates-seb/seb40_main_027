@@ -1,10 +1,13 @@
 package com.yes27.study_comment.entity;
 
 import com.yes27.BaseEntity;
+import com.yes27.study.entity.Study;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,4 +26,15 @@ public class StudyComment extends BaseEntity {
     private String comment;
 
     private int vote = 0;
+
+    @ManyToOne
+    @JoinColumn(name = "STUDY_ID")
+    private Study study;
+
+    public void addStudy(Study study) {
+        this.study = study;
+        if (!this.study.getStudyComments().contains(this)) {
+            this.study.addStudyComment(this);
+        }
+    }
 }
