@@ -25,9 +25,6 @@ public class StudyDto {
         private String studyTitle;
         @NotBlank
         private String studyContent;
-
-        private int view;
-        private int vote;
     }
 
     @Getter

@@ -21,8 +21,6 @@ public class StudyCommentDto {
 
         @NotBlank
         private String comment;
-
-        private int vote;
     }
 
     @Getter
