@@ -1,5 +1,6 @@
 package com.yes27.study_comment.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.yes27.BaseEntity;
 import com.yes27.study.entity.Study;
 import javax.persistence.Entity;
@@ -27,6 +28,7 @@ public class StudyComment extends BaseEntity {
 
     private int vote = 0;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "STUDY_ID")
     private Study study;

@@ -1,6 +1,7 @@
 package com.yes27.study_comment.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.yes27.study.entity.Study;
 import java.time.LocalDateTime;
 import javax.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -21,8 +22,6 @@ public class StudyCommentDto {
 
         @NotBlank
         private String comment;
-
-        private int vote;
     }
 
     @Getter
@@ -39,5 +38,7 @@ public class StudyCommentDto {
         private LocalDateTime createdAt;
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
         private LocalDateTime updatedAt;
+
+        private Long studyId;
     }
 }

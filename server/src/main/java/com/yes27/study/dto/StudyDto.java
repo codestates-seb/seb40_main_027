@@ -2,6 +2,8 @@ package com.yes27.study.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,9 +27,6 @@ public class StudyDto {
         private String studyTitle;
         @NotBlank
         private String studyContent;
-
-        private int view;
-        private int vote;
     }
 
     @Getter
@@ -45,5 +44,16 @@ public class StudyDto {
         private LocalDateTime createdAt;
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
         private LocalDateTime updatedAt;
+
+        private List<StudyCommentSubset> studyComments = new ArrayList<>();
+    }
+
+    @Getter
+    @Setter
+    public static class StudyCommentSubset {
+        Long studyCommentId;
+        String comment;
     }
 }
+
+
