@@ -1,7 +1,11 @@
 import MainHeader from '../components/Header/MainHeader';
 
 const Main = () => {
-  return <MainHeader />;
+  return (
+    <>
+      <MainHeader />
+    </>
+  );
 };
 
 export default Main;
