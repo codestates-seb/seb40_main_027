@@ -2,7 +2,7 @@ package com.yes27.postscripcomment.controller;
 
 import com.yes27.postscripcomment.dto.PostscriptCommentDto;
 import com.yes27.postscripcomment.entity.PostscriptComment;
-import com.yes27.postscript.mapper.PostscriptCommentMapper;
+import com.yes27.postscripcomment.mapper.PostscriptCommentMapper;
 import com.yes27.postscripcomment.repository.PostscriptCommentRepository;
 import com.yes27.postscripcomment.service.PostscriptCommentService;
 import com.yes27.postscript.service.PostscriptService;

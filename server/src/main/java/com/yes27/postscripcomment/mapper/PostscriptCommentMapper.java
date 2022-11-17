@@ -1,4 +1,4 @@
-package com.yes27.postscript.mapper;
+package com.yes27.postscripcomment.mapper;
 
 
 import com.yes27.postscripcomment.dto.PostscriptCommentDto;
