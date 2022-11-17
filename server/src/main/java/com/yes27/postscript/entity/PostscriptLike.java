@@ -21,10 +21,10 @@ public class PostscriptLike extends BaseEntity {
     private int PostLike = 0;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name ="POSTSCRIPT_ID")
     private Postscript postscript;
 
-    public void addPoscript(Postscript postscript){
+    public void addPostscript(Postscript postscript){
         if(this.postscript == null && postscript != null)
             this.postscript = postscript;
     }
