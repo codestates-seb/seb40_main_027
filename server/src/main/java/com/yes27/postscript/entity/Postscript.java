@@ -1,6 +1,7 @@
 package com.yes27.postscript.entity;
 
 import com.yes27.BaseEntity;
+import com.yes27.postscripcomment.entity.PostscriptComment;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,8 +32,9 @@ public class Postscript extends BaseEntity {
 //    @JoinColumn(name = "USER_ID")
 //    private User USER_ID;
 
+    // 좋아요값들
     @Column(length = 5, nullable = false)
-    private Integer postscriptLike = 0;
+    private Integer postscriptLikes = 0;
 
     @Column(length = 5, nullable = false)
     private Integer postscriptView = 0;
