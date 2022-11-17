@@ -23,7 +23,7 @@ const LoginWrapp = styled.div`
       font-size: 30px;
       form {
         border: 1px solid var(--greenMain);
-        padding: 6rem 15rem;
+        padding: calc(100vh * 0.1) calc(100vw * 0.12);
         display: flex;
         flex-direction: column;
         input {
