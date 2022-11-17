@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PostscriptLikeDto {
 
-    private long postscript_id;
+    private long postscriptId;
     private long PostscriptLike;
     private long totalPostscriptLike;
 }

@@ -47,7 +47,7 @@ public interface PostscriptMapper {
         postscriptResponseDto.setPostscriptStatus(postscript.getPostscriptStatus());
         postscriptResponseDto.setPostscriptTitle(postscript.getPostscriptTitle());
         postscriptResponseDto.setPostscriptContent(postscript.getPostscriptContent());
-        postscriptResponseDto.setPostscriptLike(postscript.getPostscriptLike());
+        postscriptResponseDto.setPostscriptLike(postscript.getPostscriptLikes());
         postscriptResponseDto.setPostscriptView(postscript.getPostscriptView());
 
 
@@ -65,7 +65,7 @@ public interface PostscriptMapper {
         postscriptResponse.setPostscriptTitle(postscript.getPostscriptTitle());
         postscriptResponse.setPostscriptContent(postscript.getPostscriptContent());
         postscriptResponse.setPostscriptView(postscript.getPostscriptView());
-        postscriptResponse.setPostscriptLike(postscript.getPostscriptLike());
+        postscriptResponse.setPostscriptLike(postscript.getPostscriptLikes());
         postscriptResponse.setPostscriptStatus(postscript.getPostscriptStatus());
 
 
