@@ -1,11 +1,9 @@
 import PageHeader from '../components/Header/PageHeader';
-// import MainHeader from '../components/Header/MainHeader';
-
 import styled from 'styled-components';
 import icon from '../assets/image/icon.png';
 import { useState } from 'react';
-import MypageSchedule from '../components/MypageSchedule';
-import MypageList from '../components/MypageList';
+import MypageSchedule from '../components/Mypage/MypageSchedule';
+import MypageList from '../components/Mypage/MypageList';
 import { Icon } from '@iconify/react';
 
 import Sidebar from '../components/Header/Sidebar';
@@ -176,7 +174,7 @@ const ButtonTab = styled.button`
   border-radius: 10px 10px 0px 0px;
   background-color: ${(props) => (props.className === 'tab-button' ? 'var(--greenMain)' : '#a9dbbd')};
 `;
-const Mypage = () => {
+const MyPage = () => {
   const [currentTab, setCurrentTab] = useState<any>(0);
   // const [isco, setIsco] = useRecoilState(sidebarFloading);
 
@@ -251,4 +249,4 @@ const Mypage = () => {
     </PageSize>
   );
 };
-export default Mypage;
+export default MyPage;
