@@ -21,7 +21,7 @@ const ListContent = styled.div`
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    height: 5rem;
+    height: 7rem;
     margin: 10px;
   }
 
