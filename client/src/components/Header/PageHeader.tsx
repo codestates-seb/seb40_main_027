@@ -5,6 +5,8 @@ import Nickname from './Nickname';
 import { Icon } from '@iconify/react';
 import { RegisterButton, LoginButton } from '../Button/index';
 import Sidebar from './Sidebar';
+import { useRecoilState } from 'recoil';
+import { sidebarFloading } from '../../atoms/index';
 
 // const Collapse = styled.div`
 //   background-size: cover;
@@ -85,22 +87,22 @@ const PageMenu = styled.header`
 
 const PageHeader = () => {
   const [islogin, setIslogin] = useState(true);
-  // const [iscollapse, setIscollapse] = useState(false);
+  const [iscollapse, setIscollapse] = useRecoilState(sidebarFloading);
 
   const clickLogin = () => {
     //임의로 오류안나게하기 위해 넣은 함수
     setIslogin(!islogin);
   };
   // console.log(iscollapse);
-  // const CollapseHandler = () => {
-  //   setIscollapse(!iscollapse);
-  // };
+  const CollapseHandler = () => {
+    setIscollapse(!iscollapse);
+  };
   const headerMenu = ['분야선택', '로드맵', '학원일정', '수료후기', '스터디모집', '멘토링'];
   return (
     <PageMenu>
       <div className="page-header-content">
         <span className="hamburger">
-          <Icon icon="mdi:menu" />
+          <Icon icon="mdi:menu" onClick={CollapseHandler} />
         </span>
 
         <img src={logo} alt="logo" />
