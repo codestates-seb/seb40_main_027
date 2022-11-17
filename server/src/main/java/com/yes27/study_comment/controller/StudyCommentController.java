@@ -50,8 +50,7 @@ public class StudyCommentController {
 
         StudyComment createdComment = studyCommentService.createComment(studyComment);
 
-        return new ResponseEntity<>(
-            new SingleResponseDto<>(mapper.commentToCommentResponse(createdComment)), HttpStatus.OK);
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.commentToCommentResponse(createdComment)), HttpStatus.OK);
     }
 
     @PatchMapping("/{study-id}/comment/{comment-id}")
