@@ -8,14 +8,21 @@ import MypageSchedule from '../components/MypageSchedule';
 import MypageList from '../components/MypageList';
 import { Icon } from '@iconify/react';
 
+import Sidebar from '../components/Header/Sidebar';
+
 const PageSize = styled.div`
   overflow-y: auto;
+  transform: all 2s;
+`;
+
+const SidebarMap = styled.div`
+  transition: rgba(235, 4, 4, 0.38) 0.5s ease-in 0.3s;
 `;
 
 const MypageContent = styled.div`
   height: 100vh;
   margin: 0rem 18% 0rem 18%;
-
+  transform: all 2s;
   .tab-menu {
     height: 10%;
     background-color: #ffffff;
@@ -171,6 +178,7 @@ const ButtonTab = styled.button`
 `;
 const Mypage = () => {
   const [currentTab, setCurrentTab] = useState<any>(0);
+  // const [isco, setIsco] = useRecoilState(sidebarFloading);
 
   const TabHandler = (id: any) => {
     setCurrentTab(id);
@@ -184,10 +192,13 @@ const Mypage = () => {
   return (
     <PageSize>
       <PageHeader />
-
+      <SidebarMap>
+        <Sidebar />
+      </SidebarMap>
       <MypageContent>
         <div className="tab-menu">
           <span className="page-name">Mypage</span>
+
           <div className="tab-content">
             {TabMenu.map((el) => (
               <ButtonTab
@@ -236,9 +247,6 @@ const Mypage = () => {
           </div>
           <div className="mypage-view">{currentTab === 1 ? <MypageList /> : <MypageSchedule />}</div>
         </div>
-        {/* <div className="footer-position">
-          <Footer />
-        </div> */}
       </MypageContent>
     </PageSize>
   );
