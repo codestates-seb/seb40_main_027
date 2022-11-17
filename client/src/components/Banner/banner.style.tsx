@@ -49,6 +49,13 @@ export const Title = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 1.5em;
+  margin-top: 0.83em;
+  margin-bottom: 0.83em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+
   @media ${theme.mobile} {
     width: calc(100% / 3);
   }
