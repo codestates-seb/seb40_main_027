@@ -2,13 +2,11 @@ package com.yes27.postscript.service;
 
 import com.yes27.exception.BusinessLogicException;
 import com.yes27.exception.ExceptionCode;
-import com.yes27.postscript.entity.Postscript;
-import com.yes27.postscript.entity.PostscriptComment;
+import com.yes27.postscripcomment.entity.PostscriptComment;
 import com.yes27.postscript.repository.PostscriptCommentRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

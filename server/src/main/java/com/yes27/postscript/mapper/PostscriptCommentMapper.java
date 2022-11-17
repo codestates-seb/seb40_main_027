@@ -1,8 +1,8 @@
 package com.yes27.postscript.mapper;
 
 
-import com.yes27.postscript.dto.PostscriptCommentDto;
-import com.yes27.postscript.entity.PostscriptComment;
+import com.yes27.postscripcomment.dto.PostscriptCommentDto;
+import com.yes27.postscripcomment.entity.PostscriptComment;
 import com.yes27.postscript.service.PostscriptCommentService;
 import com.yes27.postscript.service.PostscriptService;
 import org.mapstruct.Mapper;

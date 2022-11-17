@@ -1,6 +1,7 @@
-package com.yes27.postscript.entity;
+package com.yes27.postscripcomment.entity;
 
 import com.yes27.BaseEntity;
+import com.yes27.postscript.entity.Postscript;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
