@@ -78,6 +78,7 @@ interface PropType {
   pageType: string | null;
 }
 
+/** props: text = banner title, pageType = post || other  **/
 const Banner = ({ text, pageType }: PropType) => {
   return (
     <BannerWrap>
