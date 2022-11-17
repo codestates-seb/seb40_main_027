@@ -6,6 +6,7 @@ import mainmobile from '../assets/image/mainmobile.png';
 
 const MainPage = styled.div`
   height: 90vh;
+  overflow-y: auto;
   #main-big-banner {
     width: 100%;
     margin: 0px;
@@ -44,7 +45,7 @@ const MainPage = styled.div`
   }
 `;
 
-const IconContent = styled.span`
+const IconContent = styled.div`
   background-color: var(--grayListFill);
   height: 8rem;
   width: 11%;
@@ -52,6 +53,7 @@ const IconContent = styled.span`
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
+  /* vertical-align: middle; */
   align-items: center;
   border-radius: 20px;
   margin: 0px 1% 0px 1%;
@@ -61,7 +63,7 @@ const IconContent = styled.span`
     justify-content: center;
     flex-wrap: wrap;
     width: 40%;
-    height: 50%;
+    height: 120px;
     margin: 5%;
   }
 `;
@@ -75,27 +77,27 @@ const Main = () => {
         <img id="main-small-banner" src={mainmobile} alt="mainmobilebanner" />
         <div className="icon-box">
           <IconContent>
-            <Icon icon="fluent:person-question-mark-16-regular" color="var(--greenMain)" width="80" height="65" />
+            <Icon icon="fluent:person-question-mark-16-regular" color="var(--greenMain)" width="100%" height="65" />
             <span className="icon-menu-title">적성검사</span>
           </IconContent>
           <IconContent>
-            <Icon icon="zondicons:load-balancer" color="var(--greenMain)" width="90" height="72" />
+            <Icon icon="zondicons:load-balancer" color="var(--greenMain)" width="80%" height="62" />
             <span className="icon-menu-title">로드맵</span>
           </IconContent>
           <IconContent>
-            <Icon icon="gridicons:scheduled" color="var(--greenMain)" width="90" height="72" />
+            <Icon icon="gridicons:scheduled" color="var(--greenMain)" width="80%" height="72" />
             <span className="icon-menu-title">학원일정</span>
           </IconContent>
           <IconContent>
-            <Icon icon="emojione-monotone:left-speech-bubble" color="var(--greenMain)" width="90" height="72" />
+            <Icon icon="emojione-monotone:left-speech-bubble" color="var(--greenMain)" width="50%" height="50%" />
             <span className="icon-menu-title">수료후기</span>
           </IconContent>
           <IconContent>
-            <Icon icon="eos-icons:machine-learning" color="var(--greenMain)" width="90" height="72" />
+            <Icon icon="eos-icons:machine-learning" color="var(--greenMain)" width="50%" height="50%" />
             <span className="icon-menu-title">스터디 모집</span>
           </IconContent>
           <IconContent>
-            <Icon icon="bi:clipboard2-check-fill" color="var(--greenMain)" width="105" height="72" />
+            <Icon icon="bi:clipboard2-check-fill" color="var(--greenMain)" width="70%" height="52" />
             <span className="icon-menu-title">멘토링</span>
           </IconContent>
         </div>
