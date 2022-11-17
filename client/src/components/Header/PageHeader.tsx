@@ -4,20 +4,9 @@ import logo from '../../assets/image/logo.png';
 import Nickname from './Nickname';
 import { Icon } from '@iconify/react';
 import { RegisterButton, LoginButton } from '../Button/index';
-import Sidebar from './Sidebar';
+
 import { useRecoilState } from 'recoil';
 import { sidebarFloading } from '../../atoms/index';
-
-// const Collapse = styled.div`
-//   background-size: cover;
-//   background-color: #fbd2d2;
-//   width: 50%;
-//   height: 60rem;
-//   z-index: 2;
-//   position: absolute;
-//   margin: 0%;
-//   display: flex;
-// `;
 
 const PageMenu = styled.header`
   position: relative;
@@ -66,22 +55,7 @@ const PageMenu = styled.header`
       display: flex;
       width: 50px;
       justify-content: center;
-      /* & :active {
-        .sidebar-pra {
-          display: flex;
-          height: 100%;
-          width: 100%;
-          background-color: black;
-        }
-      } */
     }
-    /* .sidebar-pra {
-      display: flex;
-      height: 100vh;
-      width: 50vw;
-      background-color: black;
-      z-index: 1;
-    } */
   }
 `;
 
@@ -93,8 +67,9 @@ const PageHeader = () => {
     //임의로 오류안나게하기 위해 넣은 함수
     setIslogin(!islogin);
   };
-  // console.log(iscollapse);
+
   const CollapseHandler = () => {
+    //상태변하게 하기위하여
     setIscollapse(!iscollapse);
   };
   const headerMenu = ['분야선택', '로드맵', '학원일정', '수료후기', '스터디모집', '멘토링'];
@@ -113,7 +88,6 @@ const PageHeader = () => {
         ))}
         {islogin ? (
           <span>
-            {/* <button onClick={clickLogin}>로그인</button> */}
             <LoginButton onClick={clickLogin} />
             <RegisterButton />
           </span>
