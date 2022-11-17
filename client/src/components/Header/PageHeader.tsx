@@ -4,8 +4,21 @@ import logo from '../../assets/image/logo.png';
 import Nickname from './Nickname';
 import { Icon } from '@iconify/react';
 import { RegisterButton, LoginButton } from '../Button/index';
+import Sidebar from './Sidebar';
+
+// const Collapse = styled.div`
+//   background-size: cover;
+//   background-color: #fbd2d2;
+//   width: 50%;
+//   height: 60rem;
+//   z-index: 2;
+//   position: absolute;
+//   margin: 0%;
+//   display: flex;
+// `;
 
 const PageMenu = styled.header`
+  position: relative;
   width: 100%;
   height: 4rem;
   border-bottom: 1px solid var(--grayHeaderBorder);
@@ -26,6 +39,9 @@ const PageMenu = styled.header`
   img {
     width: 150px;
     height: 60px;
+  }
+  .sidebar-pra {
+    display: none;
   }
   @media screen and (max-width: 414px) {
     width: 100%;
@@ -48,18 +64,37 @@ const PageMenu = styled.header`
       display: flex;
       width: 50px;
       justify-content: center;
+      /* & :active {
+        .sidebar-pra {
+          display: flex;
+          height: 100%;
+          width: 100%;
+          background-color: black;
+        }
+      } */
     }
+    /* .sidebar-pra {
+      display: flex;
+      height: 100vh;
+      width: 50vw;
+      background-color: black;
+      z-index: 1;
+    } */
   }
 `;
 
 const PageHeader = () => {
   const [islogin, setIslogin] = useState(true);
+  // const [iscollapse, setIscollapse] = useState(false);
 
   const clickLogin = () => {
     //임의로 오류안나게하기 위해 넣은 함수
     setIslogin(!islogin);
   };
-
+  // console.log(iscollapse);
+  // const CollapseHandler = () => {
+  //   setIscollapse(!iscollapse);
+  // };
   const headerMenu = ['분야선택', '로드맵', '학원일정', '수료후기', '스터디모집', '멘토링'];
   return (
     <PageMenu>
@@ -67,6 +102,7 @@ const PageHeader = () => {
         <span className="hamburger">
           <Icon icon="mdi:menu" />
         </span>
+
         <img src={logo} alt="logo" />
         {headerMenu.map((el, idx) => (
           <span className="page-menu" key={idx}>
