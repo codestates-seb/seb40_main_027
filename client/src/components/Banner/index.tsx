@@ -1,7 +1,7 @@
 import icon from '../../assets/image/icon.png';
 import boardimage from '../../assets/image/boardimage.png';
 import bootimage from '../../assets/image/bootimage.png';
-import * as S from './banner.style';
+import * as S from './index.style';
 
 // height: desktop=150px / mobile=83px
 
