@@ -1,4 +1,4 @@
-package com.yes27.postscript.repository;
+package com.yes27.postscripcomment.repository;
 
 import com.yes27.postscripcomment.entity.PostscriptComment;
 import org.springframework.data.jpa.repository.JpaRepository;

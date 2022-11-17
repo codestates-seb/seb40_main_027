@@ -1,9 +1,10 @@
-package com.yes27.postscript.service;
+package com.yes27.postscripcomment.service;
 
 import com.yes27.exception.BusinessLogicException;
 import com.yes27.exception.ExceptionCode;
 import com.yes27.postscripcomment.entity.PostscriptComment;
-import com.yes27.postscript.repository.PostscriptCommentRepository;
+import com.yes27.postscripcomment.repository.PostscriptCommentRepository;
+import com.yes27.postscript.service.PostscriptService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
