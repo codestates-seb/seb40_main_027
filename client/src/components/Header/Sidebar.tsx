@@ -18,7 +18,7 @@ const SidebarPage = styled.div`
   @media screen and (max-width: 414px) {
     transition: background-color 0.4s, left 0.4s, width 0.4s;
     .baov {
-      /* display: flex; */
+      display: flex;
       transition: all 0.5s;
       position: absolute;
       width: 100%;
@@ -53,16 +53,16 @@ const SidebarMenu = styled.div`
   }
 `;
 
-// const HideSidebar = styled.div`
-//   @media screen and (max-width: 414px) {
-//     width: 1rem;
-//     height: 1rem;
-//     background-color: pink;
-//     transition: all 0.25s;
+const HideSidebar = styled.div`
+  @media screen and (max-width: 414px) {
+    width: 1rem;
+    height: 1rem;
+    background-color: pink;
+    transition: all 0.25s;
 
-//     position: absolute;
-//   }
-// `;
+    position: absolute;
+  }
+`;
 
 const Sidebar = () => {
   const [isco, setIsco] = useRecoilState(sidebarFloading);
@@ -84,8 +84,7 @@ const Sidebar = () => {
           </div>
         </SidebarPage>
       ) : (
-        // <HideSidebar>a</HideSidebar>
-        <SidebarPage></SidebarPage>
+        <HideSidebar></HideSidebar>
       )}
     </SidebarContent>
   );
