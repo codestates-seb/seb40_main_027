@@ -67,8 +67,11 @@ public interface PostscriptMapper {
         postscriptResponse.setPostscriptView(postscript.getPostscriptView());
         postscriptResponse.setPostscriptLike(postscript.getPostscriptLikes());
         postscriptResponse.setPostscriptStatus(postscript.getPostscriptStatus());
+        postscriptResponse.setCreatedAt(postscript.getCreatedAt());
+        postscriptResponse.setUpdatedAt(postscript.getUpdatedAt());
+//        postscriptResponse.setPostComments();
 
-
+        // 댓글연동 추가하기
         // 태그, 생성,수정날자 추가해야함
         return postscriptResponse;
     }
@@ -86,5 +89,6 @@ public interface PostscriptMapper {
         return postscriptResponseDtos;
     }
 
+    // postscript - comment 연동
 
 }

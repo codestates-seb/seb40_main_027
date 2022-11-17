@@ -1,4 +1,4 @@
-package com.yes27.postscript.dto;
+package com.yes27.postscripcomment.dto;
 
 import lombok.*;
 
