@@ -13,7 +13,7 @@ const SidebarContent = styled.div`
 `;
 const SidebarPage = styled.div`
   .baov {
-    overflow: hidden;
+    display: none;
   }
   @media screen and (max-width: 414px) {
     transition: background-color 0.4s, left 0.4s, width 0.4s;
