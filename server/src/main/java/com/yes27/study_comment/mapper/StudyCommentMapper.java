@@ -8,5 +8,19 @@ import org.mapstruct.Mapper;
 public interface StudyCommentMapper {
     StudyComment commentPostToComment(StudyCommentDto.Post requestBody);
     StudyComment commentPatchToComment(StudyCommentDto.Patch requestBody);
-    StudyCommentDto.Response commentToCommentResponse(StudyComment studyComment);
+//    StudyCommentDto.Response commentToCommentResponse(StudyComment studyComment);
+
+    default StudyCommentDto.Response commentToCommentResponse(StudyComment studyComment) {
+        StudyCommentDto.Response response = new StudyCommentDto.Response();
+
+        response.setStudyCommentId( studyComment.getStudyCommentId() );
+        response.setComment( studyComment.getComment() );
+        response.setVote( studyComment.getVote() );
+        response.setCreatedAt( studyComment.getCreatedAt() );
+        response.setUpdatedAt( studyComment.getUpdatedAt() );
+
+        response.setStudyId(studyComment.getStudy().getStudyId());
+
+        return response;
+    }
 }
