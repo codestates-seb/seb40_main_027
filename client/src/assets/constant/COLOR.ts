@@ -7,5 +7,6 @@ export const BLUE_STUDY = '#39739D';
 export const GRAY_HEADER_BORDER = '#D6D6D6';
 export const GRAY_CONTENTS_BORDER = '#B6B6B6';
 export const GRAY_BOARD_AREA_BORDER = '#DDDDDD';
+export const GRAY_BANNER_BACKGROUND = '#EBE7E4';
 export const GRAY_LIST_FILL = '#EEEEEE';
 export const RED_BUTTON_DELETE = '#CA471D';
