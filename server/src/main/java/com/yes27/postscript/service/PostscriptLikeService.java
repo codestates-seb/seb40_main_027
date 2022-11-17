@@ -26,7 +26,7 @@ public class PostscriptLikeService {
     public PostscriptLike PostscriptLike(long postscriptId, int postLike){
 
 
-        PostscriptLike postscriptLike = postscriptLikeRepository;
+        PostscriptLike postscriptLike = postscriptLikeRepository.findByPostscriptAndUser(postscriptService.findVerifiedPostscript(postscriptId));
 
         //유저 추가하기
 
