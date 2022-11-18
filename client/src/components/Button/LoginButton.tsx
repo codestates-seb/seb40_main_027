@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { StyledBackgroundButton } from './BackgroundButton';
 import { StyledBorderButton } from './BorderButton';
 
 const StyledButton = styled(StyledBorderButton)`
@@ -21,4 +22,24 @@ interface ClickType {
 
 export const LoginButton = ({ onClick }: ClickType) => {
   return <StyledButton onClick={onClick}>로그인</StyledButton>;
+};
+
+const StyleLogPageBtn = styled(StyledBackgroundButton)`
+  width: 280px;
+  height: 48px;
+  border-radius: 10px;
+  font-size: 30px;
+  @media screen and (max-width: 414px) {
+    width: 230px;
+    height: 48px;
+    border-radius: 10px;
+    font-size: 20px;
+  }
+`;
+interface propsType {
+  onClick?: any | null;
+}
+
+export const LogPageBtn = ({ onClick }: propsType) => {
+  return <StyleLogPageBtn onClick={onClick}>로그인</StyleLogPageBtn>;
 };

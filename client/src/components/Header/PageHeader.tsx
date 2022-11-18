@@ -31,9 +31,7 @@ const PageMenu = styled.header`
     width: 150px;
     height: 60px;
   }
-  .sidebar-pra {
-    display: none;
-  }
+
   @media screen and (max-width: 414px) {
     width: 100%;
     display: flex;
