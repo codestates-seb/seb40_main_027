@@ -26,6 +26,7 @@ const PageMenu = styled.header`
     width: 150px;
     height: 60px;
   }
+
   @media screen and (max-width: 414px) {
     width: 100%;
     display: flex;
@@ -66,6 +67,7 @@ const PageHeader = () => {
         <span className="hamburger">
           <Icon icon="mdi:menu" />
         </span>
+
         <img src={logo} alt="logo" />
         {headerMenu.map((el, idx) => (
           <span className="page-menu" key={idx}>
