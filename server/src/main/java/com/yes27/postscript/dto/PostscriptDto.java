@@ -7,13 +7,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class PostscriptDto {
     @Getter
-    public static class Post {  // 선택후기 등록
+    public static class Post {  // 부트캠프 선택 후기 등록
 
             @NotBlank(message = "선택 조언 및 후기의 제목을 적어주세요")
             private String postscriptTitle;
@@ -21,7 +23,7 @@ public class PostscriptDto {
             @NotBlank(message = "선택 조언 및 후기의 내용을 적어주세요")
             private String postscriptContent;
 
-            @NotBlank(message = "부트캠프 조언, 후기 중 골라주세요")
+            @NotNull(message = "부트캠프 조언, 후기 중 골라주세요")
             private List<TagDto> tags;
         }
 
@@ -49,8 +51,10 @@ public class PostscriptDto {
         private Integer postscriptView;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
-        private List<PostscriptCommentDto> postComments;
-        private List<TagResponseDto> questionTags;
+//        private List<PostscriptCommentDto> postComments;
+        private List<TagResponseDto> postscriptTags;
+
+        //유저 추가하기
     }
 
 }

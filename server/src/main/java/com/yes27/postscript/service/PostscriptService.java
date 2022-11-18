@@ -96,10 +96,10 @@ public class PostscriptService {
         return findPostscript;
     }
 
-    // 좋아요 수 새로 갱신
-    public void refreshLikes(long postscriptId) {
-        Postscript postscript = findVerifiedPostscript(postscriptId);
-        postscript.setPostLikes(postscriptLikeService.getPostscriptLikes(postscriptId));
-        postscriptRepository.save(postscript);
-    }
+//    // 좋아요 수 새로 갱신
+//    public void refreshLikes(long postscriptId) {
+//        Postscript postscript = findVerifiedPostscript(postscriptId);
+//        postscript.setPostLikes(postscriptLikeService.getPostscriptLikes(postscriptId));
+//        postscriptRepository.save(postscript);
+//    }
 }

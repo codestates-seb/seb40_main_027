@@ -30,19 +30,23 @@ public class Postscript extends BaseEntity {
     private PostscriptStatus postscriptStatus = PostscriptStatus.POSTSCRIPT_EXIST;
 //    @ManyToOne
 //    @JoinColumn(name = "USER_ID")
-//    private User USER_ID;
+//    private User user;
 
     // 좋아요값들
     @Column(length = 5, nullable = false)
     private Integer postLikes = 0;
 
+    // 조회수
     @Column(length = 5, nullable = false)
     private Integer postscriptView = 0;
+
+    @OneToMany(mappedBy = "postscript", cascade = CascadeType.PERSIST) //좋아요
+    private List<PostscriptLike> postscriptLikes = new ArrayList<>();
 
     @OneToMany(mappedBy = "postscript", cascade = CascadeType.ALL, orphanRemoval = true)  // 댓글 추가
     private List<PostscriptComment> postComments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "postscript",cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "postscript", cascade = CascadeType.PERSIST) //태그
     private List<Tag> tags = new ArrayList<>();
 
     public enum PostscriptStatus {
