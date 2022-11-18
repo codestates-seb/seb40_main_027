@@ -1,5 +1,5 @@
 export { RegisterButton } from './RegisterButton';
-export { LoginButton } from './LoginButton';
+export { LoginButton, LogPageBtn } from './LoginButton';
 export {
   BigBorderTagButton,
   SmallBorderTagButton,
