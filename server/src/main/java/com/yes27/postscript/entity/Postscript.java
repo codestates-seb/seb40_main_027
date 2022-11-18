@@ -34,13 +34,16 @@ public class Postscript extends BaseEntity {
 
     // 좋아요값들
     @Column(length = 5, nullable = false)
-    private Integer postscriptLikes = 0;
+    private Integer postLikes = 0;
 
     @Column(length = 5, nullable = false)
     private Integer postscriptView = 0;
 
     @OneToMany(mappedBy = "postscript", cascade = CascadeType.ALL, orphanRemoval = true)  // 댓글 추가
     private List<PostscriptComment> postComments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "postscript",cascade = CascadeType.PERSIST)
+    private List<Tag> tags = new ArrayList<>();
 
     public enum PostscriptStatus {
         POSTSCRIPT_EXIST("존재하는 후기"),

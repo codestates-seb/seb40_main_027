@@ -12,8 +12,8 @@ public interface PostscriptLikeMapper {
     default PostscriptLikeDto postLikeToPostLikeDto (PostscriptLike postscriptLike){
         PostscriptLikeDto postscriptLikeDto = new PostscriptLikeDto();
         postscriptLikeDto.setPostscriptId(postscriptLike.getPostscript().getPostscriptId());
-        postscriptLikeDto.setPostscriptLike(postscriptLike.getPostLike());
-        postscriptLikeDto.setTotalPostscriptLike(postscriptLike.getPostscript().getPostscriptLikes());
+        postscriptLikeDto.setPostLike(postscriptLike.getPostLike());
+        postscriptLikeDto.setTotalPostscriptLike(postscriptLike.getPostscript().getPostLikes());
 
         return postscriptLikeDto;
     }

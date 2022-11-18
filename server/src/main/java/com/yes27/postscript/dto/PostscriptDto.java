@@ -22,7 +22,7 @@ public class PostscriptDto {
             private String postscriptContent;
 
             @NotBlank(message = "부트캠프 조언, 후기 중 골라주세요")
-            private String postTags;  // choice 로 변경?
+            private List<TagDto> tags;
         }
 
     @Getter
@@ -32,7 +32,7 @@ public class PostscriptDto {
         private Long postscriptId;
         private String postscriptTitle;
         private String postscriptContent;
-        private String Tag; // choice 로 변경?
+        private List<TagDto> tags;
     }
 
     @Getter
@@ -40,16 +40,17 @@ public class PostscriptDto {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class PostscriptResponse{  // 선택후기 등록 response
+
         private Long postscriptId;
         private String postscriptTitle;
         private String postscriptContent;
         private Postscript.PostscriptStatus postscriptStatus;
-        private Integer postscriptLike;
+        private Integer postLike;
         private Integer postscriptView;
-        private String postTags;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
         private List<PostscriptCommentDto> postComments;
+        private List<TagResponseDto> questionTags;
     }
 
 }

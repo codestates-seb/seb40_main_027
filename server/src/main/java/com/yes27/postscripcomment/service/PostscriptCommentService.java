@@ -1,5 +1,6 @@
 package com.yes27.postscripcomment.service;
 
+import org.springframework.context.annotation.Lazy;
 import com.yes27.exception.BusinessLogicException;
 import com.yes27.exception.ExceptionCode;
 import com.yes27.postscripcomment.entity.PostscriptComment;
@@ -20,7 +21,7 @@ public class PostscriptCommentService {
     private final PostscriptService postscriptService;
 
     public PostscriptCommentService (PostscriptCommentRepository postscriptCommentRepository,
-                                     PostscriptService postscriptService){
+                                     @Lazy PostscriptService postscriptService){
 
         this.postscriptCommentRepository = postscriptCommentRepository;
         this.postscriptService = postscriptService;

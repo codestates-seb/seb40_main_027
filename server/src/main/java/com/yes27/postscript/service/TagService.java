@@ -4,10 +4,12 @@ import com.yes27.exception.BusinessLogicException;
 import com.yes27.exception.ExceptionCode;
 import com.yes27.postscript.entity.Tag;
 import com.yes27.postscript.repository.TagRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class TagService {
 
     private final TagRepository tagRepository;
