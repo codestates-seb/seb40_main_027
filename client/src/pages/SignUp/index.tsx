@@ -19,18 +19,22 @@ const SignUp = () => {
       <S.FormWrap>
         {/* 커다란 폼 안에 입력, 약관, 회원가입 버튼이 전부 존재 해야 함 */}
         <form onSubmit={handleSubmit(onSumbit)}>
-          <section>
-            {textList.map((el) => (
-              <label key={el.id}>
-                <div>{el.value}</div>
-                <input type={el.type} {...register(el.value)} />
-              </label>
-            ))}
-          </section>
-          <section>
-            <span>테스트 글자</span>
-          </section>
-          <button>가입하기</button>
+          <S.TypeSection>
+            <div>
+              {textList.map((el) => (
+                <label key={el.id}>
+                  <div>{el.value}</div>
+                  <input type={el.type} {...register(el.value)} />
+                </label>
+              ))}
+            </div>
+            <div>
+              <span>테스트 글자</span>
+            </div>
+          </S.TypeSection>
+          <S.SubmitSection>
+            <button>가입하기</button>
+          </S.SubmitSection>
         </form>
       </S.FormWrap>
     </S.Wrap>

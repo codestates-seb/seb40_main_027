@@ -17,9 +17,23 @@ export const FormWrap = styled.div`
   form {
     width: 100%;
     height: 100%;
-    display: flex;
     input {
       width: 100%;
     }
+  }
+`;
+
+export const TypeSection = styled.div`
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const SubmitSection = styled.div`
+  display: flex;
+  justify-content: center;
+  button {
+    width: 200px;
   }
 `;
