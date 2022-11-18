@@ -1,5 +1,4 @@
 import PageHeader from '../components/Header/PageHeader';
-import styled from 'styled-components';
 import icon from '../assets/image/icon.png';
 import { useState } from 'react';
 import MypageSchedule from '../components/MypageContent/MypageSchedule';
@@ -10,10 +9,9 @@ import * as S from './MyPage.style';
 import Sidebar from '../components/MypageContent/Sidebar';
 
 const MyPage = () => {
-  const [currentTab, setCurrentTab] = useState<any>(0);
-  // const [isco, setIsco] = useRecoilState(sidebarFloading);
+  const [currentTab, setCurrentTab] = useState<number>(0);
 
-  const TabHandler = (id: any) => {
+  const TabHandler = (id: number) => {
     setCurrentTab(id);
   };
   console.log(currentTab);
@@ -64,7 +62,6 @@ const MyPage = () => {
             </div>
           </div>
           <div>
-            {' '}
             <div className="tab-content-mobile">
               {TabMenu.map((el) => (
                 <S.ButtonTab
