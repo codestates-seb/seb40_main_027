@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import { StyledBorderButton } from './BorderButton';
-import onClick from '../Header/MainHeader';
-// import React from 'react';
 
 const StyledButton = styled(StyledBorderButton)`
   width: 84px;
@@ -17,10 +15,10 @@ const StyledButton = styled(StyledBorderButton)`
   }
 `;
 
-interface clickType {
+interface ClickType {
   onClick?: any | null;
 }
 
-export const LoginButton = ({ onClick }: clickType) => {
+export const LoginButton = ({ onClick }: ClickType) => {
   return <StyledButton onClick={onClick}>로그인</StyledButton>;
 };
