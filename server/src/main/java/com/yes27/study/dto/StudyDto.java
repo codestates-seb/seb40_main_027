@@ -23,9 +23,7 @@ public class StudyDto {
     public static class Patch {
         private Long studyId;
 
-        @NotBlank
         private String studyTitle;
-        @NotBlank
         private String studyContent;
     }
 
