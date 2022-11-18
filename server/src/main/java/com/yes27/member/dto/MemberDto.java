@@ -16,7 +16,7 @@ public class MemberDto {
         private String email;
 
         @NotBlank
-        private String name;
+        private String nickname;
 
         @NotBlank
         private String password;
@@ -32,7 +32,7 @@ public class MemberDto {
         private String email;
 
         @NotBlank
-        private String name;
+        private String nickname;
 
         @NotBlank
         private String password;
@@ -44,7 +44,7 @@ public class MemberDto {
     public static class Response {
         private Long memberId;
         private String email;
-        private String name;
+        private String nickname;
         private String password;
     }
 
