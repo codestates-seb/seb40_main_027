@@ -44,7 +44,7 @@ export const Character = styled.div`
   }
 `;
 
-export const Title = styled.div`
+export const Title = styled.h2`
   width: calc(100% / 3);
   display: flex;
   justify-content: center;
