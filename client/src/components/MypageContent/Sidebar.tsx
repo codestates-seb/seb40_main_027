@@ -3,17 +3,17 @@ import { sidebarFloading } from '../../atoms/index';
 import * as S from './SideBar.style';
 
 const SideBar = () => {
-  const [isco, setIsco] = useRecoilState(sidebarFloading);
+  const [isContent, setIsContent] = useRecoilState(sidebarFloading);
 
   const SelectMenu = ['적성검사', '로드맵', '학원일정', '수료후기', '스터디 모집', '멘토링'];
 
   const HideHandler = () => {
-    setIsco(!isco);
+    setIsContent(!isContent);
   };
 
   return (
     <div>
-      {isco ? (
+      {isContent ? (
         <S.SidebarPage onClick={HideHandler}>
           <div className="sidebar-graypage">
             <div className="sidebar-content">
