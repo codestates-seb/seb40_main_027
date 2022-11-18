@@ -1,5 +1,7 @@
 package com.yes27.member.dto;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -43,6 +45,8 @@ public class MemberDto {
         private String email;
         private String nickname;
         private String password;
-    }
 
+        private List<Integer> studyIds = new ArrayList<>();
+        private List<Integer> studyCommentIds = new ArrayList<>();
+    }
 }

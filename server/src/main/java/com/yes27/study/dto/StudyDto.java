@@ -44,6 +44,7 @@ public class StudyDto {
         private LocalDateTime updatedAt;
 
         private List<StudyCommentSubset> studyComments = new ArrayList<>();
+        private Long memberId;
     }
 
     @Getter

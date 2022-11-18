@@ -1,7 +1,7 @@
 package com.yes27.study.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.yes27.BaseEntity;
+import com.yes27.member.entity.Member;
 import com.yes27.study_comment.entity.StudyComment;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,7 +31,6 @@ public class Study extends BaseEntity {
     private int view = 0;
     private int vote = 0;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "study", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<StudyComment> studyComments = new ArrayList<>();
 
@@ -39,4 +40,8 @@ public class Study extends BaseEntity {
             studyComment.addStudy(this);
         }
     }
+
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
 }
