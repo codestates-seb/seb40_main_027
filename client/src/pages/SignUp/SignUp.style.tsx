@@ -13,13 +13,31 @@ export const FormWrap = styled.div`
   width: 60%;
   height: 60%;
   font-size: 30px;
-  border: 1px solid var(--greenMain);
   form {
+    border: 1px solid var(--greenMain);
+    margin-top: 2%;
     width: 100%;
     height: 100%;
-    input {
-      width: 100%;
-    }
+  }
+`;
+
+export const greenTxtBrd = styled.div`
+  border: 1px solid var(--greenMain);
+  background-color: var(--whiteBackground);
+  color: var(--greenMain);
+  width: 84px;
+  height: 36px;
+  border-radius: 9px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (max-width: 414px) {
+    width: 50px;
+    height: 18px;
+    border-radius: 4.5px;
+    font-size: 10px;
   }
 `;
 
@@ -28,6 +46,33 @@ export const TypeSection = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  div {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    label {
+      width: 70%;
+      h2 {
+        width: 100%;
+      }
+      input {
+        width: 100%;
+        height: 40%;
+        margin: 3% 0 10% 0;
+        font-size: 1.3rem;
+      }
+    }
+  }
+`;
+
+export const customH2 = styled.h2`
+  margin-left: 0;
+  margin-right: 0;
+  font-size: 1.3rem;
+  font-weight: bold;
 `;
 
 export const SubmitSection = styled.div`

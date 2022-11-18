@@ -1,6 +1,7 @@
 import * as S from './SignUp.style';
 import { useForm } from 'react-hook-form';
 import logo from '../../assets/image/logo.png';
+// import { useState } from 'react';
 
 const textList = [
   { id: 1, value: 'Nickname', type: 'text' },
@@ -12,24 +13,27 @@ const textList = [
 const SignUp = () => {
   const { register, handleSubmit } = useForm();
   const onSumbit = (data: any) => console.log(data);
+  // const [isChck, setIsCheck] = useState(false);
 
   return (
     <S.Wrap>
       <img src={logo} alt="logo" />
       <S.FormWrap>
-        {/* 커다란 폼 안에 입력, 약관, 회원가입 버튼이 전부 존재 해야 함 */}
+        <S.greenTxtBrd>회원가입</S.greenTxtBrd>
         <form onSubmit={handleSubmit(onSumbit)}>
           <S.TypeSection>
             <div>
               {textList.map((el) => (
                 <label key={el.id}>
-                  <div>{el.value}</div>
+                  <S.customH2>{el.value}</S.customH2>
                   <input type={el.type} {...register(el.value)} />
                 </label>
               ))}
             </div>
             <div>
-              <span>테스트 글자</span>
+              <form>
+                <input type="checkbox" {...register('agree')} />
+              </form>
             </div>
           </S.TypeSection>
           <S.SubmitSection>
