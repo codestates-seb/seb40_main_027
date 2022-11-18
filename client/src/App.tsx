@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Footer from './components/Footer/Footer';
 import Main from './pages/Main';
-import MyPage from './pages/MyPage';
+import MyPage from './pages/Mypage';
 
 function App() {
   return (
