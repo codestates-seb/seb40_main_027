@@ -1,7 +1,6 @@
 package com.yes27.study_comment.entity;
 
 import com.yes27.BaseEntity;
-import com.yes27.member.entity.Member;
 import com.yes27.study.entity.Study;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,8 +37,4 @@ public class StudyComment extends BaseEntity {
             this.study.addStudyComment(this);
         }
     }
-
-    @ManyToOne
-    @JoinColumn(name = "MEMBER_NAME")
-    private Member member;
 }
