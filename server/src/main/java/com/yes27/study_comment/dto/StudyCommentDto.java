@@ -1,8 +1,10 @@
 package com.yes27.study_comment.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.yes27.member.entity.Member;
+import com.yes27.study.entity.Study;
 import java.time.LocalDateTime;
 import javax.validation.constraints.NotBlank;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,6 +27,7 @@ public class StudyCommentDto {
 
     @Getter
     @Setter
+    @Builder
     public static class Response {
         private Long studyCommentId;
 
@@ -36,7 +39,7 @@ public class StudyCommentDto {
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
 
-        private Long studyId;
-        private Long memberId;
+        private Study study;
+        private Member member;
     }
 }

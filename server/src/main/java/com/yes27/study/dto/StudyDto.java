@@ -1,6 +1,7 @@
 package com.yes27.study.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.yes27.member.entity.Member;
+import com.yes27.study_comment.dto.StudyCommentDto;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,15 +42,8 @@ public class StudyDto {
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
 
-        private List<StudyCommentSubset> studyComments = new ArrayList<>();
-        private Long memberId;
-    }
-
-    @Getter
-    @Setter
-    public static class StudyCommentSubset {
-        Long studyCommentId;
-        String comment;
+        private List<StudyCommentDto.Response> studyComments = new ArrayList<>();
+        private Member member;
     }
 }
 
