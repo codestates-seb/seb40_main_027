@@ -21,6 +21,21 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
+    public Member updateMember(Member member) {
+        Member findMember = findVerifiedMember(member.getMemberId());
+
+        verifyExistsEmail(member.getEmail());
+
+        Optional.ofNullable(member.getEmail())
+            .ifPresent(email -> findMember.setEmail(email));
+        Optional.ofNullable(member.getNickname())
+            .ifPresent(nickname -> findMember.setNickname(nickname));
+        Optional.ofNullable(member.getPassword())
+            .ifPresent(password -> findMember.setPassword(password));
+
+        return memberRepository.save(findMember);
+    }
+
     public void deleteMember(Long memberId) {
         Member findMember = findVerifiedMember(memberId);
 

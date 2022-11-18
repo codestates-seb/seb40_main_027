@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,6 +41,17 @@ public class MemberController {
         return new ResponseEntity<>(
             new SingleResponseDto<>(response),
             HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/{member-id}")
+    public ResponseEntity patchMember(@PathVariable("member-id") @Positive Long memberId,
+        @Valid @RequestBody MemberDto.Patch requestBody) {
+        requestBody.setMemberId(memberId);
+
+        Member member = memberService.updateMember(mapper.memberPatchToMember(requestBody));
+
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponse(member)),
+        HttpStatus.OK);
     }
 
     @PostMapping("/login/{member-id}")
