@@ -29,9 +29,9 @@ public class Tag {
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "POSTSCRIPT_ID")
-    private Postscript Postscript;
+    private Postscript postscript;
 
     public void addPostscript(Postscript postscript) {
-        this.Postscript = postscript;
+        this.postscript = postscript;
     }
 }

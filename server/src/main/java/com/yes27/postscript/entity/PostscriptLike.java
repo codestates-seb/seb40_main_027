@@ -18,7 +18,7 @@ public class PostscriptLike extends BaseEntity {
     private Long postscriptLikeId;
 
     @Column
-    private int PostLike = 0;
+    private int postLike = 0;
 
     @ManyToOne
     @JoinColumn(name ="POSTSCRIPT_ID")

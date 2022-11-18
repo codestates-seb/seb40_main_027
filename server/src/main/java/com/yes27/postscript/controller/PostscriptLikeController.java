@@ -15,6 +15,7 @@ import javax.validation.constraints.Positive;
 @RestController
 @Validated
 @RequestMapping("/postscript")
+@CrossOrigin
 public class PostscriptLikeController {
 
     private final PostscriptLikeService postscriptLikeService;
@@ -27,13 +28,13 @@ public class PostscriptLikeController {
         this.postscriptLikeMapper=postscriptLikeMapper;
     }
 
-    @PostMapping("{postscript-Id}/like")
-    public ResponseEntity likePostscript(@PathVariable("postscript-Id") @Positive long postscriptId,
-                                         @RequestParam(value = "like",defaultValue="0") int postLike) {
-
-        PostscriptLike postscriptLike = postscriptLikeService.PostscriptLike(postscriptId,postLike);
-
-        return new ResponseEntity<>(
-                new SingleResponseDto<>(postscriptLikeMapper.postLikeToPostLikeDto(postscriptLike)), HttpStatus.OK);
-    }
+//    @PostMapping("{postscript-Id}/like")
+//    public ResponseEntity likePostscript(@PathVariable("postscript-Id") @Positive long postscriptId,
+//                                         @RequestParam(value = "like",defaultValue="0") int postLike) {
+//
+//        PostscriptLike postscriptLike = postscriptLikeService.PostscriptLike(postscriptId,postLike);
+//
+//        return new ResponseEntity<>(
+//                new SingleResponseDto<>(postscriptLikeMapper.postLikeToPostLikeDto(postscriptLike)), HttpStatus.OK);
+//    }
 }

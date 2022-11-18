@@ -1,5 +1,8 @@
 package com.yes27.postscript.service;
 
+import com.yes27.postscript.entity.Tag;
+import com.yes27.postscript.repository.TagRepository;
+import org.springframework.context.annotation.Lazy;
 import com.yes27.exception.BusinessLogicException;
 import com.yes27.exception.ExceptionCode;
 import com.yes27.postscript.entity.Postscript;
@@ -20,12 +23,15 @@ public class PostscriptService {
 
     private final PostscriptRepository postscriptRepository;
     private final PostscriptLikeService postscriptLikeService;
+    private final TagRepository tagRepository;
 
     public PostscriptService(PostscriptRepository postscriptRepository,
-                             PostscriptLikeService postscriptLikeService
+                             @Lazy PostscriptLikeService postscriptLikeService,
+                             TagRepository tagRepository
                             ) {
         this.postscriptRepository = postscriptRepository;
         this.postscriptLikeService = postscriptLikeService;
+        this.tagRepository = tagRepository;
     }
 
     public Postscript createPostscript(Postscript postscript) {
@@ -53,6 +59,16 @@ public class PostscriptService {
         Optional.ofNullable(postscript.getPostscriptContent())
                 .ifPresent(findPostscript::setPostscriptContent);
         findPostscript.setUpdatedAt(LocalDateTime.now());
+
+        List<Tag> tagList = postscript.getTags();
+        Optional.ofNullable(tagList)
+                .ifPresent(findPostscript::setTags);
+
+        if(tagList != null) {
+            for(Tag tag: tagList)
+                tagRepository.save(tag);
+        }
+
 
         Postscript updatedPostscript = postscriptRepository.save(findPostscript);
         return updatedPostscript;
@@ -83,7 +99,7 @@ public class PostscriptService {
     // 좋아요 수 새로 갱신
     public void refreshLikes(long postscriptId) {
         Postscript postscript = findVerifiedPostscript(postscriptId);
-        postscript.setPostscriptLikes(postscriptLikeService.getPostscriptLikes(postscriptId));
+        postscript.setPostLikes(postscriptLikeService.getPostscriptLikes(postscriptId));
         postscriptRepository.save(postscript);
     }
 }

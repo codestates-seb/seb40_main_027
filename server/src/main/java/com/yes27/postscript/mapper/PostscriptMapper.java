@@ -1,12 +1,16 @@
 package com.yes27.postscript.mapper;
 
 import com.yes27.postscript.dto.PostscriptDto;
+import com.yes27.postscript.dto.TagDto;
+import com.yes27.postscript.dto.TagResponseDto;
 import com.yes27.postscript.entity.Postscript;
+import com.yes27.postscript.entity.Tag;
 import com.yes27.postscript.service.PostscriptService;
 import org.mapstruct.Mapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Mapper(componentModel = "spring")
@@ -21,6 +25,9 @@ public interface PostscriptMapper {
         postscript.setPostscriptTitle(postscriptPostDto.getPostscriptTitle());
         postscript.setPostscriptContent(postscriptPostDto.getPostscriptContent());
 
+        List<Tag> tags = tagsDtosToTags(postscriptPostDto.getTags(), postscript);
+
+        postscript.setTags(tags);
 
         return postscript;
     }
@@ -35,9 +42,16 @@ public interface PostscriptMapper {
         postscript.setPostscriptTitle(postscriptPatchDto.getPostscriptTitle());
         postscript.setPostscriptContent(postscriptPatchDto.getPostscriptContent());
 
+        if(postscriptPatchDto.getTags() == null){ // 태그 수정을 하지 않는 경우 -> 기존 글에서 태그를 불러오기
+            postscript.setTags(postscriptService.findVerifiedPostscript(postscript.getPostscriptId()).getTags());
+        } else { // 태그 수정을 하는 경우
+            List<Tag> tags = tagsDtosToTags(postscriptPatchDto.getTags(), postscript);
+            postscript.setTags(tags);
+        }
 
         return postscript;
     }
+
 
     //응답
     default PostscriptDto.PostscriptResponse postscriptToPostscriptResponseDto(Postscript postscript){
@@ -47,7 +61,7 @@ public interface PostscriptMapper {
         postscriptResponseDto.setPostscriptStatus(postscript.getPostscriptStatus());
         postscriptResponseDto.setPostscriptTitle(postscript.getPostscriptTitle());
         postscriptResponseDto.setPostscriptContent(postscript.getPostscriptContent());
-        postscriptResponseDto.setPostscriptLike(postscript.getPostscriptLikes());
+        postscriptResponseDto.setPostLike(postscript.getPostLikes());
         postscriptResponseDto.setPostscriptView(postscript.getPostscriptView());
 
 
@@ -65,7 +79,7 @@ public interface PostscriptMapper {
         postscriptResponse.setPostscriptTitle(postscript.getPostscriptTitle());
         postscriptResponse.setPostscriptContent(postscript.getPostscriptContent());
         postscriptResponse.setPostscriptView(postscript.getPostscriptView());
-        postscriptResponse.setPostscriptLike(postscript.getPostscriptLikes());
+        postscriptResponse.setPostLike(postscript.getPostLikes());
         postscriptResponse.setPostscriptStatus(postscript.getPostscriptStatus());
         postscriptResponse.setCreatedAt(postscript.getCreatedAt());
         postscriptResponse.setUpdatedAt(postscript.getUpdatedAt());
@@ -87,6 +101,29 @@ public interface PostscriptMapper {
         }
 
         return postscriptResponseDtos;
+    }
+
+    default List<Tag> tagsDtosToTags(List<TagDto> tagsDtos, Postscript postscript){
+
+        return tagsDtos.stream().distinct().map(tagDto -> {
+            Tag tag = new Tag();
+            tag.addPostscript(postscript);
+            tag.setTagName(tagDto.getTagName());
+
+            // 유저 추가하기
+            return tag;
+        }).collect(Collectors.toList());
+    }
+
+    default List<TagResponseDto> tagsToTagResponseDtos(List<Tag> tags) {
+
+        return tags.stream()
+                .map(tag -> TagResponseDto
+                        .builder()
+                        .tagName(tag.getTagName())
+                        .build())
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     // postscript - comment 연동

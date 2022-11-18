@@ -23,31 +23,32 @@ public class PostscriptLikeService {
 
     }
 
-    public PostscriptLike PostscriptLike(long postscriptId, int postLike){
-
-
-        PostscriptLike postscriptLike = postscriptLikeRepository.findByPostscriptAndUser(postscriptService.findVerifiedPostscript(postscriptId));
-
-        //유저 추가하기
-
-
-        if(postscriptLike == null){
-
-            PostscriptLike newLike = new PostscriptLike();
-            newLike.addPostscript(postscriptService.findPostscript(postscriptId));
-            newLike.setPostLike(postLike);
-            postscriptLikeRepository.save(newLike);
-            postscriptService.refreshLikes(postscriptId);
-            //유저 추가하기
-
-            return newLike;
-        } else {
-            postscriptLike.setPostLike(postLike);
-            postscriptLikeRepository.save(postscriptLike);
-            postscriptService.refreshLikes(postscriptId);
-            return postscriptLike;
-        }
-    }
+//    public PostscriptLike PostscriptLike(long postscriptId, int postLike){
+//
+//
+////        //
+////        PostscriptLike postscriptLike = postscriptLikeRepository.findByPostscriptAndUser(postscriptService.findVerifiedPostscript(postscriptId));
+////
+////        //유저 추가하기
+//
+//
+//        if(postscriptLike == null){
+//
+//            PostscriptLike newLike = new PostscriptLike();
+//            newLike.addPostscript(postscriptService.findPostscript(postscriptId));
+//            newLike.setPostLike(postLike);
+//            postscriptLikeRepository.save(newLike);
+//            postscriptService.refreshLikes(postscriptId);
+//            //유저 추가하기
+//
+//            return newLike;
+//        } else {
+//            postscriptLike.setPostLike(postLike);
+//            postscriptLikeRepository.save(postscriptLike);
+//            postscriptService.refreshLikes(postscriptId);
+//            return postscriptLike;
+//        }
+//    }
 
     public int getPostscriptLikes (long postscriptId) {
         int PostscriptLikes = postscriptLikeRepository.findLikeValue(postscriptId);

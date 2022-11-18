@@ -10,6 +10,6 @@ import lombok.Setter;
 public class PostscriptLikeDto {
 
     private long postscriptId;
-    private long PostscriptLike;
+    private long postLike;
     private long totalPostscriptLike;
 }
