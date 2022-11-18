@@ -6,7 +6,7 @@ import mainmobile from '../assets/image/mainmobile.png';
 
 const MainPage = styled.div`
   height: 90vh;
-  overflow-y: auto;
+  overflow-y: scroll;
   #main-big-banner {
     width: 100%;
     margin: 0px;
