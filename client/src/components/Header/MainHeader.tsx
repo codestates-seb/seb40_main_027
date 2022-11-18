@@ -61,10 +61,6 @@ const Header = () => {
             <Nickname />
           </div>
         )}
-        {/* <div>
-          <LoginButton />
-          <RegisterButton />
-        </div> */}
       </div>
     </HeaderContent>
   );
