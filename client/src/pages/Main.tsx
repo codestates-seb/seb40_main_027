@@ -53,7 +53,6 @@ const IconContent = styled.div`
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
-  /* vertical-align: middle; */
   align-items: center;
   border-radius: 20px;
   margin: 0px 1% 0px 1%;
