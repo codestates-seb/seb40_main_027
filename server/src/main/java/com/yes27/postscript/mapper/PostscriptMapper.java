@@ -53,25 +53,7 @@ public interface PostscriptMapper {
     }
 
 
-    //응답
-    default PostscriptDto.PostscriptResponse postscriptToPostscriptResponseDto(Postscript postscript){
-
-        PostscriptDto.PostscriptResponse postscriptResponseDto = new PostscriptDto.PostscriptResponse();
-        postscriptResponseDto.setPostscriptId(postscript.getPostscriptId());
-        postscriptResponseDto.setPostscriptStatus(postscript.getPostscriptStatus());
-        postscriptResponseDto.setPostscriptTitle(postscript.getPostscriptTitle());
-        postscriptResponseDto.setPostscriptContent(postscript.getPostscriptContent());
-        postscriptResponseDto.setPostLike(postscript.getPostLikes());
-        postscriptResponseDto.setPostscriptView(postscript.getPostscriptView());
-
-
-        postscriptResponseDto.setCreatedAt(postscript.getCreatedAt());
-        postscriptResponseDto.setUpdatedAt(postscript.getUpdatedAt());
-
-        return postscriptResponseDto;
-    }
-
-    // 질문 조회
+    // 질문 응답
     default PostscriptDto.PostscriptResponse postscriptToPostscriptResponse(Postscript postscript){
 
         PostscriptDto.PostscriptResponse postscriptResponse = new PostscriptDto.PostscriptResponse();
@@ -79,10 +61,17 @@ public interface PostscriptMapper {
         postscriptResponse.setPostscriptTitle(postscript.getPostscriptTitle());
         postscriptResponse.setPostscriptContent(postscript.getPostscriptContent());
         postscriptResponse.setPostscriptView(postscript.getPostscriptView());
+
         postscriptResponse.setPostLike(postscript.getPostLikes());
+
         postscriptResponse.setPostscriptStatus(postscript.getPostscriptStatus());
+
         postscriptResponse.setCreatedAt(postscript.getCreatedAt());
         postscriptResponse.setUpdatedAt(postscript.getUpdatedAt());
+
+        // 태그
+        postscriptResponse.setPostscriptTags(tagsToTagResponseDtos(postscript.getTags()).stream().distinct().collect(Collectors.toList()));
+
 //        postscriptResponse.setPostComments();
 
         // 댓글연동 추가하기
@@ -97,8 +86,9 @@ public interface PostscriptMapper {
         List<PostscriptDto.PostscriptResponse> postscriptResponseDtos = new ArrayList<>(postscripts.size());
 
         for(Postscript postscript : postscripts) {
-            postscriptResponseDtos.add(postscriptToPostscriptResponseDto(postscript));
+            postscriptResponseDtos.add(postscriptToPostscriptResponse(postscript));
         }
+        //유저 추가하기
 
         return postscriptResponseDtos;
     }

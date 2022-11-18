@@ -44,7 +44,7 @@ public class PostscriptController {
             postscriptMapper.postscriptPostDtoToPostscript(postscriptPostDto));
 
     return new ResponseEntity<>(
-            new SingleResponseDto<>(postscriptMapper.postscriptToPostscriptResponseDto(postscript)), HttpStatus.CREATED);
+            new SingleResponseDto<>(postscriptMapper.postscriptToPostscriptResponse(postscript)), HttpStatus.CREATED);
     }
 
     @PatchMapping("/{postscript-Id}") //선택 조언, 후기 글 수정
@@ -56,7 +56,7 @@ public class PostscriptController {
         Postscript updatedPostscript = postscriptService.updatePostscript(postscript);
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(postscriptMapper.postscriptToPostscriptResponseDto(updatedPostscript)), HttpStatus.OK);
+                new SingleResponseDto<>(postscriptMapper.postscriptToPostscriptResponse(updatedPostscript)), HttpStatus.OK);
     }
 
     @GetMapping("/{postscript-Id}") //특정 조언,후기 조회

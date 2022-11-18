@@ -19,6 +19,7 @@ public class TagDto {
             return false;
         }
     }
+
     @Override
     public int hashCode() {
         return tagName.hashCode();
