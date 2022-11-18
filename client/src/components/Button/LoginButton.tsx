@@ -32,10 +32,10 @@ const StyleLogPageBtn = styled(StyledBackgroundButton)`
     font-size: 20px;
   }
 `;
-interface propsType {
+interface PropsType {
   onClick?: any | null;
 }
 
-export const LogPageBtn = ({ onClick }: propsType) => {
+export const LogPageBtn = ({ onClick }: PropsType) => {
   return <StyleLogPageBtn onClick={onClick}>로그인</StyleLogPageBtn>;
 };
