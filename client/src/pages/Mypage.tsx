@@ -1,11 +1,11 @@
 import PageHeader from '../components/Header/PageHeader';
 import icon from '../assets/image/icon.png';
 import { useState } from 'react';
-import MypageSchedule from '../components/MypageContent/MypageSchedule';
-import MypageList from '../components/MypageContent/MypageList';
+import MyPageSchedule from '../components/MyPageContent/MyPageSchedule';
+import MypageList from '../components/MyPageContent/MyPageList';
 import { Icon } from '@iconify/react';
 import * as S from './MyPage.style';
-import SideBar from '../components/MypageContent/Sidebar';
+import SideBar from '../components/SideBar/SideBar';
 
 const Mypage = () => {
   const [currentTab, setCurrentTab] = useState<number>(0);
@@ -73,7 +73,7 @@ const Mypage = () => {
             </div>
             <div className="tab-mobile-bar"></div>
           </div>
-          <div className="mypage-view">{currentTab === 1 ? <MypageList /> : <MypageSchedule />}</div>
+          <div className="mypage-view">{currentTab === 1 ? <MypageList /> : <MyPageSchedule />}</div>
         </div>
       </S.MypageContent>
     </S.PageSize>
