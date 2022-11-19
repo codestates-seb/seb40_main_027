@@ -51,10 +51,7 @@ const Header = () => {
         {islogin ? (
           <div>
             <LoginButton onClick={clickLogin} />
-
-            <button>
-              <RegisterButton />
-            </button>
+            <RegisterButton />
           </div>
         ) : (
           <div>
