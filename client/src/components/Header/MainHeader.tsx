@@ -38,17 +38,17 @@ const HeaderContent = styled.header`
 
 //onChange={clickLogin}
 const Header = () => {
-  const [islogin, setIslogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(true);
 
   const clickLogin = () => {
     //임의로 오류안나게하기 위해 넣은 함수
-    setIslogin(!islogin);
+    setIsLogin(!isLogin);
   };
   return (
     <HeaderContent>
       <div className="header-component">
         <img src={logo} alt="logo" />
-        {islogin ? (
+        {isLogin ? (
           <div>
             <LoginButton onClick={clickLogin} />
             <RegisterButton />
