@@ -36,7 +36,6 @@ const HeaderContent = styled.header`
   }
 `;
 
-//onChange={clickLogin}
 const Header = () => {
   const [isLogin, setIsLogin] = useState(true);
 
