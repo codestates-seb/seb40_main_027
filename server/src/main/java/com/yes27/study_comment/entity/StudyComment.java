@@ -42,4 +42,11 @@ public class StudyComment extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
+
+    public void addMember(Member member) {
+        this.member = member;
+        if (!this.member.getStudyComments().contains(this)) {
+            this.member.addStudyComment(this);
+        }
+    }
 }

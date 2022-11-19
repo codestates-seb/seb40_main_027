@@ -36,6 +36,20 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Study> studies = new ArrayList<>();
 
+    public void addStudy(Study study) {
+        this.studies.add(study);
+        if (study.getMember() != this) {
+            study.addMember(this);
+        }
+    }
+
     @OneToMany(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<StudyComment> studyComments = new ArrayList<>();
+
+    public void addStudyComment(StudyComment studyComment) {
+        this.studyComments.add(studyComment);
+        if (studyComment.getMember() != this) {
+            studyComment.addMember(this);
+        }
+    }
 }
