@@ -8,13 +8,26 @@ const TestContent = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 const FormContent = styled.div`
-  display: flex;
+  display: flexzz;
   justify-content: center;
   align-items: center;
   background-color: var(--greenMain);
-  height: 70%;
+  height: 80%;
   width: 70%;
+  @media screen and (max-width: 414px) {
+    height: 60vh;
+    width: 100vw;
+  }
+`;
+
+const StyleFormCode = styled.div`
+  border: 6px double white;
+  width: 90%;
+  height: 90%;
+  display: flex;
+  align-items: center;
 `;
 
 const Test = () => {
@@ -23,7 +36,9 @@ const Test = () => {
       <PageHeader />
       <TestContent>
         <FormContent>
-          <StartForm />
+          <StyleFormCode>
+            <StartForm />
+          </StyleFormCode>
         </FormContent>
       </TestContent>
     </div>
