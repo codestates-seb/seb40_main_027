@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const SidebarPage = styled.div`
-  .baov {
+export const SideBarPage = styled.div`
+  .sidebar-graypage {
     visibility: hidden;
     height: 0vh;
     transition: all 0.3s;
@@ -49,7 +49,7 @@ export const SidebarPage = styled.div`
   }
 `;
 
-export const SidebarMenu = styled.div`
+export const SideBarMenu = styled.div`
   @media screen and (max-width: 414px) {
     border: 1px solid var(--grayContentsBorder);
     width: 70%;
@@ -69,9 +69,9 @@ export const HideSidebar = styled.div`
     transition: all 0.25s;
 
     position: absolute;
-    animation: setMotionhide 1s normal;
+    animation: setMotionHide 1s normal;
   }
-  @keyframes setMotionhide {
+  @keyframes setMotionHide {
     from {
       width: 100%;
     }
