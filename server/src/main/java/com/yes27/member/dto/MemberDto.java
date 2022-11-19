@@ -1,16 +1,21 @@
 package com.yes27.member.dto;
 
-import com.yes27.study.entity.Study;
-import com.yes27.study_comment.entity.StudyComment;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 public class MemberDto {
+    @Getter
+    public static class Get {
+        private Long memberId;
+    }
+
     @Getter
     @Setter
     public static class Post {
@@ -48,7 +53,29 @@ public class MemberDto {
         private String nickname;
         private String password;
 
-        private List<Study> studies = new ArrayList<>();
-        private List<StudyComment> studyComments = new ArrayList<>();
+        private List<StudySubset> studies = new ArrayList<>();
+        private List<StudyCommentSubset> studyComments = new ArrayList<>();
     }
+
+    @Getter
+    @Setter
+    @Builder
+    public static class StudySubset {
+        public Long studyId;
+
+        public String studyTitle;
+        public String studyContent;
+        public int view;
+        public int vote;
+    }
+
+    @Getter
+    @Setter
+    @Builder
+    public static class StudyCommentSubset {
+        private Long studyCommentId;
+        private String comment;
+        private int vote;
+    }
+
 }
