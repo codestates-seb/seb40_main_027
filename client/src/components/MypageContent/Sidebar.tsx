@@ -14,19 +14,19 @@ const SideBar = () => {
   return (
     <div>
       {isContent ? (
-        <S.SidebarPage onClick={HideHandler}>
+        <S.SideBarPage onClick={HideHandler}>
           <div className="sidebar-graypage">
             <div className="sidebar-content">
               <div>
                 {SelectMenu.map((el, idx) => (
-                  <S.SidebarMenu key={idx}>{el}</S.SidebarMenu>
+                  <S.SideBarMenu key={idx}>{el}</S.SideBarMenu>
                 ))}
               </div>
             </div>
           </div>
-        </S.SidebarPage>
+        </S.SideBarPage>
       ) : (
-        <S.SidebarPage className="hide-menu"></S.SidebarPage>
+        <S.SideBarPage className="hide-menu"></S.SideBarPage>
       )}
     </div>
   );
