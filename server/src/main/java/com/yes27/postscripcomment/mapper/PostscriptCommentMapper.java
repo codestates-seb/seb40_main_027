@@ -38,14 +38,20 @@ public interface PostscriptCommentMapper {
 
     default PostscriptCommentDto.Response postCommentToPostCommentResponseDto(PostscriptComment postscriptComment){
 
-        PostscriptCommentDto.Response postCommentResponseDto = new PostscriptCommentDto.Response();
-
-        postCommentResponseDto.setPostCommentId(postscriptComment.getPostCommentId());
-        postCommentResponseDto.setPostCommentContent(postscriptComment.getPostCommentContent());
-        postCommentResponseDto.setCreatedAt(postscriptComment.getCreatedAt());
-        postCommentResponseDto.setModifiedAt(postscriptComment.getUpdatedAt());
-
+        PostscriptCommentDto.Response postCommentResponseDto = new PostscriptCommentDto.Response(
+                postscriptComment.getPostCommentId(),
+                postscriptComment.getPostCommentContent(),
+                postscriptComment.getCreatedAt(),
+                postscriptComment.getUpdatedAt()
+        );
         return postCommentResponseDto;
+//        postCommentResponseDto.setPostCommentId(postscriptComment.getPostCommentId());
+//        postCommentResponseDto.setPostCommentContent(postscriptComment.getPostCommentContent());
+//        postCommentResponseDto.setCreatedAt(postscriptComment.getCreatedAt());
+//        postCommentResponseDto.setUpdatedAt(postscriptComment.getUpdatedAt());
+//        postCommentResponseDto.setPostscriptId(postscriptComment.getPostscript().getPostscriptId());
+
+
     }
 
 }

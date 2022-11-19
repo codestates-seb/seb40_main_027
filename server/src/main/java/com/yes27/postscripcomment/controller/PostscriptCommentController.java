@@ -47,6 +47,7 @@ public class PostscriptCommentController {
 
         return new  ResponseEntity<>(
                 new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentResponseDto(postscriptComment)), HttpStatus.CREATED);
+        // 유저 추가하기
     }
 
     @PatchMapping("/comment/{postComment-id}")

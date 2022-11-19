@@ -1,6 +1,9 @@
 package com.yes27.postscripcomment.dto;
 
+import com.yes27.postscripcomment.entity.PostscriptComment;
+import com.yes27.postscript.entity.Postscript;
 import lombok.*;
+import lombok.Builder;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
@@ -8,11 +11,12 @@ import java.time.LocalDateTime;
 public class PostscriptCommentDto {
 
     @Getter
+    @Setter
     public static class Post {
 
-        private long postCommentId;
+        private Long postCommentId;
 
-        @NotBlank(message = "내용을 입력하세요.")
+        @NotBlank(message = "댓글을 입력하세요.")
         private String postCommentContent;
     }
 
@@ -23,20 +27,22 @@ public class PostscriptCommentDto {
 
         private Long postCommentId;
 
-        @NotBlank(message = "내용을 입력하세요.")
+        @NotBlank(message = "댓글을 입력하세요.")
         private String postCommentContent;
+
     }
 
 
     @Getter
     @Setter
-    @NoArgsConstructor
+    @Builder
+    @AllArgsConstructor
     public static class Response {
         private Long postCommentId;
         private String postCommentContent;
 
         private LocalDateTime createdAt;
-        private LocalDateTime modifiedAt;
+        private LocalDateTime updatedAt;
 
         // UserDto 넣기
     }

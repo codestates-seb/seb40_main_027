@@ -51,8 +51,8 @@ public class PostscriptDto {
         private Integer postscriptView;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
-//        private List<PostscriptCommentDto> postComments;
-        private List<TagResponseDto> postscriptTags;
+        private List<PostscriptCommentDto.Response> postComments; // 댓글
+        private List<TagResponseDto> postscriptTags; // 태그
 
         //유저 추가하기
     }
