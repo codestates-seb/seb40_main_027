@@ -9,7 +9,6 @@ import { useRecoilState } from 'recoil';
 import { sidebarFloading } from '../../atoms/index';
 
 const PageMenu = styled.header`
-  position: relative;
   width: 100%;
   height: 4rem;
   border-bottom: 1px solid var(--grayHeaderBorder);
