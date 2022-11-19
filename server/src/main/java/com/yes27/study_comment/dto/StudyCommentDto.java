@@ -12,6 +12,7 @@ public class StudyCommentDto {
     public static class Post {
         private String comment;
         private Long studyId;
+        private Long memberId;
     }
 
     @Getter

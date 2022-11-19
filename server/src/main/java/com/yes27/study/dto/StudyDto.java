@@ -15,6 +15,7 @@ public class StudyDto {
         private String studyTitle;
         @NotBlank
         private String studyContent;
+        private Long memberId;
     }
 
     @Getter
