@@ -2,7 +2,6 @@ package com.yes27.study.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import javax.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,9 +10,7 @@ public class StudyDto {
     @Getter
     @Setter
     public static class Post {
-        @NotBlank
         private String studyTitle;
-        @NotBlank
         private String studyContent;
         private Long memberId;
     }
@@ -42,6 +39,7 @@ public class StudyDto {
         private LocalDateTime updatedAt;
 
         public List<StudyCommentSubset> studyComments;
+        public MemberSubset member;
     }
 
     @Getter
@@ -53,6 +51,16 @@ public class StudyDto {
         public int vote;
         public LocalDateTime createdAt;
         public LocalDateTime updatedAt;
+    }
+
+    @Getter
+    @Setter
+    @Builder
+    public static class MemberSubset {
+        public Long memberId;
+        public String email;
+        public String nickname;
+        public String password;
     }
 }
 

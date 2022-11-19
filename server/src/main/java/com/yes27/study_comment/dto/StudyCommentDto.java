@@ -37,6 +37,7 @@ public class StudyCommentDto {
         private LocalDateTime updatedAt;
 
         public StudySubset study;
+        public MemberSubset member;
     }
     
     @Getter 
@@ -50,5 +51,15 @@ public class StudyCommentDto {
         public int vote;
         public LocalDateTime createdAt;
         public LocalDateTime updatedAt;
+    }
+
+    @Getter
+    @Setter
+    @Builder
+    public static class MemberSubset {
+        public Long memberId;
+        public String email;
+        public String nickname;
+        public String password;
     }
 }

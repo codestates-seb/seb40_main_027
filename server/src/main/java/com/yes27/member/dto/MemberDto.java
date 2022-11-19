@@ -1,5 +1,7 @@
 package com.yes27.member.dto;
 
+import com.yes27.study.entity.Study;
+import com.yes27.study_comment.entity.StudyComment;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.constraints.Email;
@@ -46,7 +48,7 @@ public class MemberDto {
         private String nickname;
         private String password;
 
-        private List<Integer> studyIds = new ArrayList<>();
-        private List<Integer> studyCommentIds = new ArrayList<>();
+        private List<Study> studies = new ArrayList<>();
+        private List<StudyComment> studyComments = new ArrayList<>();
     }
 }
