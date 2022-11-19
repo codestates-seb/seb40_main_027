@@ -81,6 +81,7 @@ const GlobalStyle = createGlobalStyle`
     --grayBannerBackground: #EBE7E4;
     --grayListFill: #EEEEEE;
     --redButtonDelete: #CA471D;
+    --subgreen: #a9dbbd
 
     background-color: var(--whiteBackground);
 
