@@ -1,5 +1,7 @@
 package com.yes27.study.controller;
 
+import com.yes27.member.entity.Member;
+import com.yes27.member.service.MemberService;
 import com.yes27.response.MultiResponseDto;
 import com.yes27.response.SingleResponseDto;
 import com.yes27.study.dto.StudyDto;
@@ -29,17 +31,25 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @Slf4j
 public class StudyController {
+    private final MemberService memberService;
     private final StudyService studyService;
     private final StudyMapper mapper;
 
-    public StudyController(StudyService studyService, StudyMapper mapper) {
+    public StudyController(MemberService memberService,
+        StudyService studyService, StudyMapper mapper) {
+        this.memberService = memberService;
         this.studyService = studyService;
         this.mapper = mapper;
     }
 
     @PostMapping
     public ResponseEntity postStudy(@Valid @RequestBody StudyDto.Post requestBody) {
+
+        Member member = memberService.findVerifiedMember(requestBody.getMemberId());
+
         Study study = mapper.studyPostToStudy(requestBody);
+        study.setMember(member);
+
         Study createdStudy = studyService.createStudy(study);
 
         return new ResponseEntity<>(
