@@ -36,7 +36,7 @@ public interface StudyCommentMapper {
         response.setCreatedAt(studyComment.getCreatedAt());
         response.setUpdatedAt(studyComment.getUpdatedAt());
 
-        response.setStudySubset(studyToStudySubset(study));
+        response.setStudy(studyToStudySubset(study));
 
         return response;
     }

@@ -40,7 +40,7 @@ public class StudyDto {
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
 
-        public List<StudyCommentSubset> studyCommentSubSets;
+        public List<StudyCommentSubset> studyComments;
     }
 
     @Getter

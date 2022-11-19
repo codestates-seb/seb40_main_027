@@ -35,7 +35,7 @@ public class StudyCommentDto {
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
 
-        public StudySubset studySubset;
+        public StudySubset study;
     }
     
     @Getter 
