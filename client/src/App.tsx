@@ -7,14 +7,12 @@ import MyPage from './pages/Mypage';
 function App() {
   return (
     <div>
-      <div>
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/user/login" element={<Login />} />
-          <Route path="/users/me" element={<MyPage />} />
-        </Routes>
-        {/* <Footer /> */}
-      </div>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/user/login" element={<Login />} />
+        <Route path="/users/me" element={<MyPage />} />
+      </Routes>
+
       <Footer />
     </div>
   );
