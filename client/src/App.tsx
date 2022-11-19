@@ -13,7 +13,7 @@ function App() {
           <Route path="/user/login" element={<Login />} />
           <Route path="/users/me" element={<MyPage />} />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </div>
       <Footer />
     </div>
