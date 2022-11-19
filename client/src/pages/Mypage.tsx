@@ -5,10 +5,9 @@ import MypageSchedule from '../components/MypageContent/MypageSchedule';
 import MypageList from '../components/MypageContent/MypageList';
 import { Icon } from '@iconify/react';
 import * as S from './MyPage.style';
+import SideBar from '../components/MypageContent/Sidebar';
 
-import Sidebar from '../components/MypageContent/Sidebar';
-
-const MyPage = () => {
+const Mypage = () => {
   const [currentTab, setCurrentTab] = useState<number>(0);
 
   const TabHandler = (id: number) => {
@@ -24,7 +23,7 @@ const MyPage = () => {
     <S.PageSize>
       <PageHeader />
 
-      <Sidebar />
+      <SideBar />
 
       <S.MypageContent>
         <div className="tab-menu">
@@ -35,7 +34,6 @@ const MyPage = () => {
               <S.ButtonTab
                 key={el.id}
                 onClick={() => TabHandler(el.id)}
-                // style={currentTab === el.id ?  : {}}
                 className={currentTab === el.id ? 'tab-button' : 'tab-not-select'}
               >
                 {el.text}
@@ -81,4 +79,4 @@ const MyPage = () => {
     </S.PageSize>
   );
 };
-export default MyPage;
+export default Mypage;
