@@ -1,11 +1,9 @@
 package com.yes27.study.dto;
 
-import com.yes27.member.entity.Member;
-import com.yes27.study_comment.dto.StudyCommentDto;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import javax.validation.constraints.NotBlank;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -42,8 +40,18 @@ public class StudyDto {
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
 
-        private List<StudyCommentDto.Response> studyComments = new ArrayList<>();
-        private Member member;
+        public List<StudyCommentSubset> studyCommentSubSets;
+    }
+
+    @Getter
+    @Setter
+    @Builder
+    public static class StudyCommentSubset {
+        public Long studyCommentId;
+        public String comment;
+        public int vote;
+        public LocalDateTime createdAt;
+        public LocalDateTime updatedAt;
     }
 }
 

@@ -1,7 +1,5 @@
 package com.yes27.study_comment.dto;
 
-import com.yes27.member.entity.Member;
-import com.yes27.study.entity.Study;
 import java.time.LocalDateTime;
 import javax.validation.constraints.NotBlank;
 import lombok.Builder;
@@ -12,8 +10,8 @@ public class StudyCommentDto {
     @Getter
     @Setter
     public static class Post {
-        @NotBlank
         private String comment;
+        private Long studyId;
     }
 
     @Getter
@@ -27,11 +25,9 @@ public class StudyCommentDto {
 
     @Getter
     @Setter
-    @Builder
     public static class Response {
         private Long studyCommentId;
 
-        @NotBlank
         private String comment;
 
         private int vote;
@@ -39,7 +35,19 @@ public class StudyCommentDto {
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
 
-        private Study study;
-        private Member member;
+        public StudySubset studySubset;
+    }
+    
+    @Getter 
+    @Setter 
+    @Builder
+    public static class StudySubset {
+        public Long studyId;
+        public String studyTitle; 
+        public String studyContent; 
+        public int view; 
+        public int vote;
+        public LocalDateTime createdAt;
+        public LocalDateTime updatedAt;
     }
 }
