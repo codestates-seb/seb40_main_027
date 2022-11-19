@@ -39,11 +39,12 @@ public class StudyCommentController {
     }
 
     @PostMapping("/{study-id}/comment")
-    public ResponseEntity postComment(
-        @PathVariable("study-id") @Positive Long studyId,
+    public ResponseEntity postComment(@PathVariable("study-id") @Positive Long studyId,
         @Valid @RequestBody StudyCommentDto.Post requestBody) {
 
         Study findStudy = studyService.findVerifiedStudy(studyId);
+
+        requestBody.setStudyId(studyId);
 
         StudyComment studyComment = mapper.commentPostToComment(requestBody);
         studyComment.setStudy(findStudy);
@@ -61,7 +62,7 @@ public class StudyCommentController {
 
         Study findStudy = studyService.findVerifiedStudy(studyId);
 
-        requestBody.setStudyCommentId(studyCommentId);
+//        requestBody.setStudyCommentId(studyCommentId);
         StudyComment findStudyComment = mapper.commentPatchToComment(requestBody);
         findStudyComment.setStudy(findStudy);
 
