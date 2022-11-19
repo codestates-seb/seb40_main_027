@@ -10,3 +10,4 @@ export const GRAY_BOARD_AREA_BORDER = '#DDDDDD';
 export const GRAY_BANNER_BACKGROUND = '#EBE7E4';
 export const GRAY_LIST_FILL = '#EEEEEE';
 export const RED_BUTTON_DELETE = '#CA471D';
+export const SUB_GREEN = '#a9dbbd';
