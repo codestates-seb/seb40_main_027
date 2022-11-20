@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import logo from '../assets/image/logo.png';
 import icon from '../assets/image/icon.png';
 import { RegisterButton } from '../components/Button';
+import SearchBar from '../components/SearchBar/\bSearchBar';
 
 const textList = [
   { id: 1, value: 'Nickname', type: 'text' },
@@ -23,12 +24,19 @@ const SignUp = () => {
         <form onSubmit={handleSubmit(onSumbit)}>
           <S.TypeSection>
             <div>
-              {textList.map((el) => (
-                <label key={el.id}>
-                  <S.CustomH2>{el.value}</S.CustomH2>
-                  <input type={el.type} {...register(el.value)} />
-                </label>
-              ))}
+              {textList.map((el) =>
+                el.id >= 3 ? (
+                  <label key={el.id}>
+                    <S.CustomH2>{el.value}</S.CustomH2>
+                    <input type={el.type} {...register(el.value)} autoComplete="off" />
+                  </label>
+                ) : (
+                  <label key={el.id}>
+                    <S.CustomH2>{el.value}</S.CustomH2>
+                    <input type={el.type} {...register(el.value)} />
+                  </label>
+                )
+              )}
             </div>
             <S.AgreeFrom>
               <img src={icon} alt="icon" />
