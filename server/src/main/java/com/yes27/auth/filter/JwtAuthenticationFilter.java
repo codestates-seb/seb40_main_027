@@ -4,10 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yes27.auth.dto.LoginDto;
 import com.yes27.auth.jwt.JwtTokenizer;
 import com.yes27.member.entity.Member;
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.SneakyThrows;
@@ -46,7 +48,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest request,
         HttpServletResponse response,
         FilterChain chain,
-        Authentication authResult) {
+        Authentication authResult) throws ServletException, IOException {
         Member member = (Member) authResult.getPrincipal();  // (4-1)
 
         String accessToken = delegateAccessToken(member);   // Access Token 생성
@@ -54,6 +56,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         response.setHeader("Authorization", "Bearer " + accessToken);  // (4-4)
         response.setHeader("Refresh", refreshToken);                   // (4-5)
+
+        this.getSuccessHandler().onAuthenticationSuccess(request, response, authResult);
     }
 
     // Access Token 생성 로직
