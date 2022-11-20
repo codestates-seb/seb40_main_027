@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +31,14 @@ public class MemberController {
     public MemberController(MemberService memberService, MemberMapper mapper) {
         this.memberService = memberService;
         this.mapper = mapper;
+    }
+
+    @GetMapping("/mypage")
+    public ResponseEntity getMember(@Valid @RequestBody MemberDto.Get requestBody) {
+        Member member = memberService.findVerifiedMember(requestBody.getMemberId());
+        return new ResponseEntity<>(
+            new SingleResponseDto<>(mapper.memberToMemberResponse(member)),
+            HttpStatus.OK);
     }
 
     @PostMapping("/signup")

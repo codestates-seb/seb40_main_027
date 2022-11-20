@@ -1,9 +1,8 @@
 package com.yes27.study_comment.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.yes27.study.entity.Study;
 import java.time.LocalDateTime;
 import javax.validation.constraints.NotBlank;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,8 +10,9 @@ public class StudyCommentDto {
     @Getter
     @Setter
     public static class Post {
-        @NotBlank
         private String comment;
+        private Long studyId;
+        private Long memberId;
     }
 
     @Getter
@@ -29,16 +29,37 @@ public class StudyCommentDto {
     public static class Response {
         private Long studyCommentId;
 
-        @NotBlank
         private String comment;
 
         private int vote;
 
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
         private LocalDateTime createdAt;
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
         private LocalDateTime updatedAt;
 
-        private Long studyId;
+        public StudySubset study;
+        public MemberSubset member;
+    }
+    
+    @Getter 
+    @Setter 
+    @Builder
+    public static class StudySubset {
+        public Long studyId;
+        public String studyTitle; 
+        public String studyContent; 
+        public int view; 
+        public int vote;
+        public LocalDateTime createdAt;
+        public LocalDateTime updatedAt;
+    }
+
+    @Getter
+    @Setter
+    @Builder
+    public static class MemberSubset {
+        public Long memberId;
+        public String email;
+        public String nickname;
+        public String password;
     }
 }

@@ -1,5 +1,7 @@
 package com.yes27.study_comment.controller;
 
+import com.yes27.member.entity.Member;
+import com.yes27.member.service.MemberService;
 import com.yes27.response.SingleResponseDto;
 import com.yes27.study.entity.Study;
 import com.yes27.study.service.StudyService;
@@ -27,25 +29,29 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @Slf4j
 public class StudyCommentController {
+    private final MemberService memberService;
+    private final StudyService studyService;
     private final StudyCommentService studyCommentService;
     private final StudyCommentMapper mapper;
-    private final StudyService studyService;
 
-    public StudyCommentController(StudyCommentService studyCommentService,
-        StudyCommentMapper mapper, StudyService studyService) {
+    public StudyCommentController(MemberService memberService, StudyService studyService,
+        StudyCommentService studyCommentService, StudyCommentMapper mapper) {
+        this.memberService = memberService;
+        this.studyService = studyService;
         this.studyCommentService = studyCommentService;
         this.mapper = mapper;
-        this.studyService = studyService;
     }
 
     @PostMapping("/{study-id}/comment")
-    public ResponseEntity postComment(
-        @PathVariable("study-id") @Positive Long studyId,
+    public ResponseEntity postComment(@PathVariable("study-id") @Positive Long studyId,
         @Valid @RequestBody StudyCommentDto.Post requestBody) {
 
+        Member member = memberService.findVerifiedMember(requestBody.getMemberId());
         Study findStudy = studyService.findVerifiedStudy(studyId);
 
+        requestBody.setStudyId(studyId);
         StudyComment studyComment = mapper.commentPostToComment(requestBody);
+        studyComment.setMember(member);
         studyComment.setStudy(findStudy);
 
         StudyComment createdComment = studyCommentService.createComment(studyComment);
@@ -61,7 +67,7 @@ public class StudyCommentController {
 
         Study findStudy = studyService.findVerifiedStudy(studyId);
 
-        requestBody.setStudyCommentId(studyCommentId);
+//        requestBody.setStudyCommentId(studyCommentId);
         StudyComment findStudyComment = mapper.commentPatchToComment(requestBody);
         findStudyComment.setStudy(findStudy);
 
