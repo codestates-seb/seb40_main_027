@@ -8,6 +8,10 @@ export const Wrap = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  img {
+    width: 180px;
+    height: 10%;
+  }
   @media ${theme.mobile} {
     img {
       width: 35%;
@@ -35,14 +39,13 @@ export const greenTxtBrd = styled.div`
   border: 1px solid var(--greenMain);
   background-color: var(--whiteBackground);
   color: var(--greenMain);
-  width: 84px;
-  height: 36px;
+  width: 160px;
+  height: 40px;
   border-radius: 9px;
   font-size: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-
   @media screen and (max-width: 414px) {
     width: 50px;
     height: 18px;
