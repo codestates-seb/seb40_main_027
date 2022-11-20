@@ -1,5 +1,6 @@
 package com.yes27.member.dto;
 
+import com.yes27.validator.NotSpace;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +41,11 @@ public class MemberDto {
         @Email
         @Pattern(regexp = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$",
             message = "이메일 형식을 따라야합니다.")
+        @NotSpace
         private String email;
+        @NotSpace
         private String nickname;
+        @NotSpace
         private String password;
     }
 
