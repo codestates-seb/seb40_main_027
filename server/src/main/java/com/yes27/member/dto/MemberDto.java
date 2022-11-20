@@ -1,6 +1,5 @@
 package com.yes27.member.dto;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.constraints.Email;
@@ -22,13 +21,13 @@ public class MemberDto {
         private Long memberId;
 
         @Email
-        @NotBlank
+        @NotBlank(message = "이메일은 공백이 아니어야합니다.")
         private String email;
 
-        @NotBlank
+        @NotBlank(message = "닉네임은 공백이 아니어야 합니다.")
         private String nickname;
 
-        @NotBlank
+        @NotBlank(message = "패스워드는 공백이 아니어야 합니다.")
         private String password;
     }
 
