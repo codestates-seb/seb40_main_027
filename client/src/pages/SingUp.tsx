@@ -1,6 +1,8 @@
 import * as S from './SignUp.style';
 import { useForm } from 'react-hook-form';
-import logo from '../../assets/image/logo.png';
+import logo from '../assets/image/logo.png';
+import icon from '../assets/image/icon.png';
+// import Modal from '../components/Modal/Modal';
 // import { useState } from 'react';
 
 const textList = [
@@ -12,8 +14,10 @@ const textList = [
 
 const SignUp = () => {
   const { register, handleSubmit } = useForm();
+  // const [isOpen, setIsOpen] = useState('false');
   const onSumbit = (data: any) => console.log(data);
-  // const [isChck, setIsCheck] = useState(false);
+
+  // const onClick = (e: any) => {};
 
   return (
     <S.Wrap>
@@ -25,15 +29,18 @@ const SignUp = () => {
             <div>
               {textList.map((el) => (
                 <label key={el.id}>
-                  <S.customH2>{el.value}</S.customH2>
+                  <S.CustomH2>{el.value}</S.CustomH2>
                   <input type={el.type} {...register(el.value)} />
                 </label>
               ))}
             </div>
             <div>
-              <form>
+              <S.AgreeFrom>
+                <img src={icon} alt="icon" />
+                <S.CustomH2>약관 내용</S.CustomH2>
+                <div>개인정보 수집 및 이용에 대한 안내에 동의합니다</div>
                 <input type="checkbox" {...register('agree')} />
-              </form>
+              </S.AgreeFrom>
             </div>
           </S.TypeSection>
           <S.SubmitSection>

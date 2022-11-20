@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '../styles/theme';
 
 export const Wrap = styled.div`
   width: 100vw;
@@ -7,6 +8,12 @@ export const Wrap = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media ${theme.mobile} {
+    img {
+      width: 60%;
+      height: 13%;
+    }
+  }
 `;
 
 export const FormWrap = styled.div`
@@ -68,11 +75,39 @@ export const TypeSection = styled.div`
   }
 `;
 
-export const customH2 = styled.h2`
+export const CustomH2 = styled.h2`
   margin-left: 0;
   margin-right: 0;
-  font-size: 1.3rem;
+  font-size: 2vh;
   font-weight: bold;
+  @media ${theme.mobile} {
+    font-size: 1vh;
+  }
+`;
+
+export const AgreeFrom = styled.form`
+  width: 90% !important;
+  height: 90% !important;
+  margin-top: 0 !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 9rem;
+    height: 4rem;
+  }
+  h2 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  div {
+    width: 85%;
+    height: auto;
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 export const SubmitSection = styled.div`
