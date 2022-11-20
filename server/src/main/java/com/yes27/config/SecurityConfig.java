@@ -1,6 +1,8 @@
 package com.yes27.config;
 
 import com.yes27.auth.filter.JwtAuthenticationFilter;
+import com.yes27.auth.handler.MemberAuthenticationFailureHandler;
+import com.yes27.auth.handler.MemberAuthenticationSuccessHandler;
 import com.yes27.auth.jwt.JwtTokenizer;
 import java.util.Arrays;
 import org.springframework.context.annotation.Bean;
@@ -50,6 +52,8 @@ public class SecurityConfig {
 
             JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer);  // DI
             jwtAuthenticationFilter.setFilterProcessesUrl("/users/login"); // 디폴트 request URL “/login”을 "/users/login"으로 변경
+            jwtAuthenticationFilter.setAuthenticationSuccessHandler(new MemberAuthenticationSuccessHandler());  // MemberAuthenticationSuccessHandler 적용
+            jwtAuthenticationFilter.setAuthenticationFailureHandler(new MemberAuthenticationFailureHandler());  // MemberAuthenticationFailureHandler 적용
 
             builder.addFilter(jwtAuthenticationFilter);  // JwtAuthenticationFilter 를 Spring Security Filter Chain 에 추가
         }
