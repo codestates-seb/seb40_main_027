@@ -10,8 +10,8 @@ export const Wrap = styled.div`
   align-items: center;
   @media ${theme.mobile} {
     img {
-      width: 60%;
-      height: 13%;
+      width: 35%;
+      height: 8%;
     }
   }
 `;
@@ -25,6 +25,9 @@ export const FormWrap = styled.div`
     margin-top: 2%;
     width: 100%;
     height: 100%;
+  }
+  @media ${theme.mobile} {
+    height: 45%;
   }
 `;
 
@@ -73,6 +76,11 @@ export const TypeSection = styled.div`
       }
     }
   }
+  @media ${theme.mobile} {
+    input {
+      font-size: 1.3vh !important;
+    }
+  }
 `;
 
 export const CustomH2 = styled.h2`
@@ -81,7 +89,7 @@ export const CustomH2 = styled.h2`
   font-size: 2vh;
   font-weight: bold;
   @media ${theme.mobile} {
-    font-size: 1vh;
+    font-size: 1.61vh;
   }
 `;
 
@@ -89,6 +97,7 @@ export const AgreeFrom = styled.form`
   width: 90% !important;
   height: 90% !important;
   margin-top: 0 !important;
+  margin-right: 4%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -108,12 +117,16 @@ export const AgreeFrom = styled.form`
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
+  @media ${theme.mobile} {
+    display: none;
+  }
 `;
 
 export const SubmitSection = styled.div`
   display: flex;
   justify-content: center;
   button {
+    height: 3vh;
     width: 200px;
   }
 `;

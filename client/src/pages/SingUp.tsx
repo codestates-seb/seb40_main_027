@@ -2,8 +2,7 @@ import * as S from './SignUp.style';
 import { useForm } from 'react-hook-form';
 import logo from '../assets/image/logo.png';
 import icon from '../assets/image/icon.png';
-// import Modal from '../components/Modal/Modal';
-// import { useState } from 'react';
+import { RegisterButton } from '../components/Button';
 
 const textList = [
   { id: 1, value: 'Nickname', type: 'text' },
@@ -14,10 +13,7 @@ const textList = [
 
 const SignUp = () => {
   const { register, handleSubmit } = useForm();
-  // const [isOpen, setIsOpen] = useState('false');
   const onSumbit = (data: any) => console.log(data);
-
-  // const onClick = (e: any) => {};
 
   return (
     <S.Wrap>
@@ -34,17 +30,15 @@ const SignUp = () => {
                 </label>
               ))}
             </div>
-            <div>
-              <S.AgreeFrom>
-                <img src={icon} alt="icon" />
-                <S.CustomH2>약관 내용</S.CustomH2>
-                <div>개인정보 수집 및 이용에 대한 안내에 동의합니다</div>
-                <input type="checkbox" {...register('agree')} />
-              </S.AgreeFrom>
-            </div>
+            <S.AgreeFrom>
+              <img src={icon} alt="icon" />
+              <S.CustomH2>약관 내용</S.CustomH2>
+              <div>개인정보 수집 및 이용에 대한 안내에 동의합니다</div>
+              <input type="checkbox" {...register('agree')} />
+            </S.AgreeFrom>
           </S.TypeSection>
           <S.SubmitSection>
-            <button>가입하기</button>
+            <RegisterButton text="가입하기" />
           </S.SubmitSection>
         </form>
       </S.FormWrap>
