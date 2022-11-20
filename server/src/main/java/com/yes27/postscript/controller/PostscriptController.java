@@ -84,7 +84,7 @@ public class PostscriptController {
     public ResponseEntity deletePostscript(@PathVariable("postscript-id") @Positive long postscriptId) {
         postscriptService.deletePostscript(postscriptId);
 
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

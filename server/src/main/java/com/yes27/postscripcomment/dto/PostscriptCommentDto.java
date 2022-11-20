@@ -1,7 +1,5 @@
 package com.yes27.postscripcomment.dto;
 
-import com.yes27.postscripcomment.entity.PostscriptComment;
-import com.yes27.postscript.entity.Postscript;
 import lombok.*;
 import lombok.Builder;
 

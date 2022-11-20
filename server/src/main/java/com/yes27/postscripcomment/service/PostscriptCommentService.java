@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional(readOnly = true)
 public class PostscriptCommentService {
 
     private final PostscriptCommentRepository postscriptCommentRepository;
@@ -52,9 +51,9 @@ public class PostscriptCommentService {
     }
 
     // 댓글 삭제
-    public void deletePostComment(Long postCommentId) {
-        PostscriptComment verifiedPostComment = findVerifiedPostscriptComment(postCommentId);
-        postscriptCommentRepository.delete(verifiedPostComment);
+    public void deletePostComment(long postCommentId) {
+        PostscriptComment postscriptComment = findVerifiedPostscriptComment(postCommentId);
+        postscriptCommentRepository.delete(postscriptComment);
     }
 
     public List<PostscriptComment> findPostCommentAll() {
@@ -62,8 +61,10 @@ public class PostscriptCommentService {
     }
 
     public PostscriptComment findVerifiedPostscriptComment(long postCommentId) {
-        Optional<PostscriptComment> optionalComment = postscriptCommentRepository.findById(postCommentId);
-        return optionalComment.orElseThrow(() -> new BusinessLogicException(ExceptionCode.COMMENT_NOT_FOUND));
+        Optional<PostscriptComment> optionalPostscriptComment = postscriptCommentRepository.findById(postCommentId);
+        PostscriptComment findPostComment = optionalPostscriptComment.orElseThrow(() ->
+                new BusinessLogicException(ExceptionCode.COMMENT_NOT_FOUND));
+        return findPostComment;
     }
 
 

@@ -74,7 +74,7 @@ public class PostscriptCommentController {
 
     }
 
-    @DeleteMapping("/comment/{postComment-id}")
+    @DeleteMapping("/comment/delete/{postComment-id}")
     public ResponseEntity deletePostComment(@PathVariable("postComment-id")@Positive long postCommentId){
 
         postscriptCommentService.deletePostComment(postCommentId);

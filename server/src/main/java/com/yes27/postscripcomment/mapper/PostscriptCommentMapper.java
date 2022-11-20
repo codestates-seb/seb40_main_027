@@ -31,7 +31,9 @@ public interface PostscriptCommentMapper {
 
         PostscriptComment postscriptComment = new PostscriptComment();
 
+        postscriptComment.setPostCommentId(postscriptCommentPatchDto.getPostCommentId());
         postscriptComment.setPostCommentContent(postscriptCommentPatchDto.getPostCommentContent());
+
 
         return postscriptComment;
     }
