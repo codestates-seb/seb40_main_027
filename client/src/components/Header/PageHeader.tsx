@@ -6,7 +6,7 @@ import { Icon } from '@iconify/react';
 import { RegisterButton, LoginButton } from '../Button/index';
 
 import { useRecoilState } from 'recoil';
-import { sidebarFloading } from '../../atoms/index';
+import { sideBarFloading } from '../../atoms/index';
 
 const PageMenu = styled.header`
   width: 100%;
@@ -57,12 +57,12 @@ const PageMenu = styled.header`
 `;
 
 const PageHeader = () => {
-  const [islogin, setIslogin] = useState(true);
-  const [isCollapse, setIsCollapse] = useRecoilState(sidebarFloading);
+  const [isLogin, setIsLogin] = useState(true);
+  const [isCollapse, setIsCollapse] = useRecoilState(sideBarFloading);
 
   const clickLogin = () => {
     //임의로 오류안나게하기 위해 넣은 함수
-    setIslogin(!islogin);
+    setIsLogin(!isLogin);
   };
 
   const CollapseHandler = () => {
@@ -83,7 +83,7 @@ const PageHeader = () => {
             {el}
           </span>
         ))}
-        {islogin ? (
+        {isLogin ? (
           <span>
             <LoginButton onClick={clickLogin} />
             <RegisterButton />

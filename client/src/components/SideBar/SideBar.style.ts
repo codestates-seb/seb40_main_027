@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 export const SideBarPage = styled.div`
-  .sidebar-gray-page {
+  .side-bar-gray-page {
     visibility: hidden;
     height: 0vh;
     transition: all 0.3s;
   }
   @media screen and (max-width: 414px) {
-    .sidebar-gray-page {
+    .side-bar-gray-page {
       visibility: visible;
 
       position: absolute;
@@ -28,7 +28,7 @@ export const SideBarPage = styled.div`
 
     z-index: 2;
 
-    .sidebar-content {
+    .side-bar-content {
       width: 70%;
       height: 100%;
       position: absolute;
