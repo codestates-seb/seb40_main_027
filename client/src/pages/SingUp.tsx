@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import logo from '../assets/image/logo.png';
 import icon from '../assets/image/icon.png';
 import { RegisterButton } from '../components/Button';
-import SearchBar from '../components/SearchBar/\bSearchBar';
 
 const textList = [
   { id: 1, value: 'Nickname', type: 'text' },
@@ -38,12 +37,12 @@ const SignUp = () => {
                 )
               )}
             </div>
-            <S.AgreeFrom>
+            <S.AgreeForm>
               <img src={icon} alt="icon" />
               <S.CustomH2>약관 내용</S.CustomH2>
               <div>개인정보 수집 및 이용에 대한 안내에 동의합니다</div>
-              <input type="checkbox" {...register('agree')} />
-            </S.AgreeFrom>
+              <input type="checkbox" {...register('check')} />
+            </S.AgreeForm>
           </S.TypeSection>
           <S.SubmitSection>
             <RegisterButton text="가입하기" />

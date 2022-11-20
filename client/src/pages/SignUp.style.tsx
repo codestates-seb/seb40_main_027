@@ -96,7 +96,8 @@ export const CustomH2 = styled.h2`
   }
 `;
 
-export const AgreeFrom = styled.form`
+export const AgreeForm = styled.div`
+  border: 1px solid var(--greenMain);
   width: 90% !important;
   height: 90% !important;
   margin-top: 0 !important;
