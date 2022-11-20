@@ -9,8 +9,8 @@ export const Wrap = styled.div`
   justify-content: center;
   align-items: center;
   img {
-    width: 180px;
-    height: 10%;
+    width: 240px;
+    height: 120px;
   }
   @media ${theme.mobile} {
     img {
