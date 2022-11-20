@@ -3,6 +3,7 @@ import Login from './pages/Login';
 import Footer from './components/Footer/Footer';
 import Main from './pages/Main';
 import MyPage from './pages/MyPage';
+import BootCamp from './pages/BootCamp';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/user/login" element={<Login />} />
         <Route path="/users/me" element={<MyPage />} />
+        <Route path="/bootcamp" element={<BootCamp />} />
       </Routes>
 
       <Footer />
