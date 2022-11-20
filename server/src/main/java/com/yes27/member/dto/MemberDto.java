@@ -1,5 +1,6 @@
 package com.yes27.member.dto;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.constraints.Email;
@@ -66,6 +67,8 @@ public class MemberDto {
         public String studyContent;
         public int view;
         public int vote;
+        public LocalDateTime createdAt;
+        public LocalDateTime updatedAt;
     }
 
     @Getter
@@ -75,6 +78,8 @@ public class MemberDto {
         private Long studyCommentId;
         private String comment;
         private int vote;
+        public LocalDateTime createdAt;
+        public LocalDateTime updatedAt;
     }
 
 }
