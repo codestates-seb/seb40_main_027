@@ -71,6 +71,7 @@ const GlobalStyle = createGlobalStyle`
 
     --whiteBackground: #FFFFFF;
     --greenMain: #1DCA89;
+    --greenSub: #A9DBBD;
     --blackTextNormal: #222222;
     --blackTextTitle: #222222;
     --purpleReview: #B832F8;
@@ -81,7 +82,6 @@ const GlobalStyle = createGlobalStyle`
     --grayBannerBackground: #EBE7E4;
     --grayListFill: #EEEEEE;
     --redButtonDelete: #CA471D;
-    --greensub: #a9dbbd
 
     background-color: var(--whiteBackground);
 

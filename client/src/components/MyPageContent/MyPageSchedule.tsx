@@ -1,6 +1,6 @@
 import * as S from './MyPageSchedule.style';
 
-const MypageSchedule = () => {
+const MyPageSchedule = () => {
   return (
     <S.ScheduleContent>
       <div className="schedule-line">
@@ -9,4 +9,4 @@ const MypageSchedule = () => {
     </S.ScheduleContent>
   );
 };
-export default MypageSchedule;
+export default MyPageSchedule;

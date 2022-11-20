@@ -5,7 +5,7 @@ export const PageSize = styled.div`
   transform: all 2s;
 `;
 
-export const MypageContent = styled.div`
+export const MyPageContent = styled.div`
   height: 100vh;
   margin: 0rem 18% 0rem 18%;
   transform: all 2s;
@@ -30,7 +30,7 @@ export const MypageContent = styled.div`
     width: 8rem;
     height: 50%;
   }
-  .icon-wapper {
+  .icon-wrapper {
     height: 100%;
     display: flex;
     flex-direction: column-reverse;
@@ -46,7 +46,7 @@ export const MypageContent = styled.div`
     background-color: var(--greenMain);
     border-radius: 40px 40px 0px 0px;
   }
-  .mypage-body {
+  .my-page-body {
     display: flex;
     border: 1px solid var(--grayContentsBorder);
   }
@@ -61,7 +61,7 @@ export const MypageContent = styled.div`
     margin: 1rem 1rem 0rem 1rem;
     width: 100%;
   }
-  .mypage-view {
+  .my-page-view {
     width: 100%;
   }
   .icon-gear {
@@ -104,7 +104,7 @@ export const MypageContent = styled.div`
     .page-name {
       display: none;
     }
-    .icon-wapper {
+    .icon-wrapper {
       display: none;
     }
     img {
@@ -113,7 +113,7 @@ export const MypageContent = styled.div`
     .tab-body {
       display: none;
     }
-    .mypage-body {
+    .my-page-body {
       margin: 0px;
       display: flex;
       width: 100vw;
@@ -144,7 +144,7 @@ export const MypageContent = styled.div`
       height: 100%;
       width: 100%;
     }
-    .mypage-view {
+    .my-page-view {
     }
     .tab-mobile-bar {
       display: flex;

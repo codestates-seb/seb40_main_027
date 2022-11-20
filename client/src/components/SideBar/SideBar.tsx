@@ -15,7 +15,7 @@ const SideBar = () => {
     <div>
       {isContent ? (
         <S.SideBarPage onClick={HideHandler}>
-          <div className="sidebar-graypage">
+          <div className="sidebar-gray-page">
             <div className="sidebar-content">
               <div>
                 {SelectMenu.map((el, idx) => (

@@ -61,7 +61,7 @@ const DummyData = {
   view: 351,
   heart: false,
 };
-const MypageList = () => {
+const MyPageList = () => {
   const DummyList = [DummyData, DummyData];
   console.log(DummyList);
 
@@ -86,4 +86,4 @@ const MypageList = () => {
     </ListContent>
   );
 };
-export default MypageList;
+export default MyPageList;

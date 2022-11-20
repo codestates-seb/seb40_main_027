@@ -2,12 +2,12 @@ import PageHeader from '../components/Header/PageHeader';
 import icon from '../assets/image/icon.png';
 import { useState } from 'react';
 import MyPageSchedule from '../components/MyPageContent/MyPageSchedule';
-import MypageList from '../components/MyPageContent/MyPageList';
+import MyPageList from '../components/MyPageContent/MyPageList';
 import { Icon } from '@iconify/react';
 import * as S from './MyPage.style';
 import SideBar from '../components/SideBar/SideBar';
 
-const Mypage = () => {
+const MyPage = () => {
   const [currentTab, setCurrentTab] = useState<number>(0);
 
   const TabHandler = (id: number) => {
@@ -25,9 +25,9 @@ const Mypage = () => {
 
       <SideBar />
 
-      <S.MypageContent>
+      <S.MyPageContent>
         <div className="tab-menu">
-          <span className="page-name">Mypage</span>
+          <span className="page-name">My Page</span>
 
           <div className="tab-content">
             {TabMenu.map((el) => (
@@ -42,11 +42,11 @@ const Mypage = () => {
           </div>
         </div>
         <div className="tab-body">
-          <div className="icon-wapper">
+          <div className="icon-wrapper">
             <img src={icon} alt="logo" />
           </div>
         </div>
-        <div className="mypage-body">
+        <div className="my-page-body">
           <div className="profile">
             <div className="user-profile">
               <div className="icon-gear">
@@ -73,10 +73,10 @@ const Mypage = () => {
             </div>
             <div className="tab-mobile-bar"></div>
           </div>
-          <div className="mypage-view">{currentTab === 1 ? <MypageList /> : <MyPageSchedule />}</div>
+          <div className="my-page-view">{currentTab === 1 ? <MyPageList /> : <MyPageSchedule />}</div>
         </div>
-      </S.MypageContent>
+      </S.MyPageContent>
     </S.PageSize>
   );
 };
-export default Mypage;
+export default MyPage;
