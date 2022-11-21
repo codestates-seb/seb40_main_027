@@ -50,5 +50,6 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.10",
     "eslint-plugin-react-hooks": "^4.6.0"
-  }
+  },
+  "proxy": "https://9ff1-59-20-231-47.jp.ngrok.io"
 }
