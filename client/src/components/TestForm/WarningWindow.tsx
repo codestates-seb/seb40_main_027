@@ -14,7 +14,7 @@ const WarningWindow = () => {
         <TypeForm />
       ) : (
         <div>
-          <S.WarnTitle>경고!</S.WarnTitle>
+          <S.WarnTitle>주의!</S.WarnTitle>
           <S.WarnContent>이 테스트는 정확한 테스트가 아니므로 주의해주십시오.</S.WarnContent>
           <S.WaringButtonContent>
             <S.WarningButton onClick={WaringHandler}>Next</S.WarningButton>
