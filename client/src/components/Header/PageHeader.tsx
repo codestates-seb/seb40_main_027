@@ -27,6 +27,7 @@ const PageMenu = styled.header`
     display: none;
   }
   img {
+    margin-top: 4px;
     width: 150px;
     height: 60px;
   }
