@@ -50,7 +50,7 @@ public class MemberService {
     public Member updateMember(Member member) {
         Member findMember = findVerifiedMember(member.getMemberId());
 
-        verifyExistsEmail(member.getEmail());
+//        verifyExistsEmail(member.getEmail());
 
         Optional.ofNullable(member.getEmail())
             .ifPresent(email -> findMember.setEmail(email));

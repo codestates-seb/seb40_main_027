@@ -24,12 +24,15 @@ public class MemberDto {
 
         @Email
         @NotBlank(message = "이메일은 공백이 아니어야합니다.")
+        @Pattern(regexp = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$", message = "이메일 형식을 따라야합니다.")
         private String email;
 
         @NotBlank(message = "닉네임은 공백이 아니어야 합니다.")
+        @Pattern(regexp = "^[a-z]+[a-z0-9]{2,9}$", message = "닉네임은 영어 및 숫자로 구성할 수 있으며, 3-10자 입니다.")
         private String nickname;
 
         @NotBlank(message = "패스워드는 공백이 아니어야 합니다.")
+        @Pattern(regexp = "^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\\\(\\\\)\\-_=+]).{4,20}$", message = "비밀번호는 영문, 숫자 및 특수문자 조합으로 최소 한가지씩 조합하여 4-20 자입니다.")
         private String password;
     }
 
@@ -39,14 +42,25 @@ public class MemberDto {
         private Long memberId;
 
         @Email
-        @Pattern(regexp = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$",
-            message = "이메일 형식을 따라야합니다.")
-        @NotSpace
+        @NotSpace(message = "이메일은 space 값이 될 수 없습니다.")
+        @Pattern(regexp = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$", message = "이메일 형식을 따라야합니다.")
         private String email;
-        @NotSpace
+
+        @NotSpace(message = "닉네임은 space 값이 될 수 없습니다.")
+        @Pattern(regexp = "^[a-z]+[a-z0-9]{2,9}$", message = "닉네임은 영어 및 숫자로 구성할 수 있으며, 3-10자 입니다.")
         private String nickname;
-        @NotSpace
+
+        @NotSpace(message = "비밀번호는 space 값이 될 수 없습니다.")
+        @Pattern(regexp = "^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\\\(\\\\)\\-_=+]).{4,20}$", message = "비밀번호는 영문, 숫자 및 특수문자 조합으로 최소 한가지씩 조합하여 4-20 자입니다.")
         private String password;
+    }
+
+    @Getter
+    @Setter
+    public static class PatchResponse {
+        private Long memberId;
+        private String email;
+        private String nickname;
     }
 
     @Getter
@@ -85,5 +99,4 @@ public class MemberDto {
         public LocalDateTime createdAt;
         public LocalDateTime updatedAt;
     }
-
 }
