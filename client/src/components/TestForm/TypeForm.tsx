@@ -13,8 +13,8 @@ const MyComponent = () => {
   const [isNo, setIsNo] = useRecoilState<number>(NoContent);
 
   const QuestionList = [
-    ' 나는 홈페이지 또는 어플을 보면 아이콘 배치 또는 흐름에 대해서 불편한 점을 느낀 적이 많고, 고치고 싶어한 적이 있다',
-    ' 기능이 먼저다. vs 아니다. 디자인이 먼저다',
+    '나는 홈페이지 또는 어플을 보면 아이콘 배치 또는 흐름에 대해서 불편한 점을 느낀 적이 많고, 고치고 싶어한 적이 있다',
+    '기능이 먼저다. vs 아니다. 디자인이 먼저다',
     'PPT는 흰색 배경에 검은색 글자로 작성하는 것이 역시 최고다(외관보다는 내용이 중요)',
     '나는 변화 또는 트렌드를 따라가는 것이 좋다',
     '나는 데이터의 로직에 관심이 많다',
@@ -25,12 +25,12 @@ const MyComponent = () => {
   ];
   let aaa = <img src={Pra1} alt="적성검사 이미지" width="100%" height="100%" />; //이미지의 이름은 나중에 정하고 다시 바꿀예정
   const PictureList = [aaa, aaa, aaa, aaa, aaa, aaa, aaa, aaa, aaa];
-  const ViewYesHandelr = () => {
+  const ViewYesHandler = () => {
     setIdNumber(idNumber + 1);
     setIsYes(isYes + 1);
   };
 
-  const ViewNoHandelr = () => {
+  const ViewNoHandler = () => {
     setIdNumber(idNumber + 1);
     setIsNo(isNo + 1);
   };
@@ -46,8 +46,8 @@ const MyComponent = () => {
             <div className="img-review">{PictureList.filter((el, idx) => idx === idNumber)}</div>
           </S.QuestionContentForm>
           <S.ButtonBoxForm>
-            <S.SelectQuestionButton onClick={ViewYesHandelr}>1. Yes</S.SelectQuestionButton>
-            <S.SelectQuestionButton onClick={ViewNoHandelr}>2. No</S.SelectQuestionButton>
+            <S.SelectQuestionButton onClick={ViewYesHandler}>1. Yes</S.SelectQuestionButton>
+            <S.SelectQuestionButton onClick={ViewNoHandler}>2. No</S.SelectQuestionButton>
           </S.ButtonBoxForm>
         </S.FormCaseView>
       )}
