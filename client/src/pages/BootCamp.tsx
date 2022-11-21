@@ -52,12 +52,12 @@ interface BootData {
 const BootCamp = () => {
   const columnHelper = createColumnHelper<BootData>();
   const columns = [
-    columnHelper.accessor('name', { header: '이름' }),
-    columnHelper.accessor('date', { header: '등록일' }),
-    columnHelper.accessor('dueDate', { header: '마감일' }),
-    columnHelper.accessor('filed', { header: '과정' }),
-    columnHelper.accessor('cost', { header: '총 비용' }),
-    columnHelper.accessor('onOff', { header: '온/오프라인' }),
+    columnHelper.accessor('name', { header: '이름', maxSize: 10 }),
+    columnHelper.accessor('date', { header: '등록일', maxSize: 10 }),
+    columnHelper.accessor('dueDate', { header: '마감일', maxSize: 50 }),
+    columnHelper.accessor('filed', { header: '과정', maxSize: 50 }),
+    columnHelper.accessor('cost', { header: '총 비용', maxSize: 50 }),
+    columnHelper.accessor('onOff', { header: '온/오프라인', maxSize: 50 }),
   ];
   const table = useReactTable({
     data,
@@ -84,7 +84,7 @@ const BootCamp = () => {
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
-                    <th key={header.id} style={{ width: header.getSize() }}>
+                    <th key={header.id}>
                       {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                     </th>
                   ))}

@@ -24,27 +24,34 @@ export const MiddleSection = styled.section`
 export const TableWrap = styled.table`
   width: 60vw;
   min-width: 960px;
-  border-top: 1px solid lightgray;
-  border-bottom: 1px solid lightgray;
-  background-color: #fff;
-  font-size: 14px;
-  tfoot {
-    background-color: #eee;
-  }
-  th,
-  td {
-    position: relative;
-    padding: 10px 14px;
-    border-right: 1px solid lightgray;
-    border-bottom: 1px solid lightgray;
-  }
-  th,
-  td:last-child {
-    border-right: none;
-  }
-  th {
-    border-top: 1px solid lightgray;
-    border-bottom: 1px solid lightgray;
+  font-size: 20px;
+  thead {
+    font-weight: bold;
     background-color: var(--greenTableHeader);
+    width: calc(100% / 6);
+    th {
+      border: 1px solid var(--grayTableBorder);
+      :before {
+        border: 2px solid red;
+        border-radius: 5px;
+      }
+      // 우측과 좌측 상단 border값에 radius주기가 어려워서 pass
+      /* :first-child {
+        border-radius: 10px 0 0 0;
+      }
+      :last-child {
+        border-radius: 0 10px 0 0;
+      } */
+    }
+  }
+  tbody {
+    tr {
+      border: 1px solid var(--grayTableBorder);
+      td {
+        padding: calc(100vh / 40) 0;
+        border: 1px solid var(--grayTableBorder);
+        text-align: center;
+      }
+    }
   }
 `;
