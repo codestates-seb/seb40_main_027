@@ -31,21 +31,29 @@ public interface PostscriptCommentMapper {
 
         PostscriptComment postscriptComment = new PostscriptComment();
 
+        postscriptComment.setPostCommentId(postscriptCommentPatchDto.getPostCommentId());
         postscriptComment.setPostCommentContent(postscriptCommentPatchDto.getPostCommentContent());
+
 
         return postscriptComment;
     }
 
     default PostscriptCommentDto.Response postCommentToPostCommentResponseDto(PostscriptComment postscriptComment){
 
-        PostscriptCommentDto.Response postCommentResponseDto = new PostscriptCommentDto.Response();
-
-        postCommentResponseDto.setPostCommentId(postscriptComment.getPostCommentId());
-        postCommentResponseDto.setPostCommentContent(postscriptComment.getPostCommentContent());
-        postCommentResponseDto.setCreatedAt(postscriptComment.getCreatedAt());
-        postCommentResponseDto.setModifiedAt(postscriptComment.getUpdatedAt());
-
+        PostscriptCommentDto.Response postCommentResponseDto = new PostscriptCommentDto.Response(
+                postscriptComment.getPostCommentId(),
+                postscriptComment.getPostCommentContent(),
+                postscriptComment.getCreatedAt(),
+                postscriptComment.getUpdatedAt()
+        );
         return postCommentResponseDto;
+//        postCommentResponseDto.setPostCommentId(postscriptComment.getPostCommentId());
+//        postCommentResponseDto.setPostCommentContent(postscriptComment.getPostCommentContent());
+//        postCommentResponseDto.setCreatedAt(postscriptComment.getCreatedAt());
+//        postCommentResponseDto.setUpdatedAt(postscriptComment.getUpdatedAt());
+//        postCommentResponseDto.setPostscriptId(postscriptComment.getPostscript().getPostscriptId());
+
+
     }
 
 }

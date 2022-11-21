@@ -70,20 +70,21 @@ public class PostscriptController {
     @GetMapping //작성된 전체 조언,후기 조회
     public ResponseEntity getPostscripts(@Positive @RequestParam(value="page", defaultValue="1") int page,
                                          @Positive @RequestParam(value="size", defaultValue="10") int size,
-                                         @RequestParam(value="sort", defaultValue="questionId") String sort) {
+                                         @RequestParam(value="sort", defaultValue="postscriptId") String sort) {
         Page<Postscript> pagePostscripts = postscriptService.findPostscripts(page-1, size, sort);
         List<Postscript> postscripts = pagePostscripts.getContent();
 
 
         return new ResponseEntity<>(new MultiResponseDto<>(
-                postscriptMapper.postscriptsToPostscriptResponseDtos(postscripts), pagePostscripts),HttpStatus.OK);}
+                postscriptMapper.postscriptsToPostscriptResponseDtos(postscripts), pagePostscripts),HttpStatus.OK);
+    }
 
 
-    @DeleteMapping("/delete/{postscript-Id}") //선택 조언, 후기 글 삭제
+    @DeleteMapping("/delete/{postscript-id}") //선택 조언, 후기 글 삭제
     public ResponseEntity deletePostscript(@PathVariable("postscript-id") @Positive long postscriptId) {
         postscriptService.deletePostscript(postscriptId);
 
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

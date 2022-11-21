@@ -1,5 +1,7 @@
 package com.yes27.postscript.mapper;
 
+import com.yes27.postscripcomment.dto.PostscriptCommentDto;
+import com.yes27.postscripcomment.entity.PostscriptComment;
 import com.yes27.postscript.dto.PostscriptDto;
 import com.yes27.postscript.dto.TagDto;
 import com.yes27.postscript.dto.TagResponseDto;
@@ -52,9 +54,21 @@ public interface PostscriptMapper {
         return postscript;
     }
 
-
+    default List<PostscriptCommentDto.Response> postscriptToPostscriptCommentResponse(List<PostscriptComment> postscriptComments){
+        return postscriptComments.stream()
+                .map(postscriptComment -> PostscriptCommentDto.Response
+                        .builder()
+                        .postCommentId(postscriptComment.getPostCommentId())
+                        .postCommentContent(postscriptComment.getPostCommentContent())
+                        .createdAt(postscriptComment.getCreatedAt())
+                        .updatedAt(postscriptComment.getUpdatedAt())
+                        .build())
+                .collect(Collectors.toList());
+    }
     // 질문 응답
     default PostscriptDto.PostscriptResponse postscriptToPostscriptResponse(Postscript postscript){
+
+        List<PostscriptComment> postscriptComments = postscript.getPostComments();
 
         PostscriptDto.PostscriptResponse postscriptResponse = new PostscriptDto.PostscriptResponse();
         postscriptResponse.setPostscriptId(postscript.getPostscriptId());
@@ -71,11 +85,10 @@ public interface PostscriptMapper {
 
         // 태그
         postscriptResponse.setPostscriptTags(tagsToTagResponseDtos(postscript.getTags()).stream().distinct().collect(Collectors.toList()));
+        // 댓글
+        postscriptResponse.setPostComments(postscriptToPostscriptCommentResponse(postscriptComments));
 
-//        postscriptResponse.setPostComments();
 
-        // 댓글연동 추가하기
-        // 태그, 생성,수정날자 추가해야함
         return postscriptResponse;
     }
 
@@ -117,5 +130,8 @@ public interface PostscriptMapper {
     }
 
     // postscript - comment 연동
+
+
+
 
 }

@@ -47,6 +47,7 @@ public class PostscriptCommentController {
 
         return new  ResponseEntity<>(
                 new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentResponseDto(postscriptComment)), HttpStatus.CREATED);
+        // 유저 추가하기
     }
 
     @PatchMapping("/comment/{postComment-id}")
@@ -73,7 +74,7 @@ public class PostscriptCommentController {
 
     }
 
-    @DeleteMapping("/comment/{postComment-id}")
+    @DeleteMapping("/comment/delete/{postComment-id}")
     public ResponseEntity deletePostComment(@PathVariable("postComment-id")@Positive long postCommentId){
 
         postscriptCommentService.deletePostComment(postCommentId);
