@@ -7,6 +7,7 @@ import com.yes27.mentoring.mapper.MentorMapper;
 import com.yes27.mentoring.service.MentorService;
 import com.yes27.mentoring.entity.Mentor;
 import com.yes27.response.MultiResponseDto;
+import com.yes27.response.SingleResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +38,7 @@ public class MentorController {
         Mentor mentor = mapper.mentorPostDtoToMentor(mentorDto);
         MentorDto.Response response = mapper.mentorToMentorResponseDto(mentorService.create(mentor));
 
-        return new ResponseEntity(response, HttpStatus.CREATED);
+        return new ResponseEntity(new SingleResponseDto<>(response), HttpStatus.CREATED);
     }
 
     @PatchMapping("/{mentorId}")
@@ -47,14 +48,14 @@ public class MentorController {
 
         MentorDto.Response response = mapper.mentorToMentorResponseDto(mentorService.update(mentorId,mentor));
 
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(new SingleResponseDto<>(response), HttpStatus.OK);
     }
 
     //게시글 상세조회
     @GetMapping("/{mentorId}")
     public ResponseEntity getMentor(@PathVariable("mentorId") @Positive long mentorId){
         MentorDto.MentorsResponse response = mapper.mentoringToMentoringDetailsResponse(mentorService.findMentor(mentorId));
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(new SingleResponseDto<>(response), HttpStatus.OK);
     }
 
     //전체 게시글 조회
