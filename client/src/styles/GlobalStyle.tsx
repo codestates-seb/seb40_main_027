@@ -71,6 +71,7 @@ const GlobalStyle = createGlobalStyle`
 
     --whiteBackground: #FFFFFF;
     --greenMain: #1DCA89;
+    --greenTableHeader: #A9DBBD;
     --greenSub: #A9DBBD;
     --blackTextNormal: #222222;
     --blackTextTitle: #222222;
