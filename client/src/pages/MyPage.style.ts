@@ -51,43 +51,43 @@ export const MyPageContent = styled.div`
     border: 1px solid var(--grayContentsBorder);
   }
   .profile {
-    width: 25%;
+    /* width: 25%;
     border-right: 1px solid var(--grayContentsBorder);
-    display: flex;
+    display: flex; */
   }
   .user-profile {
-    height: 40%;
+    /* height: 40%;
     border: 1px solid var(--grayContentsBorder);
     margin: 1rem 1rem 0rem 1rem;
-    width: 100%;
+    width: 100%; */
   }
   .my-page-view {
     width: 100%;
   }
   .icon-gear {
-    display: flex;
-    flex-direction: row-reverse;
+    /* display: flex;
+    flex-direction: row-reverse; */
   }
   .user-picture {
-    display: flex;
+    /* display: flex;
     width: 100%;
     height: 60%;
-    background-color: red;
+    background-color: red; */
   }
   .user-info {
-    display: flex;
+    /* display: flex;
     width: 100%;
     flex-wrap: wrap;
     justify-content: center;
     flex-direction: column;
     height: 30%;
-    align-items: center;
+    align-items: center; */
   }
   .user-nickname {
-    border: 1px solid var(--grayContentsBorder);
+    /* border: 1px solid var(--grayContentsBorder);
     border-radius: 20px;
     width: 70%;
-    margin-top: 0.5rem;
+    margin-top: 0.5rem; */
   }
 
   @media screen and (max-width: 414px) {
@@ -157,8 +157,8 @@ export const MyPageContent = styled.div`
 
 export const ButtonTab = styled.button`
   border: none;
-  height: 2rem;
-  width: 6rem;
+  height: 3rem;
+  width: 100%;
   border-radius: 10px 10px 0px 0px;
   background-color: ${(props) => (props.className === 'tab-button' ? 'var(--greenMain)' : '#a9dbbd')};
 `;
