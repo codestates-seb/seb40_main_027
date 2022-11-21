@@ -50,7 +50,7 @@ export const StartFormButton = styled.button`
 
   background-color: aquamarine; //확정적인 색이 아니라 우선 임의로 사용
   &:hover {
-    background-color: var(--greenSub); //마이페이지에 컬러지정해서 이곳에서는 우선 사용
+    background-color: var(--greenSub);
     color: var(--whiteBackground);
     transition: all 1s;
   }
