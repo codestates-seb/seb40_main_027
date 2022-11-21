@@ -65,4 +65,11 @@ export const WarnContent = styled.div`
       border-color: transparent;
     }
   }
+
+  @media screen and (max-width: 414px) {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    font-size: 0.8rem;
+  }
 `;
