@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ResultEndFormContent = styled.div`
-  .font-Result-title {
+  .font-result-title {
     display: flex;
     justify-content: center;
     font-size: 2rem;

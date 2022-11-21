@@ -7,10 +7,10 @@ import flower1 from '../../assets/image/flower1.png';
 const EndForm = () => {
   const [isYes, setIsYes] = useRecoilState<number>(YesContent);
   const [isNo, setIsNo] = useRecoilState<number>(NoContent);
-
+  console.log(isYes);
   return (
     <S.ResultEndFormContent>
-      <div className="font-Result-title">결과는?</div>
+      <div className="font-result-title">결과는?</div>
       {isYes > isNo ? (
         <div className="font-result-view">
           당신은 매력쟁이 프론트 엔드 입니다!
