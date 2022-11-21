@@ -1,5 +1,6 @@
 package com.yes27.study.dto;
 
+import com.yes27.validator.NotSpace;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Builder;
@@ -20,7 +21,9 @@ public class StudyDto {
     public static class Patch {
         private Long studyId;
 
+        @NotSpace
         private String studyTitle;
+        @NotSpace
         private String studyContent;
     }
 

@@ -39,6 +39,8 @@ public interface MemberMapper {
                     .studyContent(study.getStudyContent())
                     .view(study.getView())
                     .vote(study.getVote())
+                    .createdAt(study.getCreatedAt())
+                    .updatedAt(study.getUpdatedAt())
                     .build();
             })
             .collect(Collectors.toList());
@@ -53,6 +55,8 @@ public interface MemberMapper {
                     .studyCommentId(studyComment.getStudyCommentId())
                     .comment(studyComment.getComment())
                     .vote(studyComment.getVote())
+                    .createdAt(studyComment.getCreatedAt())
+                    .updatedAt(studyComment.getUpdatedAt())
                     .build();
                 })
             .collect(Collectors.toList());

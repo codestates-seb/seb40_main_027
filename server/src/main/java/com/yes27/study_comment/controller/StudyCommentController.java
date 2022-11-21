@@ -56,7 +56,7 @@ public class StudyCommentController {
 
         StudyComment createdComment = studyCommentService.createComment(studyComment);
 
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.commentToCommentResponse(createdComment)), HttpStatus.OK);
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.commentToCommentResponse(createdComment)), HttpStatus.CREATED);
     }
 
     @PatchMapping("/{study-id}/comment/{comment-id}")
@@ -67,7 +67,7 @@ public class StudyCommentController {
 
         Study findStudy = studyService.findVerifiedStudy(studyId);
 
-//        requestBody.setStudyCommentId(studyCommentId);
+        requestBody.setStudyCommentId(studyCommentId);
         StudyComment findStudyComment = mapper.commentPatchToComment(requestBody);
         findStudyComment.setStudy(findStudy);
 

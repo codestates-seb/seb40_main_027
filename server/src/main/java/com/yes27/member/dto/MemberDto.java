@@ -1,5 +1,6 @@
 package com.yes27.member.dto;
 
+import com.yes27.validator.NotSpace;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +23,13 @@ public class MemberDto {
         private Long memberId;
 
         @Email
-        @NotBlank
+        @NotBlank(message = "이메일은 공백이 아니어야합니다.")
         private String email;
 
-        @NotBlank
+        @NotBlank(message = "닉네임은 공백이 아니어야 합니다.")
         private String nickname;
 
-        @NotBlank
+        @NotBlank(message = "패스워드는 공백이 아니어야 합니다.")
         private String password;
     }
 
@@ -40,8 +41,11 @@ public class MemberDto {
         @Email
         @Pattern(regexp = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$",
             message = "이메일 형식을 따라야합니다.")
+        @NotSpace
         private String email;
+        @NotSpace
         private String nickname;
+        @NotSpace
         private String password;
     }
 
@@ -67,6 +71,8 @@ public class MemberDto {
         public String studyContent;
         public int view;
         public int vote;
+        public LocalDateTime createdAt;
+        public LocalDateTime updatedAt;
     }
 
     @Getter
@@ -76,6 +82,8 @@ public class MemberDto {
         private Long studyCommentId;
         private String comment;
         private int vote;
+        public LocalDateTime createdAt;
+        public LocalDateTime updatedAt;
     }
 
 }
