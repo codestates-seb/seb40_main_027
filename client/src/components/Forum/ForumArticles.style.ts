@@ -8,7 +8,7 @@ export const Container = styled.section`
   }
 
   @media screen and (max-width: 414px) {
-    width: calc(100% - (10 / 16 * 1rem));
+    width: 100%;
 
     & > *:not(:last-child) {
       margin-bottom: calc(10 / 16 * 1rem);
@@ -28,7 +28,7 @@ export const ContentHeader = styled.section`
   @media screen and (max-width: 414px) {
     display: flex;
     flex-direction: column-reverse;
-    width: calc(100% - (20 / 16 * 1rem));
+    width: 100%;
     height: calc(70 / 16 * 1rem);
 
     & > *:not(:last-child) {

@@ -15,7 +15,6 @@ export const Article = styled.article`
 
   @media screen and (max-width: 414px) {
     padding: calc(10 / 16 * 1rem);
-    width: calc(100% - (20 / 16 * 1rem));
   }
 `;
 
