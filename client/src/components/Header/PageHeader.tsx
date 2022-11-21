@@ -16,7 +16,8 @@ const PageMenu = styled.header`
   justify-content: center;
   align-items: center;
   .page-header-content {
-    width: 60%;
+    width: 60vw;
+    min-width: 960px;
     display: flex;
     justify-content: space-between;
     align-items: center;
