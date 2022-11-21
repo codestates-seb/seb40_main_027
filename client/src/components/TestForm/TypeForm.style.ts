@@ -75,7 +75,7 @@ export const FormCaseView = styled.div`
 
 export const SContentForm = styled.div`
   //글씨 위치
-  margin: 0.5rem 0 1.5rem 0;
+  margin: 0.5rem 0 0.5rem 0;
   font-size: 1.3rem;
 
   @media screen and (max-width: 414px) {
