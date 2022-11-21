@@ -26,17 +26,6 @@ export const StartView = styled.div`
     font-size: 1rem;
     justify-content: center;
     margin: 0px 10% 0 10%;
-    animation: fadein 7s ease-in-out;
-    @keyframes fadein {
-      0% {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      100% {
-        opacity: 1;
-        transform: none;
-      }
-    }
   }
 `;
 
