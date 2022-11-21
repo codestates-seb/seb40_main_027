@@ -79,7 +79,7 @@ public class MemberController {
 //            HttpStatus.OK);
 //    }
 
-    @DeleteMapping("/delete/{member-id}")
+    @DeleteMapping("/{member-id}")
     public ResponseEntity deleteMember(
         @PathVariable("member-id") @Positive Long memberId) {
         memberService.deleteMember(memberId);
