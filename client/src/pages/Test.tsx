@@ -4,7 +4,7 @@ import StartForm from '../components/TestForm/StartForm';
 
 const Test = () => {
   return (
-    <div>
+    <>
       <PageHeader />
       <S.TestContent>
         <S.FormContent>
@@ -13,7 +13,7 @@ const Test = () => {
           </S.StyleFormCode>
         </S.FormContent>
       </S.TestContent>
-    </div>
+    </>
   );
 };
 export default Test;
