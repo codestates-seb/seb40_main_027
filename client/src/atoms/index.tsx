@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 
-export const sidebarFloading = atom({
-  key: 'sidebarFloading',
+export const sideBarFloading = atom({
+  key: 'sideBarFloading',
   default: false,
 });
 
