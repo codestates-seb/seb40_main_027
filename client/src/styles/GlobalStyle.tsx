@@ -80,6 +80,7 @@ const GlobalStyle = createGlobalStyle`
     --grayHeaderBorder: #D6D6D6;
     --grayContentsBorder: #B6B6B6;
     --grayBoardAreaBorder: #DDDDDD;
+    --grayTableBorder: #A4A4A4;
     --grayBannerBackground: #EBE7E4;
     --grayListFill: #EEEEEE;
     --redButtonDelete: #CA471D;
