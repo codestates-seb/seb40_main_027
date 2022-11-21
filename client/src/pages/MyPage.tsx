@@ -6,6 +6,7 @@ import MyPageList from '../components/MyPageContent/MyPageList';
 import { Icon } from '@iconify/react';
 import * as S from './MyPage.style';
 import SideBar from '../components/SideBar/SideBar';
+import UserProfile from '../components/MyPageContent/UserProfile';
 
 const MyPage = () => {
   const [currentTab, setCurrentTab] = useState<number>(0);
@@ -48,7 +49,8 @@ const MyPage = () => {
         </div>
         <div className="my-page-body">
           <div className="profile">
-            <div className="user-profile">
+            <UserProfile />
+            {/* <div className="user-profile">
               <div className="icon-gear">
                 <Icon icon="ph:gear-six-duotone" width="25" height="25" />
               </div>
@@ -57,7 +59,7 @@ const MyPage = () => {
                 <div className="user-nickname">nickname</div>
                 <div className="user-nickname">email</div>
               </div>
-            </div>
+            </div> */}
           </div>
           <div>
             <div className="tab-content-mobile">
