@@ -62,24 +62,24 @@ public class MemberController {
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponse(member)),
         HttpStatus.OK);
     }
-
-    @PostMapping("/login/{member-id}")
-    public ResponseEntity loginMember(
-        @PathVariable("member-id") @Positive Long memberId) {
-        Member member = memberService.findVerifiedMember(memberId);
-        return new ResponseEntity<>(
-            new SingleResponseDto<>(mapper.memberToMemberResponse(member)),
-            HttpStatus.OK);
-    }
-
-    @PostMapping("/logout/{member-id}")
-    public ResponseEntity logoutMember(
-        @PathVariable("member-id") @Positive Long memberId) {
-        Member member = memberService.findVerifiedMember(memberId);
-        return new ResponseEntity<>(
-            new SingleResponseDto<>(mapper.memberToMemberResponse(member)),
-            HttpStatus.OK);
-    }
+//
+//    @PostMapping("/login/{member-id}")
+//    public ResponseEntity loginMember(
+//        @PathVariable("member-id") @Positive Long memberId) {
+//        Member member = memberService.findVerifiedMember(memberId);
+//        return new ResponseEntity<>(
+//            new SingleResponseDto<>(mapper.memberToMemberResponse(member)),
+//            HttpStatus.OK);
+//    }
+//
+//    @PostMapping("/logout/{member-id}")
+//    public ResponseEntity logoutMember(
+//        @PathVariable("member-id") @Positive Long memberId) {
+//        Member member = memberService.findVerifiedMember(memberId);
+//        return new ResponseEntity<>(
+//            new SingleResponseDto<>(mapper.memberToMemberResponse(member)),
+//            HttpStatus.OK);
+//    }
 
     @DeleteMapping("/delete/{member-id}")
     public ResponseEntity deleteMember(
