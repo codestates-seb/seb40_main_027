@@ -77,6 +77,7 @@ export const SContentForm = styled.div`
   //글씨 위치
   margin: 0.5rem 0 0.5rem 0;
   font-size: 1.3rem;
+  height: 50px;
 
   @media screen and (max-width: 414px) {
     font-size: 1rem;
