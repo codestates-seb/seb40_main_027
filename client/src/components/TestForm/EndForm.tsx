@@ -1,12 +1,12 @@
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { YesContent, NoContent } from '../../atoms/index';
 import * as S from './EndForm.style';
 
 import flower1 from '../../assets/image/flower1.png';
 
 const EndForm = () => {
-  const [isYes, setIsYes] = useRecoilState<number>(YesContent);
-  const [isNo, setIsNo] = useRecoilState<number>(NoContent);
+  const isYes = useRecoilValue<number>(YesContent);
+  const isNo = useRecoilValue<number>(NoContent);
   console.log(isYes);
   return (
     <S.ResultEndFormContent>
