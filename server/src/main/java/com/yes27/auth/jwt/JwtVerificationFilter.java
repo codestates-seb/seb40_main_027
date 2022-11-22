@@ -61,7 +61,7 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
     }
 
     private void setAuthenticationToContext(Map<String, Object> claims) {
-        String username = (String) claims.get("username");  // JWT 파싱한 Claims 에서 username 을 얻음
+        String username = (String) claims.get("email");  // JWT 파싱한 Claims 에서 email 을 얻음
         List<GrantedAuthority> authorities = authorityUtils.createAuthorities((List)claims.get("roles"));  // JWT Claims 에서 얻은 권한 정보를 기반으로 List<GrantedAuthority 생성
         Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);  // username, List<GrantedAuthority 를 포함한 Authentication 객체 생성
         SecurityContextHolder.getContext().setAuthentication(authentication);  // SecurityContext 에 Authentication 객체 저장
