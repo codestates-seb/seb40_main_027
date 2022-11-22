@@ -13,7 +13,7 @@ const PageMenu = styled.header`
   height: 4rem;
   border-bottom: 1px solid var(--grayHeaderBorder);
   display: flex;
-  justify-content: center;
+  justify-content: center; //space betweem
   align-items: center;
   .page-header-content {
     width: 60vw;
@@ -23,6 +23,8 @@ const PageMenu = styled.header`
   }
   .page-menu {
     margin: 10px;
+    display: flex;
+    flex-direction: row;
   }
   .hamburger {
     display: none;
@@ -38,16 +40,17 @@ const PageMenu = styled.header`
     align-items: center;
     justify-content: space-around;
     .page-header-content {
-      margin: 0px 10px 0px 10px;
+      margin: 0px 1px 0px 10px;
       width: 100%;
     }
     img {
-      margin-left: 20px;
+      margin-left: 3rem;
       width: 120px;
       height: 60px;
     }
     .page-menu {
       display: none;
+      font-size: 1rem;
     }
     .hamburger {
       display: flex;
@@ -55,6 +58,11 @@ const PageMenu = styled.header`
       justify-content: center;
     }
   }
+`;
+
+const LoginSignHeaderButton = styled.span`
+  display: flex;
+  flex-direction: row;
 `;
 
 const PageHeader = () => {
@@ -85,10 +93,10 @@ const PageHeader = () => {
           </span>
         ))}
         {isLogin ? (
-          <span>
+          <LoginSignHeaderButton>
             <LoginButton onClick={clickLogin} />
             <RegisterButton />
-          </span>
+          </LoginSignHeaderButton>
         ) : (
           <span>
             <Nickname />

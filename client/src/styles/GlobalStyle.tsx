@@ -77,6 +77,9 @@ const GlobalStyle = createGlobalStyle`
     --blackTextTitle: #222222;
     --purpleReview: #B832F8;
     --blueStudy: #39739D;
+    --yellowHotPosts: #FFFBD9;
+    --redImminentBootCamps: #FBB3B3;
+    --redButtonDelete: #CA471D;
     --grayHeaderBorder: #D6D6D6;
     --grayContentsBorder: #B6B6B6;
     --grayBoardAreaBorder: #DDDDDD;
@@ -84,7 +87,6 @@ const GlobalStyle = createGlobalStyle`
     --grayBannerBackground: #EBE7E4;
     --grayBootButton: #D9D9D9;
     --grayListFill: #EEEEEE;
-    --redButtonDelete: #CA471D;
 
     background-color: var(--whiteBackground);
 

@@ -8,7 +8,6 @@ export const BannerWrap = styled.div`
   align-items: center;
   @media ${theme.mobile} {
     width: 100vw;
-    color: red;
     font-size: 13px;
   }
 `;

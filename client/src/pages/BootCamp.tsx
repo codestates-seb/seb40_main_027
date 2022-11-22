@@ -1,6 +1,6 @@
 import Banner from '../components/Banner';
 import { FilterButton } from '../components/Button';
-import SearchBar from '../components/SearchBar';
+import SearchBar from '../components/SearchBar/SearchBar';
 import * as S from './BootCamp.style';
 import PageHeader from '../components/Header/PageHeader';
 import { MobileTable, Table } from '../components/Table/Table';
