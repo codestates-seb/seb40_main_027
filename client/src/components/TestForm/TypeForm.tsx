@@ -7,7 +7,7 @@ import { YesContent, NoContent } from '../../atoms/index';
 import Pra1 from '../../assets/image/pra1.png';
 import * as S from './TypeForm.style';
 
-const MyComponent = () => {
+const TypeForm = () => {
   const [idNumber, setIdNumber] = useState<number>(0);
   const [isYes, setIsYes] = useRecoilState<number>(YesContent);
   const [isNo, setIsNo] = useRecoilState<number>(NoContent);
@@ -55,4 +55,4 @@ const MyComponent = () => {
   );
 };
 
-export default MyComponent;
+export default TypeForm;
