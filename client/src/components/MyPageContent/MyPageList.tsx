@@ -51,16 +51,53 @@ const ListContent = styled.div`
 //   heart: boolean;
 // }
 
-const DummyData = {
-  tag: '1',
-  title: '코드스테이츠 후기',
-  content: '안녕하세요, 코드스테이츠 프론트엔드 부트캠프 40기 수료생입니다',
-  picture: '사진',
-  name: '홍길동123',
-  time: 20.42,
-  view: 351,
-  heart: false,
-};
+const DummyData = [
+  {
+    postscriptId: 2,
+    postscriptTitle: '테스트용 제목2.',
+    postscriptContent: '테스트 내용2 ',
+    postscriptStatus: 'POSTSCRIPT_EXIST',
+    like: 0,
+    view: 0,
+    createdAt: '2022-11-18T16:35:41.87709',
+    updatedAt: '2022-11-18T16:35:41.87709',
+    tags: [
+      {
+        tagName: '조언',
+      },
+    ],
+  },
+  {
+    postscriptId: 2,
+    postscriptTitle: '테스트용 제목2.',
+    postscriptContent: '테스트 내용2 ',
+    postscriptStatus: 'POSTSCRIPT_EXIST',
+    like: 0,
+    view: 0,
+    createdAt: '2022-11-18T16:35:41.87709',
+    updatedAt: '2022-11-18T16:35:41.87709',
+    tags: [
+      {
+        tagName: '조언',
+      },
+    ],
+  },
+  {
+    postscriptId: 2,
+    postscriptTitle: '테스트용 제목2.',
+    postscriptContent: '테스트 내용2 ',
+    postscriptStatus: 'POSTSCRIPT_EXIST',
+    like: 0,
+    view: 0,
+    createdAt: '2022-11-18T16:35:41.87709',
+    updatedAt: '2022-11-18T16:35:41.87709',
+    tags: [
+      {
+        tagName: '조언',
+      },
+    ],
+  },
+];
 const MyPageList = () => {
   const DummyList = [DummyData, DummyData];
   console.log(DummyList);
@@ -70,7 +107,7 @@ const MyPageList = () => {
       <div className="list-line">
         <span className="list-name">작성 글</span>
       </div>
-      <div>
+      {/* <div>
         {DummyList.map((el, idx) => (
           <div className="content-list" key={idx}>
             <div>{el.tag}</div>
@@ -82,7 +119,7 @@ const MyPageList = () => {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
     </ListContent>
   );
 };
