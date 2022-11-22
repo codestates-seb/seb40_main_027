@@ -16,8 +16,12 @@ const StyledButton = styled(StyledBorderButton)`
   }
 `;
 
-export const LoginButton = () => {
-  return <StyledButton>로그인</StyledButton>;
+interface ClickType {
+  onClick?: any | null;
+}
+
+export const LoginButton = ({ onClick }: ClickType) => {
+  return <StyledButton onClick={onClick}>로그인</StyledButton>;
 };
 
 const StyleLogPageBtn = styled(StyledBackgroundButton)`

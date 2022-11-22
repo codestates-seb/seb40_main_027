@@ -1,12 +1,15 @@
 export const WHITE_BACKGROUND = '#FFFFFF';
 export const GREEN_MAIN = '#1DCA89';
+export const GREEN_SUB = '#A9DBBD';
 export const BLACK_TEXT_NORMAL = '#222222';
 export const BLACK_TEXT_TITLE = '#222222';
 export const PURPLE_REVIEW = '#B832F8';
 export const BLUE_STUDY = '#39739D';
+export const YELLOW_HOT_POSTS = '#FFFBD9';
+export const RED_IMMINENT_BOOT_CAMPS = '#FBB3B3';
+export const RED_BUTTON_DELETE = '#CA471D';
 export const GRAY_HEADER_BORDER = '#D6D6D6';
 export const GRAY_CONTENTS_BORDER = '#B6B6B6';
 export const GRAY_BOARD_AREA_BORDER = '#DDDDDD';
 export const GRAY_BANNER_BACKGROUND = '#EBE7E4';
 export const GRAY_LIST_FILL = '#EEEEEE';
-export const RED_BUTTON_DELETE = '#CA471D';

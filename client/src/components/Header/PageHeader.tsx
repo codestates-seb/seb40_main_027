@@ -3,12 +3,17 @@ import styled from 'styled-components';
 import logo from '../../assets/image/logo.png';
 import Nickname from './Nickname';
 import { Icon } from '@iconify/react';
+import { RegisterButton, LoginButton } from '../Button/index';
+
+import { useRecoilState } from 'recoil';
+import { sideBarFloading } from '../../atoms/index';
 
 const PageMenu = styled.header`
   width: 100%;
   height: 4rem;
   border-bottom: 1px solid var(--grayHeaderBorder);
   justify-content: space-between;
+
   .page-header-content {
     margin-left: 13rem; //380px로 하니 1980에서는 잘보였는데 제화면에서 너무 이상해 우선 rem으로 변경 =>px로할지 질문
     margin-right: 13rem;
@@ -18,6 +23,8 @@ const PageMenu = styled.header`
   }
   .page-menu {
     margin: 10px;
+    display: flex;
+    flex-direction: row;
   }
   .hamburger {
     display: none;
@@ -33,16 +40,17 @@ const PageMenu = styled.header`
     align-items: center;
     justify-content: space-around;
     .page-header-content {
-      margin: 0px 10px 0px 10px;
+      margin: 0px 1px 0px 10px;
       width: 100%;
     }
     img {
-      margin-left: 20px;
+      margin-left: 3rem;
       width: 120px;
       height: 60px;
     }
     .page-menu {
       display: none;
+      font-size: 1rem;
     }
     .hamburger {
       display: flex;
@@ -52,20 +60,30 @@ const PageMenu = styled.header`
   }
 `;
 
+const LoginSignHeaderButton = styled.span`
+  display: flex;
+  flex-direction: row;
+`;
+
 const PageHeader = () => {
-  const [islogin, setIslogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(true);
+  const [isCollapse, setIsCollapse] = useRecoilState(sideBarFloading);
 
   const clickLogin = () => {
     //임의로 오류안나게하기 위해 넣은 함수
-    setIslogin(!islogin);
+    setIsLogin(!isLogin);
   };
 
+  const CollapseHandler = () => {
+    //상태변하게 하기위하여
+    setIsCollapse(!isCollapse);
+  };
   const headerMenu = ['분야선택', '로드맵', '학원일정', '수료후기', '스터디모집', '멘토링'];
   return (
     <PageMenu>
       <div className="page-header-content">
         <span className="hamburger">
-          <Icon icon="mdi:menu" />
+          <Icon icon="mdi:menu" onClick={CollapseHandler} />
         </span>
 
         <img src={logo} alt="logo" />
@@ -74,11 +92,11 @@ const PageHeader = () => {
             {el}
           </span>
         ))}
-        {islogin ? (
-          <span>
-            <button onClick={clickLogin}>로그인</button>
-            <button>회원가입</button>
-          </span>
+        {isLogin ? (
+          <LoginSignHeaderButton>
+            <LoginButton onClick={clickLogin} />
+            <RegisterButton />
+          </LoginSignHeaderButton>
         ) : (
           <span>
             <Nickname />
