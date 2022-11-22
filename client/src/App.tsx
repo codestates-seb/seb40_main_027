@@ -3,6 +3,7 @@ import Login from './pages/Login';
 import Footer from './components/Footer/Footer';
 import Main from './pages/Main';
 import MyPage from './pages/MyPage';
+import Test from './pages/Test';
 import Forum from './pages/Forum';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/user/login" element={<Login />} />
+        <Route path="/test" element={<Test />} />
         <Route path="/users/me" element={<MyPage />} />
         <Route path="/postscript" element={<Forum />} />
         <Route path="/postscript/:id" element={<Forum />} />
