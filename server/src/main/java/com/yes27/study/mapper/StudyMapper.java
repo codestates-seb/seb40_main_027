@@ -23,7 +23,8 @@ public interface StudyMapper {
 
     Study studyPatchToStudy(StudyDto.Patch requestBody);
     StudyDto.Response studyToStudyResponse(Study study);
-    List<StudyDto.Response> studiesToStudyResponses(List<Study> studies);
+//    List<StudyDto.Response> studiesToStudyResponses(List<Study> studies);
+    List<StudyDto.PagingResponse> studiesToPagingResponses(List<Study> studies);
 
     StudyDto.PostResponse studyToPostResponse(Study study);
 }

@@ -35,6 +35,21 @@ public class StudyDto {
 
     @Getter
     @Setter
+    public static class PagingResponse {
+        private Long studyId;
+
+        private String studyTitle;
+        private String studyContent;
+
+        private int vote;
+
+        private LocalDateTime createdAt;
+        private LocalDateTime updatedAt;
+        public MemberSubset member;
+    }
+
+    @Getter
+    @Setter
     public static class Response {
         private Long studyId;
 

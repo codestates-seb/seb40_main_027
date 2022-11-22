@@ -87,7 +87,7 @@ public class StudyController {
         List<Study> studies = pageStudies.getContent();
 
         return new ResponseEntity<>(
-            new MultiResponseDto<>(mapper.studiesToStudyResponses(studies),
+            new MultiResponseDto<>(mapper.studiesToPagingResponses(studies),
             pageStudies),
         HttpStatus.OK);
     }
