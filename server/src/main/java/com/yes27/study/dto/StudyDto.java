@@ -74,6 +74,7 @@ public class StudyDto {
         public int vote;
         public LocalDateTime createdAt;
         public LocalDateTime updatedAt;
+        public MemberSubset member;
     }
 
     @Getter
