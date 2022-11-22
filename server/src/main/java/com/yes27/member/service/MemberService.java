@@ -85,4 +85,15 @@ public class MemberService {
 
         return findMember;
     }
+
+    // 이메일로 멤버 찾음
+    public Member findVerifiedMemberByEmail(String email) {
+        Optional<Member> optionalMember = memberRepository.findByEmail(email);
+
+        Member findMember =
+            optionalMember.orElseThrow(() ->
+                new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        return findMember;
+    }
 }
