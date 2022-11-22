@@ -23,9 +23,6 @@ const FooterWrapper = styled.footer`
       display: flex;
       justify-content: space-between;
       align-items: center;
-      a {
-        color: red;
-      }
       a:first-child {
         margin-right: 1rem;
       }
