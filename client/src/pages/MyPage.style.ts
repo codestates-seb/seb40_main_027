@@ -2,13 +2,12 @@ import styled from 'styled-components';
 
 export const PageSize = styled.div`
   overflow-y: auto;
-  transform: all 2s;
 `;
 
 export const MyPageContent = styled.div`
   height: 100vh;
   margin: 0rem 18% 0rem 18%;
-  transform: all 2s;
+
   .tab-menu {
     height: 10%;
     background-color: #ffffff;
