@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Login from './pages/Login';
 import Main from './pages/Main';
 import SignUp from './pages/SignUp';
@@ -11,6 +11,8 @@ import Forum from './pages/Forum';
 import PrivateRoute from './components/Route/PrivateRoute';
 
 function App() {
+  const location = useLocation();
+
   return (
     <>
       <Routes>
@@ -38,7 +40,7 @@ function App() {
         <Route path="/mentoring/:id" element={<Forum />} />
         <Route path="/mentoring/write" element={<Forum />} />
       </Routes>
-      <Footer />
+      {location.pathname === '/users/login' || location.pathname === '/users/signup' ? null : <Footer />}
     </>
   );
 }
