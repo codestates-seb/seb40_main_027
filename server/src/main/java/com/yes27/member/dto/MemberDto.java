@@ -12,15 +12,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class MemberDto {
-    @Getter
-    public static class Get {
-        private Long memberId;
-    }
+//    @Getter
+//    public static class Get {
+//        private Long memberId;
+//    }
 
     @Getter
     @Setter
     public static class Post {
-        private Long memberId;
+//        private Long memberId;
 
         @Email
         @NotBlank(message = "이메일은 공백이 아니어야합니다.")
@@ -39,7 +39,7 @@ public class MemberDto {
     @Getter
     @Setter
     public static class Patch {
-        private Long memberId;
+//        private Long memberId;
 
         @Email
         @NotSpace(message = "이메일은 space 값이 될 수 없습니다.")

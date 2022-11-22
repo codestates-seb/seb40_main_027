@@ -3,10 +3,12 @@ package com.yes27.member.service;
 import com.yes27.auth.utils.CustomAuthorityUtils;
 import com.yes27.exception.BusinessLogicException;
 import com.yes27.exception.ExceptionCode;
+import com.yes27.member.dto.MemberDto;
 import com.yes27.member.entity.Member;
 import com.yes27.member.repository.MemberRepository;
 import java.util.List;
 import java.util.Optional;
+import javax.swing.text.html.Option;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -47,32 +49,38 @@ public class MemberService {
     }
 
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
-    public Member updateMember(Member member) {
-        Member findMember = findVerifiedMember(member.getMemberId());
+    public Member updateMember(Member member, MemberDto.Patch patchDto) {
+//        Member findMember = findVerifiedMember(member.getMemberId());
+//
+        verifyExistsEmail(patchDto.getEmail());
+//
+//        Optional.ofNullable(member.getEmail())
+//            .ifPresent(email -> findMember.setEmail(email));
+//        Optional.ofNullable(member.getNickname())
+//            .ifPresent(nickname -> findMember.setNickname(nickname));
+//        Optional.ofNullable(member.getPassword())
+//            .ifPresent(password -> findMember.setPassword(passwordEncoder.encode(password)));
+//
+//        return memberRepository.save(findMember);
 
-        verifyExistsEmail(member.getEmail());  // 이 부분 수정해야할듯
+        Optional.ofNullable(patchDto.getEmail()).ifPresent(email -> member.setEmail(email));
+        Optional.ofNullable(patchDto.getNickname()).ifPresent(nickname -> member.setNickname(nickname));
+        Optional.ofNullable(patchDto.getPassword()).ifPresent(password -> member.setPassword(passwordEncoder.encode(password)));
 
-        Optional.ofNullable(member.getEmail())
-            .ifPresent(email -> findMember.setEmail(email));
-        Optional.ofNullable(member.getNickname())
-            .ifPresent(nickname -> findMember.setNickname(nickname));
-        Optional.ofNullable(member.getPassword())
-            .ifPresent(password -> findMember.setPassword(passwordEncoder.encode(password)));
-
-        return memberRepository.save(findMember);
+        return memberRepository.save(member);
     }
 
-    public void deleteMember(Long memberId) {
-        Member findMember = findVerifiedMember(memberId);
+    public void deleteMember(Member member) {
+//        Member findMember = findVerifiedMember(memberId);
 
-        memberRepository.delete(findMember);
+        memberRepository.delete(member);
     }
 
     private void verifyExistsEmail(String email) {
         Optional<Member> member = memberRepository.findByEmail(email);
 
         if (member.isPresent())
-            throw new BusinessLogicException(ExceptionCode.MEMBER_EXISTS);
+            throw new BusinessLogicException(ExceptionCode.EMAIL_EXISTS);
     }
 
     @Transactional(readOnly = true)

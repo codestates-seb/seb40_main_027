@@ -1,13 +1,17 @@
 package com.yes27.member.controller;
 
+import com.yes27.exception.BusinessLogicException;
+import com.yes27.exception.ExceptionCode;
 import com.yes27.member.dto.MemberDto;
 import com.yes27.member.entity.Member;
 import com.yes27.member.mapper.MemberMapper;
 import com.yes27.member.service.MemberService;
 import com.yes27.response.SingleResponseDto;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,58 +37,62 @@ public class MemberController {
         this.memberService = memberService;
         this.mapper = mapper;
     }
-
-    @GetMapping("/mypage")
-    public ResponseEntity getMember(@Valid @RequestBody MemberDto.Get requestBody) {
-        Member member = memberService.findVerifiedMember(requestBody.getMemberId());
-        return new ResponseEntity<>(
-            new SingleResponseDto<>(mapper.memberToMemberResponse(member)),
-            HttpStatus.OK);
-    }
+//
+//    @GetMapping("/test")
+//    public ResponseEntity test(HttpServletRequest request) {
+//        Member member = findMemberByHeader(request);
+//        return new ResponseEntity<>(member,HttpStatus.OK);
+//    }
 
     @PostMapping("/signup")
-    public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post requestBody) {
+    public ResponseEntity postMember(HttpServletRequest request, @Valid @RequestBody MemberDto.Post requestBody) {
         Member member = mapper.memberPostToMember(requestBody);
+        memberService.createMember(member);
 
-        Member createdMember = memberService.createMember(member);
+//        Member createdMember = memberService.createMember(member);
 //        MemberDto.Response response = mapper.memberToMemberResponse(createdMember);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PatchMapping("/{member-id}")
-    public ResponseEntity patchMember(@PathVariable("member-id") @Positive Long memberId,
-        @Valid @RequestBody MemberDto.Patch requestBody) {
-        requestBody.setMemberId(memberId);
-
-        Member member = memberService.updateMember(mapper.memberPatchToMember(requestBody));
-
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToPatchResponse(member)),
-        HttpStatus.OK);
+    @GetMapping("/mypage")
+    public ResponseEntity getMember(HttpServletRequest request) {
+//        Member member = memberService.findVerifiedMember(requestBody.getMemberId());
+        Member member = findMemberByHeader(request);
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponse(member)), HttpStatus.OK);
     }
-//
-//    @PostMapping("/login/{member-id}")
-//    public ResponseEntity loginMember(
-//        @PathVariable("member-id") @Positive Long memberId) {
-//        Member member = memberService.findVerifiedMember(memberId);
-//        return new ResponseEntity<>(
-//            new SingleResponseDto<>(mapper.memberToMemberResponse(member)),
-//            HttpStatus.OK);
-//    }
-//
-//    @PostMapping("/logout/{member-id}")
-//    public ResponseEntity logoutMember(
-//        @PathVariable("member-id") @Positive Long memberId) {
-//        Member member = memberService.findVerifiedMember(memberId);
-//        return new ResponseEntity<>(
-//            new SingleResponseDto<>(mapper.memberToMemberResponse(member)),
-//            HttpStatus.OK);
-//    }
 
-    @DeleteMapping("/{member-id}")
-    public ResponseEntity deleteMember(
-        @PathVariable("member-id") @Positive Long memberId) {
-        memberService.deleteMember(memberId);
+    @PatchMapping
+    public ResponseEntity patchMember(HttpServletRequest request, @Valid @RequestBody MemberDto.Patch requestBody) {
+//        requestBody.setMemberId(memberId);
+
+        Member member = findMemberByHeader(request);
+
+        Member updatedMember = memberService.updateMember(member, requestBody);
+
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToPatchResponse(member)), HttpStatus.OK);
+    }
+
+    @DeleteMapping
+    public ResponseEntity deleteMember(HttpServletRequest request) {
+        Member member = findMemberByHeader(request);
+        memberService.deleteMember(member);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity logoutMember(HttpServletRequest request) {
+        Member member = findMemberByHeader(request);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    // http header 토큰으로 유저 찾는 메소드
+    public Member findMemberByHeader(HttpServletRequest request) {
+        String email = request.getUserPrincipal().getName();
+        if (email == null) {
+            throw new BusinessLogicException(ExceptionCode.TOKEN_NOT_FOUND);
+        }
+        Member member = memberService.findVerifiedMemberByEmail(email);
+        return member;
     }
 }
