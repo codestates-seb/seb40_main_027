@@ -48,7 +48,7 @@ export const greenTxtBrd = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  @media screen and (max-width: 414px) {
+  @media ${theme.mobile} {
     width: 50px;
     height: 18px;
     border-radius: 4.5px;
@@ -104,10 +104,7 @@ export const AgreeForm = styled.div`
   height: 90% !important;
   margin-top: 0 !important;
   margin-right: 4%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: none;
   img {
     width: 9rem;
     height: 4rem;
@@ -124,10 +121,9 @@ export const AgreeForm = styled.div`
     margin-bottom: 1rem;
   }
   @media ${theme.mobile} {
-    display: none;
+    display: none !important;
   }
 `;
-
 export const SubmitSection = styled.div`
   display: flex;
   justify-content: center;
