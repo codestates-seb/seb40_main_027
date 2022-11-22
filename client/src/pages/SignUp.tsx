@@ -13,14 +13,14 @@ const textList = [
 
 const SignUp = () => {
   const { register, handleSubmit } = useForm();
-  const onSumbmit = (data: any) => console.log(data);
+  const onSubmit = (data: any) => console.log(data);
 
   return (
     <S.Wrap>
       <img src={logo} alt="logo" />
       <S.FormWrap>
-        <S.greenTxtBrd>회원가입</S.greenTxtBrd>
-        <form onSubmit={handleSubmit(onSumbmit)}>
+        <S.GreenTxtBrd>회원가입</S.GreenTxtBrd>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <S.TypeSection>
             <div>
               {textList.map((el) =>

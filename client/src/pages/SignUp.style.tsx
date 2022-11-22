@@ -38,7 +38,7 @@ export const FormWrap = styled.div`
   }
 `;
 
-export const greenTxtBrd = styled.div`
+export const GreenTxtBrd = styled.div`
   border: 1px solid var(--greenMain);
   background-color: var(--whiteBackground);
   color: var(--greenMain);
