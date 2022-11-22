@@ -3,7 +3,9 @@ import theme from '../styles/theme';
 
 export const Wrap = styled.div`
   width: 100vw;
+  max-width: 1920px;
   height: 100vh;
+  max-height: 1080px;
   display: flex;
   flex-direction: column;
   justify-content: center;
