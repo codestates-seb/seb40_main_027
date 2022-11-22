@@ -14,3 +14,8 @@ export const NoContent = atom({
   key: 'NoContent',
   default: 0,
 });
+
+export const isLogin = atom({
+  key: 'isLogin',
+  default: false,
+});

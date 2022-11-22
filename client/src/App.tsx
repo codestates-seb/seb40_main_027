@@ -8,16 +8,24 @@ import BootCamp from './pages/BootCamp';
 import BootCampSpecific from './pages/BootCampSpecific';
 import Test from './pages/Test';
 import Forum from './pages/Forum';
+import PrivateRoute from './components/Route/PrivateRoute';
 
 function App() {
   return (
-    <div>
+    <>
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/user/login" element={<Login />} />
-        <Route path="/user/signup" element={<SignUp />} />
+        <Route path="/users/login" element={<Login />} />
+        <Route path="/users/signup" element={<SignUp />} />
+        <Route
+          path="/users/mypage"
+          element={
+            <PrivateRoute>
+              <MyPage />
+            </PrivateRoute>
+          }
+        />
         <Route path="/test" element={<Test />} />
-        <Route path="/users/me" element={<MyPage />} />
         <Route path="/bootcamp" element={<BootCamp />} />
         <Route path="/bootcamp/1" element={<BootCampSpecific />} />
         <Route path="/postscript" element={<Forum />} />
@@ -30,9 +38,8 @@ function App() {
         <Route path="/mentoring/:id" element={<Forum />} />
         <Route path="/mentoring/write" element={<Forum />} />
       </Routes>
-
       <Footer />
-    </div>
+    </>
   );
 }
 
