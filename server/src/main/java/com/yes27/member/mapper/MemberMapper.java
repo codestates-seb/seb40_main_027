@@ -14,6 +14,16 @@ public interface MemberMapper {
     Member memberPatchToMember(MemberDto.Patch requestBody);
 //    MemberDto.Response memberToMemberResponse(Member member);
 
+    default MemberDto.PatchResponse memberToPatchResponse(Member member) {
+        MemberDto.PatchResponse patchResponse = new MemberDto.PatchResponse();
+
+        patchResponse.setMemberId(member.getMemberId());
+        patchResponse.setNickname(member.getNickname());
+        patchResponse.setEmail(member.getEmail());
+
+        return patchResponse;
+    }
+
     default MemberDto.Response memberToMemberResponse(Member member) {
         MemberDto.Response response = new MemberDto.Response();
 

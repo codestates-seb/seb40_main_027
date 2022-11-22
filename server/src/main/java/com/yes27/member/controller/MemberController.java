@@ -46,10 +46,8 @@ public class MemberController {
         Member member = mapper.memberPostToMember(requestBody);
 
         Member createdMember = memberService.createMember(member);
-        MemberDto.Response response = mapper.memberToMemberResponse(createdMember);
-        return new ResponseEntity<>(
-            new SingleResponseDto<>(response),
-            HttpStatus.CREATED);
+//        MemberDto.Response response = mapper.memberToMemberResponse(createdMember);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PatchMapping("/{member-id}")
@@ -59,7 +57,7 @@ public class MemberController {
 
         Member member = memberService.updateMember(mapper.memberPatchToMember(requestBody));
 
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponse(member)),
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToPatchResponse(member)),
         HttpStatus.OK);
     }
 //
@@ -81,7 +79,7 @@ public class MemberController {
 //            HttpStatus.OK);
 //    }
 
-    @DeleteMapping("/delete/{member-id}")
+    @DeleteMapping("/{member-id}")
     public ResponseEntity deleteMember(
         @PathVariable("member-id") @Positive Long memberId) {
         memberService.deleteMember(memberId);
