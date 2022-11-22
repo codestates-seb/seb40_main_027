@@ -1,4 +1,3 @@
-import PageHeader from '../components/Header/PageHeader';
 import ForumSideBanners from '../components/Forum/ForumSideBanners';
 import Banner from '../components/Banner';
 import * as S from './Forum.style';

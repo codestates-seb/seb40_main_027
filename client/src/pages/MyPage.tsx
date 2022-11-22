@@ -1,4 +1,3 @@
-import PageHeader from '../components/Header/PageHeader';
 import icon from '../assets/image/icon.png';
 import { useState } from 'react';
 import MyPageSchedule from '../components/MyPageContent/MyPageSchedule';

@@ -1,4 +1,3 @@
-import PageHeader from '../components/Header/PageHeader';
 import * as S from './Test.style';
 import StartForm from '../components/TestForm/StartForm';
 

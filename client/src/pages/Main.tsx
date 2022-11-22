@@ -1,4 +1,3 @@
-import MainHeader from '../components/Header/MainHeader';
 import mainbanner from '../assets/image/mainbanner.png';
 import styled from 'styled-components';
 import { Icon } from '@iconify/react';
