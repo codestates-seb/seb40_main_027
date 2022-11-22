@@ -4,13 +4,14 @@ import theme from '../styles/theme';
 export const Wrap = styled.div`
   width: 100vw;
   max-width: 1920px;
-  height: 100vh;
+  height: calc(100vh - 16px);
   max-height: 1080px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   img {
+    margin-top: -5%;
     width: 240px;
     height: 120px;
   }
