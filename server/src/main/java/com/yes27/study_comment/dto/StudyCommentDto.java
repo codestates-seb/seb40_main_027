@@ -32,6 +32,7 @@ public class StudyCommentDto {
         private String comment;
 
         private int vote;
+        private int view;
 
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
@@ -48,6 +49,7 @@ public class StudyCommentDto {
         public String studyTitle; 
         public String studyContent; 
         public int vote;
+        public int view;
         public LocalDateTime createdAt;
         public LocalDateTime updatedAt;
     }

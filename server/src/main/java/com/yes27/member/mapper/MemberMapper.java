@@ -48,6 +48,7 @@ public interface MemberMapper {
                     .studyTitle(study.getStudyTitle())
                     .studyContent(study.getStudyContent())
                     .vote(study.getVote())
+                    .view(study.getView())
                     .createdAt(study.getCreatedAt())
                     .updatedAt(study.getUpdatedAt())
                     .build();

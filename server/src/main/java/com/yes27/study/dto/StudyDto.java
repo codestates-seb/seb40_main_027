@@ -58,12 +58,13 @@ public class StudyDto {
         private String studyContent;
 
         private int vote;
+        private int view;
 
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
 //        private StudyStatus tagName;
 //        private StudyTag tags;
-
+        public List<StudyTag> tags;
         public List<StudyCommentSubset> studyComments;
         public MemberSubset member;
     }
