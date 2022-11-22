@@ -7,7 +7,7 @@ import flower1 from '../../assets/image/flower1.png';
 const EndForm = () => {
   const isYes = useRecoilValue<number>(YesContent);
   const isNo = useRecoilValue<number>(NoContent);
-  console.log(isYes);
+
   return (
     <S.ResultEndFormContent>
       <div className="font-result-title">결과는?</div>
