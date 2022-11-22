@@ -24,11 +24,11 @@ public class MemberDto {
 
         @Email
         @NotBlank(message = "이메일은 공백이 아니어야합니다.")
-        @Pattern(regexp = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$", message = "이메일 형식을 따라야합니다.")
+        @Pattern(regexp = "^[_a-zA-Z0-9-]+(.[_a-zA-Z0-9-]+)*@(?:\\w+\\.)+\\w+$", message = "이메일 형식을 따라야합니다.")
         private String email;
 
         @NotBlank(message = "닉네임은 공백이 아니어야 합니다.")
-        @Pattern(regexp = "^[a-z]+[a-z0-9]{2,9}$", message = "닉네임은 영어 및 숫자로 구성할 수 있으며, 3-10자 입니다.")
+        @Pattern(regexp = "^[a-zA-Z]+[a-zA-Z0-9]{2,9}$", message = "닉네임은 영어 및 숫자로 구성할 수 있으며, 3-10자 입니다.")
         private String nickname;
 
         @NotBlank(message = "패스워드는 공백이 아니어야 합니다.")

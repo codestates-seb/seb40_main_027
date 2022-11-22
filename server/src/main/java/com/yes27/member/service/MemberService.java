@@ -50,7 +50,7 @@ public class MemberService {
     public Member updateMember(Member member) {
         Member findMember = findVerifiedMember(member.getMemberId());
 
-//        verifyExistsEmail(member.getEmail());
+        verifyExistsEmail(member.getEmail());  // 이 부분 수정해야할듯
 
         Optional.ofNullable(member.getEmail())
             .ifPresent(email -> findMember.setEmail(email));
