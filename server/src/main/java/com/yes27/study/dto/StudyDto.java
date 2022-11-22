@@ -62,7 +62,6 @@ public class StudyDto {
         public Long memberId;
         public String email;
         public String nickname;
-        public String password;
     }
 }
 

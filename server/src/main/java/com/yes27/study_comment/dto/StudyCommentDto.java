@@ -59,6 +59,5 @@ public class StudyCommentDto {
         public Long memberId;
         public String email;
         public String nickname;
-        public String password;
     }
 }
