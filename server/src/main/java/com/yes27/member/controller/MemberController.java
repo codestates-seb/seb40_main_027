@@ -9,19 +9,15 @@ import com.yes27.member.service.MemberService;
 import com.yes27.response.SingleResponseDto;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import javax.validation.constraints.Positive;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,36 +33,25 @@ public class MemberController {
         this.memberService = memberService;
         this.mapper = mapper;
     }
-//
-//    @GetMapping("/test")
-//    public ResponseEntity test(HttpServletRequest request) {
-//        Member member = findMemberByHeader(request);
-//        return new ResponseEntity<>(member,HttpStatus.OK);
-//    }
 
     @PostMapping("/signup")
     public ResponseEntity postMember(HttpServletRequest request, @Valid @RequestBody MemberDto.Post requestBody) {
         Member member = mapper.memberPostToMember(requestBody);
         memberService.createMember(member);
 
-//        Member createdMember = memberService.createMember(member);
-//        MemberDto.Response response = mapper.memberToMemberResponse(createdMember);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping("/mypage")
     public ResponseEntity getMember(HttpServletRequest request) {
-//        Member member = memberService.findVerifiedMember(requestBody.getMemberId());
         Member member = findMemberByHeader(request);
+
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponse(member)), HttpStatus.OK);
     }
 
     @PatchMapping
     public ResponseEntity patchMember(HttpServletRequest request, @Valid @RequestBody MemberDto.Patch requestBody) {
-//        requestBody.setMemberId(memberId);
-
         Member member = findMemberByHeader(request);
-
         Member updatedMember = memberService.updateMember(member, requestBody);
 
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToPatchResponse(member)), HttpStatus.OK);
@@ -83,6 +68,7 @@ public class MemberController {
     @PostMapping("/logout")
     public ResponseEntity logoutMember(HttpServletRequest request) {
         Member member = findMemberByHeader(request);
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

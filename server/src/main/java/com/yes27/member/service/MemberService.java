@@ -8,7 +8,6 @@ import com.yes27.member.entity.Member;
 import com.yes27.member.repository.MemberRepository;
 import java.util.List;
 import java.util.Optional;
-import javax.swing.text.html.Option;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -50,18 +49,7 @@ public class MemberService {
 
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     public Member updateMember(Member member, MemberDto.Patch patchDto) {
-//        Member findMember = findVerifiedMember(member.getMemberId());
-//
         verifyExistsEmail(patchDto.getEmail());
-//
-//        Optional.ofNullable(member.getEmail())
-//            .ifPresent(email -> findMember.setEmail(email));
-//        Optional.ofNullable(member.getNickname())
-//            .ifPresent(nickname -> findMember.setNickname(nickname));
-//        Optional.ofNullable(member.getPassword())
-//            .ifPresent(password -> findMember.setPassword(passwordEncoder.encode(password)));
-//
-//        return memberRepository.save(findMember);
 
         Optional.ofNullable(patchDto.getEmail()).ifPresent(email -> member.setEmail(email));
         Optional.ofNullable(patchDto.getNickname()).ifPresent(nickname -> member.setNickname(nickname));
@@ -71,25 +59,18 @@ public class MemberService {
     }
 
     public void deleteMember(Member member) {
-//        Member findMember = findVerifiedMember(memberId);
-
         memberRepository.delete(member);
     }
 
     private void verifyExistsEmail(String email) {
         Optional<Member> member = memberRepository.findByEmail(email);
-
-        if (member.isPresent())
-            throw new BusinessLogicException(ExceptionCode.EMAIL_EXISTS);
+        if (member.isPresent()) throw new BusinessLogicException(ExceptionCode.EMAIL_EXISTS);
     }
 
     @Transactional(readOnly = true)
     public Member findVerifiedMember(Long memberId) {
         Optional<Member> optionalMember = memberRepository.findById(memberId);
-
-        Member findMember =
-            optionalMember.orElseThrow(() ->
-                new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        Member findMember = optionalMember.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
         return findMember;
     }
@@ -97,10 +78,7 @@ public class MemberService {
     // 이메일로 멤버 찾음
     public Member findVerifiedMemberByEmail(String email) {
         Optional<Member> optionalMember = memberRepository.findByEmail(email);
-
-        Member findMember =
-            optionalMember.orElseThrow(() ->
-                new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        Member findMember = optionalMember.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
         return findMember;
     }

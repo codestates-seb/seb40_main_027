@@ -12,16 +12,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class MemberDto {
-//    @Getter
-//    public static class Get {
-//        private Long memberId;
-//    }
-
     @Getter
     @Setter
     public static class Post {
-//        private Long memberId;
-
         @Email
         @NotBlank(message = "이메일은 공백이 아니어야합니다.")
         @Pattern(regexp = "^[_a-zA-Z0-9-]+(.[_a-zA-Z0-9-]+)*@(?:\\w+\\.)+\\w+$", message = "이메일 형식을 따라야합니다.")
@@ -39,8 +32,6 @@ public class MemberDto {
     @Getter
     @Setter
     public static class Patch {
-//        private Long memberId;
-
         @Email
         @NotSpace(message = "이메일은 space 값이 될 수 없습니다.")
         @Pattern(regexp = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$", message = "이메일 형식을 따라야합니다.")
@@ -69,7 +60,6 @@ public class MemberDto {
         private Long memberId;
         private String email;
         private String nickname;
-//        private String password;
 
         private List<StudySubset> studies = new ArrayList<>();
         private List<StudyCommentSubset> studyComments = new ArrayList<>();
