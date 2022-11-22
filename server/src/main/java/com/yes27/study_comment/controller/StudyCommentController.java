@@ -1,5 +1,7 @@
 package com.yes27.study_comment.controller;
 
+import com.yes27.exception.BusinessLogicException;
+import com.yes27.exception.ExceptionCode;
 import com.yes27.member.entity.Member;
 import com.yes27.member.service.MemberService;
 import com.yes27.response.SingleResponseDto;
@@ -9,6 +11,7 @@ import com.yes27.study_comment.dto.StudyCommentDto;
 import com.yes27.study_comment.entity.StudyComment;
 import com.yes27.study_comment.mapper.StudyCommentMapper;
 import com.yes27.study_comment.service.StudyCommentService;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import lombok.extern.slf4j.Slf4j;
@@ -43,8 +46,7 @@ public class StudyCommentController {
     }
 
     @PostMapping("/{study-id}/comment")
-    public ResponseEntity postComment(@PathVariable("study-id") @Positive Long studyId,
-        @Valid @RequestBody StudyCommentDto.Post requestBody) {
+    public ResponseEntity postComment(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId, @Valid @RequestBody StudyCommentDto.Post requestBody) {
 
         Member member = memberService.findVerifiedMember(requestBody.getMemberId());
         Study findStudy = studyService.findVerifiedStudy(studyId);
@@ -60,10 +62,7 @@ public class StudyCommentController {
     }
 
     @PatchMapping("/{study-id}/comment/{comment-id}")
-    public ResponseEntity patchComment(
-        @PathVariable("study-id") @Positive Long studyId,
-        @PathVariable("comment-id") @Positive Long studyCommentId,
-        @Valid @RequestBody StudyCommentDto.Patch requestBody) {
+    public ResponseEntity patchComment(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId, @PathVariable("comment-id") @Positive Long studyCommentId, @Valid @RequestBody StudyCommentDto.Patch requestBody) {
 
         Study findStudy = studyService.findVerifiedStudy(studyId);
 
@@ -77,9 +76,7 @@ public class StudyCommentController {
     }
 
     @GetMapping("/{study-id}/comment/{comment-id}")
-    public ResponseEntity getComment(
-    @PathVariable("study-id") @Positive Long studyId,
-    @PathVariable("comment-id") @Positive Long studyCommentId) {
+    public ResponseEntity getComment(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId, @PathVariable("comment-id") @Positive Long studyCommentId) {
 
         StudyComment studyComment = studyCommentService.findComment(studyCommentId);
 
@@ -87,11 +84,19 @@ public class StudyCommentController {
     }
 
     @DeleteMapping("/{study-id}/comment/{comment-id}")
-    public ResponseEntity deleteComment(
-        @PathVariable("study-id") @Positive Long studyId,
-        @PathVariable("comment-id") @Positive Long studyCommentId) {
+    public ResponseEntity deleteComment(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId, @PathVariable("comment-id") @Positive Long studyCommentId) {
         studyCommentService.deleteComment(studyCommentId);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    // http header 토큰으로 유저 찾는 메소드
+    public Member findMemberByHeader(HttpServletRequest request) {
+        String email = request.getUserPrincipal().getName();
+        if (email == null) {
+            throw new BusinessLogicException(ExceptionCode.TOKEN_NOT_FOUND);
+        }
+        Member member = memberService.findVerifiedMemberByEmail(email);
+        return member;
     }
 }

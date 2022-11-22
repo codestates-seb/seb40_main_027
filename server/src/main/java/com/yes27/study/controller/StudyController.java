@@ -1,5 +1,7 @@
 package com.yes27.study.controller;
 
+import com.yes27.exception.BusinessLogicException;
+import com.yes27.exception.ExceptionCode;
 import com.yes27.member.entity.Member;
 import com.yes27.member.service.MemberService;
 import com.yes27.response.MultiResponseDto;
@@ -10,6 +12,7 @@ import com.yes27.study.entity.StudyTag;
 import com.yes27.study.mapper.StudyMapper;
 import com.yes27.study.service.StudyService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +47,7 @@ public class StudyController {
     }
 
     @PostMapping
-    public ResponseEntity postStudy(@Valid @RequestBody StudyDto.Post requestBody) {
+    public ResponseEntity postStudy(HttpServletRequest request, @Valid @RequestBody StudyDto.Post requestBody) {
 
         Member member = memberService.findVerifiedMember(requestBody.getMemberId());
 
@@ -57,51 +60,46 @@ public class StudyController {
 
         Study createdStudy = studyService.createStudy(study);
 
-        return new ResponseEntity<>(
-            new SingleResponseDto<>(mapper.studyToPostResponse(createdStudy)),
-            HttpStatus.CREATED);
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.studyToPostResponse(createdStudy)), HttpStatus.CREATED);
     }
 
     @PatchMapping("/{study-id}")
-    public ResponseEntity patchStudy(
-        @PathVariable("study-id") @Positive Long studyId,
-        @Valid @RequestBody StudyDto.Patch requestBody) {
+    public ResponseEntity patchStudy(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId, @Valid @RequestBody StudyDto.Patch requestBody) {
         requestBody.setStudyId(studyId);
-        Study study =
-            studyService.updateStudy(mapper.studyPatchToStudy(requestBody));
+        Study study = studyService.updateStudy(mapper.studyPatchToStudy(requestBody));
 
-        return new ResponseEntity<>(
-            new SingleResponseDto<>(mapper.studyToStudyResponse(study)),
-            HttpStatus.OK);
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.studyToStudyResponse(study)), HttpStatus.OK);
     }
 
     @GetMapping("/{study-id}")
-    public ResponseEntity getStudy(
-        @PathVariable("study-id") @Positive Long studyId) {
+    public ResponseEntity getStudy(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId) {
         Study study = studyService.findStudy(studyId);
 
-        return new ResponseEntity<>(
-            new SingleResponseDto<>(mapper.studyToStudyResponse(study)),
-            HttpStatus.OK);
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.studyToStudyResponse(study)), HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity getStudies(@Positive @RequestParam int page,
-        @Positive @RequestParam int size) {
+    public ResponseEntity getStudies(HttpServletRequest request, @Positive @RequestParam int page, @Positive @RequestParam int size) {
         Page<Study> pageStudies = studyService.findStudies(page-1, size);
         List<Study> studies = pageStudies.getContent();
 
-        return new ResponseEntity<>(
-            new MultiResponseDto<>(mapper.studiesToPagingResponses(studies),
-            pageStudies),
-        HttpStatus.OK);
+        return new ResponseEntity<>(new MultiResponseDto<>(mapper.studiesToPagingResponses(studies), pageStudies), HttpStatus.OK);
     }
 
     @DeleteMapping("/{study-id}")
-    public ResponseEntity deleteStudy(
-        @PathVariable("study-id") @Positive Long studyId) {
+    public ResponseEntity deleteStudy(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId) {
         studyService.deleteStudy(studyId);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    // http header 토큰으로 유저 찾는 메소드
+    public Member findMemberByHeader(HttpServletRequest request) {
+        String email = request.getUserPrincipal().getName();
+        if (email == null) {
+            throw new BusinessLogicException(ExceptionCode.TOKEN_NOT_FOUND);
+        }
+        Member member = memberService.findVerifiedMemberByEmail(email);
+        return member;
     }
 }
