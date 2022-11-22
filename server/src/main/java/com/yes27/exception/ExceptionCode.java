@@ -15,7 +15,9 @@ public enum ExceptionCode {
     TAG_EXIST(409, "Postscript exists"),
 
     MENTOR_NOT_FOUND(404, "Mentor not found"),
-    MENTOR_EXISTS(409, "Mentor exists");
+    MENTOR_EXISTS(409, "Mentor exists"),
+
+    TOKEN_NOT_FOUND(404, "Token not found");
 
 
     @Getter
