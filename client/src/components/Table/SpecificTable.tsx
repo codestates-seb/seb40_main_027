@@ -42,6 +42,7 @@ const data = {
 };
 
 const keysObj: Array<string> = Object.keys(data);
+/** 일단 전부 나열하여 작성, 추후 data확정되면 mapping형태로 한번 refactoring 필요 **/
 const SpecificTable = () => {
   return (
     <S.Detail>
