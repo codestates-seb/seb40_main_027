@@ -74,7 +74,6 @@ public class StudyController {
     public ResponseEntity getStudy(
         @PathVariable("study-id") @Positive Long studyId) {
         Study study = studyService.findStudy(studyId);
-        studyService.view(study);
 
         return new ResponseEntity<>(
             new SingleResponseDto<>(mapper.studyToStudyResponse(study)),

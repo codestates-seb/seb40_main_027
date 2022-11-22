@@ -47,7 +47,6 @@ public class StudyCommentDto {
         public Long studyId;
         public String studyTitle; 
         public String studyContent; 
-        public int view; 
         public int vote;
         public LocalDateTime createdAt;
         public LocalDateTime updatedAt;

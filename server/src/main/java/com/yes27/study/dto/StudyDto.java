@@ -35,7 +35,6 @@ public class StudyDto {
         private String studyTitle;
         private String studyContent;
 
-        private int view;
         private int vote;
 
         private LocalDateTime createdAt;

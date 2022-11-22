@@ -54,10 +54,4 @@ public class StudyService {
                 new BusinessLogicException(ExceptionCode.STUDY_NOT_FOUND));
         return findStudy;
     }
-
-    public void view(Study study) {
-        Optional.ofNullable(study.getView())
-            .ifPresent(view -> study.setView(study.getView() + 1));
-        studyRepository.save(study);
-    }
 }
