@@ -70,7 +70,6 @@ const IconContent = styled.div`
 const Main = () => {
   return (
     <div>
-      <MainHeader />
       <MainPage>
         <img id="main-big-banner" src={mainbanner} alt="mainbanner" />
         <img id="main-small-banner" src={mainmobile} alt="mainmobilebanner" />

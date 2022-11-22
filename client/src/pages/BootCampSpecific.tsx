@@ -1,5 +1,4 @@
 import Banner from '../components/Banner';
-import PageHeader from '../components/Header/PageHeader';
 import { Icon } from '@iconify/react';
 import * as S from './BootCampSepcific.style';
 
@@ -18,7 +17,6 @@ const data = {
 const BootCampSpecific = () => {
   return (
     <>
-      <PageHeader />
       <Banner text="코드 스테이츠" pageType="other" />
       <S.PageWrap>
         <S.MiddleSection>

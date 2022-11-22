@@ -5,7 +5,6 @@ import StartForm from '../components/TestForm/StartForm';
 const Test = () => {
   return (
     <>
-      <PageHeader />
       <S.TestContent>
         <S.FormContent>
           <S.StyleFormCode>

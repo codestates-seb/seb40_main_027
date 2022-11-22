@@ -9,24 +9,25 @@ import BootCampSpecific from './pages/BootCampSpecific';
 import Test from './pages/Test';
 import Forum from './pages/Forum';
 import PrivateRoute from './components/Route/PrivateRoute';
+import MainHeader from './components/Header/MainHeader';
+import PageHeader from './components/Header/PageHeader';
 
 function App() {
   const location = useLocation();
 
   return (
     <>
+      {location.pathname === '/users/login' || location.pathname === '/users/signup' ? null : location.pathname ===
+        '/' ? (
+        <MainHeader />
+      ) : (
+        <PageHeader />
+      )}
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/users/login" element={<Login />} />
         <Route path="/users/signup" element={<SignUp />} />
-        <Route
-          path="/users/mypage"
-          element={
-            <PrivateRoute>
-              <MyPage />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/users/mypage" element={<MyPage />} />
         <Route path="/test" element={<Test />} />
         <Route path="/bootcamp" element={<BootCamp />} />
         <Route path="/bootcamp/1" element={<BootCampSpecific />} />

@@ -21,10 +21,7 @@ const MyPage = () => {
   ];
   return (
     <S.PageSize>
-      <PageHeader />
-
       <SideBar />
-
       <S.MyPageContent>
         <div className="tab-menu">
           <span className="page-name">My Page</span>
