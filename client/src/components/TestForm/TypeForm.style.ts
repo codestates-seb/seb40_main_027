@@ -46,9 +46,17 @@ export const SelectQuestionButton = styled.button`
   justify-content: flex-start;
   margin: 1% 0 1rem 0;
   border: 3px double white;
-  &:hover {
-    background-color: var(--whiteBackground);
-    transition: all 1s;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--whiteBackground);
+    }
+  }
+
+  @media screen and (max-width: 414px) {
+    &:hover {
+      background-color: none;
+    }
   }
 `;
 
@@ -67,6 +75,9 @@ export const FormCaseView = styled.div`
   align-items: center;
   flex-direction: column;
   margin: 0px;
+
+  @media screen and (max-width: 414px) {
+  }
 
   @media screen and (max-width: 414px) {
     height: 50vh;
