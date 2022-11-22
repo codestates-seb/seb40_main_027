@@ -54,11 +54,11 @@ public class SecurityConfig {
             .apply(new CustomFilterConfigurer())
             .and()
             .authorizeHttpRequests(authorize -> authorize
-                .antMatchers(HttpMethod.POST, "/users/**").permitAll()  // (1) 추가
-                .antMatchers(HttpMethod.PATCH, "/users/**").hasRole("USER")  // (2) 추가
-                .antMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")  // (3) 추가
-                .antMatchers(HttpMethod.GET, "/users/**").hasAnyRole("USER", "ADMIN")  // (4) 추가
-                .antMatchers(HttpMethod.DELETE, "/users/**").hasRole("USER")  // (5) 추가
+//                .antMatchers(HttpMethod.POST, "/users/**").permitAll()  // (1) 추가
+//                .antMatchers(HttpMethod.PATCH, "/users/**").hasRole("USER")  // (2) 추가
+//                .antMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")  // (3) 추가
+//                .antMatchers(HttpMethod.GET, "/users/**").hasAnyRole("USER", "ADMIN")  // (4) 추가
+//                .antMatchers(HttpMethod.DELETE, "/users/**").hasRole("USER")  // (5) 추가
                 .anyRequest().permitAll()
             );
         return http.build();
