@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import Main from './pages/Main';
-import SignUp from './pages/SingUp';
+import SignUp from './pages/SignUp';
 import Footer from './components/Footer/Footer';
 
 function App() {
