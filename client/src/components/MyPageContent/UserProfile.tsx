@@ -3,22 +3,34 @@ import styled from 'styled-components';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useState } from 'react';
 import axios from 'axios';
-import { StyledBackgroundButton } from '../Button/BackgroundButton';
 
 const ProfileUpdateButton = styled.button`
   border: none;
-  background-color: white;
+  background-color: var(--whiteBackground);
 `;
 
 const MyProfileView = styled.div`
-  width: 15vw;
+  width: 14vw;
   border-right: 1px solid var(--grayContentsBorder);
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-  margin: 0;
+
+  .border-line {
+    border: 1px solid gray;
+    width: 100%;
+    height: calc(400 / 14 * 1rem);
+  }
+
+  .user-info {
+    height: 100rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
   @media screen and (max-width: 414px) {
     border: none;
     height: 100%;
@@ -31,39 +43,47 @@ const GrayProfileView = styled.div`
 `;
 const UserProfileUpdateBody = styled.div`
   width: 90%;
-  border: 4px double gray;
-  height: 20vh;
+  height: 14vh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-  margin: 0 0rem 0 1rem;
+  margin: 0 0 0 1rem;
 `;
 
 const PictureProfile = styled.div`
-  height: 14rem;
+  height: 13rem;
   width: 70%;
   border-radius: 50%;
-  /* background-color: pink; */
+
   border: 1px solid black;
-  margin: 0 5% 5% 15%;
+  margin: 5% 5% 5% 15%;
 `;
 
 const FormInputProFile = styled.form`
   width: 100%;
   background-color: var(--greenSub);
-  height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 `;
 const InputProfileForm = styled.input`
-  width: 80%;
+  width: 90%;
   border: none;
   height: 1.5rem;
+  margin-bottom: 1rem;
   border-radius: 10px;
 `;
+
+const UserInfoFormEmail = styled.div`
+  background-color: var(--grayHeaderBorder);
+  display: inline;
+  width: 100%;
+  height: 2rem;
+  border-radius: 10px;
+`;
+
 interface IFormInput {
   nickname: String;
   email: String;
@@ -88,7 +108,7 @@ const UserProfile = () => {
         console.log(res);
         setUpdateProfile(!updateProfile);
       })
-      .catch(() => console.log('a'));
+      .catch((err) => console.log('err'));
   };
 
   const onClickUpdate = () => {
@@ -101,30 +121,31 @@ const UserProfile = () => {
         <ProfileUpdateButton onClick={onClickUpdate}>
           <Icon icon="ph:gear-six-duotone" width="25" height="25" />
         </ProfileUpdateButton>
-        <PictureProfile></PictureProfile>
-        {updateProfile ? (
-          <UserProfileUpdateBody>
-            <FormInputProFile onSubmit={handleSubmit(MyProfileSubmit)}>
-              <label htmlFor="email">email</label>
-              <InputProfileForm {...register('email')} />
-              <label htmlFor="nickname">nickname</label>
-              <InputProfileForm {...register('nickname')} />
-              <label htmlFor="password">비밀번호</label>
-              <InputProfileForm {...register('password')} />
-              <StyledBackgroundButton color="red">
+        <div className="border-line">
+          <PictureProfile></PictureProfile>
+          {updateProfile ? (
+            <UserProfileUpdateBody>
+              <FormInputProFile onSubmit={handleSubmit(MyProfileSubmit)}>
+                <label htmlFor="email">email</label>
+                <InputProfileForm {...register('email')} />
+                <label htmlFor="nickname">nickname</label>
+                <InputProfileForm {...register('nickname')} />
+                <label htmlFor="password">비밀번호</label>
+                <InputProfileForm {...register('password')} />
+
                 <input type="submit" />
-              </StyledBackgroundButton>
-            </FormInputProFile>
-          </UserProfileUpdateBody>
-        ) : (
-          <UserProfileUpdateBody>
-            <div className="user-info">
-              nickname
-              <div className="user-nickname">aa</div>
-              <div className="user-nickname">email</div>
-            </div>
-          </UserProfileUpdateBody>
-        )}
+              </FormInputProFile>
+            </UserProfileUpdateBody>
+          ) : (
+            <UserProfileUpdateBody>
+              <div className="user-info">
+                nickname
+                <UserInfoFormEmail></UserInfoFormEmail>
+                email<UserInfoFormEmail></UserInfoFormEmail>
+              </div>
+            </UserProfileUpdateBody>
+          )}
+        </div>
       </GrayProfileView>
     </MyProfileView>
   );
