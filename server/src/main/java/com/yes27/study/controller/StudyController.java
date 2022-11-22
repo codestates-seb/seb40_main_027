@@ -53,7 +53,7 @@ public class StudyController {
         Study createdStudy = studyService.createStudy(study);
 
         return new ResponseEntity<>(
-            new SingleResponseDto<>(mapper.studyToStudyResponse(createdStudy)),
+            new SingleResponseDto<>(mapper.studyToPostResponse(createdStudy)),
             HttpStatus.CREATED);
     }
 

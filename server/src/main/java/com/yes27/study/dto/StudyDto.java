@@ -29,6 +29,12 @@ public class StudyDto {
 
     @Getter
     @Setter
+    public static class PostResponse {
+        private Long studyId;
+    }
+
+    @Getter
+    @Setter
     public static class Response {
         private Long studyId;
 
