@@ -1,6 +1,6 @@
 import { BigBorderTagButton, FilterButton, WriteButton } from '../Button';
 import Pagination from '../Pagination';
-import SearchBar from '../SearchBar';
+import SearchBar from '../SearchBar/SearchBar';
 import ForumCard from './ForumCard';
 import * as S from './ForumCards.style';
 
