@@ -42,8 +42,8 @@ const TypeForm = () => {
         <S.FormCaseView>
           <S.QuestionContentForm>
             <S.NumberBorder>{idNumber + 1}.</S.NumberBorder>
-            <S.SContentForm>{QuestionList.filter((el, idx) => idx === idNumber)}</S.SContentForm>
-            <div className="img-review">{PictureList.filter((el, idx) => idx === idNumber)}</div>
+            <S.SContentForm>{QuestionList.filter((el, idx) => idx === idNumber)[0]}</S.SContentForm>
+            <div className="img-review">{PictureList.filter((el, idx) => idx === idNumber)[0]}</div>
           </S.QuestionContentForm>
           <S.ButtonBoxForm>
             <S.SelectQuestionButton onClick={ViewYesHandler}>1. Yes</S.SelectQuestionButton>
