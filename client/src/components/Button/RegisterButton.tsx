@@ -15,10 +15,10 @@ const StyledButton = styled(StyledBackgroundButton)`
   }
 `;
 
-interface PropType {
+interface PropsType {
   text?: string;
 }
 
-export const RegisterButton = ({ text }: PropType) => {
+export const RegisterButton = ({ text }: PropsType) => {
   return <StyledButton>{text ? text : '회원가입'}</StyledButton>;
 };
