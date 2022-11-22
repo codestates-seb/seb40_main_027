@@ -30,7 +30,7 @@ public interface MemberMapper {
         response.setMemberId(member.getMemberId());
         response.setEmail(member.getEmail());
         response.setNickname(member.getNickname());
-        response.setPassword(member.getPassword());
+//        response.setPassword(member.getPassword());
 
         response.setStudies(studyTostudyResponse(member.getStudies()));
         response.setStudyComments(studyCommentToResponse(member.getStudyComments()));

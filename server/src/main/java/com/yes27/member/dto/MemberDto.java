@@ -69,7 +69,7 @@ public class MemberDto {
         private Long memberId;
         private String email;
         private String nickname;
-        private String password;
+//        private String password;
 
         private List<StudySubset> studies = new ArrayList<>();
         private List<StudyCommentSubset> studyComments = new ArrayList<>();
