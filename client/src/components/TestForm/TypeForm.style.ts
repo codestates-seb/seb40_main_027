@@ -77,9 +77,6 @@ export const FormCaseView = styled.div`
   margin: 0px;
 
   @media screen and (max-width: 414px) {
-  }
-
-  @media screen and (max-width: 414px) {
     height: 50vh;
   }
 `;
