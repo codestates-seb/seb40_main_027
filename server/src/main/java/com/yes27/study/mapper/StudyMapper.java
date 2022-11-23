@@ -14,7 +14,7 @@ public interface StudyMapper {
         Member member = new Member();
         Study study = new Study();
 
-        member.setMemberId(requestBody.getMemberId());
+//        member.setMemberId(requestBody.getMemberId());
         study.setStudyTitle(requestBody.getStudyTitle());
         study.setStudyContent(requestBody.getStudyContent());
 

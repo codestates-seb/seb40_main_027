@@ -47,13 +47,9 @@ public class StudyController {
 
     @PostMapping
     public ResponseEntity postStudy(HttpServletRequest request, @Valid @RequestBody StudyDto.Post requestBody) {
-
-        Member member = memberService.findVerifiedMember(requestBody.getMemberId());
-
+        Member member = findMemberByHeader(request);
         Study study = mapper.studyPostToStudy(requestBody);
-        study.setMember(member);
-
-        Study createdStudy = studyService.createStudy(study);
+        Study createdStudy = studyService.createStudy(member, study);
 
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.studyToPostResponse(createdStudy)), HttpStatus.CREATED);
     }

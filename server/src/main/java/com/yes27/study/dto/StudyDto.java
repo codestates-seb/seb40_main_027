@@ -13,7 +13,7 @@ public class StudyDto {
     public static class Post {
         private String studyTitle;
         private String studyContent;
-        private Long memberId;
+//        private Long memberId;
     }
 
     @Getter
