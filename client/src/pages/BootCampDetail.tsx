@@ -1,9 +1,9 @@
 import Banner from '../components/Banner';
 import { Icon } from '@iconify/react';
-import * as S from './BootCampSepcific.style';
+import * as S from './BootCampDetail.style';
 import SpecificTable from '../components/Table/SpecificTable';
 
-const BootCampSpecific = () => {
+const BootCampDetail = () => {
   return (
     <>
       <Banner text="코드 스테이츠" pageType="other" />
@@ -26,4 +26,4 @@ const BootCampSpecific = () => {
   );
 };
 
-export default BootCampSpecific;
+export default BootCampDetail;

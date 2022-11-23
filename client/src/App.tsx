@@ -5,7 +5,7 @@ import SignUp from './pages/SignUp';
 import Footer from './components/Footer/Footer';
 import MyPage from './pages/MyPage';
 import BootCamp from './pages/BootCamp';
-import BootCampSpecific from './pages/BootCampSpecific';
+import BootCampDetail from './pages/BootCampDetail';
 import Test from './pages/Test';
 import Forum from './pages/Forum';
 import PrivateRoute from './components/Route/PrivateRoute';
@@ -31,7 +31,7 @@ function App() {
         <Route path="/users/mypage" element={<MyPage />} />
         <Route path="/test" element={<Test />} />
         <Route path="/bootcamp" element={<BootCamp />} />
-        <Route path="/bootcamp/1" element={<BootCampSpecific />} />
+        <Route path="/bootcamp/1" element={<BootCampDetail />} />
         <Route path="/postscript" element={<Forum />} />
         <Route path="/postscript/:id" element={<Forum />} />
         <Route path="/postscript/write" element={<Forum />} />
