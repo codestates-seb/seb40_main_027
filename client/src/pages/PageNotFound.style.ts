@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import theme from '../styles/theme';
-import mascot from '../assets/image/mascot.png';
 
 export const CardLayout = styled.div`
   display: flex;
@@ -87,55 +86,3 @@ export const HomeLink = styled.a`
   color: #000;
   text-decoration: none;
 `;
-
-// export const Wrap = styled.div`
-//   width: 100vw;
-//   max-width: 1920px;
-//   height: calc(100vh - 16px);
-//   max-height: 1080px;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-// `;
-
-// export const Notice = styled.section`
-//   width: 60vw;
-//   height: 70vh;
-//   font-size: 30px;
-//   @media ${theme.mobile} {
-//     width: 80vw;
-//   }
-//   div {
-//     border: 1px solid var(--greenMain);
-//     margin-top: 2%;
-//     width: 100%;
-//     height: 100%;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//     align-items: center;
-//     > div {
-//       height: 80%;
-//       border: none;
-//       display: flex;
-//       flex-direction: row;
-//       > img {
-//         display: flex;
-//         width: 8%;
-//         height: 15%;
-//       }
-//     }
-//     svg {
-//       width: 40%;
-//       height: 50%;
-//     }
-//   }
-//   @media ${theme.mobile} {
-//     height: 45%;
-//   }
-// `;
-
-// export const Mascot = styled.img.attrs({
-//   src: `${mascot}`,
-// })``;

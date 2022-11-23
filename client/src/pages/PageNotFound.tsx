@@ -1,5 +1,3 @@
-import { Icon } from '@iconify/react';
-import { Link } from 'react-router-dom';
 import * as S from './PageNotFound.style';
 import mascot from '../assets/image/mascot.png';
 
@@ -20,21 +18,5 @@ const PageNotFound = () => {
       </S.Card>
     </S.CardLayout>
   );
-  //   <S.Wrap>
-  //     <S.Notice>
-  //       <div>
-  //         <span>Opps...</span>
-  //         <div>
-  //           <S.Mascot />
-  //           <Icon icon="tabler:error-404" />
-  //           <S.Mascot />
-  //         </div>
-  //         <>
-  //           <Link to="/">GO HOME</Link>
-  //         </>
-  //       </div>
-  //     </S.Notice>
-  //   </S.Wrap>
-  // );
 };
 export default PageNotFound;
