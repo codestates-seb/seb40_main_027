@@ -4,7 +4,7 @@ import theme from '../../styles/theme';
 export const Detail = styled.div`
   width: 60vw;
   height: calc(100vh - 20vh);
-  border: 3px solid var(--greenBootSpecificBorder);
+  border: 3px solid var(--greenBootDetailBorder);
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -20,7 +20,7 @@ export const Detail = styled.div`
     justify-content: center;
     align-items: center;
     :first-child {
-      border-right: 2px solid var(--greenBootSpecificBorder);
+      border-right: 2px solid var(--greenBootDetailBorder);
       @media ${theme.mobile} {
         border: none;
       }

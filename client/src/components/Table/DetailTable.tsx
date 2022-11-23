@@ -1,4 +1,4 @@
-import * as S from './SpecificTable.style';
+import * as S from './DetailTable.style';
 
 // 데이터 확정이 아직 나지 않아서 어떤 데이터 렌더링 될지 한번더 체크 필요
 
@@ -43,7 +43,7 @@ const data = {
 
 const keysObj: Array<string> = Object.keys(data);
 /** 일단 전부 나열하여 작성, 추후 data확정되면 mapping형태로 한번 refactoring 필요 **/
-const SpecificTable = () => {
+const DetailTable = () => {
   return (
     <S.Detail>
       <div>
@@ -89,4 +89,4 @@ const SpecificTable = () => {
     </S.Detail>
   );
 };
-export default SpecificTable;
+export default DetailTable;
