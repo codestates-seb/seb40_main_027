@@ -15,13 +15,6 @@ export const TableWrap = styled.table`
         border: 2px solid red;
         border-radius: 5px;
       }
-      // 우측과 좌측 상단 border값에 radius주기가 어려워서 pass
-      /* :first-child {
-        border-radius: 10px 0 0 0;
-      }
-      :last-child {
-        border-radius: 0 10px 0 0;
-      } */
     }
   }
   tbody {
