@@ -3,7 +3,7 @@ import icon from '../assets/image/icon.png';
 import { useState } from 'react';
 import MyPageSchedule from '../components/MyPageContent/MyPageSchedule';
 import MyPageList from '../components/MyPageContent/MyPageList';
-import { Icon } from '@iconify/react';
+
 import * as S from './MyPage.style';
 import SideBar from '../components/SideBar/SideBar';
 import UserProfile from '../components/MyPageContent/UserProfile';
@@ -48,9 +48,8 @@ const MyPage = () => {
           </div>
         </div>
         <div className="my-page-body">
-          <div className="profile">
-            <UserProfile />
-            {/* <div className="user-profile">
+          <UserProfile />
+          {/* <div className="user-profile">
               <div className="icon-gear">
                 <Icon icon="ph:gear-six-duotone" width="25" height="25" />
               </div>
@@ -60,7 +59,7 @@ const MyPage = () => {
                 <div className="user-nickname">email</div>
               </div>
             </div> */}
-          </div>
+
           <div>
             <div className="tab-content-mobile">
               {TabMenu.map((el) => (
