@@ -1,7 +1,7 @@
 import * as S from './MyPageSchedule.style';
 import axios from 'axios';
 
-const DummySchedule = [];
+const DummySchedule = [{}];
 
 const MyPageSchedule = () => {
   return (
