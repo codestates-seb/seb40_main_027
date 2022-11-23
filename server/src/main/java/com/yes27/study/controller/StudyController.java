@@ -8,7 +8,6 @@ import com.yes27.response.MultiResponseDto;
 import com.yes27.response.SingleResponseDto;
 import com.yes27.study.dto.StudyDto;
 import com.yes27.study.entity.Study;
-import com.yes27.study.entity.StudyTag;
 import com.yes27.study.mapper.StudyMapper;
 import com.yes27.study.service.StudyService;
 import java.util.List;
@@ -53,10 +52,6 @@ public class StudyController {
 
         Study study = mapper.studyPostToStudy(requestBody);
         study.setMember(member);
-
-        StudyTag tags = new StudyTag();
-        tags.setTagName("모집중");
-        study.getTags().add(tags);
 
         Study createdStudy = studyService.createStudy(study);
 
