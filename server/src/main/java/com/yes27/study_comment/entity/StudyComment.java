@@ -3,11 +3,15 @@ package com.yes27.study_comment.entity;
 import com.yes27.BaseEntity;
 import com.yes27.member.entity.Member;
 import com.yes27.study.entity.Study;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -47,4 +51,7 @@ public class StudyComment extends BaseEntity {
             this.member.addStudyComment(this);
         }
     }
+
+    @ManyToMany
+    Set<Member> voteMembers = new HashSet<>();
 }
