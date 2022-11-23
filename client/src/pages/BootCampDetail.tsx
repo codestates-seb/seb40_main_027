@@ -1,7 +1,7 @@
 import Banner from '../components/Banner';
 import { Icon } from '@iconify/react';
 import * as S from './BootCampDetail.style';
-import SpecificTable from '../components/Table/SpecificTable';
+import DetailTable from '../components/Table/DetailTable';
 
 const BootCampDetail = () => {
   return (
@@ -19,7 +19,7 @@ const BootCampDetail = () => {
           </S.grayBtn>
         </S.MiddleSection>
         <section>
-          <SpecificTable />
+          <DetailTable />
         </section>
       </S.PageWrap>
     </>
