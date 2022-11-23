@@ -34,6 +34,17 @@ public class MemberController {
         this.mapper = mapper;
     }
 
+    //test
+    @PostMapping("/test")
+    public ResponseEntity test(HttpServletRequest request) {
+        String email = request.getUserPrincipal().getName();
+        if (email == null) {
+            throw new BusinessLogicException(ExceptionCode.TOKEN_NOT_FOUND);
+        }
+        System.out.println(email);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PostMapping("/signup")
     public ResponseEntity postMember(HttpServletRequest request, @Valid @RequestBody MemberDto.Post requestBody) {
         Member member = mapper.memberPostToMember(requestBody);
