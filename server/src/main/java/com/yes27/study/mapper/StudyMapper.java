@@ -21,7 +21,7 @@ public interface StudyMapper {
         return study;
     }
 
-    Study studyPatchToStudy(StudyDto.Patch requestBody);
+//    Study studyPatchToStudy(StudyDto.Patch requestBody);
     StudyDto.Response studyToStudyResponse(Study study);
 //    List<StudyDto.Response> studiesToStudyResponses(List<Study> studies);
     List<StudyDto.PagingResponse> studiesToPagingResponses(List<Study> studies);

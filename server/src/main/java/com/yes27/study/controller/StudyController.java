@@ -65,6 +65,7 @@ public class StudyController {
 
     @GetMapping("/{study-id}")
     public ResponseEntity getStudy(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId) {
+        Member member = findMemberByHeader(request);
         Study study = studyService.findStudy(studyId);
 
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.studyToStudyResponse(study)), HttpStatus.OK);
@@ -72,6 +73,7 @@ public class StudyController {
 
     @GetMapping
     public ResponseEntity getStudies(HttpServletRequest request, @Positive @RequestParam int page, @Positive @RequestParam int size) {
+        Member member = findMemberByHeader(request);
         Page<Study> pageStudies = studyService.findStudies(page-1, size);
         List<Study> studies = pageStudies.getContent();
 
@@ -80,7 +82,8 @@ public class StudyController {
 
     @DeleteMapping("/{study-id}")
     public ResponseEntity deleteStudy(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId) {
-        studyService.deleteStudy(studyId);
+        Member member = findMemberByHeader(request);
+        studyService.deleteStudy(member, studyId);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

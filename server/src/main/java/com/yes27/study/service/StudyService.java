@@ -49,8 +49,12 @@ public class StudyService {
         return studyRepository.findAll(PageRequest.of(page, size, Sort.by("studyId").descending()));
     }
 
-    public void deleteStudy(Long studyId) {
+    public void deleteStudy(Member member, Long studyId) {
         Study findStudy = findVerifiedStudy(studyId);
+        if (member.getMemberId() != studyId) {
+            throw new BusinessLogicException(ExceptionCode.PERMISSION_ERROR);
+        }
+
         studyRepository.delete(findStudy);
     }
 
