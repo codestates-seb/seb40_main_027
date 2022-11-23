@@ -10,10 +10,10 @@ const PageNotFound = () => {
         </S.ImageContainer>
         <S.Content>
           <S.ErrorTitle>404</S.ErrorTitle>
-          <S.Title>Page not found</S.Title>
-          <S.Text>Sorry, we couldn`t find the page you were looking for.</S.Text>
-          <S.Text>We suggest that you return to main home page</S.Text>
-          <S.HomeLink href="/">Go to Home</S.HomeLink>
+          <S.Title>페이지를 찾을 수 없습니다</S.Title>
+          <S.Text>입력한 주소가 잘못되었거나 사용이 일시 중단되어 요청하신 페이지를 찾을 수 없습니다.</S.Text>
+          <S.Text>메인 페이지로 이동하는 것을 권장드립니다</S.Text>
+          <S.HomeLink href="/">메인 페이지 바로가기</S.HomeLink>
         </S.Content>
       </S.Card>
     </S.CardLayout>

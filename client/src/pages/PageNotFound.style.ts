@@ -21,6 +21,9 @@ export const Card = styled.div`
   display: flex;
   box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgba(0, 0, 0, 0.2);
   @media ${theme.mobile} {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 90vw;
     height: 60vh;
   }
@@ -32,6 +35,9 @@ export const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media ${theme.mobile} {
+    margin-top: -20%;
+  }
 `;
 
 export const Image = styled.img`
@@ -49,6 +55,9 @@ export const Content = styled.div`
   width: 50%;
   height: 100%;
   margin-right: 2.7%;
+  @media ${theme.mobile} {
+    margin-top: -40%;
+  }
 `;
 
 export const ErrorTitle = styled.h1`
