@@ -51,7 +51,4 @@ public class Study extends BaseEntity {
             this.member.addStudy(this);
         }
     }
-
-    @OneToMany(mappedBy = "study", cascade = CascadeType.PERSIST)
-    private List<StudyTag> tags = new ArrayList<>();
 }

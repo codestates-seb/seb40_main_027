@@ -1,6 +1,5 @@
 package com.yes27.study.dto;
 
-import com.yes27.study.entity.StudyTag;
 import com.yes27.validator.NotSpace;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -62,9 +61,7 @@ public class StudyDto {
 
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
-//        private StudyStatus tagName;
-//        private StudyTag tags;
-        public List<StudyTag> tags;
+
         public List<StudyCommentSubset> studyComments;
         public MemberSubset member;
     }
