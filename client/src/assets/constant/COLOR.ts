@@ -1,6 +1,8 @@
 export const WHITE_BACKGROUND = '#FFFFFF';
 export const GREEN_MAIN = '#1DCA89';
 export const GREEN_SUB = '#A9DBBD';
+export const GREEN_BOOT_DETAIL_BORDER = '#09CF58';
+export const GREEN_TABLE_HEADER = '#A9DBBD';
 export const BLACK_TEXT_NORMAL = '#222222';
 export const BLACK_TEXT_TITLE = '#222222';
 export const PURPLE_REVIEW = '#B832F8';
@@ -13,3 +15,5 @@ export const GRAY_CONTENTS_BORDER = '#B6B6B6';
 export const GRAY_BOARD_AREA_BORDER = '#DDDDDD';
 export const GRAY_BANNER_BACKGROUND = '#EBE7E4';
 export const GRAY_LIST_FILL = '#EEEEEE';
+export const GRAY_TABLE_BORDER = '#A4A4A4';
+export const GRAY_BOOT_BUTTON = '#D9D9D9';
