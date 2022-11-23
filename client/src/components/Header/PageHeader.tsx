@@ -13,7 +13,7 @@ const PageMenu = styled.header`
   height: 4rem;
   border-bottom: 1px solid var(--grayHeaderBorder);
   display: flex;
-  justify-content: center; //space betweem
+  justify-content: center;
   align-items: center;
   .page-header-content {
     width: 60vw;
