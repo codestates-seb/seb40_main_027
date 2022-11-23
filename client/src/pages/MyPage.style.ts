@@ -53,6 +53,7 @@ export const MyPageContent = styled.div`
     /* width: 25%;
     border-right: 1px solid var(--grayContentsBorder);
     display: flex; */
+    width: 100%;
   }
   .user-profile {
     /* height: 40%;
