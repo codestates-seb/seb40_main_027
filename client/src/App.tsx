@@ -11,6 +11,7 @@ import Forum from './pages/Forum';
 import PrivateRoute from './components/Route/PrivateRoute';
 import MainHeader from './components/Header/MainHeader';
 import PageHeader from './components/Header/PageHeader';
+import PageNotFound from './pages/PageNotFound';
 
 function App() {
   const location = useLocation();
@@ -40,6 +41,7 @@ function App() {
         <Route path="/mentoring" element={<Forum />} />
         <Route path="/mentoring/:id" element={<Forum />} />
         <Route path="/mentoring/write" element={<Forum />} />
+        <Route path="/*" element={<PageNotFound />} />
       </Routes>
       {location.pathname === '/users/login' || location.pathname === '/users/signup' ? null : <Footer />}
     </>
