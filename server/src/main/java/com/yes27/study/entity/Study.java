@@ -28,8 +28,6 @@ public class Study extends BaseEntity {
 
     private String studyTitle;
     private String studyContent;
-    private int view = 0;
-    private int vote = 0;
 
     @OneToMany(mappedBy = "study", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<StudyComment> studyComments = new ArrayList<>();

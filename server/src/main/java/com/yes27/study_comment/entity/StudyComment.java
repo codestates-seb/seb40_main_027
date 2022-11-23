@@ -26,8 +26,6 @@ public class StudyComment extends BaseEntity {
     @NotBlank
     private String comment;
 
-    private int vote = 0;
-
     @ManyToOne
     @JoinColumn(name = "STUDY_ID")
     private Study study;
