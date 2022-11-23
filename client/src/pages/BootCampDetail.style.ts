@@ -25,19 +25,3 @@ export const MiddleSection = styled.section`
     margin: calc(100% / 30) 0;
   }
 `;
-
-export const grayBtn = styled.button`
-  width: 122px;
-  height: 59px;
-  border: none;
-  border-radius: 4.5px;
-  background-color: var(--grayBootButton);
-  margin: calc(100% / 30) 0;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  svg {
-    width: 30px;
-  }
-`;

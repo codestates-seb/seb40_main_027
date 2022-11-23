@@ -1,7 +1,8 @@
 import Banner from '../components/Banner';
-import { Icon } from '@iconify/react';
 import * as S from './BootCampDetail.style';
 import DetailTable from '../components/Table/DetailTable';
+import { BootDetailButton } from '../components/Button';
+import { GREEN_MAIN, RED_BOOT_DETAIL_HEART } from '../assets/constant/COLOR';
 
 const BootCampDetail = () => {
   return (
@@ -9,14 +10,8 @@ const BootCampDetail = () => {
       <Banner text="코드 스테이츠" pageType="other" />
       <S.PageWrap>
         <S.MiddleSection>
-          <S.grayBtn>
-            홈 페이지
-            <Icon icon="ant-design:home-outlined" color="#1dca89" />
-          </S.grayBtn>
-          <S.grayBtn>
-            찜
-            <Icon icon="mdi:cards-heart-outline" color="#f24e1e" />
-          </S.grayBtn>
+          <BootDetailButton text="홈 페이지" icon="ant-design:home-outlined" iconColor={GREEN_MAIN} />
+          <BootDetailButton text="찜 " icon="mdi:cards-heart-outline" iconColor={RED_BOOT_DETAIL_HEART} />
         </S.MiddleSection>
         <section>
           <DetailTable />
