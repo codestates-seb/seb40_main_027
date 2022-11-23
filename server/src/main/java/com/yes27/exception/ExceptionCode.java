@@ -19,8 +19,9 @@ public enum ExceptionCode {
 
     TOKEN_NOT_FOUND(404, "Token not found"),
 
-    EMAIL_EXISTS(409, "Email exists");
+    EMAIL_EXISTS(409, "Email exists"),
 
+    PERMISSION_ERROR(410, "Permission does not exist");
 
     @Getter
     private int status;
