@@ -56,10 +56,11 @@ public class StudyController {
 
     @PatchMapping("/{study-id}")
     public ResponseEntity patchStudy(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId, @Valid @RequestBody StudyDto.Patch requestBody) {
+        Member member = findMemberByHeader(request);
         requestBody.setStudyId(studyId);
-        Study study = studyService.updateStudy(mapper.studyPatchToStudy(requestBody));
+        Study updatedStudy = studyService.updateStudy(member, requestBody);
 
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.studyToStudyResponse(study)), HttpStatus.OK);
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.studyToStudyResponse(updatedStudy)), HttpStatus.OK);
     }
 
     @GetMapping("/{study-id}")
