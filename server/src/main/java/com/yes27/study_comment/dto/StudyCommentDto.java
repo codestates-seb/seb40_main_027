@@ -31,9 +31,6 @@ public class StudyCommentDto {
 
         private String comment;
 
-        private int vote;
-        private int view;
-
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
 
@@ -47,9 +44,8 @@ public class StudyCommentDto {
     public static class StudySubset {
         public Long studyId;
         public String studyTitle; 
-        public String studyContent; 
-        public int vote;
-        public int view;
+        public String studyContent;
+        
         public LocalDateTime createdAt;
         public LocalDateTime updatedAt;
     }
