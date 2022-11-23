@@ -1,7 +1,7 @@
 import { TAGS } from '../../assets/constant/TAG';
 import { BigBorderTagButton, FilterButton, WriteButton } from '../Button';
 import Pagination from '../Pagination';
-import SearchBar from '../SearchBar';
+import SearchBar from '../SearchBar/\bSearchBar';
 import ForumArticle from './ForumArticle';
 import * as S from './ForumArticles.style';
 
