@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ScheduleContent = styled.div`
-  height: 90vh;
+  height: 80vh;
   width: 100%;
 
   .schedule-line {

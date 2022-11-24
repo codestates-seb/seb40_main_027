@@ -1,4 +1,3 @@
-import PageHeader from '../components/Header/PageHeader';
 import ForumSideBanners from '../components/Forum/ForumSideBanners';
 import Banner from '../components/Banner';
 import * as S from './Forum.style';
@@ -14,7 +13,6 @@ const Forum = () => {
 
   return (
     <S.PageWrapper>
-      <PageHeader />
       {forumType === 'postscript' ? <Banner text="수료 후기" pageType="post" /> : null}
       {forumType === 'study' ? <Banner text="스터디" pageType="post" /> : null}
       {forumType === 'mentoring' ? <Banner text="멘토링" pageType="post" /> : null}

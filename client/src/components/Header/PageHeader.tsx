@@ -15,11 +15,9 @@ const PageMenu = styled.header`
   border-bottom: 1px solid var(--grayHeaderBorder);
   display: flex;
   justify-content: center;
-  overflow-x: hidden;
-
+  align-items: center;
   .page-header-content {
-    /* margin-left: 13rem; //380px로 하니 1980에서는 잘보였는데 제화면에서 너무 이상해 우선 rem으로 변경 =>px로할지 질문
-    margin-right: 13rem; */
+    /* width: 60vw; */
     /* margin: 0 calc(400 / 20 * 1rem) 0 calc(400 / 20 * 1rem); */
     /* margin-left: 380px;
     margin-left: 380px; */
