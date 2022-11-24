@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 
 export const TestContent = styled.div`
-  height: 100vh;
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100;
+  margin: 0 10% 0 10%;
 
   @media screen and (max-width: 414px) {
     height: 80vh;
+    margin: 0;
   }
 `;
 
