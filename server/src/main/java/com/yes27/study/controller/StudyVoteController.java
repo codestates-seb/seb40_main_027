@@ -4,7 +4,12 @@ import com.yes27.exception.BusinessLogicException;
 import com.yes27.exception.ExceptionCode;
 import com.yes27.member.entity.Member;
 import com.yes27.member.service.MemberService;
+import com.yes27.response.SingleResponseDto;
+import com.yes27.study.dto.StudyDto;
+import com.yes27.study.entity.Study;
+import com.yes27.study.repository.StudyRepository;
 import com.yes27.study.service.StudyVoteService;
+import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class StudyVoteController {
     private final StudyVoteService studyVoteService;
     private final MemberService memberService;
+    private final StudyRepository studyRepository;
 
 //    @PostMapping("/{study-id}/vote")
 //    public ResponseEntity voteMember(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId) {
@@ -36,24 +42,29 @@ public class StudyVoteController {
     @PostMapping("/{study-id}")
     public ResponseEntity voteMember(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId, @RequestParam @Positive int vote) {
         Member member = findMemberByHeader(request);
+        Optional<Study> study = studyRepository.findByStudyId(studyId);
+        StudyDto.VoteResponse response = new StudyDto.VoteResponse();
+        response.setStudyId(studyId);
+        response.setVote(vote);
+
+        int res=0;
         if (vote == 1) {
-            boolean res = false;
             if (member != null) {
                 res = studyVoteService.addVote(member, studyId);
             }
-            return res ? new ResponseEntity<>(HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            response.setTotalVotes(res);
         } else if (vote == 0) {
-            boolean res =  false;
             if (member != null) {
                 res = studyVoteService.removeVote(member, studyId);
             }
-            return res ? new ResponseEntity<>(HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            response.setTotalVotes(res);
         } else {
             throw new BusinessLogicException(ExceptionCode.VOTE_ERROR);
         }
+
+        return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.CREATED);
     }
+
 
 
     // http header 토큰으로 유저 찾는 메소드
@@ -64,5 +75,12 @@ public class StudyVoteController {
         }
         Member member = memberService.findVerifiedMemberByEmail(email);
         return member;
+    }
+
+    public Study findVerifiedStudy(Long studyId) {
+        Optional<Study> optionalStudy = studyRepository.findById(studyId);
+        Study findStudy = optionalStudy.orElseThrow(() -> new BusinessLogicException(ExceptionCode.STUDY_NOT_FOUND));
+
+        return findStudy;
     }
 }

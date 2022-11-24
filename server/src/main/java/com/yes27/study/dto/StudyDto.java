@@ -85,6 +85,14 @@ public class StudyDto {
         public String email;
         public String nickname;
     }
+
+    @Getter
+    @Setter
+    public static class VoteResponse {
+        public Long studyId;
+        public int vote;
+        public int totalVotes;
+    }
 }
 
 

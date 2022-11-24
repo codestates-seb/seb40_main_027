@@ -17,24 +17,34 @@ public class StudyVoteService {
     private final StudyRepository studyRepository;
 
     // 중복 좋아요 방지
-    public boolean addVote(Member member, Long studyId) {
+//    public boolean addVote(Member member, Long studyId) {
+//        Study study = studyRepository.findById(studyId).orElseThrow();
+//
+//        if (isNotAlreadyVote(member, study)) {
+//            studyVoteRepository.save(new StudyVote(study, member));
+//            return true;
+//        }
+//        return false;
+//    }
+
+    public int addVote(Member member, Long studyId) {
         Study study = studyRepository.findById(studyId).orElseThrow();
 
         if (isNotAlreadyVote(member, study)) {
             studyVoteRepository.save(new StudyVote(study, member));
-            return true;
+            return study.getVotes().size();
         }
-        return false;
+        return study.getVotes().size();
     }
 
-    public boolean removeVote(Member member, Long studyId) {
+    public int removeVote(Member member, Long studyId) {
         Study study = studyRepository.findById(studyId).orElseThrow();
 
         if (!isNotAlreadyVote(member, study)) {
             studyVoteRepository.delete(new StudyVote(study, member));
-            return true;
+            return study.getVotes().size();
         }
-        return false;
+        return study.getVotes().size();
     }
 
     // 사용자가 이미 좋아요한 게시물인치 확인하는 메서드
