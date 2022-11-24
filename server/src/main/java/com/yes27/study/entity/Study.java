@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.Getter;
@@ -56,15 +56,6 @@ public class Study extends BaseEntity {
     // 태그, 조회수 및 추천수
     private String tagName;
 
-    @ManyToMany
-    private Set<Member> viewMembers = new HashSet<>();
-    public void addViewMember(Member member) {
-        viewMembers.add(member);
-    }
-
-    @ManyToMany
-    private Set<Member> voteMembers = new HashSet<>();
-    public void addVoteMember(Member member) {
-        voteMembers.add(member);
-    }
+    @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
+    Set<StudyVote> votes = new HashSet<>();
 }
