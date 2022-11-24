@@ -14,11 +14,11 @@ import PageHeader from './components/Header/PageHeader';
 import PageNotFound from './pages/PageNotFound';
 
 function App() {
-  const location = useLocation().pathname;
+  const { pathname } = useLocation();
 
   return (
     <>
-      {location === '/users/login' || location === '/users/signup' ? null : location === '/' ? (
+      {pathname === '/users/login' || pathname === '/users/signup' ? null : pathname === '/' ? (
         <MainHeader />
       ) : (
         <PageHeader />
@@ -42,7 +42,7 @@ function App() {
         <Route path="/mentoring/write" element={<Forum />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
-      {location === '/users/login' || location === '/users/signup' ? null : <Footer />}
+      {pathname === '/users/login' || pathname === '/users/signup' ? null : <Footer />}
     </>
   );
 }
