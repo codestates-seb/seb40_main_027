@@ -58,7 +58,14 @@ public class Study extends BaseEntity {
     private String tagName = "모집중";
 
     @ManyToMany
-    Set<Member> viewMembers = new HashSet<>();
+    private Set<Member> viewMembers = new HashSet<>();
+    public void addViewMember(Member member) {
+        viewMembers.add(member);
+    }
+
     @ManyToMany
-    Set<Member> voteMembers = new HashSet<>();
+    private Set<Member> voteMembers = new HashSet<>();
+    public void addVoteMember(Member member) {
+        voteMembers.add(member);
+    }
 }

@@ -53,5 +53,8 @@ public class StudyComment extends BaseEntity {
     }
 
     @ManyToMany
-    Set<Member> voteMembers = new HashSet<>();
+    private Set<Member> voteCommentMembers = new HashSet<>();
+    public void addVoteMember(Member member) {
+        voteCommentMembers.add(member);
+    }
 }
