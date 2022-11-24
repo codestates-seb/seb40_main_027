@@ -58,6 +58,15 @@ export const Content = styled.div`
   @media ${theme.mobile} {
     margin-top: -40%;
   }
+  a {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    text-transform: uppercase;
+    padding-top: 3em;
+    display: inline-block;
+    color: #000;
+    text-decoration: none;
+  }
 `;
 
 export const ErrorTitle = styled.h1`
@@ -84,14 +93,4 @@ export const Text = styled.p`
   @media ${theme.mobile} {
     font-size: 3vw;
   }
-`;
-
-export const HomeLink = styled.a`
-  font-family: 'Roboto', sans-serif;
-  font-size: 1em;
-  text-transform: uppercase;
-  padding-top: 3em;
-  display: inline-block;
-  color: #000;
-  text-decoration: none;
 `;
