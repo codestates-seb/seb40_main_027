@@ -15,7 +15,7 @@ function App() {
         <Route path="/user/login" element={<Login />} />
         <Route path="/user/signup" element={<SignUp />} />
         <Route path="/test" element={<Test />} />
-        <Route path="/users/me" element={<MyPage />} />
+        <Route path="/users/mypage" element={<MyPage />} />
         <Route path="/postscript" element={<Forum />} />
         <Route path="/postscript/:id" element={<Forum />} />
         <Route path="/postscript/write" element={<Forum />} />
