@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
@@ -24,18 +25,34 @@ public class StudyVoteController {
     private final StudyVoteService studyVoteService;
     private final MemberService memberService;
 
-    @PostMapping("/{study-id}/vote")
-    public ResponseEntity voteMember(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId) {
+//    @PostMapping("/{study-id}/vote")
+//    public ResponseEntity voteMember(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId) {
+//        Member member = findMemberByHeader(request);
+//        boolean res = false;
+//        if (member != null) { res = studyVoteService.addVote(member, studyId); }
+//        return res ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//    }
+
+    @PostMapping("/{study-id}")
+    public ResponseEntity voteMember(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId, @RequestParam @Positive int vote) {
         Member member = findMemberByHeader(request);
-
-        boolean res = false;
-
-        if (member != null) {
-            res = studyVoteService.addVote(member, studyId);
+        if (vote == 1) {
+            boolean res = false;
+            if (member != null) {
+                res = studyVoteService.addVote(member, studyId);
+            }
+            return res ? new ResponseEntity<>(HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else if (vote == 0) {
+            boolean res =  false;
+            if (member != null) {
+                res = studyVoteService.removeVote(member, studyId);
+            }
+            return res ? new ResponseEntity<>(HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            throw new BusinessLogicException(ExceptionCode.VOTE_ERROR);
         }
-
-        return res ?
-            new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
 
