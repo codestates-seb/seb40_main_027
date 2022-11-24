@@ -8,7 +8,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -55,7 +54,7 @@ public class Study extends BaseEntity {
     }
 
     // 태그, 조회수 및 추천수
-    private String tagName = "모집중";
+    private String tagName;
 
     @ManyToMany
     private Set<Member> viewMembers = new HashSet<>();
