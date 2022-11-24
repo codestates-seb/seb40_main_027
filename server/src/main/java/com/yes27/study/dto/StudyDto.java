@@ -35,6 +35,12 @@ public class StudyDto {
 
     @Getter
     @Setter
+    public static class PatchResponse {
+        private Long studyId;
+    }
+
+    @Getter
+    @Setter
     public static class PagingResponse {
         private Long studyId;
 

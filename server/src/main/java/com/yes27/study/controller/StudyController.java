@@ -64,7 +64,7 @@ public class StudyController {
         requestBody.setStudyId(studyId);
         Study updatedStudy = studyService.updateStudy(member, requestBody);
 
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.studyToStudyResponse(updatedStudy)), HttpStatus.OK);
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.studyToPatchResponse(updatedStudy)), HttpStatus.OK);
     }
 
     @GetMapping("/{study-id}")

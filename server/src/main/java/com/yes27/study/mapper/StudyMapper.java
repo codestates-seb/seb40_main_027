@@ -30,6 +30,7 @@ public interface StudyMapper {
     List<StudyDto.PagingResponse> studiesToPagingResponses(List<Study> studies);
 
     StudyDto.PostResponse studyToPostResponse(Study study);
+    StudyDto.PatchResponse studyToPatchResponse(Study study);
 
 
 
