@@ -3,9 +3,10 @@ import icon from '../assets/image/icon.png';
 import { useState } from 'react';
 import MyPageSchedule from '../components/MyPageContent/MyPageSchedule';
 import MyPageList from '../components/MyPageContent/MyPageList';
+import PageHeaderSide from '../components/Header/PageHeaderSide';
 
 import * as S from './MyPage.style';
-import SideBar from '../components/SideBar/SideBar';
+
 import UserProfile from '../components/MyPageContent/UserProfile';
 
 const MyPage = () => {
@@ -22,10 +23,9 @@ const MyPage = () => {
   ];
   return (
     <S.PageSize>
-      <PageHeader />
-
-      <SideBar />
-
+      {/* <PageHeader /> */}
+      <PageHeaderSide />
+      {/* <SideBar /> */}
       <S.MyPageContent>
         <div className="tab-menu">
           <span className="page-name">My Page</span>
@@ -49,17 +49,6 @@ const MyPage = () => {
         </div>
         <div className="my-page-body">
           <UserProfile />
-          {/* <div className="user-profile">
-              <div className="icon-gear">
-                <Icon icon="ph:gear-six-duotone" width="25" height="25" />
-              </div>
-              <div className="user-picture">사진</div>
-              <div className="user-info">
-                <div className="user-nickname">nickname</div>
-                <div className="user-nickname">email</div>
-              </div>
-            </div> */}
-
           <div>
             <div className="tab-content-mobile">
               {TabMenu.map((el) => (
