@@ -23,6 +23,15 @@ export const LoginWrapp = styled.div`
         padding: calc(100vh * 0.1) calc(100vw * 0.12);
         display: flex;
         flex-direction: column;
+        p {
+          color: var(--redBootDetailHeart);
+          width: 280px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 0.8vw;
+          word-wrap: break-word;
+        }
         input {
           width: 280px;
           height: 48px;
@@ -42,6 +51,7 @@ export const LoginWrapp = styled.div`
   @media screen and (max-width: 414px) {
     width: 100vw;
     .login-inner {
+      max-width: 375px;
       img {
         margin-bottom: 10%;
       }
@@ -50,12 +60,21 @@ export const LoginWrapp = styled.div`
         font-size: 20px;
         max-width: 414px;
         form {
-          padding: 1rem calc(100vw * 0.8 * 0.15);
-          label {
-            input {
-              width: 230px;
-              font-size: 20px;
-            }
+          padding: calc(100vh * 0.8 * 0.1) calc(100vw * 0.8 * 0.15);
+          div {
+            margin-left: 0.6rem;
+          }
+          input {
+            margin-left: 0.6rem;
+            width: 230px;
+            font-size: 20px;
+          }
+          button {
+            margin-left: 0.6rem;
+          }
+          p {
+            width: 230px;
+            margin-left: 0.6rem;
           }
         }
       }
