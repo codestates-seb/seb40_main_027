@@ -71,10 +71,8 @@ public class StudyController {
     public ResponseEntity getStudy(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId) {
         Member member = findMemberByHeader(request);
         Study study = studyService.findStudy(studyId);
-        if (studyViewService.addView(member, studyId)) {
-            study.setView(study.getView()+1);
-        }
-        System.out.println(study.getView());
+        studyViewService.addView(member, studyId);
+        study.setView(study.getViews().size());
 
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.studyToStudyResponse(study)), HttpStatus.OK);
     }
