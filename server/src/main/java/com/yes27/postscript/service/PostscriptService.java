@@ -61,14 +61,14 @@ public class PostscriptService {
                 .ifPresent(findPostscript::setPostscriptContent);
         findPostscript.setUpdatedAt(LocalDateTime.now());
 
-        List<Tag> tagList = postscript.getTags();
-        Optional.ofNullable(tagList)
-                .ifPresent(findPostscript::setTags);
-
-        if (tagList != null) {
-            for (Tag tag : tagList)
-                tagRepository.save(tag);
-        }
+//        List<Tag> tagList = postscript.getTags();
+//        Optional.ofNullable(tagList)
+//                .ifPresent(findPostscript::setTags);
+//
+//        if (tagList != null) {
+//            for (Tag tag : tagList)
+//                tagRepository.save(tag);
+//        }
 
         Postscript updatedPostscript = postscriptRepository.save(findPostscript);
         return updatedPostscript;

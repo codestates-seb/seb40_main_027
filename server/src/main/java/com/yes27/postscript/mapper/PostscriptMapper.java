@@ -79,7 +79,7 @@ public interface PostscriptMapper {
                 .map(postscriptComment -> PostscriptCommentDto.Response
                         .builder()
                         .postCommentId(postscriptComment.getPostCommentId())
-                        .postCommentContent(postscriptComment.getPostCommentContent())
+                        .postscriptComment(postscriptComment.getPostscriptComment())
                         .createdAt(postscriptComment.getCreatedAt())
                         .updatedAt(postscriptComment.getUpdatedAt())
                         .build())
@@ -97,7 +97,7 @@ public interface PostscriptMapper {
         postscriptResponse.setPostscriptContent(postscript.getPostscriptContent());
         postscriptResponse.setView(postscript.getView());
 
-        postscriptResponse.setVotes(postscript.getVotes());
+        postscriptResponse.setTotalVotes(postscript.getVotes());
 
         postscriptResponse.setPostscriptStatus(postscript.getPostscriptStatus());
 
@@ -105,7 +105,7 @@ public interface PostscriptMapper {
         postscriptResponse.setUpdatedAt(postscript.getUpdatedAt());
 
         // 태그
-        postscriptResponse.setPostscriptTags(tagsToTagResponseDtos(postscript.getTags()).stream().distinct().collect(Collectors.toList()));
+        postscriptResponse.setTags(tagsToTagResponseDtos(postscript.getTags()).stream().distinct().collect(Collectors.toList()));
         // 댓글
         postscriptResponse.setPostComments(postscriptToPostscriptCommentResponse(postscriptComments));
 
