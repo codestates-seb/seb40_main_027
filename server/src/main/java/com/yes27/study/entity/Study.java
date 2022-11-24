@@ -54,7 +54,7 @@ public class Study extends BaseEntity {
 
     // 태그, 조회수 및 추천수
     private String tagName;
-    
+
     @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
     Set<StudyVote> votes = new HashSet<>();
 }

@@ -41,7 +41,7 @@ public class StudyDto {
         private String studyTitle;
         private String studyContent;
 
-        private int vote;
+        private int totalVotes;
 
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
@@ -56,7 +56,7 @@ public class StudyDto {
         private String studyTitle;
         private String studyContent;
 
-        private int vote;
+        private int totalVotes;
         private int view;
 
         private LocalDateTime createdAt;
@@ -72,7 +72,6 @@ public class StudyDto {
     public static class StudyCommentSubset {
         public Long studyCommentId;
         public String comment;
-        public int vote;
         public LocalDateTime createdAt;
         public LocalDateTime updatedAt;
         public MemberSubset member;
