@@ -7,6 +7,7 @@ import { RegisterButton, LoginButton } from '../Button/index';
 
 import { useRecoilState } from 'recoil';
 import { sideBarFloading } from '../../atoms/index';
+import SideBar from '../SideBar/SideBar';
 
 const PageMenu = styled.header`
   width: 100vw;
@@ -66,7 +67,6 @@ const PageMenu = styled.header`
     }
   }
 `;
-
 const LoginSignHeaderButton = styled.span`
   display: flex;
   flex-direction: row;
@@ -94,11 +94,13 @@ const PageHeader = () => {
         </span>
 
         <img src={logo} alt="logo" />
+
         {headerMenu.map((el, idx) => (
           <span className="page-menu" key={idx}>
             {el}
           </span>
         ))}
+
         {isLogin ? (
           <LoginSignHeaderButton>
             <LoginButton onClick={clickLogin} />
