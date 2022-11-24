@@ -3,7 +3,7 @@ import theme from '../../styles/theme';
 
 export const Detail = styled.div`
   width: 60vw;
-  height: calc(100vh - 20vh);
+  height: 80vh;
   border: 3px solid var(--greenBootDetailBorder);
   border-radius: 10px;
   display: flex;
