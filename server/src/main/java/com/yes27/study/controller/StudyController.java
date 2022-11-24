@@ -10,6 +10,7 @@ import com.yes27.study.dto.StudyDto;
 import com.yes27.study.entity.Study;
 import com.yes27.study.mapper.StudyMapper;
 import com.yes27.study.service.StudyService;
+import com.yes27.study.service.StudyViewService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -37,12 +38,15 @@ public class StudyController {
     private final MemberService memberService;
     private final StudyService studyService;
     private final StudyMapper mapper;
+    private final StudyViewService studyViewService;
 
     public StudyController(MemberService memberService,
-        StudyService studyService, StudyMapper mapper) {
+        StudyService studyService, StudyMapper mapper ,
+        StudyViewService studyViewService) {
         this.memberService = memberService;
         this.studyService = studyService;
         this.mapper = mapper;
+        this.studyViewService = studyViewService;
     }
 
     @PostMapping
@@ -67,6 +71,10 @@ public class StudyController {
     public ResponseEntity getStudy(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId) {
         Member member = findMemberByHeader(request);
         Study study = studyService.findStudy(studyId);
+        if (studyViewService.addView(member, studyId)) {
+            study.setView(study.getView()+1);
+        }
+        System.out.println(study.getView());
 
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.studyToStudyResponse(study)), HttpStatus.OK);
     }

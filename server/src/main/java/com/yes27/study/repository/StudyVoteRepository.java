@@ -8,4 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface StudyVoteRepository extends JpaRepository<StudyVote, Long> {
     Optional<StudyVote> findByMemberAndStudy(Member member, Study study);
+
+    Optional<Integer> countByStudy(Study study);
 }

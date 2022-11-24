@@ -47,17 +47,16 @@ public class StudyVoteController {
         response.setStudyId(studyId);
         response.setVote(vote);
 
-        int res=0;
         if (vote == 1) {
             if (member != null) {
-                res = studyVoteService.addVote(member, studyId);
+                studyVoteService.addVote(member, studyId);
             }
-            response.setTotalVotes(res);
+            response.setTotalVotes(studyVoteService.count(studyId, member));
         } else if (vote == 0) {
             if (member != null) {
-                res = studyVoteService.removeVote(member, studyId);
+                studyVoteService.cancelVote(member, studyId);
             }
-            response.setTotalVotes(res);
+            response.setTotalVotes(studyVoteService.count(studyId, member));
         } else {
             throw new BusinessLogicException(ExceptionCode.VOTE_ERROR);
         }
