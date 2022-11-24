@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
 export const PageSize = styled.div`
-  overflow-y: auto;
+  /* overflow-y: auto; */ // 나중에 재수정할 수 도 있을 것 같아서 일단 주석 처리만 진행햇어요.
   transform: all 2s;
 `;
 
 export const MyPageContent = styled.div`
   height: 100vh;
+  max-height: 1080px;
   margin: 0rem 18% 0rem 18%;
   transform: all 2s;
   .tab-menu {
@@ -52,6 +53,7 @@ export const MyPageContent = styled.div`
   }
   .profile {
     width: 25%;
+    max-height: 1080px;
     border-right: 1px solid var(--grayContentsBorder);
     display: flex;
   }
