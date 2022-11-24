@@ -1,5 +1,7 @@
 package com.yes27.postscripcomment.controller;
 
+import com.yes27.member.mapper.MemberMapper;
+import com.yes27.member.service.MemberService;
 import com.yes27.postscripcomment.dto.PostscriptCommentDto;
 import com.yes27.postscripcomment.entity.PostscriptComment;
 import com.yes27.postscripcomment.mapper.PostscriptCommentMapper;
@@ -24,17 +26,25 @@ public class PostscriptCommentController {
     private final PostscriptCommentService postscriptCommentService;
     private final PostscriptCommentMapper postscriptCommentMapper;
     private final PostscriptCommentRepository postscriptCommentRepository;
-
     private final PostscriptService postscriptService;
 
-    public PostscriptCommentController(PostscriptCommentService postscriptCommentService,
+    private final MemberService memberService;
+    private final MemberMapper memberMapper;
+    public PostscriptCommentController(MemberService memberService,
+                                       MemberMapper memberMapper,
+                                       PostscriptCommentService postscriptCommentService,
                                        PostscriptCommentMapper postscriptCommentMapper,
                                        PostscriptCommentRepository postscriptCommentRepository,
-                                       PostscriptService postscriptService){
+                                       PostscriptService postscriptService
+                                       ){
+
+
         this.postscriptCommentMapper = postscriptCommentMapper;
         this.postscriptCommentService = postscriptCommentService;
         this.postscriptCommentRepository = postscriptCommentRepository;
         this.postscriptService = postscriptService;
+        this.memberService = memberService;
+        this.memberMapper = memberMapper;
     }
 
     @PostMapping("/{postscript-Id}/comment")
@@ -43,23 +53,22 @@ public class PostscriptCommentController {
 
 
         PostscriptComment postscriptComment = postscriptCommentService.createPostComment(
-                postscriptCommentMapper.postCommentPostToPostComment(postscriptId,postscriptService,postscriptCommentPostDto));
+                postscriptCommentMapper.postCommentPostToPostComment(postscriptId,postscriptService,postscriptCommentPostDto,memberService));
 
         return new  ResponseEntity<>(
-                new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentResponseDto(postscriptComment)), HttpStatus.CREATED);
-        // 유저 추가하기
+                new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentResponseDto(postscriptComment, memberMapper)), HttpStatus.CREATED);
     }
 
     @PatchMapping("/comment/{postComment-id}")
-    public ResponseEntity patchPostComment(@PathVariable("postComment-id") @NotNull long postCommentId,
+    public ResponseEntity patchPostComment(@PathVariable("postComment-id") @Positive long postCommentId,
                                            @Valid @RequestBody PostscriptCommentDto.Patch postscriptCommentPatchDto){
         postscriptCommentPatchDto.setPostCommentId(postCommentId);
-        PostscriptComment postscriptComment = postscriptCommentMapper.postCommentPatchToPostComment(postscriptCommentService, postscriptCommentPatchDto);
+        PostscriptComment postscriptComment = postscriptCommentMapper.postCommentPatchToPostComment(postscriptCommentService, postscriptCommentPatchDto, memberService);
 
         PostscriptComment updatedPostscriptComment = postscriptCommentService.updatePostComment(postscriptComment);
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentResponseDto(updatedPostscriptComment)), HttpStatus.OK);
+                new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentResponseDto(updatedPostscriptComment, memberMapper)), HttpStatus.OK);
 
     }
 
@@ -70,7 +79,7 @@ public class PostscriptCommentController {
         PostscriptComment updatedPostComment = postscriptCommentService.updatePostComment(postscriptComment);
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentResponseDto(postscriptComment)), HttpStatus.OK);
+                new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentResponseDto(postscriptComment,memberMapper)), HttpStatus.OK);
 
     }
 
@@ -78,7 +87,6 @@ public class PostscriptCommentController {
     public ResponseEntity deletePostComment(@PathVariable("postComment-id")@Positive long postCommentId){
 
         postscriptCommentService.deletePostComment(postCommentId);
-
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
