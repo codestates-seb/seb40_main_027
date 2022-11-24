@@ -49,12 +49,12 @@ public class PostscriptDto {
         private String postscriptTitle;
         private String postscriptContent;
         private Postscript.PostscriptStatus postscriptStatus;
-        private Integer votes; // 좋아요 -> 투표
+        private Integer totalVotes; // 좋아요 -> 투표
         private Integer View;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
         private List<PostscriptCommentDto.Response> postComments; // 댓글
-        private List<TagResponseDto> postscriptTags; // 태그
+        private List<TagResponseDto> Tags; // 태그
         private MemberDto.Response2 member; //유저 추가
 //        private MemberSubset member; //유저 추가
     }
