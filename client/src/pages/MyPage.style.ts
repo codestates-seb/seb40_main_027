@@ -122,22 +122,22 @@ export const MyPageContent = styled.div`
       justify-content: center;
       border: none;
     }
-    .profile {
+    /* .profile {
       width: 100vw;
       border: none;
       display: flex;
       justify-content: center;
       z-index: 1;
-    }
-    .user-profile {
+    } */
+    /* .user-profile {
       width: 100vw;
       display: flex;
       flex-direction: row;
       height: 7rem;
       border-radius: 20px;
       margin: 1rem;
-    }
-    .user-picture {
+    } */
+    /* .user-picture {
       height: 100%;
     }
     .user-info {
@@ -145,7 +145,7 @@ export const MyPageContent = styled.div`
       width: 100%;
     }
     .my-page-view {
-    }
+    } */
     .tab-mobile-bar {
       display: flex;
       background-color: var(--greenMain);
