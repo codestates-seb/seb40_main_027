@@ -7,9 +7,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PostscriptLikeDto {
+public class PostscriptVoteResponseDto {
 
     private long postscriptId;
-    private long postLike;
-    private long totalPostscriptLike;
+    private long vote;
+    private long totalVotes;
 }
