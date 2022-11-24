@@ -10,9 +10,8 @@ public class StudyCommentDto {
     @Getter
     @Setter
     public static class Post {
-        private String comment;
+        private String studyComment;
         private Long studyId;
-        private Long memberId;
     }
 
     @Getter
@@ -21,7 +20,7 @@ public class StudyCommentDto {
         private Long studyCommentId;
 
         @NotBlank
-        private String comment;
+        private String studyComment;
     }
 
     @Getter
@@ -29,7 +28,7 @@ public class StudyCommentDto {
     public static class Response {
         private Long studyCommentId;
 
-        private String comment;
+        private String studyComment;
 
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;

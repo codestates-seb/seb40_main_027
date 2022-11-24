@@ -65,7 +65,7 @@ public interface MemberMapper {
                 return MemberDto.StudyCommentSubset
                     .builder()
                     .studyCommentId(studyComment.getStudyCommentId())
-                    .comment(studyComment.getComment())
+                    .comment(studyComment.getStudyComment())
 //                    .vote(studyComment.getVote())
                     .createdAt(studyComment.getCreatedAt())
                     .updatedAt(studyComment.getUpdatedAt())

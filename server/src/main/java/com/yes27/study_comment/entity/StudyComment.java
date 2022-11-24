@@ -28,7 +28,7 @@ public class StudyComment extends BaseEntity {
     private Long studyCommentId;
 
     @NotBlank
-    private String comment;
+    private String studyComment;
 
     @ManyToOne
     @JoinColumn(name = "STUDY_ID")

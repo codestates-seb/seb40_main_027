@@ -22,8 +22,8 @@ public class StudyCommentService {
     public StudyComment updateComment(StudyComment studyComment) {
         StudyComment findStudyComment = findVerifiedComment(studyComment.getStudyCommentId());
 
-        Optional.ofNullable(studyComment.getComment())
-            .ifPresent(comment -> findStudyComment.setComment(comment));
+        Optional.ofNullable(studyComment.getStudyComment())
+            .ifPresent(comment -> findStudyComment.setStudyComment(comment));
 
         return studyCommentRepository.save(findStudyComment);
     }

@@ -48,12 +48,12 @@ public class StudyCommentController {
     @PostMapping("/{study-id}/comment")
     public ResponseEntity postComment(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId, @Valid @RequestBody StudyCommentDto.Post requestBody) {
 
-        Member member = memberService.findVerifiedMember(requestBody.getMemberId());
+//        Member member = memberService.findVerifiedMember(requestBody.getMemberId());
         Study findStudy = studyService.findVerifiedStudy(studyId);
 
         requestBody.setStudyId(studyId);
         StudyComment studyComment = mapper.commentPostToComment(requestBody);
-        studyComment.setMember(member);
+//        studyComment.setMember(member);
         studyComment.setStudy(findStudy);
 
         StudyComment createdComment = studyCommentService.createComment(studyComment);
