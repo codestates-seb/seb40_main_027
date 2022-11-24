@@ -1,5 +1,6 @@
 package com.yes27.member.controller;
 
+import com.yes27.auth.dto.LoginDto;
 import com.yes27.exception.BusinessLogicException;
 import com.yes27.exception.ExceptionCode;
 import com.yes27.member.dto.MemberDto;
@@ -43,6 +44,12 @@ public class MemberController {
         }
         System.out.println(email);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity loginMember(@Valid @RequestBody LoginDto requestBody) {
+        Member member = memberService.findVerifiedMemberByEmail(requestBody.getEmail());
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToLoginDto(member)), HttpStatus.OK);
     }
 
     @PostMapping("/signup")

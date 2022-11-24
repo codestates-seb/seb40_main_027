@@ -12,6 +12,8 @@ import org.mapstruct.Mapper;
 public interface MemberMapper {
     Member memberPostToMember(MemberDto.Post requestBody);
     Member memberPatchToMember(MemberDto.Patch requestBody);
+
+    MemberDto.LoginResponse memberToLoginDto(Member member);
 //    MemberDto.Response memberToMemberResponse(Member member);
 
     default MemberDto.PatchResponse memberToPatchResponse(Member member) {

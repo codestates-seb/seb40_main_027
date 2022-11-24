@@ -89,4 +89,10 @@ public class MemberDto {
         public LocalDateTime createdAt;
         public LocalDateTime updatedAt;
     }
+
+    @Getter
+    @Setter
+    public static class LoginResponse {
+        private String nickname;
+    }
 }
