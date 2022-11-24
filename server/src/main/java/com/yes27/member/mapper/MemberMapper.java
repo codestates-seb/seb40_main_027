@@ -37,7 +37,16 @@ public interface MemberMapper {
 
         return response;
     }
+    default MemberDto.Response2 memberToMemberResponse2(Member member) {
+        MemberDto.Response2 response2 = new MemberDto.Response2();
 
+        response2.setMemberId(member.getMemberId());
+        response2.setEmail(member.getEmail());
+        response2.setNickname(member.getNickname());
+//        response.setPassword(member.getPassword());
+
+        return response2;
+    }
     default List<MemberDto.StudySubset> studyTostudyResponse(List<Study> studies) {
         return studies
             .stream()

@@ -1,5 +1,8 @@
 package com.yes27.postscript.controller;
 
+import com.yes27.member.entity.Member;
+import com.yes27.member.mapper.MemberMapper;
+import com.yes27.member.service.MemberService;
 import com.yes27.postscript.dto.PostscriptDto;
 import com.yes27.postscript.entity.Postscript;
 import com.yes27.postscript.mapper.PostscriptMapper;
@@ -7,6 +10,7 @@ import com.yes27.postscript.repository.PostscriptRepository;
 import com.yes27.postscript.service.PostscriptService;
 import com.yes27.response.MultiResponseDto;
 import com.yes27.response.SingleResponseDto;
+import com.yes27.study.entity.Study;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,14 +30,22 @@ public class PostscriptController {
     private final PostscriptService postscriptService;
     private final PostscriptRepository postscriptRepository;
     private final PostscriptMapper postscriptMapper;
+    private final MemberService memberService;
+    private final MemberMapper memberMapper;
+
 
     public PostscriptController(PostscriptService postscriptService,
                                 PostscriptRepository postscriptRepository,
-                                PostscriptMapper postscriptMapper){
+                                PostscriptMapper postscriptMapper,
+                                MemberService memberService,
+                                MemberMapper memberMapper){
 
         this.postscriptService = postscriptService;
         this.postscriptRepository = postscriptRepository;
         this.postscriptMapper =postscriptMapper;
+        this.memberService = memberService;
+        this.memberMapper = memberMapper;
+
 
     }
 
@@ -41,28 +53,28 @@ public class PostscriptController {
     public ResponseEntity postPostscript(@Valid @RequestBody PostscriptDto.Post postscriptPostDto){
 
     Postscript postscript = postscriptService.createPostscript(
-            postscriptMapper.postscriptPostDtoToPostscript(postscriptPostDto));
+            postscriptMapper.postscriptPostDtoToPostscript(postscriptPostDto,memberService));
 
     return new ResponseEntity<>(
-            new SingleResponseDto<>(postscriptMapper.postscriptToPostscriptResponse(postscript)), HttpStatus.CREATED);
+            new SingleResponseDto<>(postscriptMapper.postscriptToPostscriptResponse2(postscript)), HttpStatus.CREATED);
     }
 
     @PatchMapping("/{postscript-Id}") //선택 조언, 후기 글 수정
-    public ResponseEntity patchPostscript(@PathVariable("postscript-Id") @Positive @NotNull long postscriptId,
+    public ResponseEntity patchPostscript(@PathVariable("postscript-Id") @Positive long postscriptId,
                                           @Valid @RequestBody PostscriptDto.Patch postscriptPatchDto) {
         postscriptPatchDto.setPostscriptId(postscriptId);
-        Postscript postscript = postscriptMapper.postscriptPatchDtoToPostscript(postscriptService, postscriptPatchDto);
+        Postscript postscript = postscriptMapper.postscriptPatchDtoToPostscript(postscriptService, postscriptPatchDto, memberService);
 
         Postscript updatedPostscript = postscriptService.updatePostscript(postscript);
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(postscriptMapper.postscriptToPostscriptResponse(updatedPostscript)), HttpStatus.OK);
+                new SingleResponseDto<>(postscriptMapper.postscriptToPostscriptResponse2(updatedPostscript)), HttpStatus.OK);
     }
 
     @GetMapping("/{postscript-Id}") //특정 조언,후기 조회
     public ResponseEntity getPostscript(@PathVariable("postscript-Id") @Positive long postscriptId){
 
-        PostscriptDto.PostscriptResponse response = postscriptMapper.postscriptToPostscriptResponse(postscriptService.findPostscript(postscriptId));
+        PostscriptDto.PostscriptResponse response = postscriptMapper.postscriptToPostscriptResponse(postscriptService.findPostscript(postscriptId), memberMapper);
 
         return new ResponseEntity(response, HttpStatus.OK);
     }
@@ -76,7 +88,7 @@ public class PostscriptController {
 
 
         return new ResponseEntity<>(new MultiResponseDto<>(
-                postscriptMapper.postscriptsToPostscriptResponseDtos(postscripts), pagePostscripts),HttpStatus.OK);
+                postscriptMapper.postscriptsToPostscriptResponseDtos(postscripts, memberMapper), pagePostscripts),HttpStatus.OK);
     }
 
 

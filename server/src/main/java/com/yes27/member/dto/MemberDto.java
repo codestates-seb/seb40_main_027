@@ -67,6 +67,15 @@ public class MemberDto {
 
     @Getter
     @Setter
+    public static class Response2{
+        private Long memberId;
+        private String email;
+        private String nickname;
+    }
+
+
+    @Getter
+    @Setter
     @Builder
     public static class StudySubset {
         public Long studyId;

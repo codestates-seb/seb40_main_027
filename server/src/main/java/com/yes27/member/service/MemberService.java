@@ -9,6 +9,7 @@ import com.yes27.member.repository.MemberRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -73,6 +74,13 @@ public class MemberService {
         Member findMember = optionalMember.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
         return findMember;
+    }
+
+    public Member getLoginMember() {
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<Member> member = memberRepository.findByEmail(principal.toString());
+        return member.get();
     }
 
     // 이메일로 멤버 찾음
