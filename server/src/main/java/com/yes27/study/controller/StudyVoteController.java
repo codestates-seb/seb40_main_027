@@ -13,20 +13,31 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/study")
 public class StudyVoteController {
     private final StudyVoteService studyVoteService;
     private final MemberService memberService;
 
-        @PostMapping("/{study-id}/vote")
-        public ResponseEntity voteMember(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId) {
+    @PostMapping("/{study-id}/vote")
+    public ResponseEntity voteMember(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId) {
+        Member member = findMemberByHeader(request);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        boolean res = false;
+
+        if (member != null) {
+            res = studyVoteService.addVote(member, studyId);
+        }
+
+        return res ?
+            new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+
 
     // http header 토큰으로 유저 찾는 메소드
     public Member findMemberByHeader(HttpServletRequest request) {

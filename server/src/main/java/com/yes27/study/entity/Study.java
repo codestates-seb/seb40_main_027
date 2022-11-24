@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -55,7 +54,7 @@ public class Study extends BaseEntity {
 
     // 태그, 조회수 및 추천수
     private String tagName;
-
+    
     @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
     Set<StudyVote> votes = new HashSet<>();
 }

@@ -28,8 +28,8 @@ public class StudyVote {
     @ManyToOne(fetch = FetchType.LAZY)
     private Study study;
 
-    public StudyVote(Member member, Study study) {
-        this.member = member;
+    public StudyVote(Study study, Member member) {
         this.study = study;
+        this.member = member;
     }
 }
