@@ -2,7 +2,6 @@ export const WHITE_BACKGROUND = '#FFFFFF';
 export const GREEN_MAIN = '#1DCA89';
 export const GREEN_SUB = '#A9DBBD';
 export const GREEN_BOOT_DETAIL_BORDER = '#09CF58';
-export const GREEN_TABLE_HEADER = '#A9DBBD';
 export const BLACK_TEXT_NORMAL = '#222222';
 export const BLACK_TEXT_TITLE = '#222222';
 export const PURPLE_REVIEW = '#B832F8';

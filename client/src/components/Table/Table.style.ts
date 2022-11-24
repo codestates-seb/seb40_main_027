@@ -7,7 +7,7 @@ export const TableWrap = styled.table`
   font-size: 20px;
   thead {
     font-weight: bold;
-    background-color: var(--greenTableHeader);
+    background-color: var(--greenSub);
     width: calc(100% / 6);
     th {
       border: 1px solid var(--grayTableBorder);
