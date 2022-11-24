@@ -26,12 +26,11 @@ export const useLogIn = (submitData: LogInType) => {
     .then((response) => {
       console.log(response);
       //Type 'string | undefined' is not assignable to type 'string'.
-      const access: string = response.headers.authorization!;
-      const refresh: string = response.headers.refresh || '';
-      // const refresh: string = response.headers.refresh as string;
+      const access = response.headers.authorization!;
+      const refresh = response.headers.refresh || '';
       localStorage.setItem('access', access);
       localStorage.setItem('refresh', refresh);
-      localStorage.getItem('access');
+      // console.log('access', access);
       // setLogState(!logState);
       // console.log(logState);
     })
