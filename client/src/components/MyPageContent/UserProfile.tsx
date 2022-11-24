@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useState } from 'react';
 import axios from 'axios';
+import Logout from '../Logout';
+import Withdrawal from '../Withdrawal';
 
 const MyProfileView = styled.div`
   //전체 길이
@@ -11,12 +13,14 @@ const MyProfileView = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 
   .user-info {
-    width: 100%;
+    width: 90%;
     display: flex;
     justify-content: center;
     flex-direction: column;
+    margin: 0 1rem 0 1rem;
   }
   @media screen and (max-width: 414px) {
     border: none;
@@ -29,7 +33,7 @@ const MyProfileView = styled.div`
     .user-info {
       width: 100vw;
       height: 20vh;
-      margin: 0;
+      margin: 0 1rem 0 0;
     }
   }
 `;
@@ -44,12 +48,12 @@ const ProfileUpdateButton = styled.button`
 const UserProfileUpdateBody = styled.div`
   //프로필 전체크기
   width: 100%;
-  height: 45vh;
+  height: 30vh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-  background-color: aquamarine;
+  /* background-color: aquamarine; */
   border: 1px solid gray;
 
   @media screen and (max-width: 414px) {
@@ -65,10 +69,10 @@ const PictureProfile = styled.span`
 
   display: flex;
   border: 1px solid black;
-  margin: 0% 0% 1% 10%;
+  margin: 0% 0% 1% 15%;
   @media screen and (max-width: 414px) {
     height: 100%;
-    margin: 0;
+    margin: 0 1rem 0 0;
   }
 `;
 
@@ -104,36 +108,58 @@ const InputProfileForm = styled.input`
 
 const UserInfoFormEmail = styled.span`
   background-color: var(--grayHeaderBorder);
-  display: inline;
-  width: 100%;
+  display: flex;
+  align-items: center;
+
   height: 2rem;
   border-radius: 10px;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
   @media screen and (max-width: 414px) {
   }
+`;
+
+const WithdrawArea = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
 `;
 
 interface IFormInput {
   nickname: String;
   email: String;
-  password: String;
+  password?: String;
+}
+
+interface RespondsBodyUser {
+  data: {
+    email: String;
+    nickname: String;
+  };
 }
 
 const UserProfile = () => {
-  const { register, setValue, handleSubmit } = useForm<IFormInput>();
+  const { register, handleSubmit } = useForm<IFormInput>();
   const [updateProfile, setUpdateProfile] = useState<boolean>(false);
-  console.log(setValue);
+  const [userUpdate, setUserUpdate] = useState<RespondsBodyUser | undefined>();
 
-  const MyProfileSubmit: SubmitHandler<IFormInput> = (data) => {
+  const MyProfileSubmit: SubmitHandler<IFormInput> = (data: any) => {
     console.log(data);
     axios.defaults.withCredentials = true;
     axios({
-      method: 'Patch',
-      url: '/users/1',
-      data: data,
-      headers: {},
+      method: 'patch',
+      url: '/users',
+      data: { data },
+      headers: {
+        // 'content-type': 'application/json',
+        Authorization:
+          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoibGFsYUBnbWFpbC5jb20iLCJzdWIiOiJsYWxhQGdtYWlsLmNvbSIsImlhdCI6MTY2OTE4MTg3NywiZXhwIjoxNjY5MjI1MDc3fQ.YZIFOGbutYKeFh3UKwOcFwfuVu7Azj6waCoh5D_2JmQ84oSdZ7YI3ODtZvHP2pMTydSp9dFK4voAu4moqWKbLw',
+      },
     })
       .then((res) => {
         console.log(res);
+        let datatype = res.data;
+        console.log(datatype);
+        setUserUpdate(datatype);
         setUpdateProfile(!updateProfile);
       })
       .catch((err) => console.log('err'));
@@ -143,14 +169,17 @@ const UserProfile = () => {
     setUpdateProfile(!updateProfile);
   };
 
+  //{userUpdate.data.nickname}
+  //{userUpdate.data.email}
+
+  //밑에 보이는 칸에 기존로그인 정보가 있으면 그걸 넣고 만약 변경시 새로운 데이터가 들어가는 조건문을 로그인이 구현시 짜줄예정
   return (
     <MyProfileView>
-      <ProfileUpdateButton onClick={onClickUpdate}>
-        <Icon icon="ph:gear-six-duotone" width="25" height="25" />
-      </ProfileUpdateButton>
-
       {updateProfile ? (
         <UserProfileUpdateBody>
+          <ProfileUpdateButton onClick={onClickUpdate}>
+            <Icon icon="ph:gear-six-duotone" width="25" height="25" />
+          </ProfileUpdateButton>
           <FormInputProFile onSubmit={handleSubmit(MyProfileSubmit)}>
             <label htmlFor="email">email</label>
             <InputProfileForm {...register('email')} />
@@ -164,14 +193,20 @@ const UserProfile = () => {
         </UserProfileUpdateBody>
       ) : (
         <UserProfileUpdateBody>
+          <ProfileUpdateButton onClick={onClickUpdate}>
+            <Icon icon="ph:gear-six-duotone" width="25" height="25" />
+          </ProfileUpdateButton>
           <PictureProfile></PictureProfile>
           <div className="user-info">
-            nickname
-            <UserInfoFormEmail></UserInfoFormEmail>
-            email<UserInfoFormEmail></UserInfoFormEmail>
+            email
+            <UserInfoFormEmail>{userUpdate ? userUpdate.data.email : 'a'}</UserInfoFormEmail>
+            nickname<UserInfoFormEmail>{userUpdate ? userUpdate.data.nickname : 'a'}</UserInfoFormEmail>
           </div>
         </UserProfileUpdateBody>
       )}
+      <WithdrawArea>
+        <Withdrawal />
+      </WithdrawArea>
     </MyProfileView>
   );
 };
