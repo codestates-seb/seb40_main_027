@@ -5,12 +5,17 @@ export const sideBarFloading = atom({
   default: false,
 });
 
-export const YesContent = atom({
-  key: 'YesContent',
+export const yesContent = atom({
+  key: 'yesContent',
   default: 0,
 });
 
-export const NoContent = atom({
-  key: 'NoContent',
+export const noContent = atom({
+  key: 'noContent',
   default: 0,
+});
+
+export const isLogin = atom({
+  key: 'isLogin',
+  default: false,
 });
