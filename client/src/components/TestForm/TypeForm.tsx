@@ -2,15 +2,15 @@ import { useState } from 'react';
 
 import EndForm from './EndForm';
 import { useRecoilState } from 'recoil';
-import { YesContent, NoContent } from '../../atoms/index';
+import { yesContent, noContent } from '../../atoms/index';
 //이미지 바꿀것이라 연습용사진입니다.
 import Pra1 from '../../assets/image/pra1.png';
 import * as S from './TypeForm.style';
 
 const TypeForm = () => {
   const [idNumber, setIdNumber] = useState<number>(0);
-  const [isYes, setIsYes] = useRecoilState<number>(YesContent);
-  const [isNo, setIsNo] = useRecoilState<number>(NoContent);
+  const [isYes, setIsYes] = useRecoilState<number>(yesContent);
+  const [isNo, setIsNo] = useRecoilState<number>(noContent);
 
   const QuestionList = [
     '나는 홈페이지 또는 어플을 보면 아이콘 배치 또는 흐름에 대해서 불편한 점을 느낀 적이 많고, 고치고 싶어한 적이 있다',

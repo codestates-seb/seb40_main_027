@@ -36,7 +36,7 @@ const HeaderContent = styled.header`
   }
 `;
 
-const Header = () => {
+const MainHeader = () => {
   const [isLogin, setIsLogin] = useState(true);
 
   const clickLogin = () => {
@@ -62,4 +62,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default MainHeader;
