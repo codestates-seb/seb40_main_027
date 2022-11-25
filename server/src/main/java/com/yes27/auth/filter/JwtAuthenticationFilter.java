@@ -1,9 +1,12 @@
 package com.yes27.auth.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.yes27.auth.dto.LoginDto;
+import com.yes27.auth.dto.NickNameDto;
 import com.yes27.auth.jwt.JwtTokenizer;
 import com.yes27.member.entity.Member;
+import com.yes27.member.repository.MemberRepository;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
@@ -22,10 +25,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenizer jwtTokenizer;
+    private final MemberRepository memberRepository;
 
-    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtTokenizer jwtTokenizer) {
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtTokenizer jwtTokenizer,
+        MemberRepository memberRepository) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenizer = jwtTokenizer;
+        this.memberRepository = memberRepository;
     }
 
     // (3)
@@ -57,6 +63,22 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.setHeader("Authorization", "Bearer " + accessToken);  // (4-4)
         response.setHeader("Refresh", refreshToken);                   // (4-5)
 
+        // 2022 11 25 로그인시 Response body에 닉네임 추가
+        Member findMember = memberRepository.findByEmail(member.getEmail()).orElseThrow();
+        NickNameDto nickNameDto = new NickNameDto();
+        String ninckname = findMember.getNickname();
+        nickNameDto.setNickname(ninckname);
+
+        String json = new Gson().toJson(nickNameDto);
+
+        response.getWriter().write(json);
+
+//        System.out.println("t3u2tu3hdhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+//        System.out.println("#####################################" + authResult.getDetails() + "-feewfewfwefewfewfewefw");
+//        System.out.println("#####################################" + ((Member) authResult.getPrincipal()).getNickname() + "-feewfewfwefewfewfewefw");
+//        System.out.println(member.getNickname());
+//        response.sendRedirect("http://localhost:8080/users/test01");
+
         this.getSuccessHandler().onAuthenticationSuccess(request, response, authResult);
     }
 
@@ -65,6 +87,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         Map<String, Object> claims = new HashMap<>();
         claims.put("email", member.getEmail());
         claims.put("roles", member.getRoles());
+//        claims.put("nickname", member.getNickname());
 
         String subject = member.getEmail();
         Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes());
