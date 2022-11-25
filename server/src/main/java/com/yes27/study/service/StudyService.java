@@ -2,6 +2,8 @@ package com.yes27.study.service;
 
 import com.yes27.exception.BusinessLogicException;
 import com.yes27.exception.ExceptionCode;
+import com.yes27.member.entity.Member;
+import com.yes27.study.dto.StudyDto;
 import com.yes27.study.entity.Study;
 import com.yes27.study.repository.StudyRepository;
 import java.util.Optional;
@@ -18,40 +20,48 @@ public class StudyService {
         this.studyRepository = studyRepository;
     }
 
-    public Study createStudy(Study study) {
+    public Study createStudy(Member member, Study study) {
+        study.setMember(member);
+        member.addStudy(study);
+
         return studyRepository.save(study);
     }
 
-    public Study updateStudy(Study study) {
-        Study findStudy = findVerifiedStudy(study.getStudyId());
+    public Study updateStudy(Member member, StudyDto.Patch patchDto) {
+        Study study = findVerifiedStudy(patchDto.getStudyId());
+        if (member.getMemberId() != study.getMember().getMemberId()) {
+            throw new BusinessLogicException(ExceptionCode.PERMISSION_ERROR);
+        }
 
-        Optional.ofNullable(study.getStudyTitle())
-            .ifPresent(title -> findStudy.setStudyTitle(title));
-        Optional.ofNullable(study.getStudyContent())
-            .ifPresent(content -> findStudy.setStudyContent(content));
+        Optional.ofNullable(patchDto.getStudyTitle()).ifPresent(title -> study.setStudyTitle(title));
+        Optional.ofNullable(patchDto.getStudyContent()).ifPresent(content -> study.setStudyContent(content));
 
-        return studyRepository.save(findStudy);
+        return studyRepository.save(study);
     }
 
     public Study findStudy(Long studyId) {
+
         return findVerifiedStudy(studyId);
     }
 
     public Page<Study> findStudies(int page, int size) {
-        return studyRepository.findAll(PageRequest.of(page, size,
-            Sort.by("studyId").descending()));
+
+        return studyRepository.findAll(PageRequest.of(page, size, Sort.by("studyId").descending()));
     }
 
-    public void deleteStudy(Long studyId) {
+    public void deleteStudy(Member member, Long studyId) {
         Study findStudy = findVerifiedStudy(studyId);
+        if (member.getMemberId() != studyId) {
+            throw new BusinessLogicException(ExceptionCode.PERMISSION_ERROR);
+        }
+
         studyRepository.delete(findStudy);
     }
 
     public Study findVerifiedStudy(Long studyId) {
         Optional<Study> optionalStudy = studyRepository.findById(studyId);
-        Study findStudy =
-            optionalStudy.orElseThrow(() ->
-                new BusinessLogicException(ExceptionCode.STUDY_NOT_FOUND));
+        Study findStudy = optionalStudy.orElseThrow(() -> new BusinessLogicException(ExceptionCode.STUDY_NOT_FOUND));
+
         return findStudy;
     }
 }

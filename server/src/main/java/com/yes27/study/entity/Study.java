@@ -4,7 +4,9 @@ import com.yes27.BaseEntity;
 import com.yes27.member.entity.Member;
 import com.yes27.study_comment.entity.StudyComment;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,8 +30,6 @@ public class Study extends BaseEntity {
 
     private String studyTitle;
     private String studyContent;
-    private int view = 0;
-    private int vote = 0;
 
     @OneToMany(mappedBy = "study", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<StudyComment> studyComments = new ArrayList<>();
@@ -52,6 +52,14 @@ public class Study extends BaseEntity {
         }
     }
 
-    @OneToMany(mappedBy = "study", cascade = CascadeType.PERSIST)
-    private List<StudyTag> tags = new ArrayList<>();
+    // 태그, 조회수 및 추천수
+    private String tagName;
+
+    @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
+    Set<StudyVote> votes = new HashSet<>();
+
+    @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
+    Set<StudyView> views = new HashSet<>();
+
+    private int view = 0;
 }

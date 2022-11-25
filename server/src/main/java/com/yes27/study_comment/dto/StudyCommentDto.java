@@ -10,9 +10,8 @@ public class StudyCommentDto {
     @Getter
     @Setter
     public static class Post {
-        private String comment;
+        private String studyComment;
         private Long studyId;
-        private Long memberId;
     }
 
     @Getter
@@ -21,7 +20,7 @@ public class StudyCommentDto {
         private Long studyCommentId;
 
         @NotBlank
-        private String comment;
+        private String studyComment;
     }
 
     @Getter
@@ -29,16 +28,13 @@ public class StudyCommentDto {
     public static class Response {
         private Long studyCommentId;
 
-        private String comment;
-
-        private int vote;
-        private int view;
+        private String studyComment;
 
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
 
-        public StudySubset study;
-        public MemberSubset member;
+//        public StudySubset study;
+//        public MemberSubset member;
     }
     
     @Getter 
@@ -47,9 +43,8 @@ public class StudyCommentDto {
     public static class StudySubset {
         public Long studyId;
         public String studyTitle; 
-        public String studyContent; 
-        public int vote;
-        public int view;
+        public String studyContent;
+        
         public LocalDateTime createdAt;
         public LocalDateTime updatedAt;
     }

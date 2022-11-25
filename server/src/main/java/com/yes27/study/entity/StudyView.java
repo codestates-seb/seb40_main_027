@@ -1,34 +1,35 @@
 package com.yes27.study.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.yes27.postscript.entity.Postscript;
-import javax.persistence.Column;
+import com.yes27.member.entity.Member;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Table
 @Entity
 @NoArgsConstructor
-public class StudyTag {
+public class StudyView {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long tagId;
+    private Long studyViewId;
 
-    @Column(nullable = false)
-    private String tagName;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Member member;
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "STUDY_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Study study;
 
-    public void addStudy(Study study) {this.study = study; }
+    public StudyView(Study study, Member member) {
+        this.study = study;
+        this.member = member;
+    }
 }
