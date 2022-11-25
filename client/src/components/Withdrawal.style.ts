@@ -6,8 +6,8 @@ export const WithdrawalButton = styled(StyledBorderButton)`
   height: 36px;
   border-radius: 9px;
   font-size: 20px;
-  color: red;
-  border: 1px solid red;
+  color: var(--redBootDetailHeart);
+  border: 1px solid var(--redBootDetailHeart);
 
   @media screen and (max-width: 414px) {
     width: 50px;
