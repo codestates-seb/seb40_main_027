@@ -17,7 +17,7 @@ public interface StudyCommentMapper {
 
 //        member.setMemberId(requestBody.getMemberId());
         study.setStudyId(requestBody.getStudyId());
-//        studyComment.setComment(requestBody.getComment());
+        studyComment.setStudyComment(requestBody.getStudyComment());
 
         return studyComment;
     }

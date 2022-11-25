@@ -33,8 +33,8 @@ public class StudyCommentDto {
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
 
-        public StudySubset study;
-        public MemberSubset member;
+//        public StudySubset study;
+//        public MemberSubset member;
     }
     
     @Getter 

@@ -47,13 +47,12 @@ public class StudyCommentController {
 
     @PostMapping("/{study-id}/comment")
     public ResponseEntity postComment(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId, @Valid @RequestBody StudyCommentDto.Post requestBody) {
-
-//        Member member = memberService.findVerifiedMember(requestBody.getMemberId());
+        Member member = findMemberByHeader(request);
         Study findStudy = studyService.findVerifiedStudy(studyId);
 
         requestBody.setStudyId(studyId);
         StudyComment studyComment = mapper.commentPostToComment(requestBody);
-//        studyComment.setMember(member);
+        studyComment.setMember(member);
         studyComment.setStudy(findStudy);
 
         StudyComment createdComment = studyCommentService.createComment(studyComment);
@@ -63,21 +62,26 @@ public class StudyCommentController {
 
     @PatchMapping("/{study-id}/comment/{comment-id}")
     public ResponseEntity patchComment(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId, @PathVariable("comment-id") @Positive Long studyCommentId, @Valid @RequestBody StudyCommentDto.Patch requestBody) {
-
+        Member member = findMemberByHeader(request);
         Study findStudy = studyService.findVerifiedStudy(studyId);
+        StudyComment studyComment = studyCommentService.findVerifiedComment(studyCommentId);
+
+        if (member.getMemberId() != studyComment.getMember().getMemberId()) {
+            throw new BusinessLogicException(ExceptionCode.PERMISSION_ERROR);
+        }
 
         requestBody.setStudyCommentId(studyCommentId);
         StudyComment findStudyComment = mapper.commentPatchToComment(requestBody);
         findStudyComment.setStudy(findStudy);
 
-        StudyComment studyComment = studyCommentService.updateComment(findStudyComment);
+        StudyComment updatedStudyComment = studyCommentService.updateComment(findStudyComment);
 
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.commentToCommentResponse(studyComment)), HttpStatus.OK);
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.commentToCommentResponse(updatedStudyComment)), HttpStatus.OK);
     }
 
     @GetMapping("/{study-id}/comment/{comment-id}")
     public ResponseEntity getComment(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId, @PathVariable("comment-id") @Positive Long studyCommentId) {
-
+        Member member = findMemberByHeader(request);
         StudyComment studyComment = studyCommentService.findComment(studyCommentId);
 
         return new ResponseEntity<>(mapper.commentToCommentResponse(studyComment), HttpStatus.OK);
@@ -85,6 +89,13 @@ public class StudyCommentController {
 
     @DeleteMapping("/{study-id}/comment/{comment-id}")
     public ResponseEntity deleteComment(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId, @PathVariable("comment-id") @Positive Long studyCommentId) {
+        Member member = findMemberByHeader(request);
+        StudyComment studyComment = studyCommentService.findVerifiedComment(studyCommentId);
+
+        if (member.getMemberId() != studyComment.getMember().getMemberId()) {
+            throw new BusinessLogicException(ExceptionCode.PERMISSION_ERROR);
+        }
+
         studyCommentService.deleteComment(studyCommentId);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

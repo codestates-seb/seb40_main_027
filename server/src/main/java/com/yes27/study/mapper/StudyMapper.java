@@ -68,7 +68,7 @@ public interface StudyMapper {
         studyCommentSubset.comment( studyComment.getStudyComment() );
         studyCommentSubset.createdAt( studyComment.getCreatedAt() );
         studyCommentSubset.updatedAt( studyComment.getUpdatedAt() );
-        studyCommentSubset.member( memberToMemberSubset( studyComment.getMember() ) );
+//        studyCommentSubset.member( memberToMemberSubset( studyComment.getMember() ) );
         return studyCommentSubset.build();
     }
     default List<StudyDto.StudyCommentSubset> studyCommentListToStudyCommentSubsetList(List<StudyComment> list) {

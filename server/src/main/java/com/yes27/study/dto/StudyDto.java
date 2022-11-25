@@ -80,7 +80,7 @@ public class StudyDto {
         public String comment;
         public LocalDateTime createdAt;
         public LocalDateTime updatedAt;
-        public MemberSubset member;
+//        public MemberSubset member;
     }
 
     @Getter
