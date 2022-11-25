@@ -1,18 +1,14 @@
 package com.yes27.member.entity;
 
+import com.yes27.mentoring.entity.Mentor;
+import com.yes27.mentoringLike.entity.MentoringVote;
+import com.yes27.mentoringcomment.entity.Comment;
 import com.yes27.study.entity.Study;
 import com.yes27.study_comment.entity.StudyComment;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -45,8 +41,16 @@ public class Member {
         }
     }
 
+    @OneToMany(mappedBy = "member", cascade ={CascadeType.PERSIST, CascadeType.REMOVE} )
+    private List<Mentor> mentors = new ArrayList<>();
     @OneToMany(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<StudyComment> studyComments = new ArrayList<>();
+
+    @OneToOne(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private MentoringVote mentoringVote;
+
+    @OneToMany(mappedBy = "member", cascade ={CascadeType.PERSIST, CascadeType.REMOVE} )
+    private List<Comment> mentoringComment = new ArrayList<>();
 
     public void addStudyComment(StudyComment studyComment) {
         this.studyComments.add(studyComment);
