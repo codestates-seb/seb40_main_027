@@ -29,8 +29,6 @@ const ListContent = styled.div`
       display: none;
     }
     .content-list {
-      /* background-color: red;
-      border: 1px solid black; */
       overflow: hidden;
     }
   }
