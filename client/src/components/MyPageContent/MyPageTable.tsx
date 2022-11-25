@@ -97,7 +97,7 @@ const MyPageTable = () => {
                     </S.LikeButton>
                   </span>
                 ) : (
-                  <Icon icon="ic:round-star-border" color="#fbb3b3" width="40" height="40" />
+                  <Icon icon="ic:round-star-border" color="#fbb3b3" width="30" height="30" />
                 )}
               </td>
             </tr>
