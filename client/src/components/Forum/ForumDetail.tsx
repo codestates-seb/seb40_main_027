@@ -85,7 +85,7 @@ const ForumDetail = () => {
         </S.LikeContainer>
 
         <S.CommentsContainer>
-          {post.comment.map((comment) => (
+          {/* {post.comment.map((comment) => (
             <S.CommentContainer key={comment.postscriptCommentId}>
               <S.CommentInfoContainer>
                 <ForumWrittenInfo position="left" author={comment.user.nickname} createdAt={comment.createdAt} />
@@ -93,7 +93,7 @@ const ForumDetail = () => {
               </S.CommentInfoContainer>
               <div>{comment.postscriptComment}</div>
             </S.CommentContainer>
-          ))}
+          ))} */}
 
           {/* <S.NewCommentContainer>
             <div>
