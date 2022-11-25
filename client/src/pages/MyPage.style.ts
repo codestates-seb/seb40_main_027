@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const PageSize = styled.div`
-  /* overflow-y: auto; */ // 나중에 재수정할 수 도 있을 것 같아서 일단 주석 처리만 진행햇어요.
+  overflow-y: auto; // 나중에 재수정할 수 도 있을 것 같아서 일단 주석 처리만 진행햇어요.
 `;
 
 export const MyPageContent = styled.div`
@@ -50,46 +50,9 @@ export const MyPageContent = styled.div`
     display: flex;
     border: 1px solid var(--grayContentsBorder);
   }
-  .profile {
-    /* width: 25%;
-    max-height: 1080px;
-    border-right: 1px solid var(--grayContentsBorder);
-    display: flex; */
-    width: 100%;
-  }
-  .user-profile {
-    /* height: 40%;
-    border: 1px solid var(--grayContentsBorder);
-    margin: 1rem 1rem 0rem 1rem;
-    width: 100%; */
-  }
+
   .my-page-view {
     width: 100%;
-  }
-  .icon-gear {
-    /* display: flex;
-    flex-direction: row-reverse; */
-  }
-  .user-picture {
-    /* display: flex;
-    width: 100%;
-    height: 60%;
-    background-color: red; */
-  }
-  .user-info {
-    /* display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: center;
-    flex-direction: column;
-    height: 30%;
-    align-items: center; */
-  }
-  .user-nickname {
-    /* border: 1px solid var(--grayContentsBorder);
-    border-radius: 20px;
-    width: 70%;
-    margin-top: 0.5rem; */
   }
 
   @media screen and (max-width: 414px) {
@@ -124,30 +87,7 @@ export const MyPageContent = styled.div`
       justify-content: center;
       border: none;
     }
-    /* .profile {
-      width: 100vw;
-      border: none;
-      display: flex;
-      justify-content: center;
-      z-index: 1;
-    } */
-    /* .user-profile {
-      width: 100vw;
-      display: flex;
-      flex-direction: row;
-      height: 7rem;
-      border-radius: 20px;
-      margin: 1rem;
-    } */
-    /* .user-picture {
-      height: 100%;
-    }
-    .user-info {
-      height: 100%;
-      width: 100%;
-    }
-    .my-page-view {
-    } */
+
     .tab-mobile-bar {
       display: flex;
       background-color: var(--greenMain);
@@ -162,5 +102,5 @@ export const ButtonTab = styled.button`
   height: 3rem;
   width: 100%;
   border-radius: 10px 10px 0px 0px;
-  background-color: ${(props) => (props.className === 'tab-button' ? 'var(--greenMain)' : '#a9dbbd')};
+  background-color: ${(props) => (props.className === 'tab-button' ? 'var(--greenMain)' : 'var(--greenSub)')};
 `;
