@@ -2,10 +2,7 @@ import icon from '../assets/image/icon.png';
 import { useState } from 'react';
 import MyPageSchedule from '../components/MyPageContent/MyPageSchedule';
 import MyPageList from '../components/MyPageContent/MyPageList';
-import PageHeaderSide from '../components/Header/PageHeaderSide';
-
 import * as S from './MyPage.style';
-
 import UserProfile from '../components/MyPageContent/UserProfile';
 
 const MyPage = () => {
@@ -14,7 +11,6 @@ const MyPage = () => {
   const TabHandler = (id: number) => {
     setCurrentTab(id);
   };
-  console.log(currentTab);
 
   const TabMenu = [
     { id: 0, text: '찜한일정' },
@@ -22,9 +18,6 @@ const MyPage = () => {
   ];
   return (
     <S.PageSize>
-      {/* <PageHeader /> */}
-      <PageHeaderSide />
-      {/* <SideBar /> */}
       <S.MyPageContent>
         <div className="tab-menu">
           <span className="page-name">My Page</span>
