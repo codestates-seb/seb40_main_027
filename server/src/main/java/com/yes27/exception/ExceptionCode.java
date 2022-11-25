@@ -17,6 +17,8 @@ public enum ExceptionCode {
     MENTOR_NOT_FOUND(404, "Mentor not found"),
     MENTOR_EXISTS(409, "Mentor exists"),
 
+    ACCESS_DENIED_MEMBER(403, "Access Denied Member"),
+
     TOKEN_NOT_FOUND(404, "Token not found"),
 
     EMAIL_EXISTS(409, "Email exists"),

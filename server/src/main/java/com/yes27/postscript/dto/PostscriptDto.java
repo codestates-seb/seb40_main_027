@@ -65,13 +65,4 @@ public class PostscriptDto {
         private Long postscriptId;
 
     }
-
-    @Getter
-    @Setter
-    @Builder
-    public static class MemberSubset {
-        public Long memberId;
-        public String email;
-        public String nickname;
-    }
 }
