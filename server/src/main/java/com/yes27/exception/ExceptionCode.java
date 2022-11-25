@@ -24,7 +24,9 @@ public enum ExceptionCode {
     EMAIL_EXISTS(409, "Email exists"),
 
     PERMISSION_ERROR(410, "Permission does not exist"),
-    VOTE_ERROR(410, "vote Should have to be 0 or 1");
+    VOTE_ERROR(410, "vote Should have to be 0 or 1"),
+
+    EMAIL_NOT_EXISTS(500, "Email not exists");
 
     @Getter
     private int status;
