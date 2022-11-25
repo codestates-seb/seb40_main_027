@@ -9,6 +9,7 @@ import com.yes27.member.repository.MemberRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -77,7 +78,6 @@ public class MemberService {
     }
 
     public Member getLoginMember() {
-
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<Member> member = memberRepository.findByEmail(principal.toString());
         return member.get();
