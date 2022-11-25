@@ -3,6 +3,7 @@ package com.yes27.mentoringcomment.service;
 
 import com.yes27.exception.BusinessLogicException;
 import com.yes27.exception.ExceptionCode;
+import com.yes27.member.entity.Member;
 import com.yes27.mentoring.entity.Mentor;
 import com.yes27.mentoring.service.MentorService;
 import com.yes27.mentoringcomment.entity.Comment;
@@ -23,17 +24,19 @@ public class CommentService {
         this.mentorService = mentorService;
     }
 
-    public Comment create(Long mentorId, Comment comment){
+    public Comment create(Long mentorId, Comment comment, Member meber){
         //mentor 게시판이 있는지 확인
        Mentor mentor =  verifyMentor(mentorId);
        comment.setMentor(mentor);
+       comment.setMember(meber);
         return commentRespository.save(comment);
     }
 
-    public Comment update(Long mentorId, Comment comment, Long commentId){
+    public Comment update(Long mentorId, Comment comment, Long commentId, Member member){
         verifyMentor(mentorId);
-        Comment findComment = findVerifiedComment(commentId);
-        findComment.setCommentContent(comment.getCommentContent());
+        Comment findComment = findVerifiedMemberComment(commentId,member);
+//        Comment findComment = findVerifiedComment(commentId);
+        findComment.setMentoringComment(comment.getMentoringComment());
 //        findComment.setUpdatedAt(LocalDateTime.now());
 
         return commentRespository.save(findComment);
@@ -43,9 +46,18 @@ public class CommentService {
         return findVerifiedComment(commentId);
     }
 
+    private Comment findVerifiedMemberComment(Long commentId, Member member) {
+        Optional<Comment> optionalComment = commentRespository.findByCommentIdAndMember(commentId, member);
+        if(optionalComment.isPresent()){
+            return optionalComment.get();
+        }else {
+            throw new BusinessLogicException(ExceptionCode.MENTOR_NOT_FOUND);
+        }
 
-    public void delete(long commentId){
-        Comment findComment = findVerifiedComment(commentId);
+    }
+
+    public void delete(long commentId, Member member){
+        Comment findComment = findVerifiedMemberComment(commentId,member);
 
         commentRespository.delete(findComment);
     }
