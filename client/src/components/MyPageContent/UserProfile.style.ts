@@ -47,7 +47,7 @@ export const UserProfileUpdateBody = styled.div`
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-  border: 1px solid gray;
+  border: 1px solid var(--grayHeaderBorder);
 
   @media screen and (max-width: 414px) {
     justify-content: center;
@@ -60,7 +60,7 @@ export const PictureProfile = styled.span`
   height: 20vh;
   width: 70%;
   display: flex;
-  border: 1px solid black;
+  border: 1px solid var(--blackTextNormal);
   margin: 0% 0% 1% 15%;
   @media screen and (max-width: 414px) {
     height: 100%;
@@ -102,7 +102,6 @@ export const UserInfoFormEmail = styled.span`
   background-color: var(--grayHeaderBorder);
   display: flex;
   align-items: center;
-
   height: 2rem;
   border-radius: 10px;
   margin-bottom: 1rem;
