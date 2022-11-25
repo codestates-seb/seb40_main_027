@@ -17,6 +17,8 @@ public interface MentorMapper {
     Mentor mentorPatchDtoToMentor(MentorDto.Patch mentorPatchDto);
     MentorDto.Response mentorToMentorResponseDto(Mentor mentor);
 
+    MentorDto.MentoringResponse mentorToMentoringResponseDto(Mentor mentor);
+
     List<MentorDto.Response> mentorsToMentorResponseDtos(List<Mentor> mentors);
 
     //게시판에 대한 댓글
@@ -25,7 +27,7 @@ public interface MentorMapper {
                 .map(mentoringComment -> CommentDto.Response
                         .builder()
                         .commentId(mentoringComment.getCommentId())
-                        .commentContent(mentoringComment.getCommentContent())
+                        .mentoringComment(mentoringComment.getMentoringComment())
                         .createdAt(mentoringComment.getCreatedAt())
                         .updatedAt(mentoringComment.getUpdatedAt())
                         .build())
@@ -43,6 +45,7 @@ public interface MentorMapper {
         mentorsResponse.setViewCount(mentoring.getViewCount());
         mentorsResponse.setCreatedAt(mentoring.getCreatedAt());
         mentorsResponse.setUpdatedAt(mentoring.getUpdatedAt());
+        mentorsResponse.setTotalVotes(mentoring.getTotalVotes());
         mentorsResponse.setComments(mentoringToMentoringCommentResponse(comments));
         return mentorsResponse;
     }

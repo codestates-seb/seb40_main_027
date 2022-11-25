@@ -3,8 +3,11 @@ package com.yes27.mentoring.service;
 
 import com.yes27.exception.BusinessLogicException;
 import com.yes27.exception.ExceptionCode;
+import com.yes27.member.entity.Member;
 import com.yes27.mentoring.entity.Mentor;
 import com.yes27.mentoring.repository.MentorRepository;
+import com.yes27.mentoringLike.repository.MentoringLikeRepository;
+import com.yes27.mentoringLike.service.MentoringVoteService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -16,37 +19,79 @@ import java.util.Optional;
 public class MentorService {
     private final MentorRepository mentorRepository;
 
+   private final MentoringLikeRepository mentoringLikeRepository;
 
-    public MentorService(MentorRepository mentorRepository) {
+    private final MentoringVoteService mentoringVoteService;
+
+
+
+    public MentorService(MentorRepository mentorRepository, MentoringLikeRepository mentoringLikeRepository, MentoringVoteService mentoringVoteService) {
         this.mentorRepository = mentorRepository;
+        this.mentoringLikeRepository = mentoringLikeRepository;
+        this.mentoringVoteService = mentoringVoteService;
     }
 
-    public Mentor create(Mentor mentor){
+
+
+    public Mentor create(Mentor mentor, Member member){
         mentor.setMentoringId(mentor.getMentoringId());
         mentor.setViewCount(0);
-
+        mentor.setMember(member);
 
         return mentorRepository.save(mentor);
     }
 
 
-    public Mentor update(Long mentoringId, Mentor mentor){
-        Mentor findMentor = findVerifiedMentor(mentoringId);
-        findMentor.setMentoringTitle(mentor.getMentoringTitle());
-        findMentor.setMentoringContent(mentor.getMentoringContent());
-//        findMentor.setUpdatedAt(LocalDateTime.now());
+
+    public Mentor update(Long mentoringId, Mentor mentor, Member member){
+        Mentor findMentor = findVerifiedMentorMember(mentoringId, member);
+        Optional.ofNullable(mentor.getMentoringTitle())
+                .ifPresent(title -> findMentor.setMentoringTitle(title));
+        Optional.ofNullable(mentor.getMentoringContent())
+                .ifPresent(content -> findMentor.setMentoringContent(content));
+        Optional.ofNullable(mentor.getTagName())
+                .ifPresent(tag -> findMentor.setTagName(tag));
         return mentorRepository.save(findMentor);
+
+    }
+
+    public Mentor comletionTag(Long mentoringId, Member member){
+        Mentor findMentor = findVerifiedMentorMember(mentoringId, member);
+        findMentor.setTagName("모집 완료");
+        return mentorRepository.save(findMentor);
+    }
+
+    public Mentor findVerifiedMentorMember(Long mentoringId, Member member) {
+        Optional<Mentor> optionalMentor = mentorRepository.findByMentoringIdAndMember(mentoringId, member);
+        if(optionalMentor.isPresent()){
+            return optionalMentor.get();
+        }else {
+            throw new BusinessLogicException(ExceptionCode.MENTOR_NOT_FOUND);
+        }
 
     }
 
     public Page<Mentor> findMentors(int page, int size){
         return mentorRepository.findAll(PageRequest.of(page,size, Sort.by("mentoringId").descending()));
+
+    }
+
+    public Page<Mentor> findMentors(int page, int size, String sort){
+        return mentorRepository.findAll(PageRequest.of(page,size, Sort.by(sort).descending()));
+
     }
 
     public Mentor findMentor(Long mentoringId){
         Mentor findMentor = findVerifiedMentor((mentoringId));
         findMentor.setViewCount(findMentor.getViewCount() + 1);
+        findMentor.setTotalVotes(findTotle(findMentor));
         return mentorRepository.save(findMentor);
+    }
+
+    //좋아요 수
+    private int findTotle(Mentor mentor) {
+        int totalvotes = mentoringLikeRepository.findMax(mentor);
+        return totalvotes;
     }
 
     public Mentor findVerifiedMentor(Long mentoringId) {
@@ -58,8 +103,10 @@ public class MentorService {
         }
     }
 
-    public void delete(Long mentoringId){
-        Mentor mentor = findVerifiedMentor(mentoringId);
+
+
+    public void delete(Long mentoringId, Member member){
+        Mentor mentor = findVerifiedMentorMember(mentoringId, member);
         mentorRepository.delete(mentor);
     }
 

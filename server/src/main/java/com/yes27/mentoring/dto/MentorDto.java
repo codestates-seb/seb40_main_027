@@ -1,5 +1,6 @@
 package com.yes27.mentoring.dto;
 
+import com.yes27.mentoringLike.entity.MentoringVote;
 import com.yes27.mentoringcomment.dto.CommentDto;
 import lombok.*;
 
@@ -18,6 +19,9 @@ public class MentorDto {
 
         @NotBlank
         private String mentoringContent;
+
+        @NotBlank
+        private String tagName;
     }
 
     @Getter
@@ -41,6 +45,16 @@ public class MentorDto {
         private int viewCount;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
+        private int totalVotes;
+        private String tagName;
+    }
+
+    @Builder
+    @Getter
+    @AllArgsConstructor
+    public static class MentoringResponse{
+
+        private Long mentoringId;
     }
 
     @AllArgsConstructor
@@ -55,6 +69,10 @@ public class MentorDto {
         private int viewCount;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
+        private String tagName;
+        private int totalVotes;
         private List<CommentDto.Response> comments;
+
+
     }
 }

@@ -15,7 +15,7 @@ public class CommentDto {
     public static class Post{
 
         @NotBlank
-        private String commentContent;
+        private String mentoringComment;
     }
 
     @Getter
@@ -23,7 +23,7 @@ public class CommentDto {
     public static class Patch{
 
         @NotBlank
-        private String commentContent;
+        private String mentoringComment;
     }
 
     @Setter
@@ -32,11 +32,19 @@ public class CommentDto {
     @AllArgsConstructor
     public static class Response{
         private long commentId;
-        private String commentContent;
+        private String mentoringComment;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
-        private long mentoringId;
+//        private long mentoringId;
 
 
+    }
+
+    @Setter
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class commmentResponse{
+        private String mentoringComment;
     }
 }

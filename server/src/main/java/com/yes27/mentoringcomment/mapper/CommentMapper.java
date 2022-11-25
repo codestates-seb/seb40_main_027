@@ -11,13 +11,15 @@ public interface CommentMapper {
     Comment commentPostDtoToComment(CommentDto.Post commentPostDto);
     Comment commentPatchDtoToComment(CommentDto.Patch commentPatchDto);
 
+    CommentDto.commmentResponse commentToCommentsResponseDto(Comment comment);
+
     default CommentDto.Response commentToCommentResponseDto(Comment comment){
         CommentDto.Response response = new CommentDto.Response(
                 comment.getCommentId(),
-                comment.getCommentContent(),
+                comment.getMentoringComment(),
                 comment.getCreatedAt(),
-                comment.getUpdatedAt(),
-                comment.getMentor().getMentoringId()
+                comment.getUpdatedAt()
+//                comment.getMentor().getMentoringId()
         );
         return response;
     }

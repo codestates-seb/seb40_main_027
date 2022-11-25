@@ -1,6 +1,8 @@
 package com.yes27.mentoring.entity;
 
 import com.yes27.BaseEntity;
+import com.yes27.member.entity.Member;
+import com.yes27.mentoringLike.entity.MentoringVote;
 import com.yes27.mentoringcomment.entity.Comment;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,11 +29,24 @@ public class Mentor extends BaseEntity {
     @Column(nullable = false, columnDefinition = "Text")
     private String mentoringContent;
 
+    @Column(nullable = false)
+    private String tagName;
+
+    @Column(nullable = false)
+    private int totalVotes;
+
     @Column
     private int viewCount;
 
     @OneToMany(mappedBy = "mentor", cascade = CascadeType.REMOVE)
     private List<Comment> comments = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
+
+//    @OneToMany(mappedBy = "mentor",  cascade = CascadeType.REMOVE)
+//    private List<MentoringVote> mentoringVotes;
 
 
 

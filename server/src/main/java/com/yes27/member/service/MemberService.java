@@ -17,6 +17,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Transactional
 @Service
 public class MemberService {
@@ -89,5 +91,12 @@ public class MemberService {
         Member findMember = optionalMember.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
         return findMember;
+    }
+
+    //로그인한 사용자 찾기
+    public Member findMember(HttpServletRequest request){
+        String email = request.getUserPrincipal().getName();
+        if(email == null) {throw new BusinessLogicException(ExceptionCode.EMAIL_NOT_EXISTS);}
+        return findVerifiedMemberByEmail(email);
     }
 }
