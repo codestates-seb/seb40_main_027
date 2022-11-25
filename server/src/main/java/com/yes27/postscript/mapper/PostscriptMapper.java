@@ -10,12 +10,9 @@ import com.yes27.postscripcomment.entity.PostscriptComment;
 import com.yes27.postscript.dto.PostscriptDto;
 import com.yes27.postscript.dto.TagDto;
 import com.yes27.postscript.dto.TagResponseDto;
-import com.yes27.postscript.dto.postToPostCommentResponseDto;
 import com.yes27.postscript.entity.Postscript;
 import com.yes27.postscript.entity.Tag;
 import com.yes27.postscript.service.PostscriptService;
-import com.yes27.study.dto.StudyDto;
-import com.yes27.study.entity.Study;
 import org.mapstruct.Mapper;
 
 import java.util.ArrayList;
@@ -29,8 +26,7 @@ public interface PostscriptMapper {
 
     //생성
     default Postscript postscriptPostDtoToPostscript(PostscriptDto.Post postscriptPostDto,
-                                                     MemberService memberService
-    ) {
+                                                     MemberService memberService) {
 
         Postscript postscript = new Postscript();
 
@@ -39,7 +35,6 @@ public interface PostscriptMapper {
 
         Member member = memberService.getLoginMember();
         List<Tag> tags = tagsDtosToTags(postscriptPostDto.getTags(), postscript, member);
-
 
         postscript.setTags(tags);
         postscript.setMember(member);
@@ -51,11 +46,12 @@ public interface PostscriptMapper {
     //수정
     default Postscript postscriptPatchDtoToPostscript(PostscriptService postscriptService,
                                                       PostscriptDto.Patch postscriptPatchDto,
-                                                      MemberService memberService) {
+                                                      MemberService memberService,
+                                                      long postscriptId) {
 
         Member member = memberService.getLoginMember();
         if (member.getMemberId() !=
-                postscriptService.findPostscriptWriter(postscriptPatchDto.getPostscriptId()).getMemberId()) { //해당 유저가 쓴 질문글 아니므로 수정 삭제 불가
+                postscriptService.findPostscriptWriter(postscriptId)){ //해당 유저가 쓴 질문글 아니므로 수정 삭제 불가
             throw new BusinessLogicException(ExceptionCode.ACCESS_DENIED_MEMBER);
         }
 
@@ -63,10 +59,12 @@ public interface PostscriptMapper {
         postscript.setPostscriptId(postscriptPatchDto.getPostscriptId());
         postscript.setPostscriptTitle(postscriptPatchDto.getPostscriptTitle());
         postscript.setPostscriptContent(postscriptPatchDto.getPostscriptContent());
+        postscript.setMember(member);
 
-        if (postscriptPatchDto.getTags() == null) { // 태그 수정을 하지 않는 경우 -> 기존 글에서 태그를 불러오기
+        // 태그 수정을 하지 않는 경우 -> 기존 글에서 태그를 불러오기
+        if (postscriptPatchDto.getTags() == null) {
             postscript.setTags(postscriptService.findVerifiedPostscript(postscript.getPostscriptId()).getTags());
-        } else { // 태그 수정을 하는 경우
+        } else { // 태그 수정할떄
             List<Tag> tags = tagsDtosToTags(postscriptPatchDto.getTags(), postscript, member);
             postscript.setTags(tags);
         }
@@ -87,7 +85,7 @@ public interface PostscriptMapper {
     }
 
     // 질문 응답
-    default PostscriptDto.PostscriptResponse postscriptToPostscriptResponse(Postscript postscript, MemberMapper memberMapper) {
+    default PostscriptDto.PostscriptResponse postscriptToPostscriptResponseDto(Postscript postscript, MemberMapper memberMapper) {
 
         List<PostscriptComment> postscriptComments = postscript.getPostComments();
 
@@ -101,17 +99,17 @@ public interface PostscriptMapper {
 
         postscriptResponse.setPostscriptStatus(postscript.getPostscriptStatus());
 
-        postscriptResponse.setCreatedAt(postscript.getCreatedAt());
-        postscriptResponse.setUpdatedAt(postscript.getUpdatedAt());
+        // Member 관계 추가
+        Member member = postscript.getMember();//질문 작성자 정보 추가
+        postscriptResponse.setMember(memberMapper.memberToMemberResponse2(member));
 
         // 태그
         postscriptResponse.setTags(tagsToTagResponseDtos(postscript.getTags()).stream().distinct().collect(Collectors.toList()));
         // 댓글
         postscriptResponse.setPostComments(postscriptToPostscriptCommentResponse(postscriptComments));
 
-        // Member 관계 추가
-        Member member = postscript.getMember();//질문 작성자 정보 추가
-        postscriptResponse.setMember(memberMapper.memberToMemberResponse2(member));
+        postscriptResponse.setCreatedAt(postscript.getCreatedAt());
+        postscriptResponse.setUpdatedAt(postscript.getUpdatedAt());
 
         return postscriptResponse;
     }
@@ -126,7 +124,7 @@ public interface PostscriptMapper {
         List<PostscriptDto.PostscriptResponse> postscriptResponseDtos = new ArrayList<>(postscripts.size());
 
         for (Postscript postscript : postscripts) {
-            postscriptResponseDtos.add(postscriptToPostscriptResponse(postscript, memberMapper));
+            postscriptResponseDtos.add(postscriptToPostscriptResponseDto(postscript, memberMapper));
         }
 
         return postscriptResponseDtos;
