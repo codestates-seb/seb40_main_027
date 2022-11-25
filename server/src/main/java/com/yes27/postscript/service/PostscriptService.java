@@ -1,6 +1,7 @@
 package com.yes27.postscript.service;
 
 import com.yes27.member.entity.Member;
+import com.yes27.postscripcomment.entity.PostscriptComment;
 import com.yes27.postscript.entity.Tag;
 import com.yes27.postscript.repository.TagRepository;
 import org.springframework.context.annotation.Lazy;
@@ -45,10 +46,29 @@ public class PostscriptService {
         return findPostscript;
     }
 
-    public void deletePostscript(long postscriptId) { //삭제
+    public void deletePostscript(long postscriptId, long memberId) { //삭제
         Postscript findPostscript = findVerifiedPostscript(postscriptId);
-        findPostscript.setPostscriptStatus(Postscript.PostscriptStatus.POSTSCRIPT_NOT_EXIST);
-        postscriptRepository.save(findPostscript);
+        long writerId = findPostscriptWriter(postscriptId);
+
+        if(memberId != writerId){
+            throw new BusinessLogicException(ExceptionCode.ACCESS_DENIED_MEMBER);
+        }
+        postscriptRepository.delete(findPostscript);
+    }
+
+
+    public Page<Postscript> findPostscripts(int page, int size, String sort) {
+
+        Page<Postscript> findAllPostscript = postscriptRepository.findAllByPostscriptStatus(
+                PageRequest.of(page, size, Sort.by(sort).descending()),
+                Postscript.PostscriptStatus.POSTSCRIPT_EXIST);
+
+        return findAllPostscript;
+    }
+
+    //마이페이지에 이용
+    public List<Postscript> findPostscripts(Member member) {
+        return postscriptRepository.findAllByMemberAndPostscriptStatus(member, Postscript.PostscriptStatus.POSTSCRIPT_EXIST);
     }
 
     public Postscript updatePostscript(Postscript postscript) { // 수정
@@ -61,41 +81,18 @@ public class PostscriptService {
                 .ifPresent(findPostscript::setPostscriptContent);
         findPostscript.setUpdatedAt(LocalDateTime.now());
 
-//        List<Tag> tagList = postscript.getTags();
-//        Optional.ofNullable(tagList)
-//                .ifPresent(findPostscript::setTags);
-//
-//        if (tagList != null) {
-//            for (Tag tag : tagList)
-//                tagRepository.save(tag);
-//        }
+        List<Tag> tagList = postscript.getTags();
+        Optional.ofNullable(tagList)
+                .ifPresent(findPostscript::setTags);
+
+        if (tagList != null) {
+            for (Tag tag : tagList)
+                tagRepository.save(tag);
+        }
 
         Postscript updatedPostscript = postscriptRepository.save(findPostscript);
         return updatedPostscript;
     }
-
-    public Page<Postscript> findPostscripts(int page, int size, String sort) {
-
-        Page<Postscript> findAllPostscript = postscriptRepository.findAllByPostscriptStatus(
-                PageRequest.of(page, size, Sort.by(sort).descending()),
-                Postscript.PostscriptStatus.POSTSCRIPT_EXIST);
-
-        return findAllPostscript;
-    }
-
-
-    @Transactional(readOnly = true)
-    public Postscript findVerifiedPostscript(long postscriptId) { // 유효한 질문인지 확인
-        Optional<Postscript> optionalPostscript = postscriptRepository.findById(postscriptId);
-        Postscript findPostscript = optionalPostscript.orElseThrow(() ->
-                new BusinessLogicException(ExceptionCode.POSTSCRIPT_NOT_FOUND));
-
-        if (findPostscript.getPostscriptStatus() == Postscript.PostscriptStatus.POSTSCRIPT_NOT_EXIST) {
-            throw new BusinessLogicException(ExceptionCode.POSTSCRIPT_NOT_FOUND);
-        }
-        return findPostscript;
-    }
-
     // 좋아요 수 새로 갱신
     public void refreshVotes(long postscriptId) {
         Postscript postscript = findVerifiedPostscript(postscriptId);
@@ -103,8 +100,19 @@ public class PostscriptService {
         postscriptRepository.save(postscript);
     }
 
-    public Member findPostscriptWriter(long postscriptId) {
-        Postscript findPostscript = findVerifiedPostscript(postscriptId);
-        return findPostscript.getMember();
+    public long findPostscriptWriter(long postscriptId) { // 글 작성자인지 찾기 -> 수정 삭제
+        Postscript postscript = findVerifiedPostscript(postscriptId);
+        return postscript.getMember().getMemberId();
+    }
+
+    public Postscript findVerifiedPostscript(long postscriptId) { // 유효한 질문인지 확인
+        Optional<Postscript> optionalPostscript = postscriptRepository.findById(postscriptId);
+        Postscript findPostscript = optionalPostscript.orElseThrow(
+                () -> new BusinessLogicException(ExceptionCode.POSTSCRIPT_NOT_FOUND));
+
+        if (findPostscript.getPostscriptStatus() == Postscript.PostscriptStatus.POSTSCRIPT_NOT_EXIST) {
+            throw new BusinessLogicException(ExceptionCode.POSTSCRIPT_NOT_FOUND);
+        }
+        return findPostscript;
     }
 }

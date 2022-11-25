@@ -1,6 +1,7 @@
 package com.yes27.postscript.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.yes27.member.entity.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,14 +23,13 @@ public class Tag {
     private String tagName;
 
     //유저 연관관계 추가
-
-//    @ManyToOne
-//    @JoinColumn(name = "USER_ID")
-//    private User user;
+    @ManyToOne
+    @JoinColumn(name = "Member_ID")
+    private Member member;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "POSTSCRIPT_ID")
+    @JoinColumn(name = "Postscript_ID")
     private Postscript postscript;
 
     public void addPostscript(Postscript postscript) {

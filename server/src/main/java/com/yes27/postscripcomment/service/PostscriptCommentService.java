@@ -54,7 +54,12 @@ public class PostscriptCommentService {
 
         return findPostComment;
     }
-
+    public PostscriptComment findVerifiedPostscriptComment(long postCommentId) {
+        Optional<PostscriptComment> optionalPostscriptComment = postscriptCommentRepository.findById(postCommentId);
+        PostscriptComment findPostComment = optionalPostscriptComment.orElseThrow(() ->
+                new BusinessLogicException(ExceptionCode.COMMENT_NOT_FOUND));
+        return findPostComment;
+    }
     // 댓글 삭제
     public void deletePostComment(long postCommentId) {
         PostscriptComment postscriptComment = findVerifiedPostscriptComment(postCommentId);
@@ -64,18 +69,8 @@ public class PostscriptCommentService {
     public List<PostscriptComment> findPostCommentAll() {
         return new ArrayList<>(postscriptCommentRepository.findAll());
     }
-
-    @Transactional(readOnly = true)
-    public PostscriptComment findVerifiedPostscriptComment(long postCommentId) {
-        Optional<PostscriptComment> optionalPostscriptComment = postscriptCommentRepository.findById(postCommentId);
-        PostscriptComment findPostComment = optionalPostscriptComment.orElseThrow(() ->
-                new BusinessLogicException(ExceptionCode.COMMENT_NOT_FOUND));
-        return findPostComment;
-    }
-
     public Member findPostscriptCommentWriter(long postCommentId) {
         PostscriptComment findPostscriptComment = findVerifiedPostscriptComment(postCommentId);
         return findPostscriptComment.getMember();
     }
-
 }
