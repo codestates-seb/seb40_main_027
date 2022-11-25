@@ -5,8 +5,8 @@ import Nickname from './Nickname';
 import { Icon } from '@iconify/react';
 import { RegisterButton, LoginButton } from '../Button/index';
 
-import { useRecoilState } from 'recoil';
-import { sideBarFloading } from '../../atoms/index';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { isLogin, sideBarFloading } from '../../atoms/index';
 
 const PageMenu = styled.header`
   width: 100vw;
@@ -66,13 +66,8 @@ const LoginSignHeaderButton = styled.span`
 `;
 
 const PageHeader = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const logStatus = useRecoilValue(isLogin);
   const [isCollapse, setIsCollapse] = useRecoilState(sideBarFloading);
-
-  const clickLogin = () => {
-    //임의로 오류안나게하기 위해 넣은 함수
-    setIsLogin(!isLogin);
-  };
 
   const CollapseHandler = () => {
     //상태변하게 하기위하여
@@ -92,15 +87,15 @@ const PageHeader = () => {
             {el}
           </span>
         ))}
-        {isLogin ? (
-          <LoginSignHeaderButton>
-            <LoginButton onClick={clickLogin} />
-            <RegisterButton />
-          </LoginSignHeaderButton>
-        ) : (
+        {logStatus ? (
           <span>
             <Nickname />
           </span>
+        ) : (
+          <LoginSignHeaderButton>
+            <LoginButton />
+            <RegisterButton />
+          </LoginSignHeaderButton>
         )}
       </div>
     </PageMenu>

@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import logo from '../assets/image/logo.png';
 import icon from '../assets/image/icon.png';
 import { RegisterButton } from '../components/Button';
-import { useSignUp } from '../hooks/useUsers';
+// import { useSignUp } from '../hooks/useUsers';
 
 const textList = [
   { id: 1, desc: 'Nickname', regist: 'nickname', type: 'text' },

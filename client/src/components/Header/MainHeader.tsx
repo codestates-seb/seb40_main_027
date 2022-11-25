@@ -3,6 +3,8 @@ import logo from '../../assets/image/logo.png';
 import { useState } from 'react';
 import Nickname from './Nickname';
 import { RegisterButton, LoginButton } from '../Button/index';
+import { useRecoilValue } from 'recoil';
+import { isLogin } from '../../atoms';
 
 const HeaderContent = styled.header`
   width: 100%;
@@ -37,24 +39,20 @@ const HeaderContent = styled.header`
 `;
 
 const MainHeader = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const logStatus = useRecoilValue(isLogin);
 
-  const clickLogin = () => {
-    //임의로 오류안나게하기 위해 넣은 함수
-    setIsLogin(!isLogin);
-  };
   return (
     <HeaderContent>
       <div className="header-component">
         <img src={logo} alt="logo" />
-        {isLogin ? (
+        {logStatus ? (
           <div>
-            <LoginButton onClick={clickLogin} />
-            <RegisterButton />
+            <Nickname />
           </div>
         ) : (
           <div>
-            <Nickname />
+            <LoginButton />
+            <RegisterButton />
           </div>
         )}
       </div>
