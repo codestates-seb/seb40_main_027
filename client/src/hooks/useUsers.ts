@@ -14,7 +14,8 @@ interface SignUpType {
 }
 
 export const useLogIn = (submitData: LogInType) => {
-  // const [logState, setLogState] = useRecoilState(isLogin); 작동 잘 되는데 서버 올라오면 test하기
+  // 작동 잘 되는데 서버 올라오면 test하기
+  // const [logState, setLogState] = useRecoilState(isLogin);
   axios({
     method: 'post',
     url: `/users/login`,
@@ -41,7 +42,7 @@ export const useLogIn = (submitData: LogInType) => {
 export const useSignUp = (submitData: SignUpType) => {
   axios({
     method: 'post',
-    url: `/users/login`,
+    url: `/users/signup`,
     data: {
       email: submitData.email,
       nickname: submitData.nickname,
