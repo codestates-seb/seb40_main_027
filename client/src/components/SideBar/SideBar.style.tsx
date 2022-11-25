@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const SideBarPage = styled.div`
   .side-bar-gray-page {
     visibility: hidden;
-
-    transition: all 0.3s;
+    display: none;
+    overflow: hidden;
   }
   .outer::-webkit-scrollbar {
     display: none;
@@ -14,7 +14,6 @@ export const SideBarPage = styled.div`
       visibility: visible;
       position: absolute;
       overflow-y: hidden;
-
       width: 100%;
       height: 100vh;
       background-color: rgba(0, 0, 0, 0.38);
@@ -59,8 +58,6 @@ export const SideBarMenu = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    /* margin: 10% 10% 10% 20%; */
-
     height: 4rem;
 
     a {
@@ -73,7 +70,6 @@ export const HideSidebar = styled.div`
   @media screen and (max-width: 414px) {
     width: 1rem;
     height: 1rem;
-    background-color: pink;
     transition: all 0.25s;
     position: absolute;
     animation: setMotionHide 1s normal;
