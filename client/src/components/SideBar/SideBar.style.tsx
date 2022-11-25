@@ -6,9 +6,6 @@ export const SideBarPage = styled.div`
     display: none;
     overflow: hidden;
   }
-  .outer::-webkit-scrollbar {
-    display: none;
-  }
   @media screen and (max-width: 414px) {
     .side-bar-gray-page {
       visibility: visible;
@@ -16,6 +13,7 @@ export const SideBarPage = styled.div`
       overflow-y: hidden;
       width: 100%;
       height: 100vh;
+      z-index: 2;
       background-color: rgba(0, 0, 0, 0.38);
       animation: setMotion 1s normal;
       @keyframes setMotion {
@@ -27,7 +25,7 @@ export const SideBarPage = styled.div`
         }
       }
     }
-    z-index: 2;
+
     .side-bar-content {
       width: 70%;
       height: 100%;
