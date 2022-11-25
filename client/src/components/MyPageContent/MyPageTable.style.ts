@@ -18,7 +18,6 @@ export const TableSchedule = styled.table`
     }
   }
   tbody {
-    /* height: 100%; */
     td {
       border-bottom: 1px solid var(--grayContentsBorder);
       text-align: center;
