@@ -1,19 +1,32 @@
 import * as S from './SignUp.style';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import logo from '../assets/image/logo.png';
 import icon from '../assets/image/icon.png';
 import { RegisterButton } from '../components/Button';
+import { useSignUp } from '../hooks/useUsers';
 
 const textList = [
-  { id: 1, value: 'Nickname', type: 'text' },
-  { id: 2, value: 'Email', type: 'email' },
-  { id: 3, value: 'Password', type: 'password' },
-  { id: 4, value: 'Password 확인', type: 'password' },
+  { id: 1, desc: 'Nickname', regist: 'nickname', type: 'text' },
+  { id: 2, desc: 'Email', regist: 'email', type: 'text' },
+  { id: 3, desc: 'Password', regist: 'password', type: 'password' },
+  { id: 4, desc: 'Password 확인', regist: 'passwrodCheck', type: 'password' },
 ];
 
+type SignUpValue = {
+  email: string;
+  nickname: string;
+  password: string;
+  passwrodCheck: string;
+  check: boolean;
+};
+
 const SignUp = () => {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data: any) => console.log(data);
+  const {
+    register,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm<SignUpValue>();
+  const onSubmit: SubmitHandler<SignUpValue> = (data) => {};
 
   return (
     <S.Wrap>
@@ -23,16 +36,36 @@ const SignUp = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <S.TypeSection>
             <div>
+              {/* <label>
+                <S.CustomH2>Nickname</S.CustomH2>
+                <input type="text" {...register('nickname')} />
+              </label>
+              <label>
+                <S.CustomH2>Email</S.CustomH2>
+                <input type="text" {...register('email')} />
+              </label>
+              <label>
+                <S.CustomH2>Password</S.CustomH2>
+                <input type="password" autoComplete="off" {...register('password')} />
+              </label>
+              <label>
+                <S.CustomH2>Password 확인</S.CustomH2>
+                <input type="password" autoComplete="off" {...register('passwrodCheck')} />
+              </label> */}
               {textList.map((el) =>
                 el.id >= 3 ? (
                   <label key={el.id}>
-                    <S.CustomH2>{el.value}</S.CustomH2>
-                    <input type={el.type} {...register(el.value)} autoComplete="off" />
+                    <S.CustomH2>{el.desc}</S.CustomH2>
+                    <input
+                      type={el.type}
+                      {...register(el.regist === 'password' ? 'password' : 'passwrodCheck')}
+                      autoComplete="off"
+                    />
                   </label>
                 ) : (
                   <label key={el.id}>
-                    <S.CustomH2>{el.value}</S.CustomH2>
-                    <input type={el.type} {...register(el.value)} />
+                    <S.CustomH2>{el.desc}</S.CustomH2>
+                    <input type={el.type} {...register(el.regist === 'email' ? 'email' : 'nickname')} />
                   </label>
                 )
               )}
