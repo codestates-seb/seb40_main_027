@@ -3,6 +3,7 @@ import { BackgroundOtherButton, SmallBorderTagButton, MoreButton } from '../Butt
 import { GRAY_LIST_FILL, GREEN_MAIN } from '../../assets/constant/COLOR';
 import ForumWrittenInfo from './ForumWrittenInfo';
 import { InlineIcon } from '@iconify/react';
+import ForumArticlesAnswer from '../Answer/ForumArticlesAnswer';
 
 const ForumDetail = () => {
   /** 더미 데이터 */
@@ -94,7 +95,7 @@ const ForumDetail = () => {
             </S.CommentContainer>
           ))}
 
-          <S.NewCommentContainer>
+          {/* <S.NewCommentContainer>
             <div>
               <ForumWrittenInfo position="left" author="지금 로그인한 사람" />
               <span>0 / 500</span>
@@ -107,7 +108,8 @@ const ForumDetail = () => {
                 <BackgroundOtherButton text="등록" color={GREEN_MAIN} />
               </div>
             </S.Form>
-          </S.NewCommentContainer>
+          </S.NewCommentContainer> */}
+          <ForumArticlesAnswer />
         </S.CommentsContainer>
       </S.ContentContainer>
 
