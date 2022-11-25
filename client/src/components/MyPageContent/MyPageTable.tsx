@@ -1,102 +1,110 @@
-import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
-import styled from 'styled-components';
-
-const TableSchedule = styled.table`
-  height: 100%;
-  width: 100%;
-  border-bottom: 1px solid gray;
-
-  thead {
-    height: 10%;
-    font-weight: bold;
-    background-color: yellow;
-    border-bottom: 1px solid gray;
-  }
-`;
+import { Icon } from '@iconify/react';
+import * as S from './MyPageTable.style';
 
 const data = [
   {
+    id: 1,
     name: '코드 스테이츠',
     date: '10/11-14',
     duration: '6개월',
     filed: '프론트엔드',
     cost: '무료(국비)',
     onOff: '온라인',
+    vote: true,
   },
   {
+    id: 2,
     name: '코드 스테이츠',
     date: '10/11-14',
     duration: '6개월',
     filed: '프론트엔드',
     cost: '무료(국비)',
     onOff: '온라인',
+    vote: true,
   },
   {
+    id: 3,
     name: '코드 스테이츠',
     date: '10/11-14',
     duration: '6개월',
     filed: '프론트엔드',
     cost: '무료(국비)',
     onOff: '온라인',
+    vote: true,
   },
   {
+    id: 4,
     name: '코드 스테이츠',
     date: '10/11-14',
     duration: '6개월',
     filed: '프론트엔드',
     cost: '무료(국비)',
     onOff: '온라인',
+    vote: true,
+  },
+  {
+    id: 5,
+    name: '코드 스테이츠',
+    date: '10/11-14',
+    duration: '6개월',
+    filed: '프론트엔드',
+    cost: '무료(국비)',
+    onOff: '온라인',
+    vote: true,
   },
 ];
 
 interface BootData {
+  id: number;
   name: string;
   date: string;
   duration: string;
   filed: string;
   cost: string;
   onOff: string;
+  vote: boolean;
 }
 
+const columns = ['이름', '등록일', '교육기간', '과정', '총 비용', '온/오프라인', '찜'];
 const MyPageTable = () => {
-  const columnHelper = createColumnHelper<BootData>();
-  const columns = [
-    columnHelper.accessor('name', { header: '이름', maxSize: 10 }),
-    columnHelper.accessor('date', { header: '등록일', maxSize: 10 }),
-    columnHelper.accessor('duration', { header: '교육기간', maxSize: 50 }),
-    columnHelper.accessor('filed', { header: '과정', maxSize: 50 }),
-    columnHelper.accessor('cost', { header: '총 비용', maxSize: 50 }),
-    columnHelper.accessor('onOff', { header: '온/오프라인', maxSize: 50 }),
-  ];
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-  });
-
   return (
-    <TableSchedule>
+    <S.TableSchedule>
       <thead>
-        {table.getHeaderGroups().map((headerGroup) => (
-          <tr key={headerGroup.id}>
-            {headerGroup.headers.map((header) => (
-              <th key={header.id}>
-                {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-              </th>
-            ))}
-          </tr>
-        ))}
+        <tr>
+          {columns.map((item, idx) => {
+            return <th key={idx}>{item}</th>;
+          })}
+        </tr>
       </thead>
       <tbody>
-        {table.getRowModel().rows.map((row) => (
-          <tr key={row.id}>
-            {row.getVisibleCells().map((cell) => (
-              <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
-            ))}
-          </tr>
-        ))}
+        {data.map((item, idx) => {
+          return (
+            <tr key={idx}>
+              <S.TableLink to={`/bootcamp/${item.id}`} key={idx}>
+                <td>{item.name} </td>
+              </S.TableLink>
+
+              <td>{item.date}</td>
+              <td>{item.duration}</td>
+              <td>{item.filed}</td>
+              <td>{item.cost}</td>
+              <td>{item.onOff}</td>
+              <td>
+                {item.vote === true ? (
+                  <span>
+                    <S.LikeButton>
+                      <Icon icon="ic:round-star" color="#fbb3b3" width="30" height="30" />
+                    </S.LikeButton>
+                  </span>
+                ) : (
+                  <Icon icon="ic:round-star-border" color="#fbb3b3" width="40" height="40" />
+                )}
+              </td>
+            </tr>
+          );
+        })}
       </tbody>
-    </TableSchedule>
+    </S.TableSchedule>
   );
 };
 
