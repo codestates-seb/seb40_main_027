@@ -4,10 +4,8 @@ import logo from '../../assets/image/logo.png';
 import Nickname from './Nickname';
 import { Icon } from '@iconify/react';
 import { RegisterButton, LoginButton } from '../Button/index';
-
 import { useRecoilState } from 'recoil';
 import { sideBarFloading } from '../../atoms/index';
-import SideBar from '../SideBar/SideBar';
 
 const PageMenu = styled.header`
   width: 100vw;
@@ -18,7 +16,7 @@ const PageMenu = styled.header`
   align-items: center;
   .page-header-content {
     /* width: 60vw; */
-    /* margin: 0 calc(400 / 20 * 1rem) 0 calc(400 / 20 * 1rem); */
+    /* margin: 0 calc(400 / 20 * 1rem) 0 calc(400 / 20 * 1rem); */ //고치신거랑 합쳐서서 확인해봐야함
     /* margin-left: 380px;
     margin-left: 380px; */
     width: 1160px;
