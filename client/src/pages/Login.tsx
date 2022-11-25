@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 // 이메일과 패스워드를 송신하면 유저아이디와 name을 준다. -> 나중에 api와 연동 필요(전송 후, refresh & access 받기)
 // help class쪽 link 추후 연결 필요
 
-type Formvalues = {
+type LoginValue = {
   email: string;
   password: string;
 };
@@ -19,9 +19,9 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Formvalues>();
+  } = useForm<LoginValue>();
 
-  const onSubmit: SubmitHandler<Formvalues> = (data) => {
+  const onSubmit: SubmitHandler<LoginValue> = (data) => {
     console.log('submission');
     useLogIn(data);
   };
