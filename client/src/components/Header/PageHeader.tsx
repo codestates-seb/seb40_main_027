@@ -88,15 +88,12 @@ const PageHeader = () => {
         <span className="hamburger">
           <Icon icon="mdi:menu" onClick={CollapseHandler} />
         </span>
-
         <img src={logo} alt="logo" />
-
         {headerMenu.map((el, idx) => (
           <span className="page-menu" key={idx}>
             {el}
           </span>
         ))}
-
         {isLogin ? (
           <LoginSignHeaderButton>
             <LoginButton onClick={clickLogin} />
