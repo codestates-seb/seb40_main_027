@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Logout from '../Logout';
+import Logout from '../Logout/Logout';
 
 const ImgCircle = styled.span`
   height: 4rem;
