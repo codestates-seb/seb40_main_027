@@ -1,6 +1,7 @@
 package com.yes27.postscript.entity;
 
 import com.yes27.BaseEntity;
+import com.yes27.member.entity.Member;
 import com.yes27.postscripcomment.entity.PostscriptComment;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,20 +29,21 @@ public class Postscript extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     @Column(length = 20, nullable = false)
     private PostscriptStatus postscriptStatus = PostscriptStatus.POSTSCRIPT_EXIST;
-//    @ManyToOne
-//    @JoinColumn(name = "USER_ID")
-//    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
 
     // 좋아요값들
     @Column(length = 5, nullable = false)
-    private Integer postLikes = 0;
+    private Integer votes = 0;
 
     // 조회수
     @Column(length = 5, nullable = false)
-    private Integer postscriptView = 0;
+    private Integer View = 0;
 
     @OneToMany(mappedBy = "postscript", cascade = CascadeType.PERSIST) //좋아요
-    private List<PostscriptLike> postscriptLikes = new ArrayList<>();
+    private List<PostscriptVote> postscriptVotes = new ArrayList<>();
 
     @OneToMany(mappedBy = "postscript", cascade = CascadeType.ALL, orphanRemoval = true)  // 댓글 추가
     private List<PostscriptComment> postComments = new ArrayList<>();

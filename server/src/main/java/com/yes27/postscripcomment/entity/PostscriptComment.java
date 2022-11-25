@@ -1,7 +1,9 @@
 package com.yes27.postscripcomment.entity;
 
 import com.yes27.BaseEntity;
+import com.yes27.member.entity.Member;
 import com.yes27.postscript.entity.Postscript;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +15,7 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 public class PostscriptComment extends BaseEntity {
 
     @Id
@@ -20,11 +23,13 @@ public class PostscriptComment extends BaseEntity {
     private Long postCommentId;
 
     @Column(nullable = false)
-    private String postCommentContent;
+    private String postscriptComment;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "postscript_id")
+    @JoinColumn(name = "POSTSCRIPT_ID")
     private Postscript postscript;
 
-    // 유저관계 매핑 추가하기
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
 }
