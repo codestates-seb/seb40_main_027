@@ -12,6 +12,7 @@ import PrivateRoute from './components/Route/PrivateRoute';
 import MainHeader from './components/Header/MainHeader';
 import PageHeader from './components/Header/PageHeader';
 import PageNotFound from './pages/PageNotFound';
+import PageHeaderSide from './components/Header/PageHeaderSide';
 
 function App() {
   const { pathname } = useLocation();
@@ -21,7 +22,7 @@ function App() {
       {pathname === '/users/login' || pathname === '/users/signup' ? null : pathname === '/' ? (
         <MainHeader />
       ) : (
-        <PageHeader />
+        <PageHeaderSide />
       )}
       <Routes>
         <Route path="/" element={<Main />} />
