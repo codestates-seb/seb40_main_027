@@ -1,8 +1,5 @@
 import * as S from './MyPageSchedule.style';
-import axios from 'axios';
 import MyPageTable from './MyPageTable';
-
-const DummySchedule = [{}];
 
 const MyPageSchedule = () => {
   return (
