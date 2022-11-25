@@ -7,12 +7,8 @@ import { Link } from 'react-router-dom';
 const SideBar = () => {
   const [isContent, setIsContent] = useRecoilState(sideBarFloading);
 
-  function disableScroll() {
-    document.body.classList.add('stop-scrolling');
-  }
   const HideHandler = () => {
     setIsContent(!isContent);
-    disableScroll();
   };
 
   return (
