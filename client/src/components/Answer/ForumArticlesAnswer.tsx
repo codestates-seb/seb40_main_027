@@ -1,18 +1,29 @@
-import { useRef, useState, useMemo } from 'react';
+import { useRef, useState, useMemo, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router';
-
+import ForumArticleAnswerList from './ForumArticleAnswersList';
 import 'react-quill/dist/quill.snow.css';
 
-const ForumArticlesAnswer = () => {
-  // const QuillRef = useRef<ReactQuill>();
-  const { id } = useParams();
-  const navigate = useNavigate();
-  console.log(id);
-  const [answerContents, setAnswerContents] = useState('');
+interface answerList {
+  postComments: [
+    {
+      createdAt?: string;
+      postCommentId: number;
+      postscriptComment: string;
+      updatedAt?: string;
+    }
+  ];
+}
 
+const ForumArticlesAnswer = () => {
+  const quillRef = useRef<ReactQuill>();
+  const { id } = useParams();
+  // const navigate = useNavigate();
+
+  const [answerContents, setAnswerContents] = useState('');
+  const [answerList, setAnswerList] = useState<answerList[]>();
   const ContentsHandler = (event: any) => {
     setAnswerContents(event);
     console.log(answerContents);
@@ -37,32 +48,38 @@ const ForumArticlesAnswer = () => {
     axios.defaults.withCredentials = true;
     axios({
       method: 'post',
-      url: `/postscript/${id}/comment`,
-      data: { answerContents },
-      // headers: {
-      //   Authorization:
-      //     'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoibGFsYUBnbWFpbC5jb20iLCJzdWIiOiJsYWxhQGdtYWlsLmNvbSIsImlhdCI6MTY2OTM1NTAxOSwiZXhwIjoxNjY5Mzk4MjE5fQ.MN3n0GS62o6xcOsT2GVrsYhdAhFltA-dUHjmTgaZlBemr_xEv-CGJQI6gj0edUdAjF5PEF82GhkTl_eDlPyXEQ',
-      // },
+      url: `/study/${id}/comment`,
+      data: { studyComment: answerContents },
+      headers: {
+        Authorization:
+          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoibGFsYUBnbWFpbC5jb20iLCJzdWIiOiJsYWxhQGdtYWlsLmNvbSIsImlhdCI6MTY2OTQ0OTUxNSwiZXhwIjoxNjY5NDkyNzE1fQ.SbuTBucG_fvPnESoQvuBunGpmI3283d9OH1XXVnR2dsmcgiGwtbGDonfzRxiWZSZvY1GmBXxFT3Dob56QLs3lQ',
+      },
     })
-      .then((res) => navigate('/postscript/${id}/comment'))
+      .then((res) => {
+        const { data } = res;
+
+        // window.location.reload();
+      })
       .catch(() => console.log('err'));
   };
 
+  // useEffect(() => {
+  //   axios.defaults.withCredentials = true;
+
+  //   axios({
+  //     method: 'get',
+  //     url: `/postscript/${id}`,
+  //   }).then((res) => {
+  //     const { data } = res;
+  //     setAnswerList(data.postComments);
+  //   });
+  // }, []);
+  // console.log(answerList);
   return (
     <>
-      {/* <ReactQuill
-        ref={(element) => {
-          if (element !== null) {
-            QuillRef.current = element;
-          }
-        }}
-        value={answerContents || ''}
-        onChange={ContentsHandler}
-        modules={modules}
-        theme="snow"
-        placeholder="내용을 입력해주세요."
-      /> */}
-      <ReactQuill theme="snow" value={answerContents} onChange={ContentsHandler} />;
+      {/* <ForumArticleAnswerList /> */}
+
+      <ReactQuill theme="snow" value={answerContents} onChange={ContentsHandler} />
       <button onClick={SummitAnswerBtn}>추가</button>
     </>
   );
