@@ -31,13 +31,13 @@ const UserProfile = () => {
       data: { data },
       headers: {
         Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoibGFsYUBnbWFpbC5jb20iLCJzdWIiOiJsYWxhQGdtYWlsLmNvbSIsImlhdCI6MTY2OTE4MTg3NywiZXhwIjoxNjY5MjI1MDc3fQ.YZIFOGbutYKeFh3UKwOcFwfuVu7Azj6waCoh5D_2JmQ84oSdZ7YI3ODtZvHP2pMTydSp9dFK4voAu4moqWKbLw',
+          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoibGFsYUBnbWFpbC5jb20iLCJzdWIiOiJsYWxhQGdtYWlsLmNvbSIsImlhdCI6MTY2OTQ4MTI0OSwiZXhwIjoxNjY5NTI0NDQ5fQ.Fwfii5XFjTe_6W9Zm20h8rDG0Wvrr-EEBOI7sLQl9rJiwNPAPeEJBRk4DkkEAZwoLkeZvgPQZcYHbNBbM1S-TQ',
       },
     })
       .then((res) => {
         console.log(res);
         let datatype = res.data;
-        console.log(datatype);
+        console.log('수정됨');
         setUserUpdate(datatype);
         setUpdateProfile(!updateProfile);
       })
