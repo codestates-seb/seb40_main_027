@@ -35,9 +35,7 @@ const UserProfile = () => {
       },
     })
       .then((res) => {
-        console.log(res);
         let datatype = res.data;
-        console.log('수정됨');
         setUserUpdate(datatype);
         setUpdateProfile(!updateProfile);
       })
