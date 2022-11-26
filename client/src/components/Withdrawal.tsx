@@ -6,19 +6,21 @@ const Withdrawal = () => {
   const navigate = useNavigate();
 
   const WithdrawalHandler = () => {
-    axios({
-      method: 'delete',
-      url: '/users',
-      headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoibGFsYUBnbWFpbC5jb20iLCJzdWIiOiJsYWxhQGdtYWlsLmNvbSIsImlhdCI6MTY2OTE4MTg3NywiZXhwIjoxNjY5MjI1MDc3fQ.YZIFOGbutYKeFh3UKwOcFwfuVu7Azj6waCoh5D_2JmQ84oSdZ7YI3ODtZvHP2pMTydSp9dFK4voAu4moqWKbLw',
-      },
-    })
-      .then(() => {
-        navigate('/');
-        alert('회원탈퇴가 되었습니다');
+    if (window.confirm('회원탈퇴를 하시겠습니까?')) {
+      axios({
+        method: 'delete',
+        url: '/users',
+        headers: {
+          Authorization:
+            'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiaGVoZUBnbWFpbC5jb20iLCJzdWIiOiJoZWhlQGdtYWlsLmNvbSIsImlhdCI6MTY2OTQ0NTA1NiwiZXhwIjoxNjY5NDg4MjU2fQ.xW0VydYPypKjjvOmEdLQjuId0kgiKHThg3GGV6GfktCYr0Q7WnbZZSOiTOt2IHFAH-sAA56lMhzCrC5HcWaTwA',
+        },
       })
-      .catch(() => console.log('err'));
+        .then(() => {
+          navigate('/');
+          alert('회원탈퇴가 되었습니다');
+        })
+        .catch(() => console.log('err'));
+    }
   };
 
   return <S.WithdrawalButton onClick={WithdrawalHandler}>회원탈퇴</S.WithdrawalButton>;
