@@ -6,7 +6,7 @@ import { useRef, useState, useMemo, KeyboardEvent } from 'react';
 import { useParams, useNavigate } from 'react-router';
 
 interface answerList {
-  data: {
+  list: {
     createdAt?: string;
     postCommentId: number;
     postscriptComment: string;
@@ -14,7 +14,7 @@ interface answerList {
   };
 }
 
-const AnswerListView = ({ data }: answerList, idx: any) => {
+const AnswerListView = ({ list }: answerList, idx: any) => {
   //수정상태를 하나만들고 만약맞으면 위에 그...창에서 수정상태를 만든다??
   const [isPatch, setIsPatch] = useState<boolean>(false);
   const [commentInfo, setCommentInfo] = useState([]);
@@ -48,17 +48,17 @@ const AnswerListView = ({ data }: answerList, idx: any) => {
   const PatchHanlder = () => {
     axios({
       method: 'patch',
-      url: `/postscript/comment/${data.postCommentId}`,
-      data: { postCommentContent: commentValue },
+      url: `/postscript/comment/${list.postCommentId}`,
+      data: { commentValue },
       headers: {
         Authorization:
           'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoibGFsYUBnbWFpbC5jb20iLCJzdWIiOiJsYWxhQGdtYWlsLmNvbSIsImlhdCI6MTY2OTQ0OTUxNSwiZXhwIjoxNjY5NDkyNzE1fQ.SbuTBucG_fvPnESoQvuBunGpmI3283d9OH1XXVnR2dsmcgiGwtbGDonfzRxiWZSZvY1GmBXxFT3Dob56QLs3lQ',
       },
     })
       .then((res) => {
+        console.log(res);
         const { data } = res;
-        console.log(data);
-        setCommentInfo(data.data.postscriptComment);
+        setCommentInfo(data);
         setIsPatch(!isPatch);
       })
       .catch(() => console.log('err'));
@@ -67,15 +67,13 @@ const AnswerListView = ({ data }: answerList, idx: any) => {
   const deleteHandler = () => {
     axios({
       method: 'delete',
-      url: `/postscript/comment/delete/${data.postCommentId}`,
+      url: `/postscript/comment/delete/${list.postCommentId}`,
     })
       .then(() => {
         window.location.reload();
       })
       .catch(() => console.log('err'));
   };
-
-  // console.log(data.postCommentId);
   return (
     <div>
       {isPatch ? (
@@ -84,12 +82,10 @@ const AnswerListView = ({ data }: answerList, idx: any) => {
           <button onClick={PatchHanlder}>완료</button>
         </div>
       ) : (
-        <div>{data.postCommentId}</div>
+        'a'
       )}
-
-      {/* {isPatch && <ReactQuill theme="snow" value={commentValue} onChange={() => CommentValueHandler} />} */}
-      <div>{data.postscriptComment}</div>
-      <div>{data.postCommentId}</div>
+      {commentInfo.length !== 0 ? <div>{commentInfo}</div> : <div>{list.postscriptComment}</div>}
+      <div>{list.postCommentId}</div>
       <button onClick={editHandler}>수정</button>
       <button onClick={deleteHandler}>삭제</button>
     </div>
