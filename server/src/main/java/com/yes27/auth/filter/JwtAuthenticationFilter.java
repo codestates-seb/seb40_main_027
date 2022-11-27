@@ -42,14 +42,15 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         ObjectMapper objectMapper = new ObjectMapper();    // (3-1)
         LoginDto loginDto = objectMapper.readValue(request.getInputStream(), LoginDto.class); // (3-2)
 
-        // (3-3)
+        // (3-3) email, password 정보를 이용하여 UsernamePasswordAuthenticationToken 생성
         UsernamePasswordAuthenticationToken authenticationToken =
             new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword());
 
-        return authenticationManager.authenticate(authenticationToken);  // (3-4)
+        // (3-4) UsernamePasswordAuthenticationToken -> AuthenticationManager 전달하면서 인증 처리 위임
+        return authenticationManager.authenticate(authenticationToken);
     }
 
-    // (4)
+    // (4) 인증에 성공할 경우 호출
     @Override
     protected void successfulAuthentication(HttpServletRequest request,
         HttpServletResponse response,
@@ -57,12 +58,14 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         Authentication authResult) throws ServletException, IOException {
         Member member = (Member) authResult.getPrincipal();  // (4-1)
 
-        String accessToken = delegateAccessToken(member);   // Access Token 생성
-        String refreshToken = delegateRefreshToken(member); // Refresh Token 생성
+        // delegateAccessToken 메서드를 이용하여 Access Token 생성
+        String accessToken = delegateAccessToken(member);
+        // delegateRefreshToken 메서드를 이용하여 Refresh Token 생성
+        String refreshToken = delegateRefreshToken(member);
 
-        response.setHeader("Authorization", "Bearer " + accessToken);  // (4-4)
-        response.setHeader("Refresh", refreshToken);                   // (4-5)
-        
+        response.setHeader("Authorization", "Bearer " + accessToken);  // Header 에 accessToken 전달
+        response.setHeader("Refresh", refreshToken);                         // Header 에 refreshToken 전달
+
         // 2022 11 25 로그인시 Response body 에 닉네임 추가
         Member findMember = memberRepository.findByEmail(member.getEmail()).orElseThrow();
         NickNameDto nickNameDto = new NickNameDto();
