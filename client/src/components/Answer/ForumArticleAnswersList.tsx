@@ -32,8 +32,8 @@ const ForumArticleAnswerList = () => {
 
   return (
     <div>
-      {answerList?.map((data: any, idx) => (
-        <AnswerListView key={idx} data={data}></AnswerListView>
+      {answerList?.map((list: any, idx) => (
+        <AnswerListView key={idx} list={list}></AnswerListView>
       ))}
     </div>
   );
