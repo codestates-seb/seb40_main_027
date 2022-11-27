@@ -10,12 +10,14 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+// 클라이언트의 JWT 이용해 자격 증명이 필요한 리소스에 대한 request 전송시, request header 통해 전달받은 JWT 를 서버에서 검증
 public class JwtVerificationFilter extends OncePerRequestFilter {
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
@@ -28,11 +30,9 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-//        Map<String, Object> claims = verifyJws(request);  // verifyJws() 메서드는 JWT 검증하는데 사용되는 메서드
-//        setAuthenticationToContext(claims);  // Authentication 객체를 SecurityContext 에 저장하기 위한 메서드
         try {
-            Map<String, Object> claims = verifyJws(request);
-            setAuthenticationToContext(claims);
+            Map<String, Object> claims = verifyJws(request);  // verifyJws() 메서드는 JWT 검증하는데 사용되는 메서드
+            setAuthenticationToContext(claims);  // Authentication 객체를 SecurityContext 에 저장하기 위한 메서드
         } catch (SignatureException se) {
             request.setAttribute("exception", se);
         } catch (ExpiredJwtException ee) {
@@ -44,7 +44,7 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    // (6)
+    // (6) 특정 조건에 부합하면(true 이면) 해당 Filter 동작을 수행하지 않고 다음 Filter 건너뜀
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         String authorization = request.getHeader("Authorization");  // Authorization header 값을 얻은 후
