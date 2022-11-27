@@ -4,10 +4,10 @@ export const SideBarPage = styled.div`
   .side-bar-gray-page {
     visibility: hidden;
     display: none;
-    overflow: hidden;
   }
   @media screen and (max-width: 414px) {
     .side-bar-gray-page {
+      display: flex;
       visibility: visible;
       position: absolute;
       overflow-y: hidden;
@@ -25,7 +25,7 @@ export const SideBarPage = styled.div`
         }
       }
     }
-
+    z-index: 2;
     .side-bar-content {
       width: 70%;
       height: 100%;
