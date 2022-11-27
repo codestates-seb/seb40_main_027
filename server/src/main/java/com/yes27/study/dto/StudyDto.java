@@ -48,6 +48,7 @@ public class StudyDto {
         private String studyContent;
 
         private int totalVotes;
+        private int view;
 
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;

@@ -44,7 +44,7 @@ public interface StudyMapper {
         response.setCreatedAt( study.getCreatedAt() );
         response.setUpdatedAt( study.getUpdatedAt() );
         response.setTotalVotes(study.getVotes().size());  //
-        response.setView(study.getView());
+        response.setView(study.getViews().size());
         response.setStudyComments( studyCommentListToStudyCommentSubsetList( study.getStudyComments() ) );
         response.setMember( memberToMemberSubset( study.getMember() ) );
         return response;

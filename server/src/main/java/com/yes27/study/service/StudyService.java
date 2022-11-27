@@ -49,6 +49,16 @@ public class StudyService {
         return studyRepository.findAll(PageRequest.of(page, size, Sort.by("studyId").descending()));
     }
 
+    // 조회순 정렬
+    public Page<Study> findStudiesByView(int page, int size) {
+        return studyRepository.findAll(PageRequest.of(page, size, Sort.by("view").descending()));
+    }
+
+    // 추천순 정렬
+    public Page<Study> findStudiesByVote(int page, int size) {
+        return studyRepository.findAll(PageRequest.of(page, size, Sort.by("totalVotes").descending()));
+    }
+
     public void deleteStudy(Member member, Long studyId) {
         Study findStudy = findVerifiedStudy(studyId);
         if (member.getMemberId() != studyId) {

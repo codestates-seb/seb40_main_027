@@ -61,5 +61,6 @@ public class Study extends BaseEntity {
     @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
     Set<StudyView> views = new HashSet<>();
 
+    private int totalVotes = 0;
     private int view = 0;
 }

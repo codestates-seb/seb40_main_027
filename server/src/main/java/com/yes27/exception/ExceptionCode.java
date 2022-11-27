@@ -26,7 +26,9 @@ public enum ExceptionCode {
     PERMISSION_ERROR(410, "Permission does not exist"),
     VOTE_ERROR(410, "vote Should have to be 0 or 1"),
 
-    EMAIL_NOT_EXISTS(500, "Email not exists");
+    EMAIL_NOT_EXISTS(500, "Email not exists"),
+
+    SORT_NOT_VALID(410, "RequestParam sort error");
 
     @Getter
     private int status;
