@@ -1,8 +1,8 @@
-export const calculateTime = (date: any) => {
-  const start: any = new Date(date);
-  const end: any = new Date(); // 현재 날짜
+export const Calculate = (date: Date) => {
+  const start: Date = new Date(date);
+  const end: Date = new Date(); // 현재 날짜
 
-  const diff = end - start; // 경과 시간
+  const diff = end.getTime() - start.getTime(); // 경과 시간
 
   const times = [
     { time: 'mins', milliSeconds: 1000 * 60 },
