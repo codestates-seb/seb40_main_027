@@ -1,4 +1,5 @@
 import axios from 'axios';
+import DOMPurify from 'dompurify';
 
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
@@ -83,6 +84,8 @@ const AnswerListView = ({ list }: answerList, idx: any) => {
       })
       .catch(() => console.log('err'));
   };
+
+  //{list.postscriptComment}
   return (
     <div>
       {isPatch ? (
@@ -93,7 +96,15 @@ const AnswerListView = ({ list }: answerList, idx: any) => {
       ) : (
         'a'
       )}
-      {commentInfo.length !== 0 ? <div>{commentInfo}</div> : <div>{list.postscriptComment}</div>}
+      {commentInfo.length !== 0 ? (
+        <div>{commentInfo}</div>
+      ) : (
+        <div
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(list.postscriptComment),
+          }}
+        />
+      )}
       <div>{list.postCommentId}</div>
       <button onClick={editHandler}>수정</button>
       <button onClick={deleteHandler}>삭제</button>
