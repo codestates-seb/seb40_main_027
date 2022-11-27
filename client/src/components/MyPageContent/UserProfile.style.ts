@@ -68,7 +68,7 @@ export const PictureProfile = styled.span`
   }
 `;
 
-export const FormInputProFile = styled.form`
+export const FromInputProFile = styled.form`
   width: 100%;
   background-color: var(--greenSub);
   display: flex;
