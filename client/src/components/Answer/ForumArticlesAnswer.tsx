@@ -52,7 +52,7 @@ const ForumArticlesAnswer = () => {
       data: { postscriptComment: answerContents },
       headers: {
         Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoibGFsYUBnbWFpbC5jb20iLCJzdWIiOiJsYWxhQGdtYWlsLmNvbSIsImlhdCI6MTY2OTQ0OTUxNSwiZXhwIjoxNjY5NDkyNzE1fQ.SbuTBucG_fvPnESoQvuBunGpmI3283d9OH1XXVnR2dsmcgiGwtbGDonfzRxiWZSZvY1GmBXxFT3Dob56QLs3lQ',
+          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoibGFsYUBnbWFpbC5jb20iLCJzdWIiOiJsYWxhQGdtYWlsLmNvbSIsImlhdCI6MTY2OTU0NDk3NywiZXhwIjoxNjY5NTg4MTc3fQ.1vRtPnBjCiR7TEx0orF4zkRWbzTQguQgfpBzUVMf_tYuqC4wiQa-iUlG1Bs1wk107oCIvW5i7i1JJ7hiq8qGKA',
       },
     })
       .then((res) => {
@@ -63,22 +63,8 @@ const ForumArticlesAnswer = () => {
       .catch(() => console.log('err'));
   };
 
-  // useEffect(() => {
-  //   axios.defaults.withCredentials = true;
-
-  //   axios({
-  //     method: 'get',
-  //     url: `/postscript/${id}`,
-  //   }).then((res) => {
-  //     const { data } = res;
-  //     setAnswerList(data.postComments);
-  //   });
-  // }, []);
-  // console.log(answerList);
   return (
     <>
-      {/* <ForumArticleAnswerList /> */}
-
       <ReactQuill theme="snow" value={answerContents} onChange={ContentsHandler} />
       <button onClick={SummitAnswerBtn}>추가</button>
     </>
