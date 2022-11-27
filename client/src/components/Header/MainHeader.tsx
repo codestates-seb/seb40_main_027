@@ -5,6 +5,7 @@ import Nickname from './Nickname';
 import { RegisterButton, LoginButton } from '../Button/index';
 import { useRecoilValue } from 'recoil';
 import { isLogin } from '../../atoms';
+import { Link } from 'react-router-dom';
 
 const HeaderContent = styled.header`
   width: 100%;
@@ -51,8 +52,12 @@ const MainHeader = () => {
           </div>
         ) : (
           <div>
-            <LoginButton />
-            <RegisterButton />
+            <Link to="/users/login">
+              <LoginButton />
+            </Link>
+            <Link to="/users/signup">
+              <RegisterButton />
+            </Link>
           </div>
         )}
       </div>
