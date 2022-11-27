@@ -1,6 +1,7 @@
 import { InlineIcon } from '@iconify/react';
-import { Calculate } from '../Calculate';
 import * as S from './MyPageLists.style';
+import { formatDistanceToNow } from 'date-fns';
+import { ko } from 'date-fns/locale';
 
 interface PropsType {
   list: {
@@ -20,21 +21,22 @@ interface PropsType {
 }
 
 const MyPageLists = ({ list }: PropsType) => {
+  const createTime = formatDistanceToNow(new Date(list.createdAt), { locale: ko });
+  const updateTime = formatDistanceToNow(new Date(list.updatedAt ? list.updatedAt : new Date()), { locale: ko });
   return (
     <S.PostMyPageContent>
       <S.PostLinkMyPage to={`/postscript/${list.postscriptId}`}>
         <S.MyPageListsTitle>{list.postscriptTitle}</S.MyPageListsTitle>
         <S.MyPageListsContent>{list.postscriptContent}</S.MyPageListsContent>
         <S.PostInfoView>
-          {list.view ? <span>조회{list.view}</span> : null}
-          {list.updatedAt ? (
-            <div>{Calculate(new Date(list.updatedAt)).toLocaleString()}</div>
-          ) : (
-            <div>{Calculate(new Date(list.createdAt)).toLocaleString()}</div> //이부분은 확정 x
-          )}
-
-          <InlineIcon icon="akar-icons:heart" />
-          <div>{list.like}</div>
+          <S.UserLikeIconList>
+            {list.view ? <span>조회{list.view}</span> : null}
+            {list.updatedAt ? <div> {updateTime}</div> : <div> {createTime}</div>}
+            <div>
+              <InlineIcon icon="akar-icons:heart" />
+              {list.like}
+            </div>
+          </S.UserLikeIconList>
         </S.PostInfoView>
       </S.PostLinkMyPage>
     </S.PostMyPageContent>
