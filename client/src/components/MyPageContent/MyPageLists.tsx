@@ -1,5 +1,5 @@
 import { InlineIcon } from '@iconify/react';
-import { calculateTime } from '../Calculate';
+import { Calculate } from '../Calculate';
 import * as S from './MyPageLists.style';
 
 interface PropsType {
@@ -28,9 +28,9 @@ const MyPageLists = ({ list }: PropsType) => {
         <S.PostInfoView>
           {list.view ? <span>조회{list.view}</span> : null}
           {list.updatedAt ? (
-            <div>{calculateTime(new Date(list.updatedAt)).toLocaleString()}</div>
+            <div>{Calculate(new Date(list.updatedAt)).toLocaleString()}</div>
           ) : (
-            <div>{calculateTime(new Date(list.createdAt)).toLocaleString()}</div> //이부분은 확정 x
+            <div>{Calculate(new Date(list.createdAt)).toLocaleString()}</div> //이부분은 확정 x
           )}
 
           <InlineIcon icon="akar-icons:heart" />
