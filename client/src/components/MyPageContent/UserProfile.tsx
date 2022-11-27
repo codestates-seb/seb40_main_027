@@ -23,7 +23,7 @@ const UserProfile = () => {
   const [updateProfile, setUpdateProfile] = useState<boolean>(false);
   const [userUpdate, setUserUpdate] = useState<RespondsBodyUser | undefined>();
 
-  const MyProfileSubmit: SubmitHandler<IFormInput> = (data: any) => {
+  const MyProfileSubmit: SubmitHandler<IFormInput> = (data: IFormInput) => {
     axios.defaults.withCredentials = true;
     axios({
       method: 'patch',
@@ -54,7 +54,7 @@ const UserProfile = () => {
           <S.ProfileUpdateButton onClick={onClickUpdate}>
             <Icon icon="ph:gear-six-duotone" width="25" height="25" />
           </S.ProfileUpdateButton>
-          <S.FormInputProFile onSubmit={handleSubmit(MyProfileSubmit)}>
+          <S.FromInputProFile onSubmit={handleSubmit(MyProfileSubmit)}>
             <label htmlFor="email">email</label>
             <S.InputProfileForm {...register('email')} />
             <label htmlFor="nickname">nickname</label>
@@ -63,7 +63,7 @@ const UserProfile = () => {
             <S.InputProfileForm {...register('password')} />
 
             <input type="submit" />
-          </S.FormInputProFile>
+          </S.FromInputProFile>
         </S.UserProfileUpdateBody>
       ) : (
         <S.UserProfileUpdateBody>
