@@ -46,17 +46,26 @@ const AnswerListView = ({ list }: answerList, idx: any) => {
   };
 
   const PatchHanlder = () => {
-    axios({
-      method: 'patch',
-      url: `/postscript/comment/${list.postCommentId}`,
-      data: { commentValue },
-      headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoibGFsYUBnbWFpbC5jb20iLCJzdWIiOiJsYWxhQGdtYWlsLmNvbSIsImlhdCI6MTY2OTQ0OTUxNSwiZXhwIjoxNjY5NDkyNzE1fQ.SbuTBucG_fvPnESoQvuBunGpmI3283d9OH1XXVnR2dsmcgiGwtbGDonfzRxiWZSZvY1GmBXxFT3Dob56QLs3lQ',
-      },
-    })
+    //   axios({
+    //     method: 'patch',
+    //     url: `/postscript/comment/${list.postCommentId}`,
+    //     data: { commentValue },
+    //     headers: {
+    //       Authorization:
+    //         'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoibGFsYUBnbWFpbC5jb20iLCJzdWIiOiJsYWxhQGdtYWlsLmNvbSIsImlhdCI6MTY2OTQ0OTUxNSwiZXhwIjoxNjY5NDkyNzE1fQ.SbuTBucG_fvPnESoQvuBunGpmI3283d9OH1XXVnR2dsmcgiGwtbGDonfzRxiWZSZvY1GmBXxFT3Dob56QLs3lQ',
+    //     },
+    //   })
+    //     .then((res) => {
+    //       console.log(res);
+    //       const { data } = res;
+    //       setCommentInfo(data);
+    //       setIsPatch(!isPatch);
+    //     })
+    //     .catch(() => console.log('err'));
+    // };
+    axios
+      .patch(`/postscript/comment/${list.postCommentId}`, { postCommentContent: commentValue })
       .then((res) => {
-        console.log(res);
         const { data } = res;
         setCommentInfo(data);
         setIsPatch(!isPatch);
