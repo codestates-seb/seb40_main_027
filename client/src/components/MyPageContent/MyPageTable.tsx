@@ -1,5 +1,6 @@
 import { Icon } from '@iconify/react';
 import * as S from './MyPageTable.style';
+import { useNavigate } from 'react-router-dom';
 
 const data = [
   {
@@ -67,6 +68,11 @@ interface BootData {
 
 const columns = ['이름', '등록일', '교육기간', '과정', '총 비용', '온/오프라인', '찜'];
 const MyPageTable = () => {
+  const navigate = useNavigate();
+
+  const linkTableHandler = (id: number) => {
+    navigate(`/bootcamp/${id}`);
+  };
   return (
     <S.TableSchedule>
       <thead>
@@ -79,11 +85,8 @@ const MyPageTable = () => {
       <tbody>
         {data.map((item, idx) => {
           return (
-            <tr key={idx}>
-              <S.TableLink to={`/bootcamp/${item.id}`} key={idx}>
-                <td>{item.name} </td>
-              </S.TableLink>
-
+            <tr key={item.id} onClick={() => linkTableHandler(item.id)}>
+              <td>{item.name} </td>
               <td>{item.date}</td>
               <td>{item.duration}</td>
               <td>{item.filed}</td>
