@@ -48,8 +48,8 @@ const ForumArticlesAnswer = () => {
     axios.defaults.withCredentials = true;
     axios({
       method: 'post',
-      url: `/study/${id}/comment`,
-      data: { studyComment: answerContents },
+      url: `/postscript/${id}/comment`,
+      data: { postscriptComment: answerContents },
       headers: {
         Authorization:
           'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoibGFsYUBnbWFpbC5jb20iLCJzdWIiOiJsYWxhQGdtYWlsLmNvbSIsImlhdCI6MTY2OTQ0OTUxNSwiZXhwIjoxNjY5NDkyNzE1fQ.SbuTBucG_fvPnESoQvuBunGpmI3283d9OH1XXVnR2dsmcgiGwtbGDonfzRxiWZSZvY1GmBXxFT3Dob56QLs3lQ',
