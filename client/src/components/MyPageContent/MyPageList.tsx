@@ -57,7 +57,7 @@ const dummyDatalist = [
     postscriptContent: '테스트 내용2 ',
     postscriptTags: ['부트캠프 후기', '개발 공부법'],
     like: 0,
-    view: 0,
+    view: 5,
     user: {
       userId: 0,
       name: '홍길동',
@@ -72,7 +72,7 @@ const dummyDatalist = [
     postscriptContent: '테스트 내용2 ',
 
     like: 0,
-    view: 0,
+    view: 10,
     user: {
       userId: 0,
       name: '홍길동',
@@ -94,8 +94,8 @@ const dummyDatalist = [
       name: '홍길동',
       userEmail: 'hong@gmail.com',
     },
-    createdAt: '2022-11-20T16:35:41.87709',
-    updatedAt: '2022-11-20T16:35:41.87709',
+    createdAt: '2022-10-20T16:35:41.87709',
+    // updatedAt: '2022-11-20T16:35:41.87709',
   },
 
   {
