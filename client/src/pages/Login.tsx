@@ -24,14 +24,14 @@ const Login = () => {
     formState: { errors },
   } = useForm<LoginValue>();
 
-  const onSubmit: SubmitHandler<LoginValue> = (data) => {
-    console.log('submission');
-    useLogIn(data);
-    console.log('done');
-    console.log('prev', logStatus);
-    setLogStatus(!logStatus);
-    console.log('after', logStatus);
-    navigate('/');
+  const onSubmit: SubmitHandler<LoginValue> = async (data) => {
+    // await LogIn(data)
+    await console.log('submission');
+    await useLogIn(data);
+    await console.log('done');
+    await setLogStatus(!logStatus);
+    await console.log('prev', logStatus);
+    // navigate('/');
   };
 
   return (
