@@ -62,8 +62,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         response.setHeader("Authorization", "Bearer " + accessToken);  // (4-4)
         response.setHeader("Refresh", refreshToken);                   // (4-5)
-
-        // 2022 11 25 로그인시 Response body에 닉네임 추가
+        
+        // 2022 11 25 로그인시 Response body 에 닉네임 추가
         Member findMember = memberRepository.findByEmail(member.getEmail()).orElseThrow();
         NickNameDto nickNameDto = new NickNameDto();
         String ninckname = findMember.getNickname();
@@ -72,12 +72,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String json = new Gson().toJson(nickNameDto);
 
         response.getWriter().write(json);
-
-//        System.out.println("t3u2tu3hdhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-//        System.out.println("#####################################" + authResult.getDetails() + "-feewfewfwefewfewfewefw");
-//        System.out.println("#####################################" + ((Member) authResult.getPrincipal()).getNickname() + "-feewfewfwefewfewfewefw");
-//        System.out.println(member.getNickname());
-//        response.sendRedirect("http://localhost:8080/users/test01");
 
         this.getSuccessHandler().onAuthenticationSuccess(request, response, authResult);
     }
