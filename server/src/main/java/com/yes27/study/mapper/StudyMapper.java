@@ -62,6 +62,7 @@ public interface StudyMapper {
             pagingResponse.setView(study.getViews().size());
             pagingResponse.setCreatedAt(study.getCreatedAt());
             pagingResponse.setUpdatedAt(study.getUpdatedAt());
+            pagingResponse.setTagName(study.getTagName());
             pagingResponse.setMember(this.memberToMemberSubset(study.getMember()));
             return pagingResponse;
         }
@@ -76,6 +77,7 @@ public interface StudyMapper {
         response.setStudyContent( study.getStudyContent() );
         response.setCreatedAt( study.getCreatedAt() );
         response.setUpdatedAt( study.getUpdatedAt() );
+        response.setTagName(study.getTagName());
         response.setTotalVotes(study.getVotes().size());  //
         response.setView(study.getViews().size());
         response.setStudyComments( studyCommentListToStudyCommentSubsetList( study.getStudyComments() ) );
