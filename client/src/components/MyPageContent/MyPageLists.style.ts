@@ -47,6 +47,6 @@ export const UserLikeIconList = styled.span`
   width: 15%;
 
   @media screen and (max-width: 414px) {
-    width: 35%;
+    width: 35vw;
   }
 `;
