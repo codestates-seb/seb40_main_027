@@ -4,20 +4,46 @@ import styled from 'styled-components';
 import axios from 'axios';
 import AnswerListView from './AnswerListView';
 import { useParams, useNavigate } from 'react-router';
-import ForumArticleAnswerList from './ForumArticleAnswersList';
+// import ForumArticleAnswerList from './ForumArticleAnswersList';
 import 'react-quill/dist/quill.snow.css';
-import { ChangeEvent } from 'react';
+import { getComment } from './getApi';
+import { useRecoilState } from 'recoil';
+import { answerListData } from '../../atoms/index';
+import { lstat } from 'fs';
 
-interface answerList {
-  postComments: [
-    {
-      createdAt?: string;
-      postCommentId: number;
-      postscriptComment: string;
-      updatedAt?: string;
-    }
-  ];
-}
+// interface answerList {
+//   postComments: [
+//     {
+//       createdAt?: string;
+//       postCommentId: number;
+//       postscriptComment: string;
+//       updatedAt?: string;
+//     }
+//   ];
+// }
+
+// export interface answerListProps {
+//   createdAt: string;
+//   postCommentId: number | undefined;
+//   postscriptComment: string | undefined;
+//   updatedAt?: string;
+// }
+
+// export interface answerMiddle {
+//   list: answerListProps;
+// }
+
+// export interface answerPlaceList {
+//   postComment: answerMiddle[];
+// }
+
+// interface answerUserInfoList {
+//   member: {
+//     memberId: number;
+//     email: string;
+//     nickname: string;
+//   };
+// }
 
 const ForumArticlesAnswer = () => {
   const quillRef = useRef<ReactQuill>();
@@ -25,7 +51,9 @@ const ForumArticlesAnswer = () => {
   // const navigate = useNavigate();
 
   const [answerContents, setAnswerContents] = useState('');
-  const [answerList, setAnswerList] = useState<answerList[]>();
+  const [answerList, setAnswerList] = useRecoilState(answerListData);
+  // const [answerUserName, setAnswerUserName] = useState<answerList[]>();
+  // const [answerList, setAnswerList] = useState<answerList[]>();
 
   // const ContentsHandler = (event: ChangeEvent<HTMLInputElement>) => {
   //   const newValue = event.currentTarget.value;
@@ -57,32 +85,18 @@ const ForumArticlesAnswer = () => {
           'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoicGp3QGdtYWlsLmNvbSIsInN1YiI6InBqd0BnbWFpbC5jb20iLCJpYXQiOjE2Njk2MDk1NDMsImV4cCI6MTY2OTY5NTk0M30.XcAWYYmpkTNFhq-VaW8zKthvWNlBYWjsTAUf2eXoL_Zz0WGL0DO5YD6vKC8B6ofsbYhRz4KgTZcoLlAVvikxMQ',
       },
     });
-    // .then((res) => {
-    //   const { data } = res;
-    // })
-    // .catch(() => console.log('err'));
-  };
-
-  const getComment = () => {
-    return axios({
-      method: 'get',
-      url: `/postscript/${id}`,
-      data: { postscriptComment: answerContents },
-      headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoicGp3QGdtYWlsLmNvbSIsInN1YiI6InBqd0BnbWFpbC5jb20iLCJpYXQiOjE2Njk2MDk1NDMsImV4cCI6MTY2OTY5NTk0M30.XcAWYYmpkTNFhq-VaW8zKthvWNlBYWjsTAUf2eXoL_Zz0WGL0DO5YD6vKC8B6ofsbYhRz4KgTZcoLlAVvikxMQ',
-      },
-    });
   };
 
   const AsyncFunction = async () => {
     axios.defaults.withCredentials = true;
     try {
       const postAwait = await postComment();
-      console.log(postAwait);
-      const getAwait = await getComment();
-      console.log(getAwait);
+
+      const getAwait = await getComment(`${id}`);
+
       setAnswerList(getAwait.data.postComments);
+      // setAnswerUserName(getAwait.data.member);
+      // console.log(answerUserName);
     } catch {
       console.log('err');
     }
@@ -90,26 +104,10 @@ const ForumArticlesAnswer = () => {
 
   const SummitAnswerBtn = () => {
     AsyncFunction();
-
-    // axios.defaults.withCredentials = true;
-    // axios({
-    //   method: 'post',
-    //   url: `/postscript/${id}/comment`,
-    //   data: { postscriptComment: answerContents },
-    //   headers: {
-    //     Authorization:
-    //       'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoibGFsYUBnbWFpbC5jb20iLCJzdWIiOiJsYWxhQGdtYWlsLmNvbSIsImlhdCI6MTY2OTU0NDk3NywiZXhwIjoxNjY5NTg4MTc3fQ.1vRtPnBjCiR7TEx0orF4zkRWbzTQguQgfpBzUVMf_tYuqC4wiQa-iUlG1Bs1wk107oCIvW5i7i1JJ7hiq8qGKA',
-    //   },
-    // })
-    //   .then((res) => {
-    //     const { data } = res;
-    //   })
-    //   .catch(() => console.log('err'));
   };
 
   useEffect(() => {
     axios.defaults.withCredentials = true;
-
     axios({
       method: 'get',
       url: `/postscript/${id}`,
@@ -122,11 +120,17 @@ const ForumArticlesAnswer = () => {
   return (
     <>
       <div>
-        {answerList?.map((list: any, idx) => (
-          <AnswerListView key={idx} list={list}></AnswerListView>
+        {answerList?.map((list, idx) => (
+          <AnswerListView
+            key={idx}
+            createdAt={list.createdAt}
+            postCommentId={list.postCommentId}
+            postscriptComment={list.postscriptComment}
+            updatedAt={list.updatedAt}
+          ></AnswerListView>
         ))}
       </div>
-      {/* <ReactQuill theme="snow" value={answerContents} onChange={(e) => ContentsHandler(e)} /> */}
+
       <ReactQuill theme="snow" value={answerContents} onChange={(e) => setAnswerContents(e)} />
       <div>{answerContents}</div>
       <button onClick={SummitAnswerBtn}>추가</button>
