@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import logo from '../../assets/image/logo.png';
-import { useState } from 'react';
 import Nickname from './Nickname';
 import { RegisterButton, LoginButton } from '../Button/index';
 import { useRecoilValue } from 'recoil';
