@@ -35,6 +35,7 @@ public class StudyService {
 
         Optional.ofNullable(patchDto.getStudyTitle()).ifPresent(title -> study.setStudyTitle(title));
         Optional.ofNullable(patchDto.getStudyContent()).ifPresent(content -> study.setStudyContent(content));
+        Optional.ofNullable(patchDto.getTagName()).ifPresent(tagName -> study.setTagName(tagName));
 
         return studyRepository.save(study);
     }

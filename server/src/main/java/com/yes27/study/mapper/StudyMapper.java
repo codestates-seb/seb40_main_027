@@ -22,6 +22,7 @@ public interface StudyMapper {
 //        member.setMemberId(requestBody.getMemberId());
         study.setStudyTitle(requestBody.getStudyTitle());
         study.setStudyContent(requestBody.getStudyContent());
+        study.setTagName(requestBody.getTagName());
 
         return study;
     }
