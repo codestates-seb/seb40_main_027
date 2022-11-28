@@ -23,3 +23,9 @@ export const isLogin = atom({
   default: false,
   effects_UNSTABLE: [persistAtom],
 });
+
+export const userName = atom({
+  key: 'userName',
+  default: '',
+  effects_UNSTABLE: [persistAtom],
+});
