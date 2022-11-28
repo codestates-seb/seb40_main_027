@@ -43,9 +43,6 @@ export const TableSchedule = styled.table`
         padding: calc(100vh / 40) 0;
       }
     }
-    /* tr {
-      width: 100vw;
-    } */
   }
 `;
 
@@ -59,5 +56,4 @@ export const LikeButton = styled.button`
   border: none;
   background-color: rgba(0, 0, 0, 0);
   margin: 0;
-  /* padding-top: 10%; */
 `;
