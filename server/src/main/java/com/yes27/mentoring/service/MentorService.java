@@ -19,16 +19,8 @@ import java.util.Optional;
 public class MentorService {
     private final MentorRepository mentorRepository;
 
-   private final MentoringLikeRepository mentoringLikeRepository;
-
-    private final MentoringVoteService mentoringVoteService;
-
-
-
-    public MentorService(MentorRepository mentorRepository, MentoringLikeRepository mentoringLikeRepository, MentoringVoteService mentoringVoteService) {
+    public MentorService(MentorRepository mentorRepository) {
         this.mentorRepository = mentorRepository;
-        this.mentoringLikeRepository = mentoringLikeRepository;
-        this.mentoringVoteService = mentoringVoteService;
     }
 
 
@@ -84,14 +76,22 @@ public class MentorService {
     public Mentor findMentor(Long mentoringId){
         Mentor findMentor = findVerifiedMentor((mentoringId));
         findMentor.setViewCount(findMentor.getViewCount() + 1);
-        findMentor.setTotalVotes(findTotle(findMentor));
+//        findMentor.setTotalVotes(findTotle(findMentor));
         return mentorRepository.save(findMentor);
     }
 
     //좋아요 수
-    private int findTotle(Mentor mentor) {
-        int totalvotes = mentoringLikeRepository.findMax(mentor);
-        return totalvotes;
+//    private int findTotle(Mentor mentor) {
+//        int totalvotes = mentoringLikeRepository.findMax(mentor);
+//        return totalvotes;
+//    }
+
+    //좋아요 수, 좋아요 유무
+    public Mentor updateTotal(Mentor mentor,int votetotal, int like){
+        Mentor findMentor = findVerifiedMentor(mentor.getMentoringId());
+        findMentor.setTotalVotes(votetotal);
+        findMentor.setVote(like);
+        return mentorRepository.save(findMentor);
     }
 
     public Mentor findVerifiedMentor(Long mentoringId) {

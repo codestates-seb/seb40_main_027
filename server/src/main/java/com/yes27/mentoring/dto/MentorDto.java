@@ -57,6 +57,8 @@ public class MentorDto {
         private Long mentoringId;
     }
 
+
+    //상세 조회
     @AllArgsConstructor
     @NoArgsConstructor
     @Getter
@@ -71,6 +73,7 @@ public class MentorDto {
         private LocalDateTime updatedAt;
         private String tagName;
         private int totalVotes;
+        private int vote;
         private List<CommentDto.Response> comments;
 
 

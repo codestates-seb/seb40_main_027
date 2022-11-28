@@ -3,6 +3,7 @@ package com.yes27.mentoringLike.service;
 
 import com.yes27.member.entity.Member;
 import com.yes27.mentoring.entity.Mentor;
+import com.yes27.mentoring.service.MentorService;
 import com.yes27.mentoringLike.entity.MentoringVote;
 import com.yes27.mentoringLike.repository.MentoringLikeRepository;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,12 @@ public class MentoringVoteService {
 
     private final MentoringLikeRepository mentoringLikeRepository;
 
+    private final MentorService mentorService;
 
-    public MentoringVoteService(MentoringLikeRepository mentoringLikeRepository) {
+
+    public MentoringVoteService(MentoringLikeRepository mentoringLikeRepository, MentorService mentorService) {
         this.mentoringLikeRepository = mentoringLikeRepository;
+        this.mentorService = mentorService;
     }
 
     public MentoringVote upVote(Mentor mentor, Member member, int vote){
@@ -38,6 +42,7 @@ public class MentoringVoteService {
         findvote.setTotalVotes(voteresult);
         findvote.setMentor(mentor);
         findvote.setMember(member);
+        mentorService.updateTotal(mentor,voteresult, vote);
         return mentoringLikeRepository.save(findvote);
     }
 
