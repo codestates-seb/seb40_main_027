@@ -78,6 +78,6 @@ public interface PostscriptCommentMapper {
 
     }
 
-//    PostscriptCommentDto.postCommentResponse postCommentToPostCommentPostResponseDto2(PostscriptComment postscriptComment);
+    PostscriptCommentDto.postCommentResponse postCommentToPostCommentPostResponseDto2(PostscriptComment postscriptComment);
 
 }

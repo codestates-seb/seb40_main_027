@@ -36,6 +36,7 @@ public class PostscriptDto {
         private String postscriptTitle;
         private String postscriptContent;
         private List<TagDto> tags;
+        private LocalDateTime updatedAt;
 //        private Long memberId;
     }
 

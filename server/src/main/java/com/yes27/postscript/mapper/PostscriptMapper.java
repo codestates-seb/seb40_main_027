@@ -51,7 +51,7 @@ public interface PostscriptMapper {
 
         Member member = memberService.getLoginMember();
         if (member.getMemberId() !=
-                postscriptService.findPostscriptWriter(postscriptId)){ //해당 유저가 쓴 질문글 아니므로 수정 삭제 불가
+                postscriptService.findPostscriptWriter(postscriptPatchDto.getPostscriptId()).getMemberId()){ //해당 유저가 쓴 질문글 아니므로 수정 삭제 불가
             throw new BusinessLogicException(ExceptionCode.ACCESS_DENIED_MEMBER);
         }
 
@@ -60,6 +60,7 @@ public interface PostscriptMapper {
         postscript.setPostscriptTitle(postscriptPatchDto.getPostscriptTitle());
         postscript.setPostscriptContent(postscriptPatchDto.getPostscriptContent());
         postscript.setMember(member);
+        postscript.setUpdatedAt(postscriptPatchDto.getUpdatedAt());
 
         // 태그 수정을 하지 않는 경우 -> 기존 글에서 태그를 불러오기
         if (postscriptPatchDto.getTags() == null) {
