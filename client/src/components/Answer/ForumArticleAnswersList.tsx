@@ -18,22 +18,28 @@ const ForumArticleAnswerList = () => {
   const [answerList, setAnswerList] = useState<answerList[]>();
   const { id } = useParams();
 
-  useEffect(() => {
-    axios.defaults.withCredentials = true;
+  // useEffect(() => {
+  //   axios.defaults.withCredentials = true;
 
-    axios({
-      method: 'get',
-      url: `/postscript/${id}`,
-    }).then((res) => {
-      const { data } = res;
-      setAnswerList(data.postComments);
-    });
-  }, []);
+  //   axios({
+  //     method: 'get',
+  //     url: `/postscript/${id}`,
+  //   }).then((res) => {
+  //     const { data } = res;
+  //     setAnswerList(data.postComments);
+  //   });
+  // }, []);
 
   return (
     <div>
       {answerList?.map((list: any, idx) => (
-        <AnswerListView key={idx} list={list}></AnswerListView>
+        <AnswerListView
+          key={idx}
+          createdAt={list.createdAt}
+          postCommentId={list.postCommentId}
+          postscriptComment={list.postscriptComment}
+          updatedAt={list.updatedAt}
+        ></AnswerListView>
       ))}
     </div>
   );
