@@ -7,6 +7,7 @@ import { RegisterButton, LoginButton } from '../Button/index';
 
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { isLogin, sideBarFloading } from '../../atoms/index';
+import { Link } from 'react-router-dom';
 
 const PageMenu = styled.header`
   width: 100vw;
@@ -93,8 +94,12 @@ const PageHeader = () => {
           </span>
         ) : (
           <LoginSignHeaderButton>
-            <LoginButton />
-            <RegisterButton />
+            <Link to="/users/login">
+              <LoginButton />
+            </Link>
+            <Link to="/users/signup">
+              <RegisterButton />
+            </Link>
           </LoginSignHeaderButton>
         )}
       </div>

@@ -5,7 +5,7 @@ import { LogPageBtn } from '../components/Button';
 import { useLogIn } from '../hooks/useUsers';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { isLogin } from '../atoms';
+import { isLogin, userName } from '../atoms';
 
 // 이메일과 패스워드를 송신하면 유저아이디와 name을 준다. -> 나중에 api와 연동 필요(전송 후, refresh & access 받기)
 // help class쪽 link 추후 연결 필요
@@ -16,21 +16,19 @@ type LoginValue = {
 };
 
 const Login = () => {
-  const navigate = useNavigate();
   const [logStatus, setLogStatus] = useRecoilState(isLogin);
+  const [nickname, setNickname] = useRecoilState(userName);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginValue>();
+  } = useForm<LoginValue>({ mode: 'onBlur' });
 
   const onSubmit: SubmitHandler<LoginValue> = async (data) => {
-    // await LogIn(data)
-    await console.log('submission');
-    await useLogIn(data);
-    await console.log('done');
+    await useLogIn(data, setNickname);
     await setLogStatus(!logStatus);
-    await console.log('prev', logStatus);
+    // useLogIn에 memberRole까지만 입력하면 navigate 활성화
     // navigate('/');
   };
 
@@ -67,7 +65,7 @@ const Login = () => {
                   message: '영어대소문자 및 숫자 및 특수문자 최소 1개씩 포함하여 4-20자입니다',
                 },
                 pattern: {
-                  value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/,
+                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,20}$/,
                   message: '영어대소문자 및 숫자 및 특수문자 최소 1개씩 포함하여 4-20자입니다',
                 },
               })}
@@ -80,7 +78,7 @@ const Login = () => {
           <div className="help">
             <div>아이디 찾기</div>
             <div>비밀번호 찾기</div>
-            <Link to="/user/signup">회원가입</Link>
+            <Link to="/users/signup">회원가입</Link>
           </div>
         </div>
       </div>

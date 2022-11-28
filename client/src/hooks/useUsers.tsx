@@ -5,7 +5,7 @@ interface LogInType {
   password: string;
 }
 
-export const useLogIn = (submitData: LogInType) => {
+export const useLogIn = (submitData: LogInType, setNickname: React.Dispatch<React.SetStateAction<string>>) => {
   axios({
     method: 'post',
     url: `/users/login`,
@@ -15,12 +15,13 @@ export const useLogIn = (submitData: LogInType) => {
     },
   })
     .then((response) => {
+      setNickname(response.data.nickname);
       const access = response.headers.authorization!;
       const refresh = response.headers.refresh || '';
       localStorage.setItem('access', access);
       localStorage.setItem('refresh', refresh);
     })
-    .catch((err) => alert(err));
+    .catch((err) => alert('로그인 실패'));
   return 'success';
 };
 

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-
+import { useRecoilValue } from 'recoil';
+import { userName } from '../../atoms';
 const ImgCircle = styled.span`
   height: 4rem;
 
@@ -11,10 +12,11 @@ const ImgCircle = styled.span`
   }
 `;
 const Nickname = () => {
+  const nickname = useRecoilValue(userName);
   return (
     <ImgCircle>
       <span className="user-img">사</span>
-      <span>Nickname</span>
+      <span>{nickname}</span>
     </ImgCircle>
   );
 };
