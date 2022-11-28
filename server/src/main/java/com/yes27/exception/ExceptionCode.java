@@ -29,6 +29,8 @@ public enum ExceptionCode {
 
     EMAIL_NOT_EXISTS(500, "Email not exists"),
 
+    BOOTCAMP_NOT_FOUND(404, "bootcamp not found"),
+
     SORT_NOT_VALID(410, "RequestParam sort error");
 
     @Getter
