@@ -6,6 +6,7 @@ import { Icon } from '@iconify/react';
 import { RegisterButton, LoginButton } from '../Button/index';
 import { useRecoilState } from 'recoil';
 import { sideBarFloading } from '../../atoms/index';
+import { Link } from 'react-router-dom';
 
 const PageMenu = styled.header`
   width: 100vw;
@@ -15,10 +16,6 @@ const PageMenu = styled.header`
   justify-content: center;
   align-items: center;
   .page-header-content {
-    /* width: 60vw; */
-    /* margin: 0 calc(400 / 20 * 1rem) 0 calc(400 / 20 * 1rem); */ //고치신거랑 합쳐서서 확인해봐야함
-    /* margin-left: 380px;
-    margin-left: 380px; */
     width: 1160px;
     display: flex;
     justify-content: space-between;
@@ -63,6 +60,10 @@ const PageMenu = styled.header`
     }
   }
 `;
+
+const HeaderLink = styled(Link)`
+  text-decoration: none;
+`;
 const LoginSignHeaderButton = styled.span`
   display: flex;
   flex-direction: row;
@@ -89,11 +90,12 @@ const PageHeader = () => {
           <Icon icon="mdi:menu" onClick={CollapseHandler} />
         </span>
         <img src={logo} alt="logo" />
-        {headerMenu.map((el, idx) => (
-          <span className="page-menu" key={idx}>
-            {el}
-          </span>
-        ))}
+        <HeaderLink to={'/test'}>적성검사</HeaderLink>
+        <HeaderLink to={'/'}>로드맵</HeaderLink>
+        <HeaderLink to={'/bootcamp'}>학원일정</HeaderLink>
+        <HeaderLink to={'/postscript'}>수료후기</HeaderLink>
+        <HeaderLink to={'/study'}>스터디모집</HeaderLink>
+        <HeaderLink to={'/mentoring'}>멘토링</HeaderLink>
         {isLogin ? (
           <LoginSignHeaderButton>
             <LoginButton onClick={clickLogin} />
