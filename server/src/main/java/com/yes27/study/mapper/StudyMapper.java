@@ -101,6 +101,7 @@ public interface StudyMapper {
         studyCommentSubset.comment( studyComment.getStudyComment() );
         studyCommentSubset.createdAt( studyComment.getCreatedAt() );
         studyCommentSubset.updatedAt( studyComment.getUpdatedAt() );
+        studyCommentSubset.nickname(studyComment.getMember().getNickname());
 //        studyCommentSubset.member( memberToMemberSubset( studyComment.getMember() ) );
         return studyCommentSubset.build();
     }

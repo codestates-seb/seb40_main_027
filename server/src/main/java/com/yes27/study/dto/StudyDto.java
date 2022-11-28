@@ -81,6 +81,8 @@ public class StudyDto {
         public String comment;
         public LocalDateTime createdAt;
         public LocalDateTime updatedAt;
+
+        public String nickname;
 //        public MemberSubset member;
     }
 
