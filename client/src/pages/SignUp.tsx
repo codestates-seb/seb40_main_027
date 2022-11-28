@@ -4,8 +4,8 @@ import logo from '../assets/image/logo.png';
 import icon from '../assets/image/icon.png';
 import { RegisterButton } from '../components/Button';
 import { useRef } from 'react';
-
-// import { useSignUp } from '../hooks/useUsers';
+import { useSignUp } from '../hooks/useUsers';
+import { useNavigate } from 'react-router-dom';
 
 type SignUpValue = {
   email: string;
@@ -21,13 +21,13 @@ const SignUp = () => {
     handleSubmit,
     formState: { errors },
     watch,
-    getValues,
   } = useForm<SignUpValue>({ mode: 'onBlur' });
   const password = useRef({});
   password.current = watch('password', '');
+  const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<SignUpValue> = async (data) => {
-    console.log(data);
+    useSignUp(data, navigate);
   };
 
   return (
