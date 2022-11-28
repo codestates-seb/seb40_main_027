@@ -1,5 +1,6 @@
 package com.yes27.postscripcomment.dto;
 
+import com.yes27.member.dto.MemberDto;
 import lombok.*;
 import lombok.Builder;
 
@@ -10,6 +11,8 @@ public class PostscriptCommentDto {
 
     @Getter
     @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class Post {
 
         private Long postCommentId;
@@ -48,7 +51,8 @@ public class PostscriptCommentDto {
 
     @Getter
     @Setter
-
+    @Builder
+    @AllArgsConstructor
     public static class postCommentResponse {
 
         private String postscriptComment;
