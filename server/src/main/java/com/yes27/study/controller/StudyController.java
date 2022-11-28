@@ -78,12 +78,24 @@ public class StudyController {
     }
 
     @GetMapping
-    public ResponseEntity getStudies(HttpServletRequest request, @Positive @RequestParam int page, @Positive @RequestParam int size) {
+    public ResponseEntity getStudies(HttpServletRequest request, @Positive @RequestParam int page, @Positive @RequestParam int size,
+        @RequestParam(value = "sort") String sort) {
         Member member = findMemberByHeader(request);
-        Page<Study> pageStudies = studyService.findStudies(page-1, size);
-        List<Study> studies = pageStudies.getContent();
-
-        return new ResponseEntity<>(new MultiResponseDto<>(mapper.studiesToPagingResponses(studies), pageStudies), HttpStatus.OK);
+        if (sort.equals("studyId")) {
+            Page<Study> pageStudies = studyService.findStudies(page-1, size);
+            List<Study> studies = pageStudies.getContent();
+            return new ResponseEntity<>(new MultiResponseDto<>(mapper.studiesToPagingResponses(studies), pageStudies), HttpStatus.OK);
+        } else if (sort.equals("viewCount")) {
+            Page<Study> pageStudies = studyService.findStudiesByView(page-1, size);
+            List<Study> studies = pageStudies.getContent();
+            return new ResponseEntity<>(new MultiResponseDto<>(mapper.studiesToPagingResponses(studies), pageStudies), HttpStatus.OK);
+        } else if (sort.equals("totalVotes")) {
+            Page<Study> pageStudies = studyService.findStudiesByVote(page-1, size);
+            List<Study> studies = pageStudies.getContent();
+            return new ResponseEntity<>(new MultiResponseDto<>(mapper.studiesToPagingResponses(studies), pageStudies), HttpStatus.OK);
+        } else {
+            throw new BusinessLogicException(ExceptionCode.SORT_NOT_VALID);
+        }
     }
 
     @DeleteMapping("/{study-id}")

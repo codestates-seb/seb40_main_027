@@ -8,6 +8,7 @@ import com.yes27.member.entity.Member;
 import com.yes27.member.mapper.MemberMapper;
 import com.yes27.member.service.MemberService;
 import com.yes27.response.SingleResponseDto;
+import java.security.Principal;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +44,14 @@ public class MemberController {
             throw new BusinessLogicException(ExceptionCode.TOKEN_NOT_FOUND);
         }
         System.out.println(email);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    //test
+    @PostMapping("/test01")
+    public ResponseEntity test01(Principal principal) {
+        String email = principal.getName();
+        System.out.println("==========================" + email + "=====================");
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

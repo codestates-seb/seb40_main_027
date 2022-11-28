@@ -8,6 +8,7 @@ import com.yes27.auth.handler.MemberAuthenticationSuccessHandler;
 import com.yes27.auth.jwt.JwtTokenizer;
 import com.yes27.auth.jwt.JwtVerificationFilter;
 import com.yes27.auth.utils.CustomAuthorityUtils;
+import com.yes27.member.repository.MemberRepository;
 import java.util.Arrays;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,11 +30,13 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfig {
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
+    private final MemberRepository memberRepository;
 
     public SecurityConfig(JwtTokenizer jwtTokenizer,
-        CustomAuthorityUtils authorityUtils) {
+        CustomAuthorityUtils authorityUtils, MemberRepository memberRepository) {
         this.jwtTokenizer = jwtTokenizer;
         this.authorityUtils = authorityUtils;
+        this.memberRepository = memberRepository;
     }
 
     @Bean
@@ -70,7 +73,7 @@ public class SecurityConfig {
         public void configure(HttpSecurity builder) throws Exception {
             AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
 
-            JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer);  // DI
+            JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer, memberRepository);  // DI
             jwtAuthenticationFilter.setFilterProcessesUrl("/users/login"); // 디폴트 request URL “/login”을 "/users/login"으로 변경
             jwtAuthenticationFilter.setAuthenticationSuccessHandler(new MemberAuthenticationSuccessHandler());  // MemberAuthenticationSuccessHandler 적용
             jwtAuthenticationFilter.setAuthenticationFailureHandler(new MemberAuthenticationFailureHandler());  // MemberAuthenticationFailureHandler 적용

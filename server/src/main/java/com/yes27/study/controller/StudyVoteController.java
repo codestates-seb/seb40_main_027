@@ -6,6 +6,7 @@ import com.yes27.member.entity.Member;
 import com.yes27.member.service.MemberService;
 import com.yes27.response.SingleResponseDto;
 import com.yes27.study.dto.StudyDto;
+import com.yes27.study.dto.StudyDto.VoteResponse;
 import com.yes27.study.entity.Study;
 import com.yes27.study.repository.StudyRepository;
 import com.yes27.study.service.StudyVoteService;
@@ -42,8 +43,10 @@ public class StudyVoteController {
     @PostMapping("/{study-id}")
     public ResponseEntity voteMember(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId, @RequestParam @Positive int vote) {
         Member member = findMemberByHeader(request);
-        Optional<Study> study = studyRepository.findByStudyId(studyId);
-        StudyDto.VoteResponse response = new StudyDto.VoteResponse();
+
+        Study study = findVerifiedStudy(studyId);
+//        Optional<Study> study = studyRepository.findByStudyId(studyId);
+        VoteResponse response = new VoteResponse();
         response.setStudyId(studyId);
         response.setVote(vote);
 
@@ -51,11 +54,13 @@ public class StudyVoteController {
             if (member != null) {
                 studyVoteService.addVote(member, studyId);
             }
+            study.setTotalVotes(study.getVotes().size());
             response.setTotalVotes(studyVoteService.count(studyId, member));
         } else if (vote == 0) {
             if (member != null) {
                 studyVoteService.cancelVote(member, studyId);
             }
+            study.setTotalVotes(study.getVotes().size());
             response.setTotalVotes(studyVoteService.count(studyId, member));
         } else {
             throw new BusinessLogicException(ExceptionCode.VOTE_ERROR);

@@ -2,10 +2,12 @@ package com.yes27.study.mapper;
 
 import com.yes27.member.entity.Member;
 import com.yes27.study.dto.StudyDto;
+import com.yes27.study.dto.StudyDto.PagingResponse;
 import com.yes27.study.dto.StudyDto.StudyCommentSubset;
 import com.yes27.study.entity.Study;
 import com.yes27.study_comment.entity.StudyComment;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import org.mapstruct.Mapper;
 
@@ -27,12 +29,43 @@ public interface StudyMapper {
 //    Study studyPatchToStudy(StudyDto.Patch requestBody);
 
 //    List<StudyDto.Response> studiesToStudyResponses(List<Study> studies);
-    List<StudyDto.PagingResponse> studiesToPagingResponses(List<Study> studies);
+
 
     StudyDto.PostResponse studyToPostResponse(Study study);
     StudyDto.PatchResponse studyToPatchResponse(Study study);
 
+    // TODO Studies -> PagingResponses
+    default List<StudyDto.PagingResponse> studiesToPagingResponses(List<Study> studies) {
+        if (studies == null) {
+            return null;
+        } else {
+            List<StudyDto.PagingResponse> list = new ArrayList(studies.size());
+            Iterator var3 = studies.iterator();
 
+            while(var3.hasNext()) {
+                Study study = (Study)var3.next();
+                list.add(this.studyToPagingResponse(study));
+            }
+
+            return list;
+        }
+    };
+    default StudyDto.PagingResponse studyToPagingResponse(Study study) {
+        if (study == null) {
+            return null;
+        } else {
+            StudyDto.PagingResponse pagingResponse = new StudyDto.PagingResponse();
+            pagingResponse.setStudyId(study.getStudyId());
+            pagingResponse.setStudyTitle(study.getStudyTitle());
+            pagingResponse.setStudyContent(study.getStudyContent());
+            pagingResponse.setTotalVotes(study.getVotes().size());
+            pagingResponse.setView(study.getViews().size());
+            pagingResponse.setCreatedAt(study.getCreatedAt());
+            pagingResponse.setUpdatedAt(study.getUpdatedAt());
+            pagingResponse.setMember(this.memberToMemberSubset(study.getMember()));
+            return pagingResponse;
+        }
+    }
 
 
     // TODO  Study -> StudyResponse
@@ -44,7 +77,7 @@ public interface StudyMapper {
         response.setCreatedAt( study.getCreatedAt() );
         response.setUpdatedAt( study.getUpdatedAt() );
         response.setTotalVotes(study.getVotes().size());  //
-        response.setView(study.getView());
+        response.setView(study.getViews().size());
         response.setStudyComments( studyCommentListToStudyCommentSubsetList( study.getStudyComments() ) );
         response.setMember( memberToMemberSubset( study.getMember() ) );
         return response;
