@@ -71,8 +71,17 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         NickNameDto nickNameDto = new NickNameDto();
         String ninckname = findMember.getNickname();
         nickNameDto.setNickname(ninckname);
+        if (findMember.getEmail().equals("admin@gmail.com")) {
+            nickNameDto.setMember_role("ADMIN");
+        } else {
+            nickNameDto.setMember_role("USER");
+        }
 
-        String json = new Gson().toJson(nickNameDto);
+        Gson gson = new Gson();
+        String json = gson.toJson(nickNameDto);
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
 
         response.getWriter().write(json);
 

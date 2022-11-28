@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 public class JwtTokenizer {
     @Getter
 //    @Value("${jwt.secret-key}")
-    private String secretKey = "abcdefghijknlmnopqrstuvwxyz";  // JWT 생성 및 검증시 사용되는 Secret Key
+    private String secretKey = "abcdefghijknlmnopqrstuvwxyzabcdefghijknlmnopqrstuvwxyzabcdefghijknlmnopqrstuvwxyzabcdefghijknlmnopqrstuvwxyz";  // JWT 생성 및 검증시 사용되는 Secret Key
 
     @Getter
 //    @Value("${jwt.access-token-expiration-minutes}")
