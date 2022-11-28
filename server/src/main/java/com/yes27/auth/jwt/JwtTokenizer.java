@@ -12,23 +12,22 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 // Bean 등록
 @Component
 public class JwtTokenizer {
     @Getter
-    @Value("${jwt.secret-key}")
-    private String secretKey;  // JWT 생성 및 검증시 사용되는 Secret Key
+//    @Value("${jwt.secret-key}")
+    private String secretKey = "abcdefghijknlmnopqrstuvwxyz";  // JWT 생성 및 검증시 사용되는 Secret Key
 
     @Getter
-    @Value("${jwt.access-token-expiration-minutes}")
-    private int accessTokenExpirationMinutes;  // Access Token 만료 시간 정보
+//    @Value("${jwt.access-token-expiration-minutes}")
+    private int accessTokenExpirationMinutes = 1440;  // Access Token 만료 시간 정보
 
     @Getter
-    @Value("${jwt.refresh-token-expiration-minutes}")
-    private int refreshTokenExpirationMinutes;  // Refresh Token 만료 시간 정보
+//    @Value("${jwt.refresh-token-expiration-minutes}")
+    private int refreshTokenExpirationMinutes = 1440;  // Refresh Token 만료 시간 정보
 
     public String encodeBase64SecretKey(String secretKey) {
         return Encoders.BASE64.encode(secretKey.getBytes(StandardCharsets.UTF_8));
