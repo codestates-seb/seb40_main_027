@@ -40,7 +40,7 @@ public class Postscript extends BaseEntity {
 
     // 조회수
     @Column(length = 5, nullable = false)
-    private Integer View = 0;
+    private Integer view = 0;
 
     @OneToMany(mappedBy = "postscript", cascade = CascadeType.PERSIST) //좋아요
     private List<PostscriptVote> postscriptVotes = new ArrayList<>();

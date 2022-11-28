@@ -11,7 +11,6 @@ import com.yes27.postscript.repository.PostscriptRepository;
 import com.yes27.postscript.service.PostscriptService;
 import com.yes27.response.MultiResponseDto;
 import com.yes27.response.SingleResponseDto;
-import com.yes27.study.entity.Study;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -48,12 +48,13 @@ public class PostscriptController {
     @PostMapping //선택 조언, 후기 글 게시
     public ResponseEntity postPostscript(@Valid @RequestBody PostscriptDto.Post postscriptPostDto){
 
+
     Postscript postscript = postscriptService.createPostscript(
             postscriptMapper.postscriptPostDtoToPostscript(postscriptPostDto,memberService));
 
     return new ResponseEntity<>(
-//            new SingleResponseDto<>(postscriptMapper.postscriptToPostscriptResponse2(postscript)), HttpStatus.CREATED);
-            new SingleResponseDto<>(postscriptMapper.postscriptToPostscriptResponseDto(postscript,memberMapper)), HttpStatus.CREATED);
+            new SingleResponseDto<>(postscriptMapper.postscriptToPostscriptResponse2(postscript)), HttpStatus.CREATED);
+//            new SingleResponseDto<>(postscriptMapper.postscriptToPostscriptResponseDto(postscript,memberMapper)), HttpStatus.CREATED);
     }
 
     @PatchMapping("/{postscript-Id}") //선택 조언, 후기 글 수정
@@ -65,8 +66,8 @@ public class PostscriptController {
         Postscript updatedPostscript = postscriptService.updatePostscript(postscript);
 
         return new ResponseEntity<>(
-//                new SingleResponseDto<>(postscriptMapper.postscriptToPostscriptResponse2(updatedPostscript)), HttpStatus.OK);
-                new SingleResponseDto<>(postscriptMapper.postscriptToPostscriptResponseDto(postscript,memberMapper)), HttpStatus.CREATED);
+                new SingleResponseDto<>(postscriptMapper.postscriptToPostscriptResponse2(updatedPostscript)), HttpStatus.OK);
+//                new SingleResponseDto<>(postscriptMapper.postscriptToPostscriptResponseDto(postscript,memberMapper)), HttpStatus.CREATED);
     }
 
     @GetMapping("/{postscript-Id}") //특정 조언,후기 조회
@@ -92,11 +93,10 @@ public class PostscriptController {
 
     @DeleteMapping("/delete/{postscript-id}") //선택 조언, 후기 글 삭제
     public ResponseEntity deletePostscript(@PathVariable("postscript-id") @Positive long postscriptId) {
-
         Member member = memberService.getLoginMember();
         postscriptService.deletePostscript(postscriptId, member.getMemberId());
-
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 
 }

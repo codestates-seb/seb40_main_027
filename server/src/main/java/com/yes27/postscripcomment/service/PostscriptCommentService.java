@@ -37,20 +37,27 @@ public class PostscriptCommentService {
     }
 
     // 댓글 수정
+//    public PostscriptComment updatePostComment(PostscriptComment postscriptComment) {
+//
+//        PostscriptComment findPostComment = findVerifiedPostscriptComment(postscriptComment.getPostCommentId());
+//        Optional.ofNullable(postscriptComment.getPostscriptComment())
+//                .ifPresent(findPostComment::setPostscriptComment);
+////        findPostComment.setUpdatedAt(LocalDateTime.now());
+//
+//        PostscriptComment updatedPostComment = postscriptCommentRepository.save(postscriptComment);
+//        return updatedPostComment;
+//    }
+
     public PostscriptComment updatePostComment(PostscriptComment postscriptComment) {
+        PostscriptComment findPostComment = findPostComment(postscriptComment.getPostCommentId());
+        findPostComment.setPostscriptComment(postscriptComment.getPostscriptComment());
 
-        PostscriptComment findPostComment = findVerifiedPostscriptComment(postscriptComment.getPostCommentId());
-        Optional.ofNullable(postscriptComment.getPostscriptComment())
-                .ifPresent(findPostComment::setPostscriptComment);
-        findPostComment.setUpdatedAt(LocalDateTime.now());
-
-        return postscriptCommentRepository.save(postscriptComment);
+        return postscriptCommentRepository.save(findPostComment);
     }
-
     public PostscriptComment findPostComment(long postCommentId) {
 
         PostscriptComment findPostComment = findVerifiedPostscriptComment(postCommentId);
-//        postscriptCommentRepository.save(findPostComment);
+        postscriptCommentRepository.save(findPostComment);
 
         return findPostComment;
     }
@@ -61,9 +68,22 @@ public class PostscriptCommentService {
         return findPostComment;
     }
     // 댓글 삭제
-    public void deletePostComment(long postCommentId) {
+    public void deletePostComment(long postCommentId, long memberId) {
         PostscriptComment postscriptComment = findVerifiedPostscriptComment(postCommentId);
+
+        long writerPostCommentId = findWritePostCommentId(postCommentId);
+
+        if(memberId != writerPostCommentId){
+            throw new BusinessLogicException(ExceptionCode.ACCESS_DENIED_MEMBER);
+        }
+
         postscriptCommentRepository.delete(postscriptComment);
+    }
+
+    public long findWritePostCommentId(long postCommentId) {
+        // 질문 작성자 아이디 찾는 메서드
+        PostscriptComment postscriptComment = findVerifiedPostComment(postCommentId);
+        return postscriptComment.getMember().getMemberId();
     }
 
     public List<PostscriptComment> findPostCommentAll() {
@@ -72,5 +92,13 @@ public class PostscriptCommentService {
     public Member findPostscriptCommentWriter(long postCommentId) {
         PostscriptComment findPostscriptComment = findVerifiedPostscriptComment(postCommentId);
         return findPostscriptComment.getMember();
+    }
+
+    public PostscriptComment findVerifiedPostComment(long postCommentId) {
+        Optional<PostscriptComment> optionalPostComment = postscriptCommentRepository.findById(postCommentId);
+        PostscriptComment findPostComment = optionalPostComment.orElseThrow(
+                () -> new BusinessLogicException(ExceptionCode.POSTSCRIPTCOMMENT_NOT_FOUND));
+
+        return findPostComment;
     }
 }

@@ -24,12 +24,12 @@ public class Tag {
 
     //유저 연관관계 추가
     @ManyToOne
-    @JoinColumn(name = "Member_ID")
+    @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "Postscript_ID")
+    @JoinColumn(name = "POSTSCRIPT_ID")
     private Postscript postscript;
 
     public void addPostscript(Postscript postscript) {
