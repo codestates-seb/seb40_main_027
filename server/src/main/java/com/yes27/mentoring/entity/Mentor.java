@@ -35,6 +35,9 @@ public class Mentor extends BaseEntity {
     @Column(nullable = false)
     private int totalVotes;
 
+    @Column(nullable = false)
+    private int vote; // 좋아요 유무
+
     @Column
     private int viewCount;
 
