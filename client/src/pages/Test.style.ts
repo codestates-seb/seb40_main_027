@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 
 export const TestContent = styled.div`
-  height: 100vh;
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100;
+  margin: 0 10% 0 10%;
 
   @media screen and (max-width: 414px) {
     height: 80vh;
+    margin: 0;
   }
 `;
 
@@ -16,7 +19,6 @@ export const FormContent = styled.div`
   justify-content: center;
   align-items: center;
   background-color: var(--greenMain);
-
   height: 80%;
   width: 70%;
   @media screen and (max-width: 414px) {
@@ -26,7 +28,7 @@ export const FormContent = styled.div`
 `;
 
 export const StyleFormCode = styled.div`
-  border: 6px double white;
+  border: 6px double var(--whiteBackground);
   width: 90%;
   height: 90%;
   display: inline;

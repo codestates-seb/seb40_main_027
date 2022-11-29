@@ -1,4 +1,5 @@
 import * as S from './MyPageSchedule.style';
+import MyPageTable from './MyPageTable';
 
 const MyPageSchedule = () => {
   return (
@@ -6,6 +7,7 @@ const MyPageSchedule = () => {
       <div className="schedule-line">
         <S.ScheduleName>찜한 일정</S.ScheduleName>
       </div>
+      <MyPageTable />
     </S.ScheduleContent>
   );
 };
