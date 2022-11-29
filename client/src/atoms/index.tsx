@@ -18,14 +18,12 @@ export const noContent = atom({
   default: 0,
 });
 
-export const isLogin = atom({
-  key: 'isLogin',
-  default: false,
-  effects_UNSTABLE: [persistAtom],
-});
-
-export const userName = atom({
-  key: 'userName',
-  default: '',
+export const logUser = atom({
+  key: 'logUser',
+  default: {
+    isLog: false,
+    member_role: '',
+    nickname: '',
+  },
   effects_UNSTABLE: [persistAtom],
 });

@@ -5,7 +5,7 @@ import { Icon } from '@iconify/react';
 import { RegisterButton, LoginButton } from '../Button/index';
 
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { isLogin, sideBarFloading } from '../../atoms/index';
+import { logUser, sideBarFloading } from '../../atoms/index';
 import { Link } from 'react-router-dom';
 
 const PageMenu = styled.header`
@@ -66,7 +66,7 @@ const LoginSignHeaderButton = styled.span`
 `;
 
 const PageHeader = () => {
-  const logStatus = useRecoilValue(isLogin);
+  const { isLog } = useRecoilValue(logUser);
   const [isCollapse, setIsCollapse] = useRecoilState(sideBarFloading);
 
   const CollapseHandler = () => {
@@ -87,7 +87,7 @@ const PageHeader = () => {
             {el}
           </span>
         ))}
-        {logStatus ? (
+        {isLog ? (
           <span>
             <Nickname />
           </span>

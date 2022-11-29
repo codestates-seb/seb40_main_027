@@ -3,7 +3,7 @@ import logo from '../../assets/image/logo.png';
 import Nickname from './Nickname';
 import { RegisterButton, LoginButton } from '../Button/index';
 import { useRecoilValue } from 'recoil';
-import { isLogin } from '../../atoms';
+import { logUser } from '../../atoms';
 import { Link } from 'react-router-dom';
 
 const HeaderContent = styled.header`
@@ -39,13 +39,13 @@ const HeaderContent = styled.header`
 `;
 
 const MainHeader = () => {
-  const logStatus = useRecoilValue(isLogin);
+  const { isLog } = useRecoilValue(logUser);
 
   return (
     <HeaderContent>
       <div className="header-component">
         <img src={logo} alt="logo" />
-        {logStatus ? (
+        {isLog ? (
           <div>
             <Nickname />
           </div>

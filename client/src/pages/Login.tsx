@@ -4,16 +4,15 @@ import logo from '../assets/image/logo.png';
 import { LogPageBtn } from '../components/Button';
 import { useLogIn } from '../hooks/useUsers';
 import { Link, useNavigate } from 'react-router-dom';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { isLogin, userName } from '../atoms';
+import { useSetRecoilState } from 'recoil';
+import { logUser } from '../atoms';
 
 type LoginValue = {
   email: string;
   password: string;
 };
 const Login = () => {
-  const [logStatus, setLogStatus] = useRecoilState(isLogin);
-  const setNickname = useSetRecoilState(userName);
+  const setLogStatus = useSetRecoilState(logUser);
   const navigate = useNavigate();
   const {
     register,
@@ -22,7 +21,7 @@ const Login = () => {
   } = useForm<LoginValue>({ mode: 'onBlur' });
 
   const onSubmit: SubmitHandler<LoginValue> = async (data) => {
-    useLogIn(data, setNickname, navigate, logStatus, setLogStatus);
+    useLogIn(data, navigate, setLogStatus);
   };
 
   return (

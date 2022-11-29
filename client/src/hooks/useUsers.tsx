@@ -1,16 +1,20 @@
 import axios from 'axios';
 import { NavigateFunction } from 'react-router-dom';
+import { RecoilState } from 'recoil';
 
 interface LogInType {
   email: string;
   password: string;
 }
+interface LogStatus {
+  isLog: boolean;
+  member_role: string;
+  nickname: string;
+}
 export const useLogIn = (
   submitData: LogInType,
-  setNickname: React.Dispatch<React.SetStateAction<string>>,
   navigate: NavigateFunction,
-  logStatus: boolean,
-  setLogStatus: React.Dispatch<React.SetStateAction<boolean>>
+  setLogStatus: React.Dispatch<React.SetStateAction<LogStatus>>
 ) => {
   axios({
     method: 'post',
@@ -21,10 +25,13 @@ export const useLogIn = (
     },
   })
     .then((response) => {
-      setNickname(response.data.nickname);
+      setLogStatus({
+        isLog: true,
+        member_role: response.data.member_role,
+        nickname: response.data.nickname,
+      });
       const access = response.headers.authorization!;
       const refresh = response.headers.refresh || '';
-      setLogStatus(!logStatus);
       localStorage.setItem('access', access);
       localStorage.setItem('refresh', refresh);
       navigate('/');
