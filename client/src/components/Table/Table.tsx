@@ -1,28 +1,11 @@
 import * as S from './Table.style';
 import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
+import dummydata from './dummydata';
+import { Link } from 'react-router-dom';
 
 // 여기서 api 호출(customHook으로 호출)
 
-const data = [
-  {
-    bootcampId: 2,
-    title: '코드스테이츠',
-    beginRegisterDate: '2022 - 11 - 25',
-    finalRegisterDate: '2022 - 11 - 30',
-    process: '백엔드',
-    totalCost: '무료(국비지원)',
-    onOff: '온라인',
-  },
-  {
-    bootcampId: 1,
-    title: '코드스테이츠',
-    beginRegisterDate: '2022 - 11 - 25',
-    finalRegisterDate: '2022 - 11 - 30',
-    process: '프론트엔드',
-    totalCost: '무료(국비지원)',
-    onOff: '온라인',
-  },
-];
+const data = dummydata;
 
 interface BootData {
   bootcampId: number;
