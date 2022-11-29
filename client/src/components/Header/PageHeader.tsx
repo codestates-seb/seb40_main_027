@@ -85,7 +85,7 @@ const PageHeader = () => {
     //상태변하게 하기위하여
     setIsCollapse(!isCollapse);
   };
-  const headerMenu = ['분야선택', '로드맵', '학원일정', '수료후기', '스터디모집', '멘토링'];
+
   return (
     <PageMenu>
       <div className="page-header-content">
