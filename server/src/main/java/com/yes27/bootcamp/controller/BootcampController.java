@@ -5,9 +5,10 @@ import com.yes27.bootcamp.dto.BootcampDto;
 import com.yes27.bootcamp.entity.BootCamp;
 import com.yes27.bootcamp.mapper.BootcampMapper;
 import com.yes27.bootcamp.service.BootcampService;
-import com.yes27.bootcamp.service.MybootcampService;
+import com.yes27.mybootcamp.service.MybootcampService;
 import com.yes27.member.entity.Member;
 import com.yes27.member.service.MemberService;
+
 import com.yes27.response.MultiResponseDto;
 import com.yes27.response.SingleResponseDto;
 import org.springframework.data.domain.Page;
@@ -37,10 +38,17 @@ public class BootcampController {
     //일정 수정
     @PatchMapping("/{bootcampId}")
     public ResponseEntity patchCamp(@PathVariable("bootcampId") Long bootcampId,
-                                    @RequestBody BootcampDto.Patch patchDto){
-        BootCamp bootCamp = mapper.bootPatchDtoToBootcamp(patchDto);
-        BootcampDto.PatchResponse response = mapper.bootcampToBootPatchResponseDto(bootcampService.update(bootCamp,bootcampId));
-        return new ResponseEntity(response, HttpStatus.OK);
+                                    @RequestBody BootcampDto.Patch patchDto,
+                                    HttpServletRequest request){
+        Member findMember = memberService.findMember(request);
+        if(findMember != null && request.isUserInRole("ROLE_ADMIN")) {
+            BootCamp bootCamp = mapper.bootPatchDtoToBootcamp(patchDto);
+            BootcampDto.PatchResponse response = mapper.bootcampToBootPatchResponseDto(bootcampService.update(bootCamp, bootcampId));
+            return new ResponseEntity(response, HttpStatus.OK);
+        }
+        else{
+            throw new RuntimeException("관리자 계정이 아닙니다");
+        }
     }
 
     //일정 조회
@@ -78,10 +86,11 @@ public class BootcampController {
     //찜하기
     @PostMapping("/votes/{bootcampId}")
     public ResponseEntity likeCamp(@PathVariable("bootcampId") Long bootcampId,
+                                   @RequestParam int vote,
                                    HttpServletRequest request){
         Member member = memberService.findMember(request);
         BootCamp findCamp = bootcampService.findBootcamp(bootcampId);
-        mybootcampService.upVote(findCamp, member);
+        mybootcampService.upVote(findCamp, member, vote);
         return new ResponseEntity(HttpStatus.OK);
     }
 

@@ -18,7 +18,8 @@ public interface CommentMapper {
                 comment.getCommentId(),
                 comment.getMentoringComment(),
                 comment.getCreatedAt(),
-                comment.getUpdatedAt()
+                comment.getUpdatedAt(),
+                comment.getMember().getNickname()
 //                comment.getMentor().getMentoringId()
         );
         return response;
