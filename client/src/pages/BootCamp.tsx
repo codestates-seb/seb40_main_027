@@ -2,7 +2,7 @@ import Banner from '../components/Banner';
 import { FilterButton } from '../components/Button';
 import SearchBar from '../components/SearchBar/SearchBar';
 import * as S from './BootCamp.style';
-import { MobileTable, Table } from '../components/Table/Table';
+import { Table } from '../components/Table/Table';
 
 const BootCamp = () => {
   return (
@@ -18,7 +18,7 @@ const BootCamp = () => {
       </S.MiddleSection>
       <section>
         <Table />
-        <MobileTable />
+        {/* <MobileTable /> */}
       </section>
     </S.PageWrap>
   );
