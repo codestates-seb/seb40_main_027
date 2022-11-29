@@ -9,14 +9,6 @@ export interface answerListProps {
 
 interface IanswerList extends Array<answerListProps> {}
 
-// interface answerUserInfoList {
-//   member: {
-//     memberId: number;
-//     email: string;
-//     nickname: string;
-//   };
-// }
-
 export const sideBarFloading = atom({
   key: 'sideBarFloading',
   default: false,
