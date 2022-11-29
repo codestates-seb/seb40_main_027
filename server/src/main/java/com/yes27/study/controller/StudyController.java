@@ -83,9 +83,8 @@ public class StudyController {
     }
 
     @GetMapping
-    public ResponseEntity getStudies(HttpServletRequest request, @Positive @RequestParam int page, @Positive @RequestParam int size,
-        @RequestParam(value = "sort") String sort) {
-        Member member = findMemberByHeader(request);
+    public ResponseEntity getStudies(@Positive @RequestParam int page, @Positive @RequestParam int size, @RequestParam(value = "sort") String sort) {
+//        Member member = findMemberByHeader(request);
         if (sort.equals("studyId")) {
             Page<Study> pageStudies = studyService.findStudies(page-1, size);
             List<Study> studies = pageStudies.getContent();
