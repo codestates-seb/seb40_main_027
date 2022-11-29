@@ -35,7 +35,7 @@ const UserProfile = () => {
       },
     })
       .then((res) => {
-        let datatype = res.data;
+        const datatype = res.data;
         setUserUpdate(datatype);
         setUpdateProfile(!updateProfile);
       })
