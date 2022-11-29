@@ -7,10 +7,23 @@ import com.yes27.member.dto.MemberDto;
 import com.yes27.member.entity.Member;
 import com.yes27.member.mapper.MemberMapper;
 import com.yes27.member.service.MemberService;
+import com.yes27.mentoring.dto.MentorDto;
+import com.yes27.mentoring.mapper.MentorMapper;
+import com.yes27.mentoring.service.MentorService;
+import com.yes27.postscript.dto.PostscriptDto;
+import com.yes27.postscript.mapper.PostscriptMapper;
+import com.yes27.postscript.service.PostscriptService;
 import com.yes27.response.SingleResponseDto;
+
 import java.security.Principal;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
+import com.yes27.study.dto.StudyDto;
+import com.yes27.study.entity.Study;
+import com.yes27.study.mapper.StudyMapper;
+import com.yes27.study.service.StudyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,10 +43,27 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberController {
     private final MemberService memberService;
     private final MemberMapper mapper;
+    private final StudyMapper studyMapper;
+    private final StudyService studyService;
+    private final MentorMapper mentorMapper;
+    private final MentorService mentorService;
 
-    public MemberController(MemberService memberService, MemberMapper mapper) {
+    private final PostscriptMapper postscriptMapper;
+
+    private final PostscriptService postscriptService;
+
+
+    public MemberController(MemberService memberService, MemberMapper mapper,
+                            StudyMapper studyMapper, MentorMapper mentorMapper, PostscriptMapper postscriptMapper,
+                            StudyService studyService, MentorService mentorService,PostscriptService postscriptService) {
         this.memberService = memberService;
         this.mapper = mapper;
+        this.studyMapper = studyMapper;
+        this.mentorMapper = mentorMapper;
+        this.postscriptMapper = postscriptMapper;
+        this.studyService = studyService;
+        this.mentorService = mentorService;
+        this.postscriptService = postscriptService;
     }
 
     //test
@@ -69,12 +99,40 @@ public class MemberController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping("/mypage")
-    public ResponseEntity getMember(HttpServletRequest request) {
+//    @GetMapping("/mypage/uerInfo")
+//    public ResponseEntity getMember(HttpServletRequest request) {
+//        Member member = findMemberByHeader(request);
+//
+//        return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponse(member)), HttpStatus.OK);
+//    }
+
+    @GetMapping("/mypage/uerInfo")
+    public ResponseEntity getMember() {
+        Member member = memberService.getLoginMember();
+
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponse2(member)), HttpStatus.OK);
+    }
+
+    @GetMapping("/mypage/bootcampLike")
+    public ResponseEntity getLikeSchedule(HttpServletRequest request) {
         Member member = findMemberByHeader(request);
+
 
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponse(member)), HttpStatus.OK);
     }
+
+    @GetMapping("/mypage/writing")
+    public ResponseEntity getWriting(HttpServletRequest request) {
+        Member member = findMemberByHeader(request);
+
+        List<StudyDto.PagingResponse> studies = studyMapper.studiesToPagingResponses(studyService.findStudiesPage(member));
+        List<MentorDto.Response> mentors = mentorMapper.mentorsToMentorResponseDtos(mentorService.findMentorsPage(member));
+
+        List<PostscriptDto.PostscriptResponse> postscripts = postscriptMapper.postscriptsToPostscriptResponseDtos(postscriptService.findPostscripts(member),mapper);
+
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberDataDto(member,postscripts,mentors, studies)), HttpStatus.OK);
+    }
+
 
     @PatchMapping
     public ResponseEntity patchMember(HttpServletRequest request, @Valid @RequestBody MemberDto.Patch requestBody) {

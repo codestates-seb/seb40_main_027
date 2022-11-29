@@ -2,6 +2,9 @@ package com.yes27.member.mapper;
 
 import com.yes27.member.dto.MemberDto;
 import com.yes27.member.entity.Member;
+import com.yes27.mentoring.dto.MentorDto;
+import com.yes27.postscript.dto.PostscriptDto;
+import com.yes27.study.dto.StudyDto;
 import com.yes27.study.entity.Study;
 import com.yes27.study_comment.entity.StudyComment;
 import java.util.List;
@@ -82,4 +85,23 @@ public interface MemberMapper {
                 })
             .collect(Collectors.toList());
     }
+
+    // 마이페이지 글쓰기 데이터 불러오기
+    default MemberDto.MemberDataDetailDto memberToMemberDataDto(Member member,
+                                                                List<PostscriptDto.PostscriptResponse> postscripts,
+                                                                List<MentorDto.Response> mentors,
+                                                                List<StudyDto.PagingResponse> studies) {
+
+        MemberDto.MemberDataDetailDto memberDataDto = new MemberDto.MemberDataDetailDto();
+        memberDataDto.setMemberId(member.getMemberId());
+        memberDataDto.setEmail(member.getEmail());
+        memberDataDto.setNickname(member.getNickname());
+        memberDataDto.setPostscript(postscripts);
+        memberDataDto.setMentor(mentors);
+        memberDataDto.setStudies(studies);
+
+
+        return memberDataDto;
+    }
+
 }

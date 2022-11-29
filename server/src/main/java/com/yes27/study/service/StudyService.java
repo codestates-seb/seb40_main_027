@@ -3,9 +3,12 @@ package com.yes27.study.service;
 import com.yes27.exception.BusinessLogicException;
 import com.yes27.exception.ExceptionCode;
 import com.yes27.member.entity.Member;
+import com.yes27.mentoring.entity.Mentor;
 import com.yes27.study.dto.StudyDto;
 import com.yes27.study.entity.Study;
 import com.yes27.study.repository.StudyRepository;
+
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -73,5 +76,9 @@ public class StudyService {
         Study findStudy = optionalStudy.orElseThrow(() -> new BusinessLogicException(ExceptionCode.STUDY_NOT_FOUND));
 
         return findStudy;
+    }
+
+    public List<Study> findStudiesPage(Member member){
+        return studyRepository.findAllByMember(member);
     }
 }
