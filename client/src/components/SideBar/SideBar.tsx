@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil';
 import { sideBarFloading } from '../../atoms/index';
-import Logout from '../Logout/Logout';
+import Logout from '../Button/Logout';
 import * as S from './SideBar.style';
 import { Link } from 'react-router-dom';
 
