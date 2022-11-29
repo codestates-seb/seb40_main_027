@@ -1,17 +1,12 @@
 import styled from 'styled-components';
-import Logout from '../Logout/Logout';
+import Logout from '../Button/Logout';
+import { Icon } from '@iconify/react';
 
 const ImgCircle = styled.span`
   height: 4rem;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  .user-img {
-    width: 2rem;
-    height: 2rem;
-    border: 1px solid red;
-    border-radius: 50%;
-  }
 `;
 
 const LogoutArea = styled.span`
@@ -20,16 +15,19 @@ const LogoutArea = styled.span`
   }
 `;
 
-const NickNameArea = styled.div`
+const NicknameArea = styled.div`
   margin-right: 1rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
 `;
 const Nickname = () => {
   return (
     <ImgCircle>
-      <NickNameArea>
-        <span className="user-img">사</span>
+      <NicknameArea>
+        <Icon icon="carbon:user-avatar-filled-alt" width="30" height="30" />
         <span>Nickname</span>
-      </NickNameArea>
+      </NicknameArea>
       <LogoutArea>
         <Logout />
       </LogoutArea>
