@@ -107,7 +107,7 @@ public interface PostscriptMapper {
         // 태그
         postscriptResponse.setTags(tagsToTagResponseDtos(postscript.getTags()).stream().distinct().collect(Collectors.toList()));
         // 댓글
-        postscriptResponse.setPostComments(postscriptToPostscriptCommentResponse(postscriptComments));
+//        postscriptResponse.setPostComments(postscriptToPostscriptCommentResponse(postscriptComments));
 
         postscriptResponse.setCreatedAt(postscript.getCreatedAt());
         postscriptResponse.setUpdatedAt(postscript.getUpdatedAt());
@@ -121,7 +121,6 @@ public interface PostscriptMapper {
     //여러개 조회
     default List<PostscriptDto.PostscriptResponse> postscriptsToPostscriptResponseDtos(List<Postscript> postscripts, MemberMapper memberMapper) {
         if (postscripts == null) return null;
-
         List<PostscriptDto.PostscriptResponse> postscriptResponseDtos = new ArrayList<>(postscripts.size());
 
         for (Postscript postscript : postscripts) {
