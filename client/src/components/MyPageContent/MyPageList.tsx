@@ -16,11 +16,6 @@ const ListContent = styled.div`
     margin-left: 2rem;
   }
 
-  .mycontent-info {
-    display: flex;
-    justify-content: flex-end;
-  }
-
   @media screen and (max-width: 414px) {
     .list-line {
       display: none;
@@ -95,7 +90,6 @@ const dummyDatalist = [
       userEmail: 'hong@gmail.com',
     },
     createdAt: '2022-10-20T16:35:41.87709',
-    // updatedAt: '2022-11-20T16:35:41.87709',
   },
 
   {
