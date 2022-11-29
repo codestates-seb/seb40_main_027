@@ -10,10 +10,6 @@ const Withdrawal = () => {
       axios({
         method: 'delete',
         url: '/users',
-        headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiaGVoZUBnbWFpbC5jb20iLCJzdWIiOiJoZWhlQGdtYWlsLmNvbSIsImlhdCI6MTY2OTQ0NTA1NiwiZXhwIjoxNjY5NDg4MjU2fQ.xW0VydYPypKjjvOmEdLQjuId0kgiKHThg3GGV6GfktCYr0Q7WnbZZSOiTOt2IHFAH-sAA56lMhzCrC5HcWaTwA',
-        },
       })
         .then(() => {
           navigate('/');
