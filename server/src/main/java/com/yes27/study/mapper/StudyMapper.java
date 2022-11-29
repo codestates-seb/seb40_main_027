@@ -22,6 +22,7 @@ public interface StudyMapper {
 //        member.setMemberId(requestBody.getMemberId());
         study.setStudyTitle(requestBody.getStudyTitle());
         study.setStudyContent(requestBody.getStudyContent());
+        study.setTagName(requestBody.getTagName());
 
         return study;
     }
@@ -62,6 +63,7 @@ public interface StudyMapper {
             pagingResponse.setView(study.getViews().size());
             pagingResponse.setCreatedAt(study.getCreatedAt());
             pagingResponse.setUpdatedAt(study.getUpdatedAt());
+            pagingResponse.setTagName(study.getTagName());
             pagingResponse.setMember(this.memberToMemberSubset(study.getMember()));
             return pagingResponse;
         }
@@ -76,6 +78,7 @@ public interface StudyMapper {
         response.setStudyContent( study.getStudyContent() );
         response.setCreatedAt( study.getCreatedAt() );
         response.setUpdatedAt( study.getUpdatedAt() );
+        response.setTagName(study.getTagName());
         response.setTotalVotes(study.getVotes().size());  //
         response.setView(study.getViews().size());
         response.setStudyComments( studyCommentListToStudyCommentSubsetList( study.getStudyComments() ) );
@@ -101,6 +104,7 @@ public interface StudyMapper {
         studyCommentSubset.comment( studyComment.getStudyComment() );
         studyCommentSubset.createdAt( studyComment.getCreatedAt() );
         studyCommentSubset.updatedAt( studyComment.getUpdatedAt() );
+        studyCommentSubset.nickname(studyComment.getMember().getNickname());
 //        studyCommentSubset.member( memberToMemberSubset( studyComment.getMember() ) );
         return studyCommentSubset.build();
     }

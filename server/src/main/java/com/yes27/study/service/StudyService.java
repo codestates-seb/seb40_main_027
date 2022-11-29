@@ -38,6 +38,7 @@ public class StudyService {
 
         Optional.ofNullable(patchDto.getStudyTitle()).ifPresent(title -> study.setStudyTitle(title));
         Optional.ofNullable(patchDto.getStudyContent()).ifPresent(content -> study.setStudyContent(content));
+        Optional.ofNullable(patchDto.getTagName()).ifPresent(tagName -> study.setTagName(tagName));
 
         return studyRepository.save(study);
     }
@@ -54,12 +55,14 @@ public class StudyService {
 
     // 조회순 정렬
     public Page<Study> findStudiesByView(int page, int size) {
-        return studyRepository.findAll(PageRequest.of(page, size, Sort.by("view").descending()));
+//        return studyRepository.findAll(PageRequest.of(page, size, Sort.by("view").descending()));
+        return studyRepository.findAll(PageRequest.of(page, size, Sort.by(Sort.Order.desc("view"), Sort.Order.desc("studyId"))));
     }
 
     // 추천순 정렬
     public Page<Study> findStudiesByVote(int page, int size) {
-        return studyRepository.findAll(PageRequest.of(page, size, Sort.by("totalVotes").descending()));
+//        return studyRepository.findAll(PageRequest.of(page, size, Sort.by("totalVotes").descending()));
+        return studyRepository.findAll(PageRequest.of(page, size, Sort.by(Sort.Order.desc("totalVotes"), Sort.Order.desc("studyId"))));
     }
 
     public void deleteStudy(Member member, Long studyId) {

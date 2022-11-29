@@ -13,7 +13,7 @@ public class StudyDto {
     public static class Post {
         private String studyTitle;
         private String studyContent;
-//        private Long memberId;
+        private String tagName;  // 태그
     }
 
     @Getter
@@ -25,6 +25,8 @@ public class StudyDto {
         private String studyTitle;
         @NotSpace
         private String studyContent;
+
+        private String tagName;  // 태그
     }
 
     @Getter
@@ -52,6 +54,9 @@ public class StudyDto {
 
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
+
+        private String tagName;  // 태그
+
         public MemberSubset member;
     }
 
@@ -69,6 +74,8 @@ public class StudyDto {
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
 
+        private String tagName;  // 태그
+
         public List<StudyCommentSubset> studyComments;
         public MemberSubset member;
     }
@@ -81,6 +88,8 @@ public class StudyDto {
         public String comment;
         public LocalDateTime createdAt;
         public LocalDateTime updatedAt;
+
+        public String nickname;
 //        public MemberSubset member;
     }
 
