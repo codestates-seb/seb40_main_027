@@ -81,7 +81,7 @@ public class StudyCommentController {
 
     @GetMapping("/{study-id}/comment/{comment-id}")
     public ResponseEntity getComment(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId, @PathVariable("comment-id") @Positive Long studyCommentId) {
-        Member member = findMemberByHeader(request);
+//        Member member = findMemberByHeader(request);
         StudyComment studyComment = studyCommentService.findComment(studyCommentId);
 
         return new ResponseEntity<>(mapper.commentToCommentResponse(studyComment), HttpStatus.OK);
