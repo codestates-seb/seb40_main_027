@@ -12,6 +12,7 @@ import PrivateRoute from './components/Route/PrivateRoute';
 import MainHeader from './components/Header/MainHeader';
 import PageHeader from './components/Header/PageHeader';
 import PageNotFound from './pages/PageNotFound';
+import LoadMap from './pages/LoadMap';
 
 function App() {
   const { pathname } = useLocation();
@@ -29,6 +30,7 @@ function App() {
         <Route path="/users/signup" element={<SignUp />} />
         <Route path="/users/mypage" element={<MyPage />} />
         <Route path="/test" element={<Test />} />
+        <Route path="/loadmap" element={<LoadMap />} />
         <Route path="/bootcamp" element={<BootCamp />} />
         <Route path="/bootcamp/1" element={<BootCampDetail />} />
         <Route path="/postscript" element={<Forum />} />
