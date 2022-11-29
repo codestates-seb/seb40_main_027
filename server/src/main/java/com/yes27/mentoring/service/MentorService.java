@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -108,6 +109,11 @@ public class MentorService {
     public void delete(Long mentoringId, Member member){
         Mentor mentor = findVerifiedMentorMember(mentoringId, member);
         mentorRepository.delete(mentor);
+    }
+
+    //마이페이지에 이용
+    public List<Mentor> findMentorsPage(Member member){
+        return mentorRepository.findAllByMember(member);
     }
 
 
