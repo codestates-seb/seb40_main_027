@@ -109,6 +109,36 @@ public interface PostscriptMapper {
 //        postscriptResponse.setTags(tagsToTagResponseDtos(postscript.getTags()).stream().distinct().collect(Collectors.toList()));
         postscriptResponse.setTagName(postscript.getTagName());
         // 댓글
+        postscriptResponse.setPostComments(postscriptToPostscriptCommentResponse(postscriptComments));
+
+        postscriptResponse.setCreatedAt(postscript.getCreatedAt());
+        postscriptResponse.setUpdatedAt(postscript.getUpdatedAt());
+
+        return postscriptResponse;
+    }
+
+    default PostscriptDto.PostscriptResponse2 postscriptToPostscriptResponseDto2(Postscript postscript, MemberMapper memberMapper) {
+
+//        List<PostscriptComment> postscriptComments2 = postscript.getPostComments();
+
+        PostscriptDto.PostscriptResponse2 postscriptResponse = new PostscriptDto.PostscriptResponse2();
+        postscriptResponse.setPostscriptId(postscript.getPostscriptId());
+        postscriptResponse.setPostscriptTitle(postscript.getPostscriptTitle());
+        postscriptResponse.setPostscriptContent(postscript.getPostscriptContent());
+        postscriptResponse.setView(postscript.getView());
+
+        postscriptResponse.setTotalVotes(postscript.getVotes());
+
+        postscriptResponse.setPostscriptStatus(postscript.getPostscriptStatus());
+
+        // Member 관계 추가
+        Member member = postscript.getMember();//질문 작성자 정보 추가
+        postscriptResponse.setMember(memberMapper.memberToMemberResponse2(member));
+
+        // 태그
+//        postscriptResponse.setTags(tagsToTagResponseDtos(postscript.getTags()).stream().distinct().collect(Collectors.toList()));
+        postscriptResponse.setTagName(postscript.getTagName());
+        // 댓글
 //        postscriptResponse.setPostComments(postscriptToPostscriptCommentResponse(postscriptComments));
 
         postscriptResponse.setCreatedAt(postscript.getCreatedAt());

@@ -45,7 +45,27 @@ public class PostscriptDto {
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class PostscriptResponse {  // 선택후기 등록 response
+    public static class PostscriptResponse {  // 선택후기 등록 전체 조회 response
+
+        private Long postscriptId;
+        private String postscriptTitle;
+        private String postscriptContent;
+        private Postscript.PostscriptStatus postscriptStatus;
+        private Integer totalVotes; // 좋아요 -> 투표
+        private Integer View;
+        private LocalDateTime createdAt;
+        private LocalDateTime updatedAt;
+        private List<PostscriptCommentDto.Response> postComments; // 댓글
+        private String tagName; // 태그
+        private MemberDto.Response2 member; //유저 추가
+//        private MemberSubset member; //유저 추가
+    }
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class PostscriptResponse2 {  // 선택후기 등록 조회 response
 
         private Long postscriptId;
         private String postscriptTitle;
@@ -58,7 +78,7 @@ public class PostscriptDto {
 //        private List<PostscriptCommentDto.Response> postComments; // 댓글
         private String tagName; // 태그
         private MemberDto.Response2 member; //유저 추가
-//        private MemberSubset member; //유저 추가
+
     }
     @Getter
     @Setter
