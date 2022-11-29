@@ -1,5 +1,6 @@
 package com.yes27.mentoringcomment.dto;
 
+import com.yes27.member.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -35,7 +36,8 @@ public class CommentDto {
         private String mentoringComment;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
-//        private long mentoringId;
+//        private Member member;
+        private String nickname;
 
 
     }

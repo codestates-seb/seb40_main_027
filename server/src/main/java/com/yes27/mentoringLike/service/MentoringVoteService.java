@@ -42,7 +42,7 @@ public class MentoringVoteService {
         findvote.setTotalVotes(voteresult);
         findvote.setMentor(mentor);
         findvote.setMember(member);
-        mentorService.updateTotal(mentor,voteresult, vote);
+        mentorService.updateTotal(mentor,voteresult);
         return mentoringLikeRepository.save(findvote);
     }
 

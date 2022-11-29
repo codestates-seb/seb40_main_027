@@ -6,6 +6,7 @@ import com.yes27.exception.ExceptionCode;
 import com.yes27.member.entity.Member;
 import com.yes27.mentoring.entity.Mentor;
 import com.yes27.mentoring.repository.MentorRepository;
+import com.yes27.mentoringLike.entity.MentoringVote;
 import com.yes27.mentoringLike.repository.MentoringLikeRepository;
 import com.yes27.mentoringLike.service.MentoringVoteService;
 import org.springframework.data.domain.Page;
@@ -16,12 +17,16 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 public class MentorService {
     private final MentorRepository mentorRepository;
 
-    public MentorService(MentorRepository mentorRepository) {
+    private final MentoringLikeRepository mentoringLikeRepository;
+
+    public MentorService(MentorRepository mentorRepository, MentoringLikeRepository mentoringLikeRepository) {
         this.mentorRepository = mentorRepository;
+        this.mentoringLikeRepository = mentoringLikeRepository;
     }
 
 
@@ -88,10 +93,27 @@ public class MentorService {
 //    }
 
     //좋아요 수, 좋아요 유무
-    public Mentor updateTotal(Mentor mentor,int votetotal, int like){
+//    public Mentor updateTotal(Mentor mentor,int votetotal, int like){
+//        Mentor findMentor = findVerifiedMentor(mentor.getMentoringId());
+//        findMentor.setTotalVotes(votetotal);
+//        findMentor.setVote(like);
+//        return mentorRepository.save(findMentor);
+//    }
+
+    public Mentor updateTotal(Mentor mentor,int votetotal) {
         Mentor findMentor = findVerifiedMentor(mentor.getMentoringId());
         findMentor.setTotalVotes(votetotal);
-        findMentor.setVote(like);
+        return mentorRepository.save(findMentor);
+    }
+    public Mentor isVote(Long mentoringId, Member member){
+        Mentor findMentor = findVerifiedMentor(mentoringId);
+        findMentor.setViewCount(findMentor.getViewCount() + 1);
+        Optional<MentoringVote> findVote = mentoringLikeRepository.findByMentorAndMember(findMentor,member);
+        if(findVote.isPresent()){
+            findMentor.setVote(findVote.get().getVote());
+        }else{
+            findMentor.setVote(0);
+        }
         return mentorRepository.save(findMentor);
     }
 

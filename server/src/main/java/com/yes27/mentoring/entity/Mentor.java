@@ -48,6 +48,9 @@ public class Mentor extends BaseEntity {
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
+    @OneToMany(mappedBy = "mentor", cascade = CascadeType.REMOVE)
+    private List<MentoringVote> mentoringVote;
+
 //    @OneToMany(mappedBy = "mentor",  cascade = CascadeType.REMOVE)
 //    private List<MentoringVote> mentoringVotes;
 

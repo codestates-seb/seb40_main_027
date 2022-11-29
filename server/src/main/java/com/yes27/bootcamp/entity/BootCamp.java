@@ -64,8 +64,14 @@ public class BootCamp {
     //수강만족도
     private String satisfaction;
 
+    //주소
+    private String address;
+
+    //정원
+    private String yardMan;
+
     //좋아요 유무
-//    private int vote;
+    private int vote;
 
 
 }

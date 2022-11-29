@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -66,8 +67,11 @@ public class MentorController {
 
     //게시글 상세조회
     @GetMapping("/{mentorId}")
-    public ResponseEntity getMentor(@PathVariable("mentorId") @Positive long mentorId){
-        MentorDto.MentorsResponse response = mapper.mentoringToMentoringDetailsResponse(mentorService.findMentor(mentorId));
+    public ResponseEntity getMentor(@PathVariable("mentorId") @Positive long mentorId,
+                                    HttpServletRequest request){
+        Member member = memberService.findMember(request);
+        MentorDto.MentorsResponse response = mapper.mentoringToMentoringDetailsResponse(mentorService.isVote(mentorId,member));
+//            MentorDto.MentorsResponse response = mapper.mentoringToMentoringDetailsResponse(mentorService.findMentor(mentorId));
         return new ResponseEntity(new SingleResponseDto<>(response), HttpStatus.OK);
     }
 
