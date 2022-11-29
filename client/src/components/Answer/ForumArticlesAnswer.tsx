@@ -10,12 +10,12 @@ import { useRecoilState } from 'recoil';
 import { answerListData } from '../../atoms/index';
 
 const QuillContent = styled.div`
-  border: 3px solid red;
+  /* border: 3px solid red;
   display: flex;
   justify-content: center;
   height: 18vh;
   flex-direction: column;
-  flex-wrap: wrap;
+  flex-wrap: wrap; */
   /* background-color: gray; */
 `;
 

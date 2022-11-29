@@ -14,7 +14,7 @@ const AnswerTextContent = styled.div`
   border-bottom: 1px solid black;
 `;
 
-const AnswerListView = ({ createdAt, postCommentId, updatedAt, postscriptComment }: answerListProps) => {
+const StudyAnswerList = ({ createdAt, postCommentId, updatedAt, postscriptComment }: answerListProps) => {
   const [isPatch, setIsPatch] = useState<boolean>(false);
   // const [commentInfo, setCommentInfo] = useState([]);
   const [commentValue, setCommentValue] = useState('');
@@ -149,4 +149,4 @@ const AnswerListView = ({ createdAt, postCommentId, updatedAt, postscriptComment
   );
 };
 
-export default AnswerListView;
+export default StudyAnswerList;
