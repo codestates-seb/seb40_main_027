@@ -3,7 +3,7 @@ package com.yes27.postscript.service;
 import com.yes27.member.entity.Member;
 import com.yes27.postscripcomment.entity.PostscriptComment;
 import com.yes27.postscript.entity.Tag;
-import com.yes27.postscript.repository.TagRepository;
+//import com.yes27.postscript.repository.TagRepository;
 import org.springframework.context.annotation.Lazy;
 import com.yes27.exception.BusinessLogicException;
 import com.yes27.exception.ExceptionCode;
@@ -25,15 +25,16 @@ public class PostscriptService {
 
     private final PostscriptRepository postscriptRepository;
     private final PostscriptVoteService postscriptVoteService;
-    private final TagRepository tagRepository;
+//    private final TagRepository tagRepository;
 
 
     public PostscriptService(PostscriptRepository postscriptRepository,
-                             @Lazy PostscriptVoteService postscriptVoteService,
-                             TagRepository tagRepository) {
+                             @Lazy PostscriptVoteService postscriptVoteService
+//                             ,TagRepository tagRepository
+    ) {
         this.postscriptRepository = postscriptRepository;
         this.postscriptVoteService = postscriptVoteService;
-        this.tagRepository = tagRepository;
+//        this.tagRepository = tagRepository;
     }
 
     public Postscript createPostscript(Postscript postscript) {
@@ -88,17 +89,18 @@ public class PostscriptService {
         Postscript findPostscript = findVerifiedPostscript(postscript.getPostscriptId());
         findPostscript.setPostscriptTitle(postscript.getPostscriptTitle());
         findPostscript.setPostscriptContent(postscript.getPostscriptContent());
+        findPostscript.setTagName(postscript.getTagName());
 
-        List<Tag> tagList = postscript.getTags();
-        Optional.ofNullable(tagList)
-                .ifPresent(findPostscript::setTags);
-//        findPostscript.setTags(postscript.getTags());
-
-
-        if (tagList != null) {
-            for (Tag tag : tagList)
-                tagRepository.save(tag);
-        }
+//        List<Tag> tagList = postscript.getTags();
+//        Optional.ofNullable(tagList)
+//                .ifPresent(findPostscript::setTags);
+////        findPostscript.setTags(postscript.getTags());
+//
+//
+//        if (tagList != null) {
+//            for (Tag tag : tagList)
+//                tagRepository.save(tag);
+//        }
 
         Postscript updatedPostscript = postscriptRepository.save(findPostscript);
         return updatedPostscript;

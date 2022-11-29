@@ -23,8 +23,9 @@ public class PostscriptDto {
             @NotBlank(message = "선택 조언 및 후기의 내용을 적어주세요")
             private String postscriptContent;
 
-            @NotNull(message = "부트캠프 조언, 후기 중 골라주세요")
-            private List<TagDto> tags;
+            @NotBlank(message = "부트캠프 조언, 후기 중 골라주세요")
+            private String tagName;
+
             private Long memberId;
         }
 
@@ -35,7 +36,7 @@ public class PostscriptDto {
         private Long postscriptId;
         private String postscriptTitle;
         private String postscriptContent;
-        private List<TagDto> tags;
+        private String tagName;
         private LocalDateTime updatedAt;
 //        private Long memberId;
     }
@@ -55,7 +56,7 @@ public class PostscriptDto {
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
 //        private List<PostscriptCommentDto.Response> postComments; // 댓글
-        private List<TagResponseDto> Tags; // 태그
+        private String tagName; // 태그
         private MemberDto.Response2 member; //유저 추가
 //        private MemberSubset member; //유저 추가
     }
