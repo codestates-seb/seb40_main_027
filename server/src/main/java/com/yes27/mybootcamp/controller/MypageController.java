@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
-@RequestMapping({"users/mypage/bootcampLike"})
+@RequestMapping("users/mypage/bootcampLike")
 public class MypageController {
     private final MybootcampService mybootcampService;
     private final MybootcampMapper mybootcampMapper;

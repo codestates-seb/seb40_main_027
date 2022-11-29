@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 public class MybootcampService {
     private final MybootcampRepository mybootcampRepository;
     private final BootcampService bootcampService;
-    List<BootCamp> mybootCampList = new ArrayList();
 
     public MybootcampService(MybootcampRepository mybootcampRepository, BootcampService bootcampService) {
         this.mybootcampRepository = mybootcampRepository;
