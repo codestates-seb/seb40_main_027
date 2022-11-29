@@ -73,7 +73,7 @@ public class PostscriptController {
     @GetMapping("/{postscript-Id}") //특정 조언,후기 조회
     public ResponseEntity getPostscript(@PathVariable("postscript-Id") @Positive long postscriptId){
 
-        PostscriptDto.PostscriptResponse response = postscriptMapper.postscriptToPostscriptResponseDto(postscriptService.findPostscript(postscriptId), memberMapper);
+        PostscriptDto.PostscriptResponse2 response = postscriptMapper.postscriptToPostscriptResponseDto2(postscriptService.findPostscript(postscriptId), memberMapper);
 
         return new ResponseEntity(response, HttpStatus.OK);
     }
