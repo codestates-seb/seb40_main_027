@@ -45,7 +45,7 @@ public class PostscriptCommentDto {
 
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
-
+        private String nickname;
         // UserDto 넣기
     }
 

@@ -65,7 +65,8 @@ public interface PostscriptCommentMapper {
                 postscriptComment.getPostCommentId(),
                 postscriptComment.getPostscriptComment(),
                 postscriptComment.getCreatedAt(),
-                postscriptComment.getUpdatedAt()
+                postscriptComment.getUpdatedAt(),
+                postscriptComment.getMember().getNickname()
 //                postscriptComment.setMember(memberMapper.memberToMemberResponse(member));
 
         );

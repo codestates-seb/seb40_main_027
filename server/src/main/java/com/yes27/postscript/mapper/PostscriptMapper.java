@@ -82,6 +82,7 @@ public interface PostscriptMapper {
                         .postscriptComment(postscriptComment.getPostscriptComment())
                         .createdAt(postscriptComment.getCreatedAt())
                         .updatedAt(postscriptComment.getUpdatedAt())
+                        .nickname(postscriptComment.getMember().getNickname())
                         .build())
                 .collect(Collectors.toList());
     }
@@ -89,7 +90,7 @@ public interface PostscriptMapper {
     // 질문 응답
     default PostscriptDto.PostscriptResponse postscriptToPostscriptResponseDto(Postscript postscript, MemberMapper memberMapper) {
 
-        List<PostscriptComment> postscriptComments = postscript.getPostComments();
+//        List<PostscriptComment> postscriptComments = postscript.getPostComments();
 
         PostscriptDto.PostscriptResponse postscriptResponse = new PostscriptDto.PostscriptResponse();
         postscriptResponse.setPostscriptId(postscript.getPostscriptId());
@@ -109,7 +110,7 @@ public interface PostscriptMapper {
 //        postscriptResponse.setTags(tagsToTagResponseDtos(postscript.getTags()).stream().distinct().collect(Collectors.toList()));
         postscriptResponse.setTagName(postscript.getTagName());
         // 댓글
-        postscriptResponse.setPostComments(postscriptToPostscriptCommentResponse(postscriptComments));
+//        postscriptResponse.setPostComments(postscriptToPostscriptCommentResponse(postscriptComments));
 
         postscriptResponse.setCreatedAt(postscript.getCreatedAt());
         postscriptResponse.setUpdatedAt(postscript.getUpdatedAt());
@@ -119,7 +120,7 @@ public interface PostscriptMapper {
 
     default PostscriptDto.PostscriptResponse2 postscriptToPostscriptResponseDto2(Postscript postscript, MemberMapper memberMapper) {
 
-//        List<PostscriptComment> postscriptComments2 = postscript.getPostComments();
+        List<PostscriptComment> postscriptComments = postscript.getPostComments();
 
         PostscriptDto.PostscriptResponse2 postscriptResponse = new PostscriptDto.PostscriptResponse2();
         postscriptResponse.setPostscriptId(postscript.getPostscriptId());
@@ -139,7 +140,7 @@ public interface PostscriptMapper {
 //        postscriptResponse.setTags(tagsToTagResponseDtos(postscript.getTags()).stream().distinct().collect(Collectors.toList()));
         postscriptResponse.setTagName(postscript.getTagName());
         // 댓글
-//        postscriptResponse.setPostComments(postscriptToPostscriptCommentResponse(postscriptComments));
+        postscriptResponse.setPostComments(postscriptToPostscriptCommentResponse(postscriptComments));
 
         postscriptResponse.setCreatedAt(postscript.getCreatedAt());
         postscriptResponse.setUpdatedAt(postscript.getUpdatedAt());
