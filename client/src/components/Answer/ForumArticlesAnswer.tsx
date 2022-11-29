@@ -49,7 +49,7 @@ const ForumArticlesAnswer = () => {
       data: { postscriptComment: answerContents },
       headers: {
         Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoicGp3QGdtYWlsLmNvbSIsInN1YiI6InBqd0BnbWFpbC5jb20iLCJpYXQiOjE2Njk2MDk1NDMsImV4cCI6MTY2OTY5NTk0M30.XcAWYYmpkTNFhq-VaW8zKthvWNlBYWjsTAUf2eXoL_Zz0WGL0DO5YD6vKC8B6ofsbYhRz4KgTZcoLlAVvikxMQ',
+          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoicGp3QGdtYWlsLmNvbSIsInN1YiI6InBqd0BnbWFpbC5jb20iLCJpYXQiOjE2Njk2OTU4MzYsImV4cCI6MTY2OTc4MjIzNn0.P6yVNzmbVyPjAe5RlYE3i-7LG-hvHiCOSP0dPFnsaGVa9BiwqVQ0UVCewVlfmsWkYHdNF5Wg2zI9CEs6EnKxVg',
       },
     });
   };
