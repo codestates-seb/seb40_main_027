@@ -4,61 +4,28 @@ import styled from 'styled-components';
 import axios from 'axios';
 import AnswerListView from './AnswerListView';
 import { useParams, useNavigate } from 'react-router';
-// import ForumArticleAnswerList from './ForumArticleAnswersList';
 import 'react-quill/dist/quill.snow.css';
-import { getComment } from './getApi';
+import { getComment } from '../../utils/API/getApi';
 import { useRecoilState } from 'recoil';
 import { answerListData } from '../../atoms/index';
-import { lstat } from 'fs';
 
-// interface answerList {
-//   postComments: [
-//     {
-//       createdAt?: string;
-//       postCommentId: number;
-//       postscriptComment: string;
-//       updatedAt?: string;
-//     }
-//   ];
-// }
-
-// export interface answerListProps {
-//   createdAt: string;
-//   postCommentId: number | undefined;
-//   postscriptComment: string | undefined;
-//   updatedAt?: string;
-// }
-
-// export interface answerMiddle {
-//   list: answerListProps;
-// }
-
-// export interface answerPlaceList {
-//   postComment: answerMiddle[];
-// }
-
-// interface answerUserInfoList {
-//   member: {
-//     memberId: number;
-//     email: string;
-//     nickname: string;
-//   };
-// }
+const QuillContent = styled.div`
+  border: 3px solid red;
+  display: flex;
+  justify-content: center;
+  height: 18vh;
+  flex-direction: column;
+  flex-wrap: wrap;
+  /* background-color: gray; */
+`;
 
 const ForumArticlesAnswer = () => {
   const quillRef = useRef<ReactQuill>();
   const { id } = useParams();
-  // const navigate = useNavigate();
-
   const [answerContents, setAnswerContents] = useState('');
   const [answerList, setAnswerList] = useRecoilState(answerListData);
   // const [answerUserName, setAnswerUserName] = useState<answerList[]>();
   // const [answerList, setAnswerList] = useState<answerList[]>();
-
-  // const ContentsHandler = (event: ChangeEvent<HTMLInputElement>) => {
-  //   const newValue = event.currentTarget.value;
-  //   setAnswerContents(newValue);
-  // };
 
   const modules = useMemo(
     () => ({
@@ -91,9 +58,7 @@ const ForumArticlesAnswer = () => {
     axios.defaults.withCredentials = true;
     try {
       const postAwait = await postComment();
-
       const getAwait = await getComment(`${id}`);
-
       setAnswerList(getAwait.data.postComments);
       // setAnswerUserName(getAwait.data.member);
       // console.log(answerUserName);
@@ -130,10 +95,11 @@ const ForumArticlesAnswer = () => {
           ></AnswerListView>
         ))}
       </div>
+      <QuillContent>
+        <ReactQuill theme="snow" value={answerContents} onChange={(e) => setAnswerContents(e)} />
 
-      <ReactQuill theme="snow" value={answerContents} onChange={(e) => setAnswerContents(e)} />
-      <div>{answerContents}</div>
-      <button onClick={SummitAnswerBtn}>추가</button>
+        <button onClick={SummitAnswerBtn}>추가</button>
+      </QuillContent>
     </>
   );
 };
