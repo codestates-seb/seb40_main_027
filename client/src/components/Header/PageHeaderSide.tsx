@@ -7,16 +7,16 @@ const PageHeaderSide = () => {
   const isCollapse = useRecoilValue(sideBarFloading);
 
   return (
-    <div>
+    <>
       {isCollapse ? (
-        <div>
+        <>
           <PageHeader />
           <SideBar />
-        </div>
+        </>
       ) : (
         <PageHeader />
       )}
-    </div>
+    </>
   );
 };
 
