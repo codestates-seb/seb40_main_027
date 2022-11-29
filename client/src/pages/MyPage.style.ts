@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const PageSize = styled.div`
-  overflow-y: auto; // 나중에 재수정할 수 도 있을 것 같아서 일단 주석 처리만 진행햇어요.
+  overflow-y: auto;
 `;
 
 export const MyPageContent = styled.div`
