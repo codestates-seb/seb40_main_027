@@ -4,21 +4,10 @@ import styled from 'styled-components';
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
 import { useRef, useState, useMemo, KeyboardEvent, useCallback, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router';
-import { getComment } from './getApi';
+import { useParams } from 'react-router';
+import { getComment } from '../../utils/API/getApi';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { answerListData, answerListProps } from '../../atoms/index';
-
-// interface answerListP {
-//   postComments: [
-//     {
-//       createdAt?: string;
-//       postCommentId: number;
-//       postscriptComment: string;
-//       updatedAt?: string;
-//     }
-//   ];
-// }
 
 const AnswerTextContent = styled.div`
   /* background-color: red; */
@@ -26,13 +15,11 @@ const AnswerTextContent = styled.div`
 `;
 
 const AnswerListView = ({ createdAt, postCommentId, updatedAt, postscriptComment }: answerListProps) => {
-  //수정상태를 하나만들고 만약맞으면 위에 그...창에서 수정상태를 만든다??
   const [isPatch, setIsPatch] = useState<boolean>(false);
-  const [commentInfo, setCommentInfo] = useState([]);
+  // const [commentInfo, setCommentInfo] = useState([]);
   const [commentValue, setCommentValue] = useState('');
   const [answerList, setAnswerList] = useRecoilState(answerListData);
 
-  const navigate = useNavigate();
   const { id } = useParams();
 
   const modules = useMemo(
