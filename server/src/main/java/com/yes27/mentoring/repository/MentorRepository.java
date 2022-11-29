@@ -12,5 +12,5 @@ public interface MentorRepository extends JpaRepository<Mentor, Long> {
 
     Optional<Mentor> findByMentoringIdAndMember(Long mentoringId, Member member);
 
-
+    List<Mentor> findAllByMember(Member member);
 }
