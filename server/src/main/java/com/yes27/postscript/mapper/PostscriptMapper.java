@@ -34,9 +34,9 @@ public interface PostscriptMapper {
         postscript.setPostscriptContent(postscriptPostDto.getPostscriptContent());
 
         Member member = memberService.getLoginMember();
-        List<Tag> tags = tagsDtosToTags(postscriptPostDto.getTags(), postscript, member);
+//        List<Tag> tags = tagsDtosToTags(postscriptPostDto.getTags(), postscript, member);
 
-        postscript.setTags(tags);
+        postscript.setTagName(postscriptPostDto.getTagName());
         postscript.setMember(member);
 
         return postscript;
@@ -62,13 +62,14 @@ public interface PostscriptMapper {
         postscript.setMember(member);
         postscript.setUpdatedAt(postscriptPatchDto.getUpdatedAt());
 
-        // 태그 수정을 하지 않는 경우 -> 기존 글에서 태그를 불러오기
-        if (postscriptPatchDto.getTags() == null) {
-            postscript.setTags(postscriptService.findVerifiedPostscript(postscript.getPostscriptId()).getTags());
-        } else { // 태그 수정할떄
-            List<Tag> tags = tagsDtosToTags(postscriptPatchDto.getTags(), postscript, member);
-            postscript.setTags(tags);
-        }
+//        // 태그 수정을 하지 않는 경우 -> 기존 글에서 태그를 불러오기
+//        if (postscriptPatchDto.getTags() == null) {
+//            postscript.setTags(postscriptService.findVerifiedPostscript(postscript.getPostscriptId()).getTags());
+//        } else { // 태그 수정할떄
+//            List<Tag> tags = tagsDtosToTags(postscriptPatchDto.getTags(), postscript, member);
+//            postscript.setTags(tags);
+//        }
+        postscript.setTagName(postscriptPatchDto.getTagName());
 
         return postscript;
     }
@@ -105,7 +106,8 @@ public interface PostscriptMapper {
         postscriptResponse.setMember(memberMapper.memberToMemberResponse2(member));
 
         // 태그
-        postscriptResponse.setTags(tagsToTagResponseDtos(postscript.getTags()).stream().distinct().collect(Collectors.toList()));
+//        postscriptResponse.setTags(tagsToTagResponseDtos(postscript.getTags()).stream().distinct().collect(Collectors.toList()));
+        postscriptResponse.setTagName(postscript.getTagName());
         // 댓글
 //        postscriptResponse.setPostComments(postscriptToPostscriptCommentResponse(postscriptComments));
 
@@ -130,26 +132,26 @@ public interface PostscriptMapper {
         return postscriptResponseDtos;
     }
 
-    default List<Tag> tagsDtosToTags(List<TagDto> tagsDtos, Postscript postscript, Member member) {
-
-        return tagsDtos.stream().distinct().map(tagDto -> {
-            Tag tag = new Tag();
-            tag.setMember(member);
-            tag.addPostscript(postscript);
-            tag.setTagName(tagDto.getTagName());
-
-            return tag;
-        }).collect(Collectors.toList());
-    }
-
-    default List<TagResponseDto> tagsToTagResponseDtos(List<Tag> tags) {
-
-        return tags.stream()
-                .map(tag -> TagResponseDto
-                        .builder()
-                        .tagName(tag.getTagName())
-                        .build())
-                .distinct()
-                .collect(Collectors.toList());
-    }
+//    default List<Tag> tagsDtosToTags(List<TagDto> tagsDtos, Postscript postscript, Member member) {
+//
+//        return tagsDtos.stream().distinct().map(tagDto -> {
+//            Tag tag = new Tag();
+//            tag.setMember(member);
+//            tag.addPostscript(postscript);
+//            tag.setTagName(tagDto.getTagName());
+//
+//            return tag;
+//        }).collect(Collectors.toList());
+//    }
+//
+//    default List<TagResponseDto> tagsToTagResponseDtos(List<Tag> tags) {
+//
+//        return tags.stream()
+//                .map(tag -> TagResponseDto
+//                        .builder()
+//                        .tagName(tag.getTagName())
+//                        .build())
+//                .distinct()
+//                .collect(Collectors.toList());
+//    }
 }

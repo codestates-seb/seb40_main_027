@@ -48,8 +48,9 @@ public class Postscript extends BaseEntity {
     @OneToMany(mappedBy = "postscript", cascade = CascadeType.ALL, orphanRemoval = true)  // 댓글 추가
     private List<PostscriptComment> postComments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "postscript", cascade = CascadeType.PERSIST) //태그
-    private List<Tag> tags = new ArrayList<>();
+//    @OneToMany(mappedBy = "postscript", cascade = CascadeType.PERSIST) //태그
+    @Column(nullable = false)
+    private String tagName;
 
     public enum PostscriptStatus {
         POSTSCRIPT_EXIST("존재하는 후기"),
