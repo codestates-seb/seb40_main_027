@@ -29,14 +29,10 @@ const UserProfile = () => {
       method: 'patch',
       url: '/users',
       data: { data },
-      headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoibGFsYUBnbWFpbC5jb20iLCJzdWIiOiJsYWxhQGdtYWlsLmNvbSIsImlhdCI6MTY2OTQ4MTI0OSwiZXhwIjoxNjY5NTI0NDQ5fQ.Fwfii5XFjTe_6W9Zm20h8rDG0Wvrr-EEBOI7sLQl9rJiwNPAPeEJBRk4DkkEAZwoLkeZvgPQZcYHbNBbM1S-TQ',
-      },
     })
       .then((res) => {
-        const datatype = res.data;
-        setUserUpdate(datatype);
+        const dataType = res.data;
+        setUserUpdate(dataType);
         setUpdateProfile(!updateProfile);
       })
       .catch(() => console.log('err'));
