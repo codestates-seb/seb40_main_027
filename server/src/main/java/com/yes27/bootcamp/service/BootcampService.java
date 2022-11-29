@@ -1,7 +1,6 @@
 package com.yes27.bootcamp.service;
 
 import com.yes27.bootcamp.entity.BootCamp;
-import com.yes27.bootcamp.entity.Mybootcamp;
 import com.yes27.bootcamp.repository.BootcampRepository;
 import com.yes27.exception.BusinessLogicException;
 import com.yes27.exception.ExceptionCode;
