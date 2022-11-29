@@ -83,7 +83,7 @@ const MyPageTable = () => {
         </tr>
       </thead>
       <tbody>
-        {data.map((item, idx) => {
+        {data.map((item) => {
           return (
             <tr key={item.id} onClick={() => linkTableHandler(item.id)}>
               <td>{item.name} </td>
