@@ -12,7 +12,7 @@ export const ScheduleContent = styled.div`
     align-items: center;
   }
   .schedule-name {
-    font-size: 1rem;
+    font-size: 2rem;
     margin-left: 2rem;
   }
   @media screen and (max-width: 414px) {
@@ -26,7 +26,7 @@ export const ScheduleContent = styled.div`
 `;
 
 export const ScheduleName = styled.span`
-  font-size: 1rem;
+  font-size: 2rem;
   margin-left: 2rem;
   @media screen and (max-width: 414px) {
     display: none;
