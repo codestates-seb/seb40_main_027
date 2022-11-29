@@ -3,6 +3,7 @@ package com.yes27.mentoring.mapper;
 
 import com.yes27.mentoring.dto.MentorDto;
 import com.yes27.mentoring.entity.Mentor;
+import com.yes27.mentoringLike.entity.MentoringVote;
 import com.yes27.mentoringcomment.entity.Comment;
 import com.yes27.mentoringcomment.dto.CommentDto;
 import org.mapstruct.Mapper;
@@ -30,6 +31,7 @@ public interface MentorMapper {
                         .mentoringComment(mentoringComment.getMentoringComment())
                         .createdAt(mentoringComment.getCreatedAt())
                         .updatedAt(mentoringComment.getUpdatedAt())
+                        .nickname(mentoringComment.getMember().getNickname())
                         .build())
                 .collect(Collectors.toList());
     }
@@ -47,6 +49,7 @@ public interface MentorMapper {
         mentorsResponse.setUpdatedAt(mentoring.getUpdatedAt());
         mentorsResponse.setTotalVotes(mentoring.getTotalVotes());
         mentorsResponse.setComments(mentoringToMentoringCommentResponse(comments));
+        mentorsResponse.setVote(mentoring.getVote());
         return mentorsResponse;
     }
 
