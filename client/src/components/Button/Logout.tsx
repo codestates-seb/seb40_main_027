@@ -25,9 +25,9 @@ const Logout = () => {
   };
 
   return (
-    <div>
+    <>
       <S.LogoutButton onClick={LogoutHandler}>로그아웃</S.LogoutButton>
-    </div>
+    </>
   );
 };
 
