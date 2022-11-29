@@ -1,5 +1,8 @@
 package com.yes27.member.dto;
 
+import com.yes27.mentoring.dto.MentorDto;
+import com.yes27.postscript.dto.PostscriptDto;
+import com.yes27.study.dto.StudyDto;
 import com.yes27.validator.NotSpace;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -103,5 +106,17 @@ public class MemberDto {
     @Setter
     public static class LoginResponse {
         private String nickname;
+    }
+
+    @Setter
+    @Getter
+    public static class MemberDataDetailDto{
+        private Long memberId;
+        private String email;
+        private String nickname;
+
+        private List<PostscriptDto.PostscriptResponse> postscript;
+        private List<MentorDto.Response> mentor;
+        private List<StudyDto.PagingResponse> studies;
     }
 }
