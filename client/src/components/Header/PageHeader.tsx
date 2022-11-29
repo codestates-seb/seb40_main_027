@@ -63,6 +63,9 @@ const PageMenu = styled.header`
 
 const HeaderLink = styled(Link)`
   text-decoration: none;
+  @media screen and (max-width: 414px) {
+    display: none;
+  }
 `;
 const LoginSignHeaderButton = styled.span`
   display: flex;
