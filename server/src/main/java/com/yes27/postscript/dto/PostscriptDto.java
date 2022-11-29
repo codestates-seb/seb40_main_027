@@ -55,7 +55,7 @@ public class PostscriptDto {
         private Integer View;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
-        private List<PostscriptCommentDto.Response> postComments; // 댓글
+//        private List<PostscriptCommentDto.Response> postComments; // 댓글
         private String tagName; // 태그
         private MemberDto.Response2 member; //유저 추가
 //        private MemberSubset member; //유저 추가
@@ -75,7 +75,7 @@ public class PostscriptDto {
         private Integer View;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
-//        private List<PostscriptCommentDto.Response> postComments; // 댓글
+        private List<PostscriptCommentDto.Response> postComments; // 댓글
         private String tagName; // 태그
         private MemberDto.Response2 member; //유저 추가
 
