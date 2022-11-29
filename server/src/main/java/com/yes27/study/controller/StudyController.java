@@ -69,12 +69,17 @@ public class StudyController {
 
     @GetMapping("/{study-id}")
     public ResponseEntity getStudy(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId) {
-        Member member = findMemberByHeader(request);
-        Study study = studyService.findStudy(studyId);
-        studyViewService.addView(member, studyId);
-        study.setView(study.getViews().size());
+        if (request.getHeader("Authorization") == null && request.getHeader("Refresh") == null) {
+            Study study = studyService.findStudy(studyId);
+            return new ResponseEntity<>(new SingleResponseDto<>(mapper.studyToStudyResponse(study)), HttpStatus.OK);
+        } else {
+            Member member = findMemberByHeader(request);
+            Study study = studyService.findStudy(studyId);
+            studyViewService.addView(member, studyId);
+            study.setView(study.getViews().size());
 
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.studyToStudyResponse(study)), HttpStatus.OK);
+            return new ResponseEntity<>(new SingleResponseDto<>(mapper.studyToStudyResponse(study)), HttpStatus.OK);
+        }
     }
 
     @GetMapping
