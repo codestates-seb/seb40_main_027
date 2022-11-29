@@ -10,10 +10,6 @@ const Logout = () => {
       axios({
         method: 'post',
         url: '/users/logout',
-        headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoibGFsYUBnbWFpbC5jb20iLCJzdWIiOiJsYWxhQGdtYWlsLmNvbSIsImlhdCI6MTY2OTQ4MTI0OSwiZXhwIjoxNjY5NTI0NDQ5fQ.Fwfii5XFjTe_6W9Zm20h8rDG0Wvrr-EEBOI7sLQl9rJiwNPAPeEJBRk4DkkEAZwoLkeZvgPQZcYHbNBbM1S-TQ',
-        },
       })
         .then(() => {
           navigate('/');
@@ -24,11 +20,7 @@ const Logout = () => {
     }
   };
 
-  return (
-    <>
-      <S.LogoutButton onClick={LogoutHandler}>로그아웃</S.LogoutButton>
-    </>
-  );
+  return <S.LogoutButton onClick={LogoutHandler}>로그아웃</S.LogoutButton>;
 };
 
 export default Logout;
