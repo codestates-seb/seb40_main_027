@@ -75,7 +75,7 @@ public class PostscriptController {
 
         PostscriptDto.PostscriptResponse2 response = postscriptMapper.postscriptToPostscriptResponseDto2(postscriptService.findPostscript(postscriptId), memberMapper);
 
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
     }
 
     @GetMapping //작성된 전체 조언,후기 조회 -> 댓글 제외하고 조회되게
@@ -91,7 +91,7 @@ public class PostscriptController {
     }
 
 
-    @DeleteMapping("/delete/{postscript-id}") //선택 조언, 후기 글 삭제
+    @DeleteMapping("/{postscript-id}") //선택 조언, 후기 글 삭제
     public ResponseEntity deletePostscript(@PathVariable("postscript-id") @Positive long postscriptId) {
         Member member = memberService.getLoginMember();
         postscriptService.deletePostscript(postscriptId, member.getMemberId());

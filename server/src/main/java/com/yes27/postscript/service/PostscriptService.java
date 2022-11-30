@@ -64,7 +64,9 @@ public class PostscriptService {
     public Page<Postscript> findPostscripts(int page, int size, String sort) {
 
         Page<Postscript> findAllPostscript = postscriptRepository.findAllByPostscriptStatus(
+//                PageRequest.of(page, size, Sort.by(sort).descending()),
                 PageRequest.of(page, size, Sort.by(sort).descending()),
+                                         //Sort.by(Sort.Order.desc("totalVotes"), Sort.Order.desc("postscriptId"))
                 Postscript.PostscriptStatus.POSTSCRIPT_EXIST);
 
         return findAllPostscript;
