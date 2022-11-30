@@ -56,7 +56,7 @@ export const useSignUp = (submitData: SignUpType, navigate: NavigateFunction) =>
     },
   })
     .then((response) => {
-      alert(`로그인 성공 ${response}`);
+      alert(`회원가입 성공`);
       navigate('/users/login');
     })
     .catch((err) => alert(`로그인 실패 ${err}`));
