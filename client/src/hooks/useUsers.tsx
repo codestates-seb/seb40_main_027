@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { NavigateFunction } from 'react-router-dom';
 
-interface LogInType {
+interface LoginType {
   email: string;
   password: string;
 }
@@ -10,8 +10,8 @@ interface LogStatus {
   memberRole: string;
   nickname: string;
 }
-export const useLogIn = (
-  submitData: LogInType,
+export const useLogin = (
+  submitData: LoginType,
   navigate: NavigateFunction,
   setLogStatus: React.Dispatch<React.SetStateAction<LogStatus>>
 ) => {

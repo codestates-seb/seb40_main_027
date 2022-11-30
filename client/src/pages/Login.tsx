@@ -2,7 +2,7 @@ import * as S from './Login.style';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import logo from '../assets/image/logo.png';
 import { LogPageBtn } from '../components/Button';
-import { useLogIn } from '../hooks/useUsers';
+import { useLogin } from '../hooks/useUsers';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { logUser } from '../atoms';
@@ -21,7 +21,7 @@ const Login = () => {
   } = useForm<LoginValue>({ mode: 'onBlur' });
 
   const onSubmit: SubmitHandler<LoginValue> = async (data) => {
-    useLogIn(data, navigate, setLogStatus);
+    useLogin(data, navigate, setLogStatus);
   };
 
   return (
