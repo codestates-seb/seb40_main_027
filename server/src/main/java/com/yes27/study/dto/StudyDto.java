@@ -70,6 +70,7 @@ public class StudyDto {
 
         private int totalVotes;
         private int view;
+        private int vote; // 추천 여부 필드 추가
 
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;

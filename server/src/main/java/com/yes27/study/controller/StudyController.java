@@ -8,9 +8,11 @@ import com.yes27.response.MultiResponseDto;
 import com.yes27.response.SingleResponseDto;
 import com.yes27.study.dto.StudyDto;
 import com.yes27.study.entity.Study;
+import com.yes27.study.entity.StudyVote;
 import com.yes27.study.mapper.StudyMapper;
 import com.yes27.study.service.StudyService;
 import com.yes27.study.service.StudyViewService;
+import com.yes27.study.service.StudyVoteService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -39,14 +41,16 @@ public class StudyController {
     private final StudyService studyService;
     private final StudyMapper mapper;
     private final StudyViewService studyViewService;
+    private final StudyVoteService studyVoteService;
 
     public StudyController(MemberService memberService,
         StudyService studyService, StudyMapper mapper ,
-        StudyViewService studyViewService) {
+        StudyViewService studyViewService, StudyVoteService studyVoteService) {
         this.memberService = memberService;
         this.studyService = studyService;
         this.mapper = mapper;
         this.studyViewService = studyViewService;
+        this.studyVoteService = studyVoteService;
     }
 
     @PostMapping
@@ -71,14 +75,24 @@ public class StudyController {
     public ResponseEntity getStudy(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId) {
         if (request.getHeader("Authorization") == null && request.getHeader("Refresh") == null) {
             Study study = studyService.findStudy(studyId);
-            return new ResponseEntity<>(new SingleResponseDto<>(mapper.studyToStudyResponse(study)), HttpStatus.OK);
+            StudyDto.Response response = mapper.studyToStudyResponse(study);
+            response.setVote(0);
+//            return new ResponseEntity<>(new SingleResponseDto<>(mapper.studyToStudyResponse(study)), HttpStatus.OK);
+            return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
         } else {
             Member member = findMemberByHeader(request);
             Study study = studyService.findStudy(studyId);
             studyViewService.addView(member, studyId);
             study.setView(study.getViews().size());
 
-            return new ResponseEntity<>(new SingleResponseDto<>(mapper.studyToStudyResponse(study)), HttpStatus.OK);
+            StudyDto.Response response = mapper.studyToStudyResponse(study);
+
+            if (studyVoteService.isNotAlreadyVote(member, study)) {
+                response.setVote((0));
+            } else {
+                response.setVote(1);
+            }
+            return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
         }
     }
 
