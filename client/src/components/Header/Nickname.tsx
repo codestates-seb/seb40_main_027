@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { useRecoilValue } from 'recoil';
+import { logUser } from '../../atoms';
 import Logout from '../Button/Logout';
 import { Icon } from '@iconify/react';
 
@@ -22,11 +24,12 @@ const NicknameArea = styled.div`
   align-items: center;
 `;
 const Nickname = () => {
+  const { nickname } = useRecoilValue(logUser);
   return (
     <ImgCircle>
       <NicknameArea>
         <Icon icon="carbon:user-avatar-filled-alt" width="30" height="30" />
-        <span>Nickname</span>
+        <span>{nickname}</span>
       </NicknameArea>
       <LogoutArea>
         <Logout />

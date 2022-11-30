@@ -1,101 +1,84 @@
-import styled from 'styled-components';
-import { useForm } from 'react-hook-form';
+import * as S from './Login.style';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import logo from '../assets/image/logo.png';
 import { LogPageBtn } from '../components/Button';
+import { userLogin } from '../utils/api/userAPI';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { logUser } from '../atoms';
 
-const LoginWrapp = styled.div`
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .login-inner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    img {
-      width: 240px;
-      height: 120px;
-    }
-    .form-wrap {
-      margin-left: -1rem;
-      box-sizing: border-box;
-      font-size: 30px;
-      form {
-        border: 1px solid var(--greenMain);
-        padding: calc(100vh * 0.1) calc(100vw * 0.12);
-        display: flex;
-        flex-direction: column;
-        input {
-          width: 280px;
-          height: 48px;
-          border-radius: 10px;
-          margin: 1rem 0;
-          font-size: 1.3rem;
-        }
-      }
-      .help {
-        display: flex;
-        justify-content: space-evenly;
-        margin-top: 1rem;
-        font-size: 19px;
-      }
-    }
-  }
-  @media screen and (max-width: 414px) {
-    width: 100vw;
-    .login-inner {
-      img {
-        margin-bottom: 10%;
-      }
-      .form-wrap {
-        margin-left: 0;
-        font-size: 20px;
-        max-width: 414px;
-        form {
-          padding: 1rem calc(100vw * 0.8 * 0.15);
-          label {
-            input {
-              width: 230px;
-              font-size: 20px;
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
-// 이메일과 패스워드를 송신하면 유저아이디와 name을 준다. -> 나중에 api와 연동 필요(전송 후, refresh & access 받기)
-// help class쪽 link 추후 연결 필요
-
+interface LoginValue {
+  email: string;
+  password: string;
+}
 const Login = () => {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data: any) => console.log(data);
+  const setLogStatus = useSetRecoilState(logUser);
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginValue>({ mode: 'onBlur' });
+
+  const onSubmit: SubmitHandler<LoginValue> = async (data) => {
+    userLogin(data, navigate, setLogStatus);
+  };
+
   return (
-    <LoginWrapp>
+    <S.LoginWrapp>
       <div className="login-inner">
         <img src={logo} alt="logo" />
         <div className="form-wrap">
           <form onSubmit={handleSubmit(onSubmit)}>
             <label>
-              <div className="indicator">Email</div>
-              <input type="email" {...register('email')} />
+              <S.CustomH2>Email</S.CustomH2>
+              <input
+                type="text"
+                {...register('email', {
+                  required: '아이디를 입력해주세요',
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
+                    message: '이메일 형식으로 입력해주세요',
+                  },
+                })}
+                placeholder="이메일을 입력하세요"
+              />
             </label>
+            <p>{errors?.email?.message}</p>
             <label>
-              <div className="indicator">Password</div>
-              <input type="password" {...register('password')} />
+              <S.CustomH2>Password</S.CustomH2>
+              <input
+                type="password"
+                {...register('password', {
+                  required: '비밀번호를 입력해주세요',
+                  minLength: {
+                    value: 4,
+                    message: '영어대소문자 및 숫자 및 특수문자 최소 1개씩 포함하여 4-20자입니다',
+                  },
+                  maxLength: {
+                    value: 20,
+                    message: '영어대소문자 및 숫자 및 특수문자 최소 1개씩 포함하여 4-20자입니다',
+                  },
+                  pattern: {
+                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{4,20}$/,
+                    message: '영어대소문자 및 숫자 및 특수문자 최소 1개씩 포함하여 4-20자입니다',
+                  },
+                })}
+                placeholder="비밀번호를 입력하세요"
+                autoComplete="off"
+              />
             </label>
+            <p>{errors?.password?.message}</p>
             <LogPageBtn />
           </form>
           <div className="help">
             <div>아이디 찾기</div>
             <div>비밀번호 찾기</div>
-            <div>회원가입</div>
+            <Link to="/users/signup">회원가입</Link>
           </div>
         </div>
       </div>
-    </LoginWrapp>
+    </S.LoginWrapp>
   );
 };
 export default Login;

@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import logo from '../../assets/image/logo.png';
-import { useState } from 'react';
 import Nickname from './Nickname';
 import { RegisterButton, LoginButton } from '../Button/index';
+import { useRecoilValue } from 'recoil';
+import { logUser } from '../../atoms';
+import { Link } from 'react-router-dom';
 
 const HeaderContent = styled.header`
   width: 100%;
@@ -37,24 +39,24 @@ const HeaderContent = styled.header`
 `;
 
 const MainHeader = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const { isLog } = useRecoilValue(logUser);
 
-  const clickLogin = () => {
-    //임의로 오류안나게하기 위해 넣은 함수
-    setIsLogin(!isLogin);
-  };
   return (
     <HeaderContent>
       <div className="header-component">
         <img src={logo} alt="logo" />
-        {isLogin ? (
+        {isLog ? (
           <div>
-            <LoginButton onClick={clickLogin} />
-            <RegisterButton />
+            <Nickname />
           </div>
         ) : (
           <div>
-            <Nickname />
+            <Link to="/users/login">
+              <LoginButton />
+            </Link>
+            <Link to="/users/signup">
+              <RegisterButton />
+            </Link>
           </div>
         )}
       </div>
