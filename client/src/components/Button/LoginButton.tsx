@@ -29,6 +29,7 @@ const StyleLogPageBtn = styled(StyledBackgroundButton)`
   height: 48px;
   border-radius: 10px;
   font-size: 30px;
+  margin-top: 1rem;
   @media screen and (max-width: 414px) {
     width: 230px;
     height: 48px;

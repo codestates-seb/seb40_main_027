@@ -1,4 +1,7 @@
 import { atom } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
+
+const { persistAtom } = recoilPersist();
 
 export const sideBarFloading = atom({
   key: 'sideBarFloading',
@@ -15,7 +18,12 @@ export const noContent = atom({
   default: 0,
 });
 
-export const isLogin = atom({
-  key: 'isLogin',
-  default: false,
+export const logUser = atom({
+  key: 'logUser',
+  default: {
+    isLog: false,
+    memberRole: '',
+    nickname: '',
+  },
+  effects_UNSTABLE: [persistAtom],
 });
