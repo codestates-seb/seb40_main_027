@@ -7,10 +7,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { logUser } from '../atoms';
 
-type LoginValue = {
+interface LoginValue {
   email: string;
   password: string;
-};
+}
 const Login = () => {
   const setLogStatus = useSetRecoilState(logUser);
   const navigate = useNavigate();
