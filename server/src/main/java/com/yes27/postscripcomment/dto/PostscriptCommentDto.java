@@ -15,7 +15,7 @@ public class PostscriptCommentDto {
     @NoArgsConstructor
     public static class Post {
 
-        private Long postCommentId;
+        private Long postscriptCommentId;
 
         @NotBlank(message = "댓글을 입력하세요.")
         private String postscriptComment;
@@ -27,7 +27,7 @@ public class PostscriptCommentDto {
     @Setter
     public static class Patch {
 
-        private Long postCommentId;
+        private Long postscriptCommentId;
 
 //        @NotBlank(message = "댓글을 입력하세요.")
         private String postscriptComment;
@@ -40,7 +40,7 @@ public class PostscriptCommentDto {
     @Builder
     @AllArgsConstructor
     public static class Response {
-        private Long postCommentId;
+        private Long postscriptCommentId;
         private String postscriptComment;
 
         private LocalDateTime createdAt;
