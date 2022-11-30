@@ -7,20 +7,20 @@ interface PropsType {
   createdAt?: string;
   modifiedAt?: string;
   view?: number;
-  like?: number;
+  totalVotes?: number;
 }
 
-const ForumWrittenInfo = ({ position, author, createdAt, modifiedAt, view, like }: PropsType) => {
+const ForumWrittenInfo = ({ position, author, createdAt, modifiedAt, view, totalVotes }: PropsType) => {
   return (
     <S.Container position={position}>
       <InlineIcon icon="bx:user-circle" />
       <span>{author}</span>
       {createdAt !== undefined ? <span>{modifiedAt ? modifiedAt : createdAt}</span> : null}
       {view !== undefined ? <span>조회 {view}</span> : null}
-      {like !== undefined ? (
+      {totalVotes !== undefined ? (
         <>
           <InlineIcon icon="akar-icons:heart" />
-          <span>{like}</span>
+          <span>{totalVotes}</span>
         </>
       ) : null}
     </S.Container>
