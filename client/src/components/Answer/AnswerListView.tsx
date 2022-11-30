@@ -108,6 +108,7 @@ const AnswerListView = ({ createdAt, postCommentId, updatedAt, postscriptComment
     e.preventDefault();
     patchAsync();
     setIsPatch(!isPatch);
+    setCommentValue('');
   };
 
   const deleteHandler = (e: React.MouseEvent<HTMLElement>) => {
