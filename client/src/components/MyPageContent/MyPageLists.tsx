@@ -31,7 +31,7 @@ const MyPageLists = ({ list }: PropsType) => {
         <S.PostInfoView>
           <S.UserLikeIconList>
             {list.view ? <span>조회{list.view}</span> : null}
-            {list.updatedAt ? <div> {updateTime}</div> : <div> {createTime}</div>}
+            {list.updatedAt ? <div> {updateTime}전</div> : <div> {createTime}전</div>}
             <div>
               <InlineIcon icon="akar-icons:heart" />
               {list.like}
