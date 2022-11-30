@@ -5,6 +5,9 @@ export const LoginWrapp = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  a {
+    text-decoration: none;
+  }
   .login-inner {
     display: flex;
     justify-content: center;
