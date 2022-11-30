@@ -56,7 +56,7 @@ function decider(data: DataType, el: string | number) {
     return `${start} ~ ${end}`;
   } else if (el === 'site') {
     return (
-      <a href={data[el]} target="_blank" rel="noopener noreferrer">
+      <a href={`https://${data[el]}`} target="_blank" rel="noopener noreferrer">
         {data[el]}
       </a>
     );
