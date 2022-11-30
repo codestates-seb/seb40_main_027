@@ -78,7 +78,7 @@ public interface PostscriptMapper {
         return postscriptComments.stream()
                 .map(postscriptComment -> PostscriptCommentDto.Response
                         .builder()
-                        .postCommentId(postscriptComment.getPostCommentId())
+                        .postscriptCommentId(postscriptComment.getPostscriptCommentId())
                         .postscriptComment(postscriptComment.getPostscriptComment())
                         .createdAt(postscriptComment.getCreatedAt())
                         .updatedAt(postscriptComment.getUpdatedAt())
@@ -98,7 +98,7 @@ public interface PostscriptMapper {
         postscriptResponse.setPostscriptContent(postscript.getPostscriptContent());
         postscriptResponse.setView(postscript.getView());
 
-        postscriptResponse.setTotalVotes(postscript.getVotes());
+        postscriptResponse.setTotalVotes(postscript.getTotalVotes());
 
         postscriptResponse.setPostscriptStatus(postscript.getPostscriptStatus());
 
@@ -128,7 +128,7 @@ public interface PostscriptMapper {
         postscriptResponse.setPostscriptContent(postscript.getPostscriptContent());
         postscriptResponse.setView(postscript.getView());
 
-        postscriptResponse.setTotalVotes(postscript.getVotes());
+        postscriptResponse.setVote(postscript.getTotalVotes());
 
         postscriptResponse.setPostscriptStatus(postscript.getPostscriptStatus());
 
@@ -140,7 +140,7 @@ public interface PostscriptMapper {
 //        postscriptResponse.setTags(tagsToTagResponseDtos(postscript.getTags()).stream().distinct().collect(Collectors.toList()));
         postscriptResponse.setTagName(postscript.getTagName());
         // 댓글
-        postscriptResponse.setPostComments(postscriptToPostscriptCommentResponse(postscriptComments));
+        postscriptResponse.setPostscriptComments(postscriptToPostscriptCommentResponse(postscriptComments));
 
         postscriptResponse.setCreatedAt(postscript.getCreatedAt());
         postscriptResponse.setUpdatedAt(postscript.getUpdatedAt());
@@ -149,7 +149,45 @@ public interface PostscriptMapper {
     }
 
     PostscriptDto.PostscriptPostResponse postscriptToPostscriptResponse2(Postscript postscript);
+    PostscriptDto.PostscriptPostResponse postscriptToPostscriptResponse3(Postscript postscript);
 
+    // Mypage 조회용
+    default List<PostscriptDto.PostscriptMypageResponse> postscriptToMypageResponse(List<Postscript> postscripts, MemberMapper memberMapper) {
+
+        if (postscripts == null) return null;
+        List<PostscriptDto.PostscriptMypageResponse> postscriptMypageResponseDtos = new ArrayList<>(postscripts.size());
+
+        for (Postscript postscript : postscripts) {
+            postscriptMypageResponseDtos.add(postscriptToMypageResponseDto(postscript, memberMapper));
+        }
+
+        return postscriptMypageResponseDtos;
+    }
+
+    //마이페이지용 응답 dto
+    default PostscriptDto.PostscriptMypageResponse postscriptToMypageResponseDto(Postscript postscript, MemberMapper memberMapper) {
+
+        PostscriptDto.PostscriptMypageResponse postscriptMypageResponse = new PostscriptDto.PostscriptMypageResponse();
+        postscriptMypageResponse.setPostscriptId(postscript.getPostscriptId());
+        postscriptMypageResponse.setPostscriptTitle(postscript.getPostscriptTitle());
+        postscriptMypageResponse.setPostscriptContent(postscript.getPostscriptContent());
+        postscriptMypageResponse.setView(postscript.getView());
+
+        postscriptMypageResponse.setTotalVotes(postscript.getTotalVotes());
+
+
+
+        // 태그
+//        postscriptResponse.setTags(tagsToTagResponseDtos(postscript.getTags()).stream().distinct().collect(Collectors.toList()));
+        postscriptMypageResponse.setTagName(postscript.getTagName());
+        // 댓글
+//        postscriptResponse.setPostComments(postscriptToPostscriptCommentResponse(postscriptComments));
+
+        postscriptMypageResponse.setCreatedAt(postscript.getCreatedAt());
+        postscriptMypageResponse.setUpdatedAt(postscript.getUpdatedAt());
+
+        return postscriptMypageResponse;
+    }
 
     //여러개 조회
     default List<PostscriptDto.PostscriptResponse> postscriptsToPostscriptResponseDtos(List<Postscript> postscripts, MemberMapper memberMapper) {

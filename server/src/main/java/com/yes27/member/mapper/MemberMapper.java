@@ -88,9 +88,9 @@ public interface MemberMapper {
 
     // 마이페이지 글쓰기 데이터 불러오기
     default MemberDto.MemberDataDetailDto memberToMemberDataDto(Member member,
-                                                                List<PostscriptDto.PostscriptResponse> postscripts,
-                                                                List<MentorDto.Response> mentors,
-                                                                List<StudyDto.PagingResponse> studies) {
+                                                                List<PostscriptDto.PostscriptMypageResponse> postscripts,
+                                                                List<MentorDto.MentorMypageResponse> mentors,
+                                                                List<StudyDto.StudyMypageResponse> studies) {
 
         MemberDto.MemberDataDetailDto memberDataDto = new MemberDto.MemberDataDetailDto();
         memberDataDto.setMemberId(member.getMemberId());

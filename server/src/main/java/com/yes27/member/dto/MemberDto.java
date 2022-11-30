@@ -115,8 +115,8 @@ public class MemberDto {
         private String email;
         private String nickname;
 
-        private List<PostscriptDto.PostscriptResponse> postscript;
-        private List<MentorDto.Response> mentor;
-        private List<StudyDto.PagingResponse> studies;
+        private List<PostscriptDto.PostscriptMypageResponse> postscript;
+        private List<MentorDto.MentorMypageResponse> mentor;
+        private List<StudyDto.StudyMypageResponse> studies;
     }
 }

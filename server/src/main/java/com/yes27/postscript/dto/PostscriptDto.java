@@ -71,11 +71,11 @@ public class PostscriptDto {
         private String postscriptTitle;
         private String postscriptContent;
         private Postscript.PostscriptStatus postscriptStatus;
-        private Integer totalVotes; // 좋아요 -> 투표
+        private Integer vote; // 좋아요 -> 투표
         private Integer View;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
-        private List<PostscriptCommentDto.Response> postComments; // 댓글
+        private List<PostscriptCommentDto.Response> postscriptComments; // 댓글
         private String tagName; // 태그
         private MemberDto.Response2 member; //유저 추가
 
@@ -86,5 +86,19 @@ public class PostscriptDto {
 
         private Long postscriptId;
 
+    }
+
+    @Getter
+    @Setter
+    public static class PostscriptMypageResponse {  // 마이페이지 표시 내용
+
+        private Long postscriptId;
+        private String postscriptTitle;
+        private String postscriptContent;
+        private Integer View;
+        private Integer totalVotes; // 좋아요 -> 투표
+        private LocalDateTime createdAt;
+        private LocalDateTime updatedAt;
+        private String tagName; // 태그
     }
 }
