@@ -52,4 +52,5 @@ export const NameZone = styled.span`
 
 export const TextArea = styled.div`
   height: 5vh;
+  margin-left: 1rem;
 `;
