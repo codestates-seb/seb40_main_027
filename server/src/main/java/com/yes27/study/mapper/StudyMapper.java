@@ -101,7 +101,7 @@ public interface StudyMapper {
         }
         StudyDto.StudyCommentSubset.StudyCommentSubsetBuilder studyCommentSubset = StudyDto.StudyCommentSubset.builder();
         studyCommentSubset.studyCommentId( studyComment.getStudyCommentId() );
-        studyCommentSubset.comment( studyComment.getStudyComment() );
+        studyCommentSubset.studyComment( studyComment.getStudyComment() );
         studyCommentSubset.createdAt( studyComment.getCreatedAt() );
         studyCommentSubset.updatedAt( studyComment.getUpdatedAt() );
         studyCommentSubset.nickname(studyComment.getMember().getNickname());

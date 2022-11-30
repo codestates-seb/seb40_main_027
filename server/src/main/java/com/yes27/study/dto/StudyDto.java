@@ -85,7 +85,7 @@ public class StudyDto {
     @Builder
     public static class StudyCommentSubset {
         public Long studyCommentId;
-        public String comment;
+        public String studyComment;
         public LocalDateTime createdAt;
         public LocalDateTime updatedAt;
 
