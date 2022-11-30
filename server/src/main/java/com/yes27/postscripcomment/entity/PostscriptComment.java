@@ -20,7 +20,7 @@ public class PostscriptComment extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long postCommentId;
+    private Long postscriptCommentId;
 
     @Column(nullable = false)
     private String postscriptComment;

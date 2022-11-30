@@ -53,7 +53,7 @@ public class PostscriptCommentController {
                                           @Valid @RequestBody PostscriptCommentDto.Post postscriptCommentPostDto) {
 
 
-        PostscriptComment postscriptComment = postscriptCommentService.createPostComment(
+        PostscriptComment postscriptComment = postscriptCommentService.createPostComment(postscriptId,
                 postscriptCommentMapper.postCommentPostToPostComment(postscriptId,postscriptService,postscriptCommentPostDto,memberService));
 
 
@@ -63,34 +63,37 @@ public class PostscriptCommentController {
                 new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentPostResponseDto2(postscriptComment)), HttpStatus.CREATED);
     }
 
-    @PatchMapping("/comment/{postComment-id}")
-    public ResponseEntity patchPostComment(@PathVariable("postComment-id") @Positive long postCommentId,
+    @PatchMapping("/{postscript-Id}/comment/{postscriptComment-id}")
+    public ResponseEntity patchPostComment(@PathVariable("postscriptComment-id") @Positive long PostscriptCommentId,
+                                           @PathVariable("postscript-Id") @Positive long postscriptId,
                                            @Valid @RequestBody PostscriptCommentDto.Patch postscriptCommentPatchDto){
-        postscriptCommentPatchDto.setPostCommentId(postCommentId);
+        postscriptCommentPatchDto.setPostscriptCommentId(PostscriptCommentId);
         PostscriptComment postscriptComment = postscriptCommentMapper.postCommentPatchToPostComment(postscriptCommentService, postscriptCommentPatchDto, memberService);
 
-        PostscriptComment updatedPostscriptComment = postscriptCommentService.updatePostComment(postscriptComment);
+        PostscriptComment updatedPostscriptComment = postscriptCommentService.updatePostComment(postscriptId,postscriptComment);
 
         return new ResponseEntity<>(
 //                new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentResponseDto(updatedPostscriptComment, memberMapper)), HttpStatus.OK);
         new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentPostResponseDto2(postscriptComment)), HttpStatus.CREATED);
     }
 
-    @GetMapping("/comment/{postComment-id}")
-    public ResponseEntity getPostComment(@PathVariable("postComment-id")@Positive long postCommentId){
+    @GetMapping("/comment/{postscriptComment-id}")
+    public ResponseEntity getPostComment(@PathVariable("postscriptComment-id")@Positive long PostscriptCommentId
+//                                         @PathVariable("postscript-Id") @Positive long postscriptId
+                                         ){
 
-        PostscriptComment postscriptComment = postscriptCommentService.findPostComment(postCommentId);
-        PostscriptComment updatedPostComment = postscriptCommentService.updatePostComment(postscriptComment);
+        PostscriptComment postscriptComment = postscriptCommentService.findPostComment(PostscriptCommentId);
+//        PostscriptComment updatedPostComment = postscriptCommentService.updatePostComment(postscriptId, postscriptComment);
 
         return new ResponseEntity<>(
                 new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentResponseDto(postscriptComment,memberMapper)), HttpStatus.OK);
 
     }
 
-    @DeleteMapping("/comment/delete/{postComment-id}")
-    public ResponseEntity deletePostComment(@PathVariable("postComment-id")@Positive long postCommentId){
+    @DeleteMapping("/comment/{postscriptComment-id}")
+    public ResponseEntity deletePostComment(@PathVariable("postscriptComment-id")@Positive long PostscriptCommentId){
         Member member = memberService.getLoginMember();
-        postscriptCommentService.deletePostComment(postCommentId, member.getMemberId());
+        postscriptCommentService.deletePostComment(PostscriptCommentId, member.getMemberId());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

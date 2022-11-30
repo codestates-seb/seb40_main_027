@@ -31,8 +31,8 @@ public class PostscriptCommentService {
     }
 
     // 댓글 생성
-    public PostscriptComment createPostComment(PostscriptComment postscriptComment) {
-
+    public PostscriptComment createPostComment(Long postscriptId,PostscriptComment postscriptComment) {
+        Postscript postscript = verifyPostscript(postscriptId);
         return postscriptCommentRepository.save(postscriptComment);
     }
 
@@ -48,30 +48,31 @@ public class PostscriptCommentService {
 //        return updatedPostComment;
 //    }
 
-    public PostscriptComment updatePostComment(PostscriptComment postscriptComment) {
-        PostscriptComment findPostComment = findPostComment(postscriptComment.getPostCommentId());
+    public PostscriptComment updatePostComment(Long postscriptId, PostscriptComment postscriptComment) {
+        verifyPostscript(postscriptId);
+        PostscriptComment findPostComment = findPostComment(postscriptComment.getPostscriptCommentId());
         findPostComment.setPostscriptComment(postscriptComment.getPostscriptComment());
 
         return postscriptCommentRepository.save(findPostComment);
     }
-    public PostscriptComment findPostComment(long postCommentId) {
+    public PostscriptComment findPostComment(long PostscriptCommentId) {
 
-        PostscriptComment findPostComment = findVerifiedPostscriptComment(postCommentId);
+        PostscriptComment findPostComment = findVerifiedPostscriptComment(PostscriptCommentId);
         postscriptCommentRepository.save(findPostComment);
 
         return findPostComment;
     }
-    public PostscriptComment findVerifiedPostscriptComment(long postCommentId) {
-        Optional<PostscriptComment> optionalPostscriptComment = postscriptCommentRepository.findById(postCommentId);
+    public PostscriptComment findVerifiedPostscriptComment(long PostscriptCommentId) {
+        Optional<PostscriptComment> optionalPostscriptComment = postscriptCommentRepository.findById(PostscriptCommentId);
         PostscriptComment findPostComment = optionalPostscriptComment.orElseThrow(() ->
                 new BusinessLogicException(ExceptionCode.COMMENT_NOT_FOUND));
         return findPostComment;
     }
     // 댓글 삭제
-    public void deletePostComment(long postCommentId, long memberId) {
-        PostscriptComment postscriptComment = findVerifiedPostscriptComment(postCommentId);
+    public void deletePostComment(long PostscriptCommentId, long memberId) {
+        PostscriptComment postscriptComment = findVerifiedPostscriptComment(PostscriptCommentId);
 
-        long writerPostCommentId = findWritePostCommentId(postCommentId);
+        long writerPostCommentId = findWritePostCommentId(PostscriptCommentId);
 
         if(memberId != writerPostCommentId){
             throw new BusinessLogicException(ExceptionCode.ACCESS_DENIED_MEMBER);
@@ -80,25 +81,30 @@ public class PostscriptCommentService {
         postscriptCommentRepository.delete(postscriptComment);
     }
 
-    public long findWritePostCommentId(long postCommentId) {
+    public long findWritePostCommentId(long PostscriptCommentId) {
         // 질문 작성자 아이디 찾는 메서드
-        PostscriptComment postscriptComment = findVerifiedPostComment(postCommentId);
+        PostscriptComment postscriptComment = findVerifiedPostComment(PostscriptCommentId);
         return postscriptComment.getMember().getMemberId();
     }
 
     public List<PostscriptComment> findPostCommentAll() {
         return new ArrayList<>(postscriptCommentRepository.findAll());
     }
-    public Member findPostscriptCommentWriter(long postCommentId) {
-        PostscriptComment findPostscriptComment = findVerifiedPostscriptComment(postCommentId);
+    public Member findPostscriptCommentWriter(long PostscriptCommentId) {
+        PostscriptComment findPostscriptComment = findVerifiedPostscriptComment(PostscriptCommentId);
         return findPostscriptComment.getMember();
     }
 
-    public PostscriptComment findVerifiedPostComment(long postCommentId) {
-        Optional<PostscriptComment> optionalPostComment = postscriptCommentRepository.findById(postCommentId);
+    public PostscriptComment findVerifiedPostComment(long PostscriptCommentId) {
+        Optional<PostscriptComment> optionalPostComment = postscriptCommentRepository.findById(PostscriptCommentId);
         PostscriptComment findPostComment = optionalPostComment.orElseThrow(
                 () -> new BusinessLogicException(ExceptionCode.POSTSCRIPTCOMMENT_NOT_FOUND));
 
         return findPostComment;
+    }
+
+    //postscript게시판 존재 여부 확인 메서드
+    private Postscript verifyPostscript(Long postscriptId){
+        return postscriptService.findVerifiedPostscript(postscriptId);
     }
 }
