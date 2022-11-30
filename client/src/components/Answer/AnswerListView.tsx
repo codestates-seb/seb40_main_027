@@ -3,22 +3,90 @@ import DOMPurify from 'dompurify';
 import styled from 'styled-components';
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
-import { useRef, useState, useMemo, KeyboardEvent, useCallback, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { useParams } from 'react-router';
 import { getComment } from '../../utils/API/getApi';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { answerListData, answerListProps } from '../../atoms/index';
+// import { answerListData, answerListProps } from '../../atoms/index';
+import { answerListData } from '../../atoms/index';
+import { StyledBorderButton } from '../Button/BorderButton';
+import { Icon } from '@iconify/react';
+import { StyledBackgroundButton } from '../Button/BackgroundButton';
+import { formatDistanceToNow, format } from 'date-fns';
+import { ko } from 'date-fns/locale';
+import { Calculate } from '../Calculate';
 
 const AnswerTextContent = styled.div`
-  /* background-color: red; */
   border-bottom: 1px solid black;
+
+  &:nth-last-child(1) {
+    border: none;
+  }
 `;
 
-const AnswerListView = ({ createdAt, postCommentId, updatedAt, postscriptComment }: answerListProps) => {
+const UserAnswerInfo = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const TimeOrName = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+
+  span:nth-last-child(1) {
+    margin-left: 1rem;
+    margin-top: 0;
+    align-items: flex-start;
+  }
+`;
+
+const AnswerButton = styled(StyledBorderButton)`
+  margin: 0.5rem;
+`;
+
+const OkButton = styled(StyledBackgroundButton)`
+  width: 3rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+`;
+
+const ButtonArea = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+`;
+
+const NameZone = styled.span`
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+`;
+
+const TextArea = styled.div`
+  height: 5vh;
+`;
+
+interface answerListProps {
+  createdAt: string;
+  postCommentId: number;
+  postscriptComment: string;
+  updatedAt?: string;
+  nickname: string;
+}
+
+const AnswerListView = ({ createdAt, postCommentId, updatedAt, postscriptComment, nickname }: answerListProps) => {
   const [isPatch, setIsPatch] = useState<boolean>(false);
-  // const [commentInfo, setCommentInfo] = useState([]);
   const [commentValue, setCommentValue] = useState('');
   const [answerList, setAnswerList] = useRecoilState(answerListData);
+
+  const ds = new Date(createdAt);
+  const d = format(ds, 'yyyy.MM.dd HH:mm:ss');
+  // console.log(Calculate(createdAt));
+  let timels = Calculate(createdAt);
+  const createTime = formatDistanceToNow(new Date(d), { locale: ko });
+  // const updateTime = formatDistanceToNow(new Date(updatedAt), { locale: ko });
 
   const { id } = useParams();
 
@@ -48,7 +116,7 @@ const AnswerListView = ({ createdAt, postCommentId, updatedAt, postscriptComment
       data: { postscriptComment: commentValue },
       headers: {
         Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoicGp3QGdtYWlsLmNvbSIsInN1YiI6InBqd0BnbWFpbC5jb20iLCJpYXQiOjE2Njk2MDk1NDMsImV4cCI6MTY2OTY5NTk0M30.XcAWYYmpkTNFhq-VaW8zKthvWNlBYWjsTAUf2eXoL_Zz0WGL0DO5YD6vKC8B6ofsbYhRz4KgTZcoLlAVvikxMQ',
+          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTcwNDAyMSwiZXhwIjoxNjY5NzkwNDIxfQ.ipJnckImRyPfR9kXlDI3Kajkp-M3RZzFUHBDpdxBK1Teu0kV8wjyHxh6WET_fckelUSByRdh7QDTZOnqA8FFXg',
       },
     });
   };
@@ -59,7 +127,7 @@ const AnswerListView = ({ createdAt, postCommentId, updatedAt, postscriptComment
       url: `/postscript/comment/delete/${postCommentId}`,
       headers: {
         Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoicGp3QGdtYWlsLmNvbSIsInN1YiI6InBqd0BnbWFpbC5jb20iLCJpYXQiOjE2Njk2MDk1NDMsImV4cCI6MTY2OTY5NTk0M30.XcAWYYmpkTNFhq-VaW8zKthvWNlBYWjsTAUf2eXoL_Zz0WGL0DO5YD6vKC8B6ofsbYhRz4KgTZcoLlAVvikxMQ',
+          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTcwNDAyMSwiZXhwIjoxNjY5NzkwNDIxfQ.ipJnckImRyPfR9kXlDI3Kajkp-M3RZzFUHBDpdxBK1Teu0kV8wjyHxh6WET_fckelUSByRdh7QDTZOnqA8FFXg',
       },
     })
       .then(() => {})
@@ -70,7 +138,7 @@ const AnswerListView = ({ createdAt, postCommentId, updatedAt, postscriptComment
     axios.defaults.withCredentials = true;
     try {
       const patchAwait = await patchComment();
-      const getAwait = await getComment(`${id}`);
+      const getAwait = await getComment('postscript', `${id}`);
 
       setAnswerList(getAwait.data.postComments);
     } catch {
@@ -82,7 +150,7 @@ const AnswerListView = ({ createdAt, postCommentId, updatedAt, postscriptComment
     axios.defaults.withCredentials = true;
     try {
       const deleteAwait = await deleteComment();
-      const getAwait = await getComment(`${id}`);
+      const getAwait = await getComment('postscript', `${id}`);
 
       setAnswerList(getAwait.data.postComments);
     } catch {
@@ -92,25 +160,8 @@ const AnswerListView = ({ createdAt, postCommentId, updatedAt, postscriptComment
 
   const PatchHanlder = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    //수정에서 403오류 발생
     patchAsync();
     setIsPatch(!isPatch);
-    // axios({
-    //   method: 'patch',
-    //   url: `/postscript/comment/${list.postCommentId}`,
-    //   data: { commentValue },
-    //   headers: {
-    //     Authorization:
-    //       'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoibGFsYUBnbWFpbC5jb20iLCJzdWIiOiJsYWxhQGdtYWlsLmNvbSIsImlhdCI6MTY2OTQ0OTUxNSwiZXhwIjoxNjY5NDkyNzE1fQ.SbuTBucG_fvPnESoQvuBunGpmI3283d9OH1XXVnR2dsmcgiGwtbGDonfzRxiWZSZvY1GmBXxFT3Dob56QLs3lQ',
-    //   },
-    // })
-    //   .then((res) => {
-    //     console.log(res);
-    //     const { data } = res;
-    //     setCommentInfo(data);
-    //     setIsPatch(!isPatch);
-    //   })
-    //   .catch(() => console.log('err'));
   };
 
   const deleteHandler = (e: React.MouseEvent<HTMLElement>) => {
@@ -123,19 +174,33 @@ const AnswerListView = ({ createdAt, postCommentId, updatedAt, postscriptComment
       {isPatch ? (
         <div>
           <ReactQuill theme="snow" value={commentValue} onChange={setCommentValue} />
-          <button onClick={PatchHanlder}>완료</button>
+          <ButtonArea>
+            <OkButton onClick={PatchHanlder}>완료</OkButton>
+            <OkButton color={'red'} onClick={editHandler}>
+              취소
+            </OkButton>
+          </ButtonArea>
         </div>
       ) : (
         <div>
           <div>
-            <div>
-              <span>username</span>
+            <UserAnswerInfo>
+              <TimeOrName>
+                <NameZone>
+                  <Icon icon="carbon:user-avatar-filled-alt" width="20" height="15" />
+                  {nickname}
+                </NameZone>
+                <span>{updatedAt ? <span>{timels}</span> : createTime} </span>
+              </TimeOrName>
+
               <div>
-                <button onClick={editHandler}>수정</button>
-                <button onClick={deleteHandler}>삭제</button>
+                <AnswerButton onClick={editHandler}>수정</AnswerButton>
+                <AnswerButton color="red" onClick={deleteHandler}>
+                  삭제
+                </AnswerButton>
               </div>
-            </div>
-            <div
+            </UserAnswerInfo>
+            <TextArea
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(postscriptComment),
               }}
@@ -143,8 +208,6 @@ const AnswerListView = ({ createdAt, postCommentId, updatedAt, postscriptComment
           </div>
         </div>
       )}
-
-      <div>{postCommentId}</div>
     </AnswerTextContent>
   );
 };
