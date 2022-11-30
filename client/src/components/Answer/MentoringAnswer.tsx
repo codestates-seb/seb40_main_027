@@ -20,8 +20,8 @@ export interface MentoringanswerList extends Array<mentoringAnswerListProps> {}
 
 const MentoringAnswer = () => {
   const { id } = useParams();
-  const [studyAnswerContents, setStudynAnswerContents] = useState('');
-  const [studyanswerList, setStudyAnswerList] = useRecoilState(mentoringListData);
+  const [mentoringAnswerContents, setMentoringnAnswerContents] = useState('');
+  const [mentoringanswerList, setMentoringAnswerList] = useRecoilState(mentoringListData);
 
   const modules = useMemo(
     () => ({
@@ -42,7 +42,7 @@ const MentoringAnswer = () => {
     return axios({
       method: 'post',
       url: `/mentoring/${id}/comment`,
-      data: { mentoringComment: studyAnswerContents },
+      data: { mentoringComment: mentoringAnswerContents },
       headers: {
         Authorization:
           'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTczNzAwNSwiZXhwIjoxNjY5ODIzNDA1fQ.AykpiUvJlzmcTWT7x2iMKPbPo0y9cCIVzqhiMECTGFKAMKg171ropdOZjpB_lLbV7m6AkQBlYPbIahmpmPGcdQ',
@@ -55,7 +55,7 @@ const MentoringAnswer = () => {
     try {
       const postAwait = await postComment();
       const getAwait = await getComment('mentoring', `${id}`);
-      setStudyAnswerList(getAwait.data.data.comments);
+      setMentoringAnswerList(getAwait.data.data.comments);
     } catch {
       console.log('err');
     }
@@ -77,14 +77,14 @@ const MentoringAnswer = () => {
     }).then((res) => {
       const { data } = res;
 
-      setStudyAnswerList(data.data.comments);
+      setMentoringAnswerList(data.data.comments);
     });
   }, []);
 
   return (
     <>
       <S.ViewAnswer>
-        {studyanswerList?.map((list, idx) => (
+        {mentoringanswerList?.map((list, idx) => (
           <MentoringAnswerList
             key={idx}
             createdAt={list.createdAt}
@@ -96,7 +96,7 @@ const MentoringAnswer = () => {
         ))}
       </S.ViewAnswer>
       <S.QuillContent>
-        <S.QuillArea theme="snow" value={studyAnswerContents} onChange={(e) => setStudynAnswerContents(e)} />
+        <S.QuillArea theme="snow" value={mentoringAnswerContents} onChange={(e) => setMentoringnAnswerContents(e)} />
         <div className="btn-area">
           <S.SubmitButtton onClick={SummitAnswerBtn}>등록</S.SubmitButtton>
         </div>
