@@ -10,7 +10,7 @@ interface LogStatus {
   memberRole: string;
   nickname: string;
 }
-export const useLogin = (
+export const userLogin = (
   submitData: LoginType,
   navigate: NavigateFunction,
   setLogStatus: React.Dispatch<React.SetStateAction<LogStatus>>
@@ -44,7 +44,7 @@ interface SignUpType {
   nickname: string;
   password: string;
 }
-export const useSignUp = (submitData: SignUpType, navigate: NavigateFunction) => {
+export const userSignUp = (submitData: SignUpType, navigate: NavigateFunction) => {
   axios({
     method: 'post',
     url: `/users/signup`,

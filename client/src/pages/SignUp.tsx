@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import logo from '../assets/image/logo.png';
 import icon from '../assets/image/icon.png';
 import { RegisterButton } from '../components/Button';
-import { useSignUp } from '../hooks/useUsers';
+import { userSignUp } from '../utils/api/userAPI';
 import { useNavigate } from 'react-router-dom';
 
 type SignUpValue = {
@@ -25,7 +25,7 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<SignUpValue> = async (data) => {
-    useSignUp(data, navigate);
+    userSignUp(data, navigate);
   };
 
   return (
