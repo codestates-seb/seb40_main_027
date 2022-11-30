@@ -110,6 +110,21 @@ public class StudyDto {
         public int vote;
         public int totalVotes;
     }
+
+    // Mypage Response
+    @Getter
+    @Setter
+    public static class StudyMypageResponse {
+        private Long studyId;
+        private String studyTitle;
+        private String studyContent;
+        private int view;
+        private int totalVotes;
+        private LocalDateTime createdAt;
+        private LocalDateTime updatedAt;
+        private String tagName;  // 태그
+
+    }
 }
 
 
