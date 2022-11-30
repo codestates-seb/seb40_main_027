@@ -1,7 +1,9 @@
 import axios from 'axios';
+import { useEffect } from 'react';
 import { useState } from 'react';
+import { DataType } from '../components/Table/DetailTable';
 
-const useBootTable = (params: string) => {
+export const useGetBootTable = () => {
   const [data, setData] = useState('');
 
   axios({
@@ -15,4 +17,35 @@ const useBootTable = (params: string) => {
 
   return data;
 };
-export default useBootTable;
+
+/** 뒤에 숫자를 나중에 받아오는 코드가 필요 **/
+export const useGetBootSpecificTable = (): DataType => {
+  const [data, setData] = useState({
+    bootcampId: 1,
+    title: '',
+    beginRegisterDate: '',
+    finalRegisterDate: '',
+    duration: '',
+    onOff: '',
+    totalCost: '',
+    superviser: '',
+    satisfaction: '',
+    trTime: '',
+    site: '',
+    weekendStatus: '',
+    startDate: '',
+    endDate: '',
+  });
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: '/bootcamp/1',
+    })
+      .then((resopnse) => {
+        setData(resopnse.data.data);
+      })
+      .catch((err) => alert(err));
+  }, []);
+
+  return data;
+};
