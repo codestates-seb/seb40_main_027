@@ -1,25 +1,20 @@
 import axios from 'axios';
 import DOMPurify from 'dompurify';
-import styled from 'styled-components';
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
-import { useRef, useState, useMemo, KeyboardEvent, useCallback, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { useParams } from 'react-router';
 import { getComment } from '../../utils/API/getApi';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { answerListData } from '../../atoms/index';
+import { useSetRecoilState } from 'recoil';
+import { mentoringListData } from '../../atoms/index';
 import * as S from './AnswerListView.style';
-import { Icon } from '@iconify/react';
-
-const AnswerTextContent = styled.div`
-  border-bottom: 1px solid black;
-`;
+import { AnswerViewContainer, QuillContainer } from './AnswerContainer';
 
 interface mentoringAnswerListProps {
-  createdAt?: string;
+  createdAt: string;
   commentId: number;
   mentoringComment: string;
-  updatedAt?: string;
+  updatedAt: string;
   nickname: string;
 }
 
@@ -32,7 +27,8 @@ const MentoringAnswerList = ({
 }: mentoringAnswerListProps) => {
   const [isPatch, setIsPatch] = useState<boolean>(false);
   const [commentValue, setCommentValue] = useState('');
-  const [answerList, setAnswerList] = useRecoilState(answerListData);
+  // const [answerList, setAnswerList] = useRecoilState(mentoringListData);
+  const setAnswerList = useSetRecoilState(mentoringListData);
 
   const { id } = useParams();
 
@@ -98,16 +94,14 @@ const MentoringAnswerList = ({
       const deleteAwait = await deleteComment();
       const getAwait = await getComment('mentoring', `${id}`);
 
-      setAnswerList(getAwait.data.comments);
+      setAnswerList(getAwait.data.data.comments);
     } catch {
       console.log('err');
     }
   };
-  console.log(answerList);
 
   const PatchHanlder = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    //수정에서 403오류 발생
     patchAsync();
     setIsPatch(!isPatch);
   };
@@ -122,38 +116,22 @@ const MentoringAnswerList = ({
       {isPatch ? (
         <div>
           <ReactQuill theme="snow" value={commentValue} onChange={setCommentValue} />
-          <S.ButtonArea>
-            <S.OkButton onClick={PatchHanlder}>완료</S.OkButton>
-            <S.OkButton color={'red'} onClick={editHandler}>
-              취소
-            </S.OkButton>
-          </S.ButtonArea>
+          <QuillContainer PatchHanlder={PatchHanlder} editHandler={editHandler} />
         </div>
       ) : (
         <div>
-          <div>
-            <S.UserAnswerInfo>
-              <S.TimeOrName>
-                <S.NameZone>
-                  <Icon icon="carbon:user-avatar-filled-alt" width="20" height="15" />
-                  {nickname}
-                </S.NameZone>
-                <span>{updatedAt ? <span>{createdAt}</span> : createdAt} </span>
-              </S.TimeOrName>
-
-              <div>
-                <S.AnswerButton onClick={editHandler}>수정</S.AnswerButton>
-                <S.AnswerButton color="red" onClick={deleteHandler}>
-                  삭제
-                </S.AnswerButton>
-              </div>
-            </S.UserAnswerInfo>
-            <S.TextArea
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(mentoringComment),
-              }}
-            />
-          </div>
+          <AnswerViewContainer
+            nick={nickname}
+            updateAt={updatedAt}
+            createAt={createdAt}
+            editHandler={editHandler}
+            deleteHandler={deleteHandler}
+          />
+          <S.TextArea
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(mentoringComment),
+            }}
+          />
         </div>
       )}
     </S.AnswerTextContent>
