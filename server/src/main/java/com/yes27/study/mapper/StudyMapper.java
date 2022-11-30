@@ -1,6 +1,7 @@
 package com.yes27.study.mapper;
 
 import com.yes27.member.entity.Member;
+import com.yes27.member.mapper.MemberMapper;
 import com.yes27.study.dto.StudyDto;
 import com.yes27.study.dto.StudyDto.PagingResponse;
 import com.yes27.study.dto.StudyDto.StudyCommentSubset;
@@ -118,4 +119,29 @@ public interface StudyMapper {
         }
         return list1;
     }
+    default List<StudyDto.StudyMypageResponse> studiesToMypageResponse(List<Study> studies, MemberMapper memberMapper){
+        if(studies == null) return null;
+        List<StudyDto.StudyMypageResponse> studyMypageResponsesDto = new ArrayList<>(studies.size());
+
+        for(Study study : studies){
+            studyMypageResponsesDto.add(studyToMypageResponseDto(study,memberMapper));
+        }
+        return studyMypageResponsesDto;
+    }
+
+    default StudyDto.StudyMypageResponse studyToMypageResponseDto(Study study,MemberMapper memberMapper){
+
+        StudyDto.StudyMypageResponse studyMypageResponse = new StudyDto.StudyMypageResponse();
+        studyMypageResponse.setStudyId(study.getStudyId());
+        studyMypageResponse.setStudyTitle(study.getStudyTitle());
+        studyMypageResponse.setStudyContent(study.getStudyContent());
+        studyMypageResponse.setView(study.getView());
+        studyMypageResponse.setTotalVotes(study.getTotalVotes());
+        studyMypageResponse.setTagName(study.getTagName());
+        studyMypageResponse.setCreatedAt(study.getCreatedAt());
+        studyMypageResponse.setUpdatedAt(study.getUpdatedAt());
+
+        return studyMypageResponse;
+    }
+
 }

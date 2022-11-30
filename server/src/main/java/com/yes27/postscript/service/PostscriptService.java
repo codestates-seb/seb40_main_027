@@ -109,7 +109,7 @@ public class PostscriptService {
     // 좋아요 수 새로 갱신
     public void refreshVotes(long postscriptId) {
         Postscript postscript = findVerifiedPostscript(postscriptId);
-        postscript.setVotes(postscriptVoteService.getVotes(postscriptId));
+        postscript.setTotalVotes(postscriptVoteService.getVotes(postscriptId));
         postscriptRepository.save(postscript);
     }
 
