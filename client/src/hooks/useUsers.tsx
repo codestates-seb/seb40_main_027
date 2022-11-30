@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { NavigateFunction } from 'react-router-dom';
-import { RecoilState } from 'recoil';
 
 interface LogInType {
   email: string;
