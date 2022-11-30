@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { StyledBorderButton } from './BorderButton';
 import { StyledBackgroundButton } from './BackgroundButton';
+import { GREEN_MAIN } from '../../assets/constant/COLOR';
 
 const StyledBorderOtherButton = styled(StyledBorderButton)`
   width: 56px;
@@ -30,10 +31,34 @@ const StyledBackgroundOtherButton = styled(StyledBackgroundButton)`
   }
 `;
 
-export const BorderOtherButton = ({ text = '기타', color = '#1DCA89' }) => {
-  return <StyledBorderOtherButton color={color}>{text}</StyledBorderOtherButton>;
+interface PropsType {
+  type?: 'button' | 'submit' | 'reset';
+  form?: string;
+  text?: string;
+  color?: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onSubmit?: React.FormEventHandler<HTMLButtonElement>;
+}
+
+export const BorderOtherButton = ({ type, form, text = '기타', color = GREEN_MAIN, onClick, onSubmit }: PropsType) => {
+  return (
+    <StyledBorderOtherButton type={type} form={form} color={color} onClick={onClick} onSubmit={onSubmit}>
+      {text}
+    </StyledBorderOtherButton>
+  );
 };
 
-export const BackgroundOtherButton = ({ text = '기타', color = '#1DCA89' }) => {
-  return <StyledBackgroundOtherButton color={color}>{text}</StyledBackgroundOtherButton>;
+export const BackgroundOtherButton = ({
+  type,
+  form,
+  text = '기타',
+  color = GREEN_MAIN,
+  onClick,
+  onSubmit,
+}: PropsType) => {
+  return (
+    <StyledBackgroundOtherButton type={type} form={form} color={color} onClick={onClick} onSubmit={onSubmit}>
+      {text}
+    </StyledBackgroundOtherButton>
+  );
 };
