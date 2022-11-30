@@ -43,6 +43,8 @@ public class BootcampDto {
         private String duration;
         //온 오프라인
         private String onOff;
+        //상세 조회
+        private String process;
         //총 비용
         private String totalCost;
         //주관 부처
@@ -59,6 +61,9 @@ public class BootcampDto {
         //훈련기간
         private String startDate;
         private String endDate;
+
+        //좋아요 유무
+        private int vote;
     }
 
     @Getter
@@ -106,6 +111,12 @@ public class BootcampDto {
 
         //수강만족도
         private String satisfaction;
+
+        //주소
+        private String address;
+
+        //모집정원
+        private String yardMan;
     }
 
     @Getter
