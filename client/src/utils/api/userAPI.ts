@@ -30,7 +30,7 @@ export const userLogin = (
         nickname: response.data.nickname,
       });
       const access = response.headers.authorization!;
-      const refresh = response.headers.refresh || '';
+      const refresh = response.headers.refresh ?? '';
       localStorage.setItem('access', access);
       localStorage.setItem('refresh', refresh);
       navigate('/');
@@ -54,7 +54,7 @@ export const userSignUp = (submitData: SignUpType, navigate: NavigateFunction) =
       password: submitData.password,
     },
   })
-    .then((response) => {
+    .then(() => {
       alert(`회원가입 성공`);
       navigate('/users/login');
     })
