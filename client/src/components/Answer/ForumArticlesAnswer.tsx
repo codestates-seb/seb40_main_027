@@ -1,56 +1,27 @@
-import { useRef, useState, useMemo, useEffect } from 'react';
-import ReactQuill from 'react-quill';
-import styled from 'styled-components';
+import { useState, useMemo, useEffect } from 'react';
 import axios from 'axios';
 import AnswerListView from './AnswerListView';
-import { useParams, useNavigate } from 'react-router';
+import { useParams } from 'react-router';
 import 'react-quill/dist/quill.snow.css';
 import { getComment } from '../../utils/API/getApi';
 import { useRecoilState } from 'recoil';
 import { answerListData } from '../../atoms/index';
-import { StyledBackgroundButton } from '../Button/BackgroundButton';
-
-const QuillContent = styled.div`
-  border: 2px solid var(--greenSub);
-  border-radius: 10px;
-  height: 16vh;
-
-  .btn-area {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-  }
-`;
-const QuillArea = styled(ReactQuill)`
-  background-color: var(--whiteBackground);
-  margin: 1rem;
-  border-radius: 10px;
-`;
-
-const SubmitButtton = styled(StyledBackgroundButton)`
-  width: 6rem;
-  height: 2rem;
-  margin-right: 2rem;
-  border-radius: 10px;
-`;
+import * as S from './ForumAnswer.style';
 
 interface answerListProps {
   createdAt: string;
   postCommentId: number;
   postscriptComment: string;
-  updatedAt?: string;
+  updatedAt: string;
   nickname: string;
 }
 
 export interface IanswerList extends Array<answerListProps> {}
 
 const ForumArticlesAnswer = () => {
-  const quillRef = useRef<ReactQuill>();
   const { id } = useParams();
   const [answerContents, setAnswerContents] = useState('');
   const [answerList, setAnswerList] = useRecoilState(answerListData);
-  // const [answerUserName, setAnswerUserName] = useState<answerList[]>();
-  // const [answerList, setAnswerList] = useState<answerList[]>();
 
   const modules = useMemo(
     () => ({
@@ -85,8 +56,6 @@ const ForumArticlesAnswer = () => {
       const postAwait = await postComment();
       const getAwait = await getComment('postscript', `${id}`);
       setAnswerList(getAwait.data.postComments);
-      // setAnswerUserName(getAwait.data.member);
-      // console.log(answerUserName);
     } catch {
       console.log('err');
     }
@@ -94,6 +63,7 @@ const ForumArticlesAnswer = () => {
 
   const SummitAnswerBtn = () => {
     AsyncFunction();
+    setAnswerContents('');
   };
 
   useEffect(() => {
@@ -109,7 +79,7 @@ const ForumArticlesAnswer = () => {
 
   return (
     <>
-      <div>
+      <S.ViewAnswer>
         {answerList?.map((list, idx) => (
           <AnswerListView
             key={idx}
@@ -120,13 +90,13 @@ const ForumArticlesAnswer = () => {
             nickname={list.nickname}
           ></AnswerListView>
         ))}
-      </div>
-      <QuillContent>
-        <QuillArea theme="snow" value={answerContents} onChange={(e) => setAnswerContents(e)} />
+      </S.ViewAnswer>
+      <S.QuillContent>
+        <S.QuillArea theme="snow" value={answerContents} onChange={(e) => setAnswerContents(e)} />
         <div className="btn-area">
-          <SubmitButtton onClick={SummitAnswerBtn}>등록</SubmitButtton>
+          <S.SubmitButtton onClick={SummitAnswerBtn}>등록</S.SubmitButtton>
         </div>
-      </QuillContent>
+      </S.QuillContent>
     </>
   );
 };
