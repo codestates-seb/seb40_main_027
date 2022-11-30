@@ -103,9 +103,6 @@ const SignUp = () => {
                 />
               </label>
               <S.ErrMsg>{errors.passwordCheck?.message}</S.ErrMsg>
-              {/* {watch('passwordCheck') !== watch('password') && getValues('passwordCheck') ? (
-                <S.ErrMsg>비밀번호가 일치하지 않습니다</S.ErrMsg>
-              ) : null} */}
             </div>
             <S.AgreeForm>
               <img src={icon} alt="icon" />
