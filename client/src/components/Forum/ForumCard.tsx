@@ -1,60 +1,46 @@
 import { InlineIcon } from '@iconify/react';
-import { useLocation } from 'react-router-dom';
+import { formatDistanceToNow } from 'date-fns';
+import { ko } from 'date-fns/locale';
 import { SmallBackgroundTagButton } from '../Button';
 import * as S from './ForumCard.style';
 import ForumWrittenInfo from './ForumWrittenInfo';
 
 interface PropsType {
-  post: {
-    studyId: number;
-    studyTitle: string;
-    studyContent: string;
-    studyTags: string[];
-    view: number;
-    like: number;
-    user: {
-      userId: number;
-      name: string;
-      userEmail: string;
-    };
-    createdAt: string;
-    updatedAt?: string;
-  };
+  forumType: string;
+  post: any;
 }
 
-const ForumCard = ({ post }: PropsType) => {
-  const { pathname } = useLocation();
-  const forumType = pathname.split('/')[1];
+const ForumCard = ({ forumType, post }: PropsType) => {
+  const content = post[`${forumType}Content`].replace(/<[^>]*>?/g, ' ');
+  const createdAt = `${formatDistanceToNow(new Date(post.createdAt), { locale: ko })} 전`;
 
   return (
     <S.Article>
-      <S.StyledLink to={`/${forumType}/${post.studyId}`}>
+      <S.StyledLink to={`/${forumType}/${post[`${forumType}Id`]}`}>
         <S.TagsContainer>
-          {post.studyTags.map((tag, index) => (
-            <SmallBackgroundTagButton key={index} text={tag} />
-          ))}
+          <SmallBackgroundTagButton text={post.tagName} />
         </S.TagsContainer>
 
-        <S.Title>{post.studyTitle}</S.Title>
+        <S.Title>{post[`${forumType}Title`]}</S.Title>
 
         <S.WrittenInfoContainer className="desktop">
-          <ForumWrittenInfo position="left" author={post.user.name} createdAt={post.createdAt} view={post.view} />
+          <ForumWrittenInfo position="left" author={post.member.nickname} createdAt={createdAt} view={post.view} />
           <S.LikeContainer>
             <InlineIcon icon="akar-icons:heart" />
-            <span>{post.like}</span>
+            <span>{post.totalVotes}</span>
           </S.LikeContainer>
         </S.WrittenInfoContainer>
         <S.WrittenInfoContainer className="mobile">
           <ForumWrittenInfo
             position="right"
-            author={post.user.name}
-            createdAt={post.createdAt}
+            author={post.member.nickname}
+            createdAt={createdAt}
             view={post.view}
-            like={post.like}
+            totalVotes={post.totalVotes}
           />
         </S.WrittenInfoContainer>
 
-        <S.Content>{post.studyContent}</S.Content>
+        <S.Content>{content}</S.Content>
       </S.StyledLink>
     </S.Article>
   );
