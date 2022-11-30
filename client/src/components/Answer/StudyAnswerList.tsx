@@ -98,6 +98,7 @@ const StudyAnswerList = ({ createdAt, studyCommentId, updatedAt, studyComment, n
     //수정에서 403오류 발생
     patchAsync();
     setIsPatch(!isPatch);
+    setCommentValue('');
   };
 
   const deleteHandler = (e: React.MouseEvent<HTMLElement>) => {
