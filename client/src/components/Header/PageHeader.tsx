@@ -16,7 +16,7 @@ const PageMenu = styled.header`
   justify-content: center;
   align-items: center;
   .page-header-content {
-    width: 60vw;
+    width: 1160px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -30,6 +30,7 @@ const PageMenu = styled.header`
     display: none;
   }
   img {
+    margin-top: 4px;
     width: 150px;
     height: 60px;
   }
@@ -60,6 +61,12 @@ const PageMenu = styled.header`
   }
 `;
 
+const HeaderLink = styled(Link)`
+  text-decoration: none;
+  @media screen and (max-width: 414px) {
+    display: none;
+  }
+`;
 const LoginSignHeaderButton = styled.span`
   display: flex;
   flex-direction: row;
@@ -73,33 +80,29 @@ const PageHeader = () => {
     //상태변하게 하기위하여
     setIsCollapse(!isCollapse);
   };
-  const headerMenu = ['분야선택', '로드맵', '학원일정', '수료후기', '스터디모집', '멘토링'];
+
   return (
     <PageMenu>
       <div className="page-header-content">
         <span className="hamburger">
           <Icon icon="mdi:menu" onClick={CollapseHandler} />
         </span>
-
         <img src={logo} alt="logo" />
-        {headerMenu.map((el, idx) => (
-          <span className="page-menu" key={idx}>
-            {el}
-          </span>
-        ))}
+        <HeaderLink to={'/test'}>적성검사</HeaderLink>
+        <HeaderLink to={'/'}>로드맵</HeaderLink>
+        <HeaderLink to={'/bootcamp'}>학원일정</HeaderLink>
+        <HeaderLink to={'/postscript'}>수료후기</HeaderLink>
+        <HeaderLink to={'/study'}>스터디모집</HeaderLink>
+        <HeaderLink to={'/mentoring'}>멘토링</HeaderLink>
         {isLog ? (
+          <LoginSignHeaderButton>
+            <LoginButton />
+            <RegisterButton />
+          </LoginSignHeaderButton>
+        ) : (
           <span>
             <Nickname />
           </span>
-        ) : (
-          <LoginSignHeaderButton>
-            <Link to="/users/login">
-              <LoginButton />
-            </Link>
-            <Link to="/users/signup">
-              <RegisterButton />
-            </Link>
-          </LoginSignHeaderButton>
         )}
       </div>
     </PageMenu>
