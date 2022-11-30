@@ -11,7 +11,7 @@ public interface PostscriptVoteMapper {
         PostscriptVoteResponseDto postscriptVoteResponseDto = new PostscriptVoteResponseDto();
         postscriptVoteResponseDto.setPostscriptId(postscriptVote.getPostscript().getPostscriptId());
         postscriptVoteResponseDto.setVote(postscriptVote.getVote());
-        postscriptVoteResponseDto.setTotalVotes(postscriptVote.getPostscript().getVotes());
+        postscriptVoteResponseDto.setTotalVotes(postscriptVote.getPostscript().getTotalVotes());
 
         return postscriptVoteResponseDto;
     }
