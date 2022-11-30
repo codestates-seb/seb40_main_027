@@ -11,6 +11,7 @@ const BootCampDetail = () => {
   console.log(data);
   const dataKeys: Array<string> = Object.keys(data);
   const halfIdx = Math.floor(dataKeys.length / 2);
+  // 찜하기 기능 구현하기
   // const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {};
   return (
     <>

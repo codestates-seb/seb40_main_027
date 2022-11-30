@@ -31,6 +31,8 @@ export const Table = () => {
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
+  // row클릭 시 해당 페이지로 이동하는 로직
+  const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {};
   return (
     <S.TableWrap>
       <thead>
