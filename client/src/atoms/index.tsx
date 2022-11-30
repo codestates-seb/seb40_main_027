@@ -1,13 +1,7 @@
 import { atom } from 'recoil';
-
-export interface answerListProps {
-  createdAt?: string;
-  postCommentId: number;
-  postscriptComment: string;
-  updatedAt?: string;
-}
-
-interface IanswerList extends Array<answerListProps> {}
+import { IanswerList } from '../components/Answer/ForumArticlesAnswer';
+import { StudyanswerList } from '../components/Answer/StudyAnswer';
+import { MentoringanswerList } from '../components/Answer/MentoringAnswer';
 
 export const sideBarFloading = atom({
   key: 'sideBarFloading',
@@ -31,5 +25,15 @@ export const isLogin = atom({
 
 export const answerListData = atom<IanswerList>({
   key: 'answerListData',
+  default: [],
+});
+
+export const studyListData = atom<StudyanswerList>({
+  key: 'studyListData',
+  default: [],
+});
+
+export const mentoringListData = atom<MentoringanswerList>({
+  key: 'mentoringListData',
   default: [],
 });
