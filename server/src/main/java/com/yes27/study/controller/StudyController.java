@@ -103,7 +103,7 @@ public class StudyController {
             Page<Study> pageStudies = studyService.findStudies(page-1, size);
             List<Study> studies = pageStudies.getContent();
             return new ResponseEntity<>(new MultiResponseDto<>(mapper.studiesToPagingResponses(studies), pageStudies), HttpStatus.OK);
-        } else if (sort.equals("viewCount")) {
+        } else if (sort.equals("view")) {
             Page<Study> pageStudies = studyService.findStudiesByView(page-1, size);
             List<Study> studies = pageStudies.getContent();
             return new ResponseEntity<>(new MultiResponseDto<>(mapper.studiesToPagingResponses(studies), pageStudies), HttpStatus.OK);
