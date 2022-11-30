@@ -40,7 +40,7 @@ public class StudyVoteController {
 //        return res ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 //    }
 
-    @PostMapping("/{study-id}")
+    @PostMapping("/votes/{study-id}")
     public ResponseEntity voteMember(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId, @RequestParam @Positive int vote) {
         Member member = findMemberByHeader(request);
 
