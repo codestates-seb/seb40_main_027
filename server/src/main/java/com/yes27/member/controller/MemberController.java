@@ -113,6 +113,7 @@ public class MemberController {
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponse2(member)), HttpStatus.OK);
     }
 
+
 //    @GetMapping("/mypage/bootcampLike")
 //    public ResponseEntity getLikeSchedule(HttpServletRequest request) {
 //        Member member = findMemberByHeader(request);
@@ -125,10 +126,11 @@ public class MemberController {
     public ResponseEntity getWriting(HttpServletRequest request) {
         Member member = findMemberByHeader(request);
 
-        List<StudyDto.PagingResponse> studies = studyMapper.studiesToPagingResponses(studyService.findStudiesPage(member));
-        List<MentorDto.Response> mentors = mentorMapper.mentorsToMentorResponseDtos(mentorService.findMentorsPage(member));
+        List<StudyDto.StudyMypageResponse> studies = studyMapper.studiesToMypageResponse(studyService.findStudiesPage(member),mapper);
 
-        List<PostscriptDto.PostscriptResponse> postscripts = postscriptMapper.postscriptsToPostscriptResponseDtos(postscriptService.findPostscripts(member),mapper);
+        List<MentorDto.MentorMypageResponse> mentors = mentorMapper.mentorsToMypageResponse(mentorService.findMentorsPage(member),mapper);
+
+        List<PostscriptDto.PostscriptMypageResponse> postscripts = postscriptMapper.postscriptToMypageResponse(postscriptService.findPostscripts(member),mapper);
 
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberDataDto(member,postscripts,mentors, studies)), HttpStatus.OK);
     }

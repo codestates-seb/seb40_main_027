@@ -36,7 +36,7 @@ public class Postscript extends BaseEntity {
 
     // 좋아요값들
     @Column(length = 5, nullable = false)
-    private Integer votes = 0;
+    private Integer totalVotes = 0;
 
     // 조회수
     @Column(length = 5, nullable = false)
