@@ -7,19 +7,27 @@ import { useRef, useState, useMemo, KeyboardEvent, useCallback, useEffect } from
 import { useParams } from 'react-router';
 import { getComment } from '../../utils/API/getApi';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { answerListData, answerListProps } from '../../atoms/index';
+import { answerListData } from '../../atoms/index';
+import * as S from './AnswerListView.style';
+import { Icon } from '@iconify/react';
 
 const AnswerTextContent = styled.div`
-  /* background-color: red; */
   border-bottom: 1px solid black;
 `;
 
-const StudyAnswerList = ({ createdAt, postCommentId, updatedAt, postscriptComment }: answerListProps) => {
+interface studyAnswerListProps {
+  createdAt?: string;
+  studyCommentId: number;
+  studyComment: string;
+  updatedAt?: string;
+  nickname: string;
+}
+
+const StudyAnswerList = ({ createdAt, studyCommentId, updatedAt, studyComment, nickname }: studyAnswerListProps) => {
   const [isPatch, setIsPatch] = useState<boolean>(false);
-  // const [commentInfo, setCommentInfo] = useState([]);
   const [commentValue, setCommentValue] = useState('');
   const [answerList, setAnswerList] = useRecoilState(answerListData);
-
+  console.log(studyComment);
   const { id } = useParams();
 
   const modules = useMemo(
@@ -44,11 +52,11 @@ const StudyAnswerList = ({ createdAt, postCommentId, updatedAt, postscriptCommen
   const patchComment = () => {
     return axios({
       method: 'patch',
-      url: `/postscript/comment/${postCommentId}`,
+      url: `/study/${id}/comment/${studyCommentId}`,
       data: { postscriptComment: commentValue },
       headers: {
         Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoicGp3QGdtYWlsLmNvbSIsInN1YiI6InBqd0BnbWFpbC5jb20iLCJpYXQiOjE2Njk2MDk1NDMsImV4cCI6MTY2OTY5NTk0M30.XcAWYYmpkTNFhq-VaW8zKthvWNlBYWjsTAUf2eXoL_Zz0WGL0DO5YD6vKC8B6ofsbYhRz4KgTZcoLlAVvikxMQ',
+          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTczNzAwNSwiZXhwIjoxNjY5ODIzNDA1fQ.AykpiUvJlzmcTWT7x2iMKPbPo0y9cCIVzqhiMECTGFKAMKg171ropdOZjpB_lLbV7m6AkQBlYPbIahmpmPGcdQ',
       },
     });
   };
@@ -56,10 +64,10 @@ const StudyAnswerList = ({ createdAt, postCommentId, updatedAt, postscriptCommen
   const deleteComment = () => {
     return axios({
       method: 'delete',
-      url: `/postscript/comment/delete/${postCommentId}`,
+      url: `/study/${id}/comment/${studyCommentId}`,
       headers: {
         Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoicGp3QGdtYWlsLmNvbSIsInN1YiI6InBqd0BnbWFpbC5jb20iLCJpYXQiOjE2Njk2MDk1NDMsImV4cCI6MTY2OTY5NTk0M30.XcAWYYmpkTNFhq-VaW8zKthvWNlBYWjsTAUf2eXoL_Zz0WGL0DO5YD6vKC8B6ofsbYhRz4KgTZcoLlAVvikxMQ',
+          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTczNzAwNSwiZXhwIjoxNjY5ODIzNDA1fQ.AykpiUvJlzmcTWT7x2iMKPbPo0y9cCIVzqhiMECTGFKAMKg171ropdOZjpB_lLbV7m6AkQBlYPbIahmpmPGcdQ',
       },
     })
       .then(() => {})
@@ -70,7 +78,7 @@ const StudyAnswerList = ({ createdAt, postCommentId, updatedAt, postscriptCommen
     axios.defaults.withCredentials = true;
     try {
       const patchAwait = await patchComment();
-      const getAwait = await getComment(`${id}`);
+      const getAwait = await getComment('study', `${id}`);
 
       setAnswerList(getAwait.data.postComments);
     } catch {
@@ -82,7 +90,7 @@ const StudyAnswerList = ({ createdAt, postCommentId, updatedAt, postscriptCommen
     axios.defaults.withCredentials = true;
     try {
       const deleteAwait = await deleteComment();
-      const getAwait = await getComment(`${id}`);
+      const getAwait = await getComment('study', `${id}`);
 
       setAnswerList(getAwait.data.postComments);
     } catch {
@@ -95,22 +103,6 @@ const StudyAnswerList = ({ createdAt, postCommentId, updatedAt, postscriptCommen
     //수정에서 403오류 발생
     patchAsync();
     setIsPatch(!isPatch);
-    // axios({
-    //   method: 'patch',
-    //   url: `/postscript/comment/${list.postCommentId}`,
-    //   data: { commentValue },
-    //   headers: {
-    //     Authorization:
-    //       'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoibGFsYUBnbWFpbC5jb20iLCJzdWIiOiJsYWxhQGdtYWlsLmNvbSIsImlhdCI6MTY2OTQ0OTUxNSwiZXhwIjoxNjY5NDkyNzE1fQ.SbuTBucG_fvPnESoQvuBunGpmI3283d9OH1XXVnR2dsmcgiGwtbGDonfzRxiWZSZvY1GmBXxFT3Dob56QLs3lQ',
-    //   },
-    // })
-    //   .then((res) => {
-    //     console.log(res);
-    //     const { data } = res;
-    //     setCommentInfo(data);
-    //     setIsPatch(!isPatch);
-    //   })
-    //   .catch(() => console.log('err'));
   };
 
   const deleteHandler = (e: React.MouseEvent<HTMLElement>) => {
@@ -119,33 +111,45 @@ const StudyAnswerList = ({ createdAt, postCommentId, updatedAt, postscriptCommen
   };
 
   return (
-    <AnswerTextContent>
+    <S.AnswerTextContent>
       {isPatch ? (
         <div>
           <ReactQuill theme="snow" value={commentValue} onChange={setCommentValue} />
-          <button onClick={PatchHanlder}>완료</button>
+          <S.ButtonArea>
+            <S.OkButton onClick={PatchHanlder}>완료</S.OkButton>
+            <S.OkButton color={'red'} onClick={editHandler}>
+              취소
+            </S.OkButton>
+          </S.ButtonArea>
         </div>
       ) : (
         <div>
           <div>
-            <div>
-              <span>username</span>
+            <S.UserAnswerInfo>
+              <S.TimeOrName>
+                <S.NameZone>
+                  <Icon icon="carbon:user-avatar-filled-alt" width="20" height="15" />
+                  {nickname}
+                </S.NameZone>
+                <span>{updatedAt ? <span>{createdAt}</span> : createdAt} </span>
+              </S.TimeOrName>
+
               <div>
-                <button onClick={editHandler}>수정</button>
-                <button onClick={deleteHandler}>삭제</button>
+                <S.AnswerButton onClick={editHandler}>수정</S.AnswerButton>
+                <S.AnswerButton color="red" onClick={deleteHandler}>
+                  삭제
+                </S.AnswerButton>
               </div>
-            </div>
-            <div
+            </S.UserAnswerInfo>
+            <S.TextArea
               dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(postscriptComment),
+                __html: DOMPurify.sanitize(studyComment),
               }}
             />
           </div>
         </div>
       )}
-
-      <div>{postCommentId}</div>
-    </AnswerTextContent>
+    </S.AnswerTextContent>
   );
 };
 
