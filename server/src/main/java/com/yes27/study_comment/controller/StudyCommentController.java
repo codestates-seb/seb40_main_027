@@ -60,10 +60,11 @@ public class StudyCommentController {
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.commentToCommentResponse(createdComment)), HttpStatus.CREATED);
     }
 
-    @PatchMapping("/{study-id}/comment/{comment-id}")
-    public ResponseEntity patchComment(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId, @PathVariable("comment-id") @Positive Long studyCommentId, @Valid @RequestBody StudyCommentDto.Patch requestBody) {
+    // TODO studyId 제거
+    @PatchMapping("/comment/{comment-id}")
+    public ResponseEntity patchComment(HttpServletRequest request, @PathVariable("comment-id") @Positive Long studyCommentId, @Valid @RequestBody StudyCommentDto.Patch requestBody) {
         Member member = findMemberByHeader(request);
-        Study findStudy = studyService.findVerifiedStudy(studyId);
+//        Study findStudy = studyService.findVerifiedStudy(studyId);
         StudyComment studyComment = studyCommentService.findVerifiedComment(studyCommentId);
 
         if (member.getMemberId() != studyComment.getMember().getMemberId()) {
@@ -72,23 +73,25 @@ public class StudyCommentController {
 
         requestBody.setStudyCommentId(studyCommentId);
         StudyComment findStudyComment = mapper.commentPatchToComment(requestBody);
-        findStudyComment.setStudy(findStudy);
+//        findStudyComment.setStudy(findStudy);
 
         StudyComment updatedStudyComment = studyCommentService.updateComment(findStudyComment);
 
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.commentToCommentResponse(updatedStudyComment)), HttpStatus.OK);
     }
 
-    @GetMapping("/{study-id}/comment/{comment-id}")
-    public ResponseEntity getComment(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId, @PathVariable("comment-id") @Positive Long studyCommentId) {
-        Member member = findMemberByHeader(request);
+    // TODO studyId 제거
+    @GetMapping("/comment/{comment-id}")
+    public ResponseEntity getComment(HttpServletRequest request, @PathVariable("comment-id") @Positive Long studyCommentId) {
+//        Member member = findMemberByHeader(request);
         StudyComment studyComment = studyCommentService.findComment(studyCommentId);
 
         return new ResponseEntity<>(mapper.commentToCommentResponse(studyComment), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{study-id}/comment/{comment-id}")
-    public ResponseEntity deleteComment(HttpServletRequest request, @PathVariable("study-id") @Positive Long studyId, @PathVariable("comment-id") @Positive Long studyCommentId) {
+    // TODO studyId 제거
+    @DeleteMapping("/comment/{comment-id}")
+    public ResponseEntity deleteComment(HttpServletRequest request, @PathVariable("comment-id") @Positive Long studyCommentId) {
         Member member = findMemberByHeader(request);
         StudyComment studyComment = studyCommentService.findVerifiedComment(studyCommentId);
 
