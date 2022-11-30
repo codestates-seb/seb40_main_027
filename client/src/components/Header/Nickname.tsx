@@ -24,12 +24,12 @@ const NicknameArea = styled.div`
   align-items: center;
 `;
 const Nickname = () => {
-  const stateNameNRole = useRecoilValue(logUser);
+  const { nickname } = useRecoilValue(logUser);
   return (
     <ImgCircle>
       <NicknameArea>
         <Icon icon="carbon:user-avatar-filled-alt" width="30" height="30" />
-        <span>{stateNameNRole.nickname}</span>
+        <span>{nickname}</span>
       </NicknameArea>
       <LogoutArea>
         <Logout />

@@ -95,14 +95,18 @@ const PageHeader = () => {
         <HeaderLink to={'/study'}>스터디모집</HeaderLink>
         <HeaderLink to={'/mentoring'}>멘토링</HeaderLink>
         {isLog ? (
-          <LoginSignHeaderButton>
-            <LoginButton />
-            <RegisterButton />
-          </LoginSignHeaderButton>
-        ) : (
           <span>
             <Nickname />
           </span>
+        ) : (
+          <LoginSignHeaderButton>
+            <Link to="/users/login">
+              <LoginButton />
+            </Link>
+            <Link to="/users/signup">
+              <RegisterButton />
+            </Link>
+          </LoginSignHeaderButton>
         )}
       </div>
     </PageMenu>
