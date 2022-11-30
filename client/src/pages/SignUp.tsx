@@ -3,7 +3,6 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import logo from '../assets/image/logo.png';
 import icon from '../assets/image/icon.png';
 import { RegisterButton } from '../components/Button';
-import { useRef } from 'react';
 import { useSignUp } from '../hooks/useUsers';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,8 +21,7 @@ const SignUp = () => {
     formState: { errors },
     watch,
   } = useForm<SignUpValue>({ mode: 'onBlur' });
-  const password = useRef({});
-  password.current = watch('password', '');
+  const watchPassword = watch('password', '');
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<SignUpValue> = async (data) => {
@@ -100,7 +98,7 @@ const SignUp = () => {
                   placeholder="비밀번호를 확인해주세요"
                   {...register('passwordCheck', {
                     required: '비밀번호를 확인해주세요',
-                    validate: (value) => value === password.current || '비밀번호가 일치하지 않습니다',
+                    validate: (value) => value === watchPassword || '비밀번호가 일치하지 않습니다',
                   })}
                 />
               </label>
