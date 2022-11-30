@@ -1,19 +1,32 @@
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { logUser } from '../../atoms';
 import * as S from './Logout.style';
 
 const Logout = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const setLogStatus = useSetRecoilState(logUser);
 
   const LogoutHandler = () => {
     if (window.confirm('로그아웃을 하시겠습니까?')) {
       axios({
         method: 'post',
         url: '/users/logout',
+        headers: {
+          Authorization: localStorage.getItem('access'),
+        },
       })
         .then(() => {
-          navigate('/');
-          console.log('로그아웃이 됨');
+          setLogStatus({
+            isLog: false,
+            memberRole: '',
+            nickname: '',
+          });
+          localStorage.removeItem('access');
+          localStorage.removeItem('refresh');
+          navigate(`${pathname}`);
           alert('로그아웃이 되었습니다');
         })
         .catch(() => console.log('err'));
