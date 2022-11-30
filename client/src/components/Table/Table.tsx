@@ -1,7 +1,7 @@
 import * as S from './Table.style';
 import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import dummydata from './dummydata';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 // 여기서 api 호출(customHook으로 호출)
 
@@ -32,7 +32,7 @@ export const Table = () => {
     getCoreRowModel: getCoreRowModel(),
   });
   // row클릭 시 해당 페이지로 이동하는 로직
-  const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {};
+  // const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {};
   return (
     <S.TableWrap>
       <thead>
