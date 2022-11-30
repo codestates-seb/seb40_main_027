@@ -4,7 +4,8 @@ import { GRAY_LIST_FILL, GREEN_MAIN } from '../../assets/constant/COLOR';
 import ForumWrittenInfo from './ForumWrittenInfo';
 import { InlineIcon } from '@iconify/react';
 import ForumArticlesAnswer from '../Answer/ForumArticlesAnswer';
-import ForumArticleAnswerList from '../Answer/ForumArticleAnswersList';
+import StudyAnswer from '../Answer/StudyAnswer';
+import MentoringAnswer from '../Answer/MentoringAnswer';
 
 const ForumDetail = () => {
   /** 더미 데이터 */
@@ -110,8 +111,10 @@ const ForumDetail = () => {
               </div>
             </S.Form>
           </S.NewCommentContainer> */}
-          <ForumArticleAnswerList />
-          <ForumArticlesAnswer />
+
+          {/* <ForumArticlesAnswer /> */}
+          <StudyAnswer />
+          {/* <MentoringAnswer /> */}
         </S.CommentsContainer>
       </S.ContentContainer>
 
