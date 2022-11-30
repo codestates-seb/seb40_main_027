@@ -19,7 +19,12 @@ interface RespondsBodyUser {
 }
 
 const UserProfile = () => {
-  const { register, handleSubmit } = useForm<IFormInput>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<IFormInput>({ mode: 'onBlur' });
   const [updateProfile, setUpdateProfile] = useState<boolean>(false);
   const [userUpdate, setUserUpdate] = useState<RespondsBodyUser | undefined>();
 
@@ -34,6 +39,7 @@ const UserProfile = () => {
         const dataType = res.data;
         setUserUpdate(dataType);
         setUpdateProfile(!updateProfile);
+        reset();
       })
       .catch(() => console.log('err'));
   };
@@ -52,11 +58,35 @@ const UserProfile = () => {
           </S.ProfileUpdateButton>
           <S.FromInputProFile onSubmit={handleSubmit(MyProfileSubmit)}>
             <label htmlFor="email">email</label>
-            <S.InputProfileForm {...register('email')} />
+            <S.InputProfileForm
+              {...register('email', {
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
+                  message: '이메일 형식으로 입력해주세요',
+                },
+              })}
+            />
+            <div>{errors.email?.message}</div>
             <label htmlFor="nickname">nickname</label>
-            <S.InputProfileForm {...register('nickname')} />
+            <S.InputProfileForm
+              {...register('nickname', {
+                pattern: {
+                  value: /^[A-za-z0-9]{3,10}$/,
+                  message: '숫자 및 영어로 3자 이상 10지 이하로 작성해주세요',
+                },
+              })}
+            />
+            <div>{errors.nickname?.message}</div>
             <label htmlFor="password">비밀번호</label>
-            <S.InputProfileForm {...register('password')} />
+            <S.InputProfileForm
+              {...register('password', {
+                pattern: {
+                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{4,20}$/,
+                  message: '영어대소문자 및 숫자 및 특수문자 최소 1개씩 포함하여 4-20자입니다',
+                },
+              })}
+            />
+            <div>{errors.password?.message}</div>
 
             <input type="submit" />
           </S.FromInputProFile>
