@@ -1,30 +1,24 @@
-import { useRef, useState, useMemo, useEffect } from 'react';
-import ReactQuill from 'react-quill';
-import styled from 'styled-components';
+import { useState, useMemo, useEffect } from 'react';
 import axios from 'axios';
-// import AnswerListView from './AnswerListView';
-import { useParams, useNavigate } from 'react-router';
+import { useParams } from 'react-router';
 import 'react-quill/dist/quill.snow.css';
 import { getComment } from '../../utils/API/getApi';
 import { useRecoilState } from 'recoil';
 import { mentoringListData } from '../../atoms/index';
-import StudyAnswerList from './StudyAnswerList';
 import MentoringAnswerList from './MentoringAnswerList';
-
-const QuillContent = styled.div``;
+import * as S from './ForumAnswer.style';
 
 interface mentoringAnswerListProps {
-  createdAt?: string;
+  createdAt: string;
   commentId: number;
   mentoringComment: string;
-  updatedAt?: string;
+  updatedAt: string;
   nickname: string;
 }
 
 export interface MentoringanswerList extends Array<mentoringAnswerListProps> {}
 
 const MentoringAnswer = () => {
-  const quillRef = useRef<ReactQuill>();
   const { id } = useParams();
   const [studyAnswerContents, setStudynAnswerContents] = useState('');
   const [studyanswerList, setStudyAnswerList] = useRecoilState(mentoringListData);
@@ -86,10 +80,10 @@ const MentoringAnswer = () => {
       setStudyAnswerList(data.data.comments);
     });
   }, []);
-  console.log(studyanswerList);
+
   return (
     <>
-      <div>
+      <S.ViewAnswer>
         {studyanswerList?.map((list, idx) => (
           <MentoringAnswerList
             key={idx}
@@ -100,12 +94,13 @@ const MentoringAnswer = () => {
             nickname={list.nickname}
           ></MentoringAnswerList>
         ))}
-      </div>
-      <QuillContent>
-        <ReactQuill theme="snow" value={studyAnswerContents} onChange={(e) => setStudynAnswerContents(e)} />
-
-        <button onClick={SummitAnswerBtn}>추가</button>
-      </QuillContent>
+      </S.ViewAnswer>
+      <S.QuillContent>
+        <S.QuillArea theme="snow" value={studyAnswerContents} onChange={(e) => setStudynAnswerContents(e)} />
+        <div className="btn-area">
+          <S.SubmitButtton onClick={SummitAnswerBtn}>등록</S.SubmitButtton>
+        </div>
+      </S.QuillContent>
     </>
   );
 };
