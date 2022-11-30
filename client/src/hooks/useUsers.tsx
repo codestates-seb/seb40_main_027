@@ -7,7 +7,7 @@ interface LogInType {
 }
 interface LogStatus {
   isLog: boolean;
-  member_role: string;
+  memberRole: string;
   nickname: string;
 }
 export const useLogIn = (
@@ -26,7 +26,7 @@ export const useLogIn = (
     .then((response) => {
       setLogStatus({
         isLog: true,
-        member_role: response.data.member_role,
+        memberRole: response.data.member_role,
         nickname: response.data.nickname,
       });
       const access = response.headers.authorization!;

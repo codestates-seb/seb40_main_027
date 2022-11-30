@@ -22,7 +22,7 @@ export const logUser = atom({
   key: 'logUser',
   default: {
     isLog: false,
-    member_role: '',
+    memberRole: '',
     nickname: '',
   },
   effects_UNSTABLE: [persistAtom],
