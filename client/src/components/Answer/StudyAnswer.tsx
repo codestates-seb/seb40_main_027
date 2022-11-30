@@ -63,6 +63,7 @@ const StudyAnswer = () => {
 
   const SummitAnswerBtn = () => {
     AsyncFunction();
+    setStudynAnswerContents('');
   };
 
   useEffect(() => {
