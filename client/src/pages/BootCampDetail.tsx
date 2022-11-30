@@ -11,11 +11,12 @@ const BootCampDetail = () => {
   console.log(data);
   const dataKeys: Array<string> = Object.keys(data);
   const halfIdx = Math.floor(dataKeys.length / 2);
+  const process: string = data.process;
   // 찜하기 기능 구현하기
   // const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {};
   return (
     <>
-      <Banner text="코드 스테이츠" pageType="other" />
+      <Banner text={`${data.process}`} pageType="other" />
       <S.PageWrap>
         <S.MiddleSection>
           <a href={`${data.site}`}>

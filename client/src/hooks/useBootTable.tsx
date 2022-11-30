@@ -35,6 +35,8 @@ export const useGetBootSpecificTable = (): DataType => {
     weekendStatus: '',
     startDate: '',
     endDate: '',
+    process: '',
+    vote: 0,
   });
   useEffect(() => {
     axios({

@@ -20,6 +20,8 @@ export interface DataType {
   weekendStatus: string;
   startDate: string;
   endDate: string;
+  process: string;
+  vote: string | number;
 }
 
 const keyDict: DataType = {
@@ -37,25 +39,9 @@ const keyDict: DataType = {
   weekendStatus: '주야구분/주말여부',
   startDate: '개강일',
   endDate: '종강일',
+  process: '훈련명',
+  vote: '찜여부',
 };
-// const data: DataType = {
-//   bootcampId: 1,
-//   title: '코드스테이츠',
-//   beginRegisterDate: '2022-11-29',
-//   finalRegisterDate: '2022-11-30',
-//   duration: '6개월',
-//   onOff: '온라인',
-//   totalCost: '무료(국비지원)',
-//   superviser: '코드스테이츠',
-//   satisfaction: '2',
-//   trTime: '9:00 ~ 18 : 00',
-//   site: 'https://www.choongang.co.kr/',
-//   weekendStatus: '주간/주중',
-//   startDate: '2022-12-1',
-//   endDate: '2022-5-29',
-// };
-
-/** 일단 전부 나열하여 작성, 추후 data확정되면 mapping형태로 한번 refactoring 필요 **/
 
 interface PropsType {
   data: DataType;
@@ -69,7 +55,11 @@ function decider(data: DataType, el: string | number) {
     const end = data.endDate.substring(2);
     return `${start} ~ ${end}`;
   } else if (el === 'site') {
-    return <a href={data[el]}>{data[el]}</a>;
+    return (
+      <a href={data[el]} target="_blank" rel="noopener noreferrer">
+        {data[el]}
+      </a>
+    );
   } else if (el === 'satisfaction') {
     return `${data[el]}/5`;
   } else return data[el];
@@ -80,7 +70,7 @@ export const DetailTable = ({ data, halfIdx, dataKeys }: PropsType) => {
     <S.Detail>
       <div>
         {dataKeys.map((el: string, idx: number) =>
-          idx <= halfIdx && idx >= 1 ? (
+          idx <= halfIdx && idx >= 1 && keyDict[el] !== '훈련명' ? (
             <div key={idx}>
               <div>
                 <S.RowHeader>{keyDict[el]}</S.RowHeader>
@@ -92,7 +82,7 @@ export const DetailTable = ({ data, halfIdx, dataKeys }: PropsType) => {
       </div>
       <div>
         {dataKeys.map((el: string, idx: number) =>
-          idx > halfIdx ? (
+          idx > halfIdx && keyDict[el] !== '찜여부' ? (
             <div key={idx}>
               <div>
                 <S.RowHeader>{keyDict[el]}</S.RowHeader>
