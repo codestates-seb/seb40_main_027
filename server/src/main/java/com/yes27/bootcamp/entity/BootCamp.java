@@ -70,8 +70,7 @@ public class BootCamp {
     //정원
     private String yardMan;
 
-    //좋아요 유무
-//    private int vote;
+
 
 
 }

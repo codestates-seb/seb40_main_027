@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.Positive;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/bootcamp")
@@ -38,17 +39,13 @@ public class BootcampController {
     //일정 수정
     @PatchMapping("/{bootcampId}")
     public ResponseEntity patchCamp(@PathVariable("bootcampId") Long bootcampId,
-                                    @RequestBody BootcampDto.Patch patchDto,
-                                    HttpServletRequest request){
-        Member findMember = memberService.findMember(request);
-        if(findMember != null && request.isUserInRole("ROLE_ADMIN")) {
-            BootCamp bootCamp = mapper.bootPatchDtoToBootcamp(patchDto);
-            BootcampDto.PatchResponse response = mapper.bootcampToBootPatchResponseDto(bootcampService.update(bootCamp, bootcampId));
-            return new ResponseEntity(response, HttpStatus.OK);
-        }
-        else{
-            throw new RuntimeException("관리자 계정이 아닙니다");
-        }
+                                    @RequestBody BootcampDto.Patch patchDto){
+        BootCamp bootCamp = mapper.bootPatchDtoToBootcamp(patchDto);
+        bootCamp.setBootcampId(bootcampId);
+
+        BootcampDto.PatchResponse response = mapper.bootcampToBootPatchResponseDto(bootcampService.update(bootCamp));
+        return new ResponseEntity(response, HttpStatus.OK);
+
     }
 
     //일정 조회
@@ -67,14 +64,24 @@ public class BootcampController {
         return new ResponseEntity(new MultiResponseDto<>(mapper.bootcampToBootcampResponsesDto(bootcamps),pageBootcamps), HttpStatus.OK);
 
     }
-    //상세 조회
+    //상세 조회 로그인 한 경우
     @GetMapping("/{bootcampId}")
-    public ResponseEntity getCamp(@PathVariable("bootcampId") Long bootcampId){
-        BootcampDto.DetailResponseDto response = mapper.bootcampTobootCampDetailResponseDto(bootcampService.findBootcamp(bootcampId));
+    public ResponseEntity getCamp(@PathVariable("bootcampId") Long bootcampId,
+                                  HttpServletRequest request){
+        Integer isVote = 0;
+        try{
+            String email = request.getUserPrincipal().getName();
+            Member findMember = memberService.findVerifiedMemberByEmail(email);
+            isVote = bootcampService.isVote(bootcampId, findMember);
+        }
+        catch (NullPointerException e){
+            isVote = 0;
+        }
+
+        BootcampDto.DetailResponseDto response = mapper.bootcampTobootCampDetailResponseDto(bootcampService.findBootcamp(bootcampId),isVote);
         return new ResponseEntity(new SingleResponseDto<>(response), HttpStatus.OK);
 
     }
-
 
     //삭제
     @DeleteMapping("/{bootcampId}")

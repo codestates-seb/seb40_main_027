@@ -57,6 +57,8 @@ public class SecurityConfig {
             .apply(new CustomFilterConfigurer())
             .and()
             .authorizeHttpRequests(authorize -> authorize
+                            .antMatchers(HttpMethod.PATCH, "/bootcamp/{bootcampId}").hasRole("ADMIN")
+                            .antMatchers(HttpMethod.DELETE, "/bootcamp/{bootcampId}").hasRole("ADMIN")
 //                .antMatchers(HttpMethod.POST, "/users/**").permitAll()  // (1) 추가
 //                .antMatchers(HttpMethod.PATCH, "/users/**").hasRole("USER")  // (2) 추가
 //                .antMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")  // (3) 추가
