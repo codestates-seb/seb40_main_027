@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '../styles/theme';
 
 export const LoginWrapp = styled.div`
   height: 100vh;
@@ -83,4 +84,10 @@ export const LoginWrapp = styled.div`
       }
     }
   }
+`;
+export const CustomH2 = styled.h2`
+  margin-left: 0;
+  margin-right: 0;
+  font-size: 2.7vh;
+  font-weight: bold;
 `;

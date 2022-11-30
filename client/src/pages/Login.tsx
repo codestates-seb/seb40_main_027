@@ -30,40 +30,44 @@ const Login = () => {
         <img src={logo} alt="logo" />
         <div className="form-wrap">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="indicator">Email</div>
-            <input
-              type="text"
-              {...register('email', {
-                required: '아이디를 입력해주세요',
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
-                  message: '이메일 형식으로 입력해주세요',
-                },
-              })}
-              placeholder="이메일을 입력하세요"
-            />
+            <label>
+              <S.CustomH2>Email</S.CustomH2>
+              <input
+                type="text"
+                {...register('email', {
+                  required: '아이디를 입력해주세요',
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
+                    message: '이메일 형식으로 입력해주세요',
+                  },
+                })}
+                placeholder="이메일을 입력하세요"
+              />
+            </label>
             <p>{errors?.email?.message}</p>
-            <div className="indicator">Password</div>
-            <input
-              type="password"
-              {...register('password', {
-                required: '비밀번호를 입력해주세요',
-                minLength: {
-                  value: 4,
-                  message: '영어대소문자 및 숫자 및 특수문자 최소 1개씩 포함하여 4-20자입니다',
-                },
-                maxLength: {
-                  value: 20,
-                  message: '영어대소문자 및 숫자 및 특수문자 최소 1개씩 포함하여 4-20자입니다',
-                },
-                pattern: {
-                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{4,20}$/,
-                  message: '영어대소문자 및 숫자 및 특수문자 최소 1개씩 포함하여 4-20자입니다',
-                },
-              })}
-              placeholder="비밀번호를 입력하세요"
-              autoComplete="off"
-            />
+            <label>
+              <S.CustomH2>Password</S.CustomH2>
+              <input
+                type="password"
+                {...register('password', {
+                  required: '비밀번호를 입력해주세요',
+                  minLength: {
+                    value: 4,
+                    message: '영어대소문자 및 숫자 및 특수문자 최소 1개씩 포함하여 4-20자입니다',
+                  },
+                  maxLength: {
+                    value: 20,
+                    message: '영어대소문자 및 숫자 및 특수문자 최소 1개씩 포함하여 4-20자입니다',
+                  },
+                  pattern: {
+                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{4,20}$/,
+                    message: '영어대소문자 및 숫자 및 특수문자 최소 1개씩 포함하여 4-20자입니다',
+                  },
+                })}
+                placeholder="비밀번호를 입력하세요"
+                autoComplete="off"
+              />
+            </label>
             <p>{errors?.password?.message}</p>
             <LogPageBtn />
           </form>
