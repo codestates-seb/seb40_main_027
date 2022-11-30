@@ -39,7 +39,7 @@ public interface PostscriptCommentMapper {
                                                             MemberService memberService) {
 
 
-        if (memberService.getLoginMember().getMemberId() !=postscriptCommentService.findPostscriptCommentWriter(postscriptCommentPatchDto.getPostCommentId()).getMemberId()) { //해당 유저가 쓴 질문글 아니므로 수정 삭제 불가
+        if (memberService.getLoginMember().getMemberId() !=postscriptCommentService.findPostscriptCommentWriter(postscriptCommentPatchDto.getPostscriptCommentId()).getMemberId()) { //해당 유저가 쓴 질문글 아니므로 수정 삭제 불가
             throw new BusinessLogicException(ExceptionCode.ACCESS_DENIED_MEMBER);
         }
 //        Member member = memberService.getLoginMember();
@@ -50,7 +50,7 @@ public interface PostscriptCommentMapper {
 
         PostscriptComment postscriptComment = new PostscriptComment();
 
-        postscriptComment.setPostCommentId(postscriptCommentPatchDto.getPostCommentId());
+        postscriptComment.setPostscriptCommentId(postscriptCommentPatchDto.getPostscriptCommentId());
         postscriptComment.setPostscriptComment(postscriptCommentPatchDto.getPostscriptComment());
 
 
@@ -62,7 +62,7 @@ public interface PostscriptCommentMapper {
         Member member = postscriptComment.getMember();
 
         PostscriptCommentDto.Response postCommentResponseDto = new PostscriptCommentDto.Response(
-                postscriptComment.getPostCommentId(),
+                postscriptComment.getPostscriptCommentId(),
                 postscriptComment.getPostscriptComment(),
                 postscriptComment.getCreatedAt(),
                 postscriptComment.getUpdatedAt(),

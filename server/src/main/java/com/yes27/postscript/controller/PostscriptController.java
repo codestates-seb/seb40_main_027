@@ -70,7 +70,7 @@ public class PostscriptController {
 //                new SingleResponseDto<>(postscriptMapper.postscriptToPostscriptResponseDto(postscript,memberMapper)), HttpStatus.CREATED);
     }
 
-    @GetMapping("/{postscript-Id}") //특정 조언,후기 조회 -> 댓글 포함하고 작성한글 조회, 글 작성후 다시 보여주는 곳
+    @GetMapping("/{postscript-Id}") //특정 조언,후기 조회 -> 댓글 포함하고 작성한글 조회, 글 작성후 다시 보여주는 곳, 게시글 상세 조회
     public ResponseEntity getPostscript(@PathVariable("postscript-Id") @Positive long postscriptId){
 
         PostscriptDto.PostscriptResponse2 response = postscriptMapper.postscriptToPostscriptResponseDto2(postscriptService.findPostscript(postscriptId), memberMapper);
