@@ -58,23 +58,25 @@ public class PostscriptCommentController {
 
 
 //        postCommentToPostCommentPostResponseDto2
-        return new  ResponseEntity<>(
-//                new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentResponseDto(postscriptComment, memberMapper)), HttpStatus.CREATED);
-                new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentPostResponseDto2(postscriptComment)), HttpStatus.CREATED);
+//        return new  ResponseEntity<>(
+////                new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentResponseDto(postscriptComment, memberMapper)), HttpStatus.CREATED);
+//                new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentPostResponseDto2(postscriptComment)), HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PatchMapping("/{postscript-Id}/comment/{postscriptComment-id}")
+    @PatchMapping("/comment/{postscriptComment-id}")
     public ResponseEntity patchPostComment(@PathVariable("postscriptComment-id") @Positive long PostscriptCommentId,
-                                           @PathVariable("postscript-Id") @Positive long postscriptId,
+//                                           @PathVariable("postscript-Id") @Positive long postscriptId,
                                            @Valid @RequestBody PostscriptCommentDto.Patch postscriptCommentPatchDto){
         postscriptCommentPatchDto.setPostscriptCommentId(PostscriptCommentId);
         PostscriptComment postscriptComment = postscriptCommentMapper.postCommentPatchToPostComment(postscriptCommentService, postscriptCommentPatchDto, memberService);
 
-        PostscriptComment updatedPostscriptComment = postscriptCommentService.updatePostComment(postscriptId,postscriptComment);
+        PostscriptComment updatedPostscriptComment = postscriptCommentService.updatePostComment(postscriptComment);
 
-        return new ResponseEntity<>(
-//                new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentResponseDto(updatedPostscriptComment, memberMapper)), HttpStatus.OK);
-        new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentPostResponseDto2(postscriptComment)), HttpStatus.CREATED);
+//        return new ResponseEntity<>(
+////                new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentResponseDto(updatedPostscriptComment, memberMapper)), HttpStatus.OK);
+//        new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentPostResponseDto2(postscriptComment)), HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/comment/{postscriptComment-id}")

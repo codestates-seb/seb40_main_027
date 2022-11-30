@@ -48,8 +48,8 @@ public class PostscriptCommentService {
 //        return updatedPostComment;
 //    }
 
-    public PostscriptComment updatePostComment(Long postscriptId, PostscriptComment postscriptComment) {
-        verifyPostscript(postscriptId);
+    public PostscriptComment updatePostComment(PostscriptComment postscriptComment) {
+//   Long postscriptId,      verifyPostscript(postscriptId);
         PostscriptComment findPostComment = findPostComment(postscriptComment.getPostscriptCommentId());
         findPostComment.setPostscriptComment(postscriptComment.getPostscriptComment());
 
