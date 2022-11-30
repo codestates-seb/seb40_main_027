@@ -104,6 +104,7 @@ const MentoringAnswerList = ({
     e.preventDefault();
     patchAsync();
     setIsPatch(!isPatch);
+    setCommentValue('');
   };
 
   const deleteHandler = (e: React.MouseEvent<HTMLElement>) => {
