@@ -40,7 +40,7 @@ export const useGetBootSpecificTable = (): DataType => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: '/bootcamp/1',
+      url: '/bootcamp/2',
     })
       .then((resopnse) => {
         setData(resopnse.data.data);
