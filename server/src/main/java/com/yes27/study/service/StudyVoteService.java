@@ -56,7 +56,7 @@ public class StudyVoteService {
     }
 
     // 사용자가 이미 좋아요한 게시물인치 확인하는 메서드
-        private boolean isNotAlreadyVote(Member member, Study study) {
+        public boolean isNotAlreadyVote(Member member, Study study) {
             return studyVoteRepository.findByMemberAndStudy(member, study).isEmpty();
         }
 }

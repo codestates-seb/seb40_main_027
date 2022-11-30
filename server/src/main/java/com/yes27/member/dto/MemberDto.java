@@ -37,11 +37,11 @@ public class MemberDto {
     public static class Patch {
         @Email
         @NotSpace(message = "이메일은 space 값이 될 수 없습니다.")
-        @Pattern(regexp = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$", message = "이메일 형식을 따라야합니다.")
+        @Pattern(regexp = "^[_a-zA-Z0-9-]+(.[_a-zA-Z0-9-]+)*@(?:\\w+\\.)+\\w+$", message = "이메일 형식을 따라야합니다.")
         private String email;
 
         @NotSpace(message = "닉네임은 space 값이 될 수 없습니다.")
-        @Pattern(regexp = "^[a-z]+[a-z0-9]{2,9}$", message = "닉네임은 영어 및 숫자로 구성할 수 있으며, 3-10자 입니다.")
+        @Pattern(regexp = "^[a-zA-Z]+[a-zA-Z0-9]{2,9}$", message = "닉네임은 영어 및 숫자로 구성할 수 있으며, 3-10자 입니다.")
         private String nickname;
 
         @NotSpace(message = "비밀번호는 space 값이 될 수 없습니다.")
