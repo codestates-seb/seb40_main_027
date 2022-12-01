@@ -4,7 +4,7 @@ import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
 import { useState, useMemo } from 'react';
 import { useParams } from 'react-router';
-import { getComment } from '../../utils/API/getApi';
+import { getComment, deleteComment } from '../../utils/api/getApi';
 import { useSetRecoilState } from 'recoil';
 import { answerListData } from '../../atoms/index';
 import * as S from './AnswerListView.style';
@@ -12,18 +12,23 @@ import { AnswerViewContainer, QuillContainer } from './AnswerContainer';
 
 interface answerListProps {
   createdAt: string;
-  postCommentId: number;
+  postscriptCommentId: number;
   postscriptComment: string;
   updatedAt: string;
   nickname: string;
 }
 
-const AnswerListView = ({ createdAt, postCommentId, updatedAt, postscriptComment, nickname }: answerListProps) => {
+const AnswerListView = ({
+  createdAt,
+  postscriptCommentId,
+  updatedAt,
+  postscriptComment,
+  nickname,
+}: answerListProps) => {
   const [isPatch, setIsPatch] = useState<boolean>(false);
   const [commentValue, setCommentValue] = useState('');
-  // const [answerList, setAnswerList] = useRecoilState(answerListData);
   const setAnswerList = useSetRecoilState(answerListData);
-
+  const access = localStorage.getItem('access');
   const { id } = useParams();
 
   const modules = useMemo(
@@ -48,26 +53,12 @@ const AnswerListView = ({ createdAt, postCommentId, updatedAt, postscriptComment
   const patchComment = () => {
     return axios({
       method: 'patch',
-      url: `/postscript/comment/${postCommentId}`,
+      url: `/postscript/comment/${postscriptCommentId}`,
       data: { postscriptComment: commentValue },
       headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTcwNDAyMSwiZXhwIjoxNjY5NzkwNDIxfQ.ipJnckImRyPfR9kXlDI3Kajkp-M3RZzFUHBDpdxBK1Teu0kV8wjyHxh6WET_fckelUSByRdh7QDTZOnqA8FFXg',
+        Authorization: access,
       },
     });
-  };
-
-  const deleteComment = () => {
-    return axios({
-      method: 'delete',
-      url: `/postscript/comment/delete/${postCommentId}`,
-      headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTcwNDAyMSwiZXhwIjoxNjY5NzkwNDIxfQ.ipJnckImRyPfR9kXlDI3Kajkp-M3RZzFUHBDpdxBK1Teu0kV8wjyHxh6WET_fckelUSByRdh7QDTZOnqA8FFXg',
-      },
-    })
-      .then(() => {})
-      .catch(() => console.log('err'));
   };
 
   const patchAsync = async () => {
@@ -76,7 +67,7 @@ const AnswerListView = ({ createdAt, postCommentId, updatedAt, postscriptComment
       const patchAwait = await patchComment();
       const getAwait = await getComment('postscript', `${id}`);
 
-      setAnswerList(getAwait.data.postComments);
+      setAnswerList(getAwait.data.postscriptComments);
     } catch {
       console.log('err');
     }
@@ -85,10 +76,10 @@ const AnswerListView = ({ createdAt, postCommentId, updatedAt, postscriptComment
   const deleteAsync = async () => {
     axios.defaults.withCredentials = true;
     try {
-      const deleteAwait = await deleteComment();
+      const deleteAwait = await deleteComment(`${postscriptCommentId}`, 'postscript');
       const getAwait = await getComment('postscript', `${id}`);
 
-      setAnswerList(getAwait.data.postComments);
+      setAnswerList(getAwait.data.postscriptComments);
     } catch {
       console.log('err');
     }
