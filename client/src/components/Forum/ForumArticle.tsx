@@ -1,46 +1,35 @@
 import { SmallBorderTagButton } from '../Button';
 import ForumWrittenInfo from './ForumWrittenInfo';
 import * as S from './ForumArticle.style';
-import { useLocation } from 'react-router-dom';
+import { formatDistanceToNow } from 'date-fns';
+import { ko } from 'date-fns/locale';
 
 interface PropsType {
-  post: {
-    postscriptId: number;
-    postscriptTitle: string;
-    postscriptContent: string;
-    postscriptTags: string[];
-    view: number;
-    like: number;
-    user: {
-      userId: number;
-      name: string;
-      userEmail: string;
-    };
-    createdAt: string;
-    updatedAt?: string;
-  };
+  forumType: string;
+  post: any;
 }
 
-const ForumArticle = ({ post }: PropsType) => {
-  const { pathname } = useLocation();
-  const forumType = pathname.split('/')[1];
+const ForumArticle = ({ forumType, post }: PropsType) => {
+  const content = post[`${forumType}Content`].replace(/<[^>]*>?/g, ' ');
+  const createdAt = formatDistanceToNow(new Date(post.createdAt), { addSuffix: true, locale: ko });
 
   return (
     <S.Article>
-      <S.StyledLink to={`/${forumType}/${post.postscriptId}`}>
+      <S.StyledLink to={`/${forumType}/${post[`${forumType}Id`]}`}>
         <S.TagsContainer>
-          {post.postscriptTags.map((tag, index) => (
-            <SmallBorderTagButton key={index} text={tag} />
-          ))}
+          <SmallBorderTagButton text={post.tagName} />
         </S.TagsContainer>
-        <S.Title>{post.postscriptTitle}</S.Title>
-        <S.Content>{post.postscriptContent}</S.Content>
+
+        <S.Title>{post[`${forumType}Title`]}</S.Title>
+
+        <S.Content>{content}</S.Content>
+
         <ForumWrittenInfo
           position="right"
-          author={post.user.name}
-          createdAt={post.createdAt}
+          author={post.member.nickname}
+          createdAt={createdAt}
           view={post.view}
-          like={post.like}
+          totalVotes={post.totalVotes}
         />
       </S.StyledLink>
     </S.Article>
