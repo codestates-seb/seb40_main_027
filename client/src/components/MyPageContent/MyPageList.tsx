@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import MyPageLists from './MyPageLists';
 import axios from 'axios';
 import { SetStateAction, useCallback, useEffect, useState } from 'react';
-import MyPagePagination from './MyPagePagination';
+import MyPagePagination from '../Pagination/MyPagePagination';
 
 const ListContent = styled.div`
   height: 90vh;
@@ -51,11 +51,9 @@ interface PropsAnswerType {
 export interface propsAnswerList extends Array<PropsAnswerType> {}
 
 const MyPageList = () => {
-  // const [fWritingList, setFWritingList] = useState([]);
-  // const [sWritingList, setSWritingList] = useState([]);
-  // const [mWritingList, setMWritingList] = useState([]);
   const [totalPost, setTotalPost] = useState(0);
   const [currentPosts, setCurrentPosts] = useState<PropsAnswerType[]>();
+  const [emailPost, setEmailPost] = useState('');
   const [page, setPage] = useState(1);
   const [postPerPage] = useState(7);
   const indexOfLastPost = page * postPerPage;
@@ -64,15 +62,6 @@ const MyPageList = () => {
   const handlePostPage = (page: number) => {
     setPage(page);
   };
-
-  const plusClick = (e: string) => {
-    setPage(page + 1);
-  };
-
-  const MinusClick = (e: string) => {
-    setPage(page - 1);
-  };
-  console.log(page);
 
   useEffect(() => {
     axios.defaults.withCredentials = true;
@@ -85,21 +74,21 @@ const MyPageList = () => {
       },
     }).then((res) => {
       const { data } = res;
-      // setFWritingList(data.data.postscript.reverse());
-      // setSWritingList(data.data.studies);
-      // setMWritingList(data.data.mentor);
       const postP = data.data.postscript;
       const postS = data.data.studies;
       const postM = data.data.mentor;
       // const Maxarr = [...data.data.studies, ...sWritingList, ...mWritingList];
-      const Maxarr: propsAnswerList = [...postP, ...postS, ...postM];
+      setEmailPost(data.data.nickname);
+      const Maxarr: propsAnswerList = [...postP, ...postS, ...postM].sort(
+        (a, b) => +new Date(b.createdAt) - +new Date(a.createdAt)
+      );
 
       setTotalPost(postP.length + postM.length + postS.length);
       const MaxPage = Maxarr.slice(indexOfFirstPost, indexOfLastPost);
       setCurrentPosts(MaxPage);
     });
   }, [page, indexOfFirstPost, indexOfLastPost]);
-
+  console.log(emailPost);
   return (
     <ListContent>
       <div className="list-line">
@@ -133,8 +122,6 @@ const MyPageList = () => {
         postPerPage={postPerPage}
         pageRangeDisplayed={5}
         handlePageChange={handlePostPage}
-        plusClick={plusClick}
-        MinusClick={MinusClick}
       />
     </ListContent>
   );
