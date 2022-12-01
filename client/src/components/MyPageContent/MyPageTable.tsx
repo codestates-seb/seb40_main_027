@@ -1,6 +1,9 @@
 import { Icon } from '@iconify/react';
 import * as S from './MyPageTable.style';
 import { useNavigate } from 'react-router-dom';
+import { useInView } from 'react-intersection-observer';
+import { useCallback, useEffect, useState } from 'react';
+import axios from 'axios';
 
 const data = [
   {
@@ -57,22 +60,48 @@ const data = [
 
 interface BootData {
   id: number;
-  name: string;
-  date: string;
-  duration: string;
-  filed: string;
+  title: string;
+  beginRegisterDate: string;
+  finalRegisterDate: string;
+  process: string;
   cost: string;
-  onOff: string;
-  vote: boolean;
+  totalCost: string;
+  onOff: boolean;
 }
 
 const columns = ['이름', '등록일', '교육기간', '과정', '총 비용', '온/오프라인', '찜'];
 const MyPageTable = () => {
+  const [bootList, setBootList] = useState<BootData[]>();
+  const [loading, setLoading] = useState(false);
+  const [offset, setOffset] = useState(0);
   const navigate = useNavigate();
 
   const linkTableHandler = (id: number) => {
     navigate(`/bootcamp/${id}`);
   };
+
+  const getItem = async () => {
+    setLoading(true);
+    await axios.get('mypage/bootcampLike').then((res) => {
+      setBootList(res.data.data);
+    });
+  };
+
+  useEffect(() => {
+    axios.defaults.withCredentials = true;
+    axios({
+      method: 'get',
+      url: 'mypage/bootcampLike',
+      headers: {
+        Authorization:
+          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTc5Mzk4OSwiZXhwIjoxNjY5ODgwMzg5fQ.jwHPEroDLyZmiL2TRvYuvaED2bCmDwsXUs3QL1nA8QVoU9Kkr2nmJd5vSlHdOr5ak9hKHOf3Vj65Ffe_gIUdnQ',
+      },
+    }).then((res) => {
+      const { data } = res;
+      setBootList(data.data);
+    });
+  }, []);
+
   return (
     <S.TableSchedule>
       <thead>
