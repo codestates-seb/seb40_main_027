@@ -38,7 +38,7 @@ public class CommentController {
                                      HttpServletRequest request){
         Member findMember = memberService.findMember(request);
         Comment comment = mapper.commentPostDtoToComment(commentPostDto);
-        CommentDto.commmentResponse response = mapper.commentToCommentsResponseDto(commentService.create(mentoringId,comment,findMember));
+        commentService.create(mentoringId,comment,findMember);
 
         return new ResponseEntity(HttpStatus.CREATED);
     }
@@ -50,7 +50,7 @@ public class CommentController {
         Member findMember = memberService.findMember(request);
         Comment comment = mapper.commentPatchDtoToComment(commentPatchDto);
         comment.setMentoringCommentId(commentId);
-        CommentDto.commmentResponse response = mapper.commentToCommentsResponseDto(commentService.update(comment,findMember));
+       commentService.update(comment,findMember);
 
         return new ResponseEntity(HttpStatus.OK);
     }
