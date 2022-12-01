@@ -4,58 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-// const data = [
-//   {
-//     id: 1,
-//     name: '코드 스테이츠',
-//     date: '10/11-14',
-//     duration: '6개월',
-//     filed: '프론트엔드',
-//     cost: '무료(국비)',
-//     onOff: '온라인',
-//     vote: true,
-//   },
-//   {
-//     id: 2,
-//     name: '코드 스테이츠',
-//     date: '10/11-14',
-//     duration: '6개월',
-//     filed: '프론트엔드',
-//     cost: '무료(국비)',
-//     onOff: '온라인',
-//     vote: true,
-//   },
-//   {
-//     id: 3,
-//     name: '코드 스테이츠',
-//     date: '10/11-14',
-//     duration: '6개월',
-//     filed: '프론트엔드',
-//     cost: '무료(국비)',
-//     onOff: '온라인',
-//     vote: true,
-//   },
-//   {
-//     id: 4,
-//     name: '코드 스테이츠',
-//     date: '10/11-14',
-//     duration: '6개월',
-//     filed: '프론트엔드',
-//     cost: '무료(국비)',
-//     onOff: '온라인',
-//     vote: true,
-//   },
-//   {
-//     id: 5,
-//     name: '코드 스테이츠',
-//     date: '10/11-14',
-//     duration: '6개월',
-//     filed: '프론트엔드',
-//     cost: '무료(국비)',
-//     onOff: '온라인',
-//     vote: true,
-//   },
-// ];
 
 interface BootData {
   id: number;
@@ -100,7 +48,7 @@ const MyPageTable = () => {
       setBootList(data.data);
     });
   }, []);
-  console.log(bootList);
+
   return (
     <S.TableSchedule>
       <thead>
@@ -113,7 +61,6 @@ const MyPageTable = () => {
       <tbody>
         {bootList?.map((item) => {
           return (
-            // <div ref={ref} key={item.id}>
             <tr key={item.id} onClick={() => linkTableHandler(item.id)}>
               <td>{item.title} </td>
               <td>{item.beginRegisterDate}</td>
