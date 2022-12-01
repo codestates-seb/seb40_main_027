@@ -47,7 +47,7 @@ const StudyAnswerList = ({ createdAt, studyCommentId, updatedAt, studyComment, n
   const patchComment = () => {
     return axios({
       method: 'patch',
-      url: `/study/${id}/comment/${studyCommentId}`,
+      url: `/study/comment/${studyCommentId}`,
       data: { studyComment: commentValue },
       headers: {
         Authorization:
@@ -59,7 +59,7 @@ const StudyAnswerList = ({ createdAt, studyCommentId, updatedAt, studyComment, n
   const deleteComment = () => {
     return axios({
       method: 'delete',
-      url: `/study/${id}/comment/${studyCommentId}`,
+      url: `/study/comment/${studyCommentId}`,
       headers: {
         Authorization:
           'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTczNzAwNSwiZXhwIjoxNjY5ODIzNDA1fQ.AykpiUvJlzmcTWT7x2iMKPbPo0y9cCIVzqhiMECTGFKAMKg171ropdOZjpB_lLbV7m6AkQBlYPbIahmpmPGcdQ',
