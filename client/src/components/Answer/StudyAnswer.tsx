@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router';
 import 'react-quill/dist/quill.snow.css';
-import { getComment } from '../../utils/api/getApi';
+import { getComment } from '../../utils/api/answerAPI';
 import { useRecoilState } from 'recoil';
 import { studyListData } from '../../atoms/index';
 import StudyAnswerList from './StudyAnswerList';
@@ -16,7 +16,7 @@ interface studyAnswerListProps {
   nickname: string;
 }
 
-export interface StudyanswerList extends Array<studyAnswerListProps> {}
+export interface studyAnswerList extends Array<studyAnswerListProps> {}
 
 const StudyAnswer = () => {
   const { id } = useParams();
@@ -36,13 +36,16 @@ const StudyAnswer = () => {
   };
 
   const AsyncFunction = async () => {
-    axios.defaults.withCredentials = true;
     try {
       await postComment();
       const getAwait = await getComment('study', `${id}`);
       setStudyAnswerList(getAwait.data.data.studyComments);
-    } catch {
-      console.log('err');
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        console.log(error);
+      }
     }
   };
 
@@ -52,7 +55,6 @@ const StudyAnswer = () => {
   };
 
   useEffect(() => {
-    axios.defaults.withCredentials = true;
     axios({
       method: 'get',
       url: `/study/${id}`,
@@ -65,7 +67,7 @@ const StudyAnswer = () => {
   }, []);
 
   return (
-    <>
+    <S.ContainerViewAnswer>
       <S.ViewAnswer>
         {studyanswerList?.map((list, idx) => (
           <StudyAnswerList
@@ -79,12 +81,12 @@ const StudyAnswer = () => {
         ))}
       </S.ViewAnswer>
       <S.QuillContent>
-        <S.QuillArea theme="snow" value={studyAnswerContents} onChange={(e) => setStudynAnswerContents(e)} />
+        <S.QuillArea theme="snow" value={studyAnswerContents} onChange={setStudynAnswerContents} />
         <div className="btn-area">
-          <S.SubmitButtton onClick={SummitAnswerBtn}>등록</S.SubmitButtton>
+          <S.SubmitButton onClick={SummitAnswerBtn}>등록</S.SubmitButton>
         </div>
       </S.QuillContent>
-    </>
+    </S.ContainerViewAnswer>
   );
 };
 
