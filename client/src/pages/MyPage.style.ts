@@ -6,7 +6,7 @@ export const PageSize = styled.div`
 
 export const MyPageContent = styled.div`
   height: 100vh;
-  /* max-height: 1080px; */
+  max-height: 1080px;
   margin: 0rem 18% 0rem 18%;
 
   .tab-menu {
