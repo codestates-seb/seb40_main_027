@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router';
 import 'react-quill/dist/quill.snow.css';
-import { getComment } from '../../utils/API/getApi';
+import { getComment } from '../../utils/api/getApi';
 import { useRecoilState } from 'recoil';
 import { studyListData } from '../../atoms/index';
 import StudyAnswerList from './StudyAnswerList';
@@ -22,7 +22,7 @@ const StudyAnswer = () => {
   const { id } = useParams();
   const [studyAnswerContents, setStudynAnswerContents] = useState('');
   const [studyanswerList, setStudyAnswerList] = useRecoilState(studyListData);
-
+  const access = localStorage.getItem('access');
   const modules = useMemo(
     () => ({
       toolbar: {
@@ -44,8 +44,7 @@ const StudyAnswer = () => {
       url: `/study/${id}/comment`,
       data: { studyComment: studyAnswerContents },
       headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTczNzAwNSwiZXhwIjoxNjY5ODIzNDA1fQ.AykpiUvJlzmcTWT7x2iMKPbPo0y9cCIVzqhiMECTGFKAMKg171ropdOZjpB_lLbV7m6AkQBlYPbIahmpmPGcdQ',
+        Authorization: access,
       },
     });
   };
@@ -71,10 +70,6 @@ const StudyAnswer = () => {
     axios({
       method: 'get',
       url: `/study/${id}`,
-      // headers: {
-      //   Authorization:
-      //     'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTczNzAwNSwiZXhwIjoxNjY5ODIzNDA1fQ.AykpiUvJlzmcTWT7x2iMKPbPo0y9cCIVzqhiMECTGFKAMKg171ropdOZjpB_lLbV7m6AkQBlYPbIahmpmPGcdQ',
-      // },
     }).then((res) => {
       console.log(res);
       const { data } = res;
