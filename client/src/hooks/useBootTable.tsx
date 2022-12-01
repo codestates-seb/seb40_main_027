@@ -41,8 +41,12 @@ export const useGetBootSpecificTable = (): DataType => {
     axios({
       method: 'get',
       url: '/bootcamp/2',
+      headers: {
+        Authorization: localStorage.getItem('access'),
+      },
     })
       .then((resopnse) => {
+        console.log(resopnse.data);
         setData(resopnse.data.data);
       })
       .catch((err) => alert(err));
