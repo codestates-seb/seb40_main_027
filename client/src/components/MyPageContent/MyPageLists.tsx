@@ -2,6 +2,9 @@ import { InlineIcon } from '@iconify/react';
 import * as S from './MyPageLists.style';
 import { formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
+import { useRecoilValue } from 'recoil';
+import { logUser } from '../../atoms/index';
+import { Icon } from '@iconify/react';
 
 interface PropsType {
   mentoringId?: number;
@@ -36,8 +39,11 @@ const MyPageLists = ({
   tagName,
   view,
 }: PropsType) => {
-  const createTime = formatDistanceToNow(new Date(createdAt), { locale: ko });
-  const updateTime = formatDistanceToNow(new Date(updatedAt ? updatedAt : new Date()), { locale: ko });
+  const setLogStatus = useRecoilValue(logUser);
+  const createTime = formatDistanceToNow(new Date(createdAt), { addSuffix: true, locale: ko });
+  const updateTime = formatDistanceToNow(new Date(updatedAt ? updatedAt : new Date()), { addSuffix: true, locale: ko });
+
+  console.log(setLogStatus.nickname);
   return (
     <S.PostMyPageContent>
       <S.PostLinkMyPage
@@ -47,8 +53,12 @@ const MyPageLists = ({
         <S.MyPageListsContent>{studyContent || mentoringContent || postscriptContent}</S.MyPageListsContent>
         <S.PostInfoView>
           <S.UserLikeIconList>
+            <span>
+              <Icon icon="carbon:user-avatar-filled-alt" width="25" height="12" />
+            </span>
+            {setLogStatus.nickname}
             {view ? <span>조회{view}</span> : null}
-            {updatedAt ? <div> {updateTime}전</div> : <div> {createTime}전</div>}
+            {updatedAt === createdAt ? <div> {createTime}</div> : <div> {updateTime}</div>}
             <div>
               <InlineIcon icon="akar-icons:heart" />a
             </div>
