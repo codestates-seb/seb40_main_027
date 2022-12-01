@@ -1,5 +1,7 @@
 import * as S from './AnswerListView.style';
 import { Icon } from '@iconify/react';
+import { formatDistanceToNow, format } from 'date-fns';
+import { ko } from 'date-fns/locale';
 
 interface HandlerProps {
   PatchHanlder: (e: React.MouseEvent<HTMLElement>) => void;
@@ -25,6 +27,8 @@ interface AnswerViewProps {
   deleteHandler: (e: React.MouseEvent<HTMLElement>) => void;
 }
 export const AnswerViewContainer = ({ nick, updateAt, createAt, editHandler, deleteHandler }: AnswerViewProps) => {
+  const createTime = formatDistanceToNow(new Date(createAt), { addSuffix: true, locale: ko });
+  const updateTime = formatDistanceToNow(new Date(updateAt), { addSuffix: true, locale: ko });
   return (
     <S.UserAnswerInfo>
       <S.TimeOrName>
@@ -32,7 +36,7 @@ export const AnswerViewContainer = ({ nick, updateAt, createAt, editHandler, del
           <Icon icon="carbon:user-avatar-filled-alt" width="20" height="15" />
           {nick}
         </S.NameZone>
-        <span>{updateAt ? <span>{createAt}</span> : createAt} </span>
+        <span>{createTime !== updateTime ? <span>{updateTime}</span> : createTime} </span>
       </S.TimeOrName>
 
       <div>
