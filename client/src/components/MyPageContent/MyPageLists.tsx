@@ -5,6 +5,7 @@ import { ko } from 'date-fns/locale';
 import { useRecoilValue } from 'recoil';
 import { logUser } from '../../atoms/index';
 import { Icon } from '@iconify/react';
+import { SmallBorderTagButton } from '../Button';
 
 interface PropsType {
   mentoringId?: number;
@@ -41,14 +42,14 @@ const MyPageLists = ({
 }: PropsType) => {
   const setLogStatus = useRecoilValue(logUser);
   const createTime = formatDistanceToNow(new Date(createdAt), { addSuffix: true, locale: ko });
-  const updateTime = formatDistanceToNow(new Date(updatedAt ? updatedAt : new Date()), { addSuffix: true, locale: ko });
+  // const updateTime = formatDistanceToNow(new Date(updatedAt ? updatedAt : new Date()), { addSuffix: true, locale: ko });
 
-  console.log(setLogStatus.nickname);
   return (
     <S.PostMyPageContent>
       <S.PostLinkMyPage
         to={postscriptId ? `/postscript/${postscriptId}` : studyId ? `/study/${studyId}` : `/mentoring/${mentoringId}`}
       >
+        <SmallBorderTagButton text={tagName} />
         <S.MyPageListsTitle>{studyTitle || mentoringTitle || postscriptTitle}</S.MyPageListsTitle>
         <S.MyPageListsContent>{studyContent || mentoringContent || postscriptContent}</S.MyPageListsContent>
         <S.PostInfoView>
@@ -58,9 +59,10 @@ const MyPageLists = ({
             </span>
             {setLogStatus.nickname}
             {view ? <span>조회{view}</span> : null}
-            {updatedAt === createdAt ? <div> {createTime}</div> : <div> {updateTime}</div>}
+            <span>{createTime}</span>
             <div>
-              <InlineIcon icon="akar-icons:heart" />a
+              <InlineIcon icon="akar-icons:heart" />
+              {totalVotes}
             </div>
           </S.UserLikeIconList>
         </S.PostInfoView>
