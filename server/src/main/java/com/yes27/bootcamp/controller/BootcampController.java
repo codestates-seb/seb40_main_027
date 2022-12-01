@@ -77,10 +77,11 @@ public class BootcampController {
         catch (NullPointerException e){
             isVote = 0;
         }
-
-        BootcampDto.DetailResponseDto response = mapper.bootcampTobootCampDetailResponseDto(bootcampService.findBootcamp(bootcampId),isVote);
-        return new ResponseEntity(new SingleResponseDto<>(response), HttpStatus.OK);
-
+        if(isVote == 0 || isVote == 1) {
+            BootcampDto.DetailResponseDto response = mapper.bootcampTobootCampDetailResponseDto(bootcampService.findBootcamp(bootcampId), isVote);
+            return new ResponseEntity(new SingleResponseDto<>(response), HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     //삭제

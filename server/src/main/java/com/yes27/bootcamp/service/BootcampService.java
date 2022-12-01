@@ -29,38 +29,38 @@ public class BootcampService {
     public BootCamp update(BootCamp bootCamp){
         BootCamp findCamp = findBootcamp(bootCamp.getBootcampId());
 
-        Optional.ofNullable(findCamp.getDuration())
-                .ifPresent(duration -> bootCamp.setDuration(duration));
-        Optional.ofNullable(findCamp.getBeginRegisterDate()).
-                ifPresent(beginRegisterDate->bootCamp.setBeginRegisterDate(beginRegisterDate));
-        Optional.ofNullable(findCamp.getFinalRegisterDate())
-                        .ifPresent(finalRegisterDate->bootCamp.setFinalRegisterDate(finalRegisterDate));
-        Optional.ofNullable(findCamp.getSite())
-                        .ifPresent(site -> bootCamp.setSite(site));
-        Optional.ofNullable(findCamp.getOnOff())
-                        .ifPresent(onOff ->bootCamp.setOnOff(onOff));
-        Optional.ofNullable(findCamp.getProcess())
-                        .ifPresent(process -> bootCamp.setProcess(process));
-        Optional.ofNullable(findCamp.getSatisfaction())
-                        .ifPresent(satisfaction->bootCamp.setSatisfaction(satisfaction));
-        Optional.ofNullable(findCamp.getEndDate())
-                        .ifPresent(endDate -> bootCamp.setEndDate(endDate));
-        Optional.ofNullable(findCamp.getSuperviser())
-                        .ifPresent(superviser->bootCamp.setSuperviser(superviser));
-        Optional.ofNullable(findCamp.getTotalCost())
-                        .ifPresent(totalCost->bootCamp.setTotalCost(totalCost));
-        Optional.ofNullable(findCamp.getTitle())
-                        .ifPresent(title->bootCamp.setTitle(title));
-        Optional.ofNullable(findCamp.getTrTime())
-                        .ifPresent(trTime->bootCamp.setTrTime(trTime));
-        Optional.ofNullable(findCamp.getStartDate())
-                        .ifPresent(startDate->bootCamp.setStartDate(startDate));
-        Optional.ofNullable(findCamp.getWeekendStatus())
-                        .ifPresent(weekendStatus->bootCamp.setWeekendStatus(weekendStatus));
-        Optional.ofNullable(findCamp.getYardMan())
-                        .ifPresent(yardMan->bootCamp.setYardMan(yardMan));
-        Optional.ofNullable(findCamp.getAddress())
-                        .ifPresent(address -> bootCamp.setAddress(address));
+        Optional.ofNullable(bootCamp.getDuration())
+                .ifPresent(duration -> findCamp.setDuration(duration));
+        Optional.ofNullable(bootCamp.getBeginRegisterDate()).
+                ifPresent(beginRegisterDate->findCamp.setBeginRegisterDate(beginRegisterDate));
+        Optional.ofNullable(bootCamp.getFinalRegisterDate())
+                        .ifPresent(finalRegisterDate->findCamp.setFinalRegisterDate(finalRegisterDate));
+        Optional.ofNullable(bootCamp.getSite())
+                        .ifPresent(site -> findCamp.setSite(site));
+        Optional.ofNullable(bootCamp.getOnOff())
+                        .ifPresent(onOff ->findCamp.setOnOff(onOff));
+        Optional.ofNullable(bootCamp.getProcess())
+                        .ifPresent(process -> findCamp.setProcess(process));
+        Optional.ofNullable(bootCamp.getSatisfaction())
+                        .ifPresent(satisfaction->findCamp.setSatisfaction(satisfaction));
+        Optional.ofNullable(bootCamp.getEndDate())
+                        .ifPresent(endDate -> findCamp.setEndDate(endDate));
+        Optional.ofNullable(bootCamp.getSuperviser())
+                        .ifPresent(superviser->findCamp.setSuperviser(superviser));
+        Optional.ofNullable(bootCamp.getTotalCost())
+                        .ifPresent(totalCost->findCamp.setTotalCost(totalCost));
+        Optional.ofNullable(bootCamp.getTitle())
+                        .ifPresent(title->findCamp.setTitle(title));
+        Optional.ofNullable(bootCamp.getTrTime())
+                        .ifPresent(trTime->findCamp.setTrTime(trTime));
+        Optional.ofNullable(bootCamp.getStartDate())
+                        .ifPresent(startDate->findCamp.setStartDate(startDate));
+        Optional.ofNullable(bootCamp.getWeekendStatus())
+                        .ifPresent(weekendStatus->findCamp.setWeekendStatus(weekendStatus));
+        Optional.ofNullable(bootCamp.getYardMan())
+                        .ifPresent(yardMan->findCamp.setYardMan(yardMan));
+        Optional.ofNullable(bootCamp.getAddress())
+                        .ifPresent(address -> findCamp.setAddress(address));
 
         return bootcampRepository.save(findCamp);
     }
