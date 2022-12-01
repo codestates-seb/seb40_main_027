@@ -128,7 +128,7 @@ public interface PostscriptMapper {
         postscriptResponse.setPostscriptContent(postscript.getPostscriptContent());
         postscriptResponse.setView(postscript.getView());
 
-        postscriptResponse.setVote(postscript.getTotalVotes());
+        postscriptResponse.setVote(postscript.getVote()); // 좋아요 유무 표현
 
 //        postscriptResponse.setPostscriptStatus(postscript.getPostscriptStatus());
 
