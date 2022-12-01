@@ -26,7 +26,7 @@ const ForumDetail = ({ page = 1 }: PropsType) => {
   useEffect(() => {
     const url = `/${forumType}/${id}`;
     readPost(url, setPost).then((res) => {
-      setCreatedAt(`${formatDistanceToNow(new Date(res.createdAt), { locale: ko })} 전`);
+      setCreatedAt(formatDistanceToNow(new Date(res.createdAt), { addSuffix: true, locale: ko }));
     });
   }, []);
 

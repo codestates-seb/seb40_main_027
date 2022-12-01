@@ -12,7 +12,7 @@ interface PropsType {
 
 const ForumCard = ({ forumType, post }: PropsType) => {
   const content = post[`${forumType}Content`].replace(/<[^>]*>?/g, ' ');
-  const createdAt = `${formatDistanceToNow(new Date(post.createdAt), { locale: ko })} 전`;
+  const createdAt = formatDistanceToNow(new Date(post.createdAt), { addSuffix: true, locale: ko });
 
   return (
     <S.Article>
