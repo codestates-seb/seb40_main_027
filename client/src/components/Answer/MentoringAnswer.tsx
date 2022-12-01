@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router';
 import 'react-quill/dist/quill.snow.css';
-import { getComment } from '../../utils/API/getApi';
+import { getComment } from '../../utils/api/getApi';
 import { useRecoilState } from 'recoil';
 import { mentoringListData } from '../../atoms/index';
 import MentoringAnswerList from './MentoringAnswerList';
@@ -10,7 +10,7 @@ import * as S from './ForumAnswer.style';
 
 interface mentoringAnswerListProps {
   createdAt: string;
-  commentId: number;
+  mentoringCommentId: number;
   mentoringComment: string;
   updatedAt: string;
   nickname: string;
@@ -22,7 +22,7 @@ const MentoringAnswer = () => {
   const { id } = useParams();
   const [mentoringAnswerContents, setMentoringnAnswerContents] = useState('');
   const [mentoringanswerList, setMentoringAnswerList] = useRecoilState(mentoringListData);
-
+  const access = localStorage.getItem('access');
   const modules = useMemo(
     () => ({
       toolbar: {
@@ -44,8 +44,7 @@ const MentoringAnswer = () => {
       url: `/mentoring/${id}/comment`,
       data: { mentoringComment: mentoringAnswerContents },
       headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTczNzAwNSwiZXhwIjoxNjY5ODIzNDA1fQ.AykpiUvJlzmcTWT7x2iMKPbPo0y9cCIVzqhiMECTGFKAMKg171ropdOZjpB_lLbV7m6AkQBlYPbIahmpmPGcdQ',
+        Authorization: access,
       },
     });
   };
@@ -55,7 +54,7 @@ const MentoringAnswer = () => {
     try {
       const postAwait = await postComment();
       const getAwait = await getComment('mentoring', `${id}`);
-      setMentoringAnswerList(getAwait.data.data.comments);
+      setMentoringAnswerList(getAwait.data.data.mentoringComments);
     } catch {
       console.log('err');
     }
@@ -70,14 +69,9 @@ const MentoringAnswer = () => {
     axios({
       method: 'get',
       url: `/mentoring/${id}`,
-      headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTczNzAwNSwiZXhwIjoxNjY5ODIzNDA1fQ.AykpiUvJlzmcTWT7x2iMKPbPo0y9cCIVzqhiMECTGFKAMKg171ropdOZjpB_lLbV7m6AkQBlYPbIahmpmPGcdQ',
-      },
     }).then((res) => {
       const { data } = res;
-
-      setMentoringAnswerList(data.data.comments);
+      setMentoringAnswerList(data.data.mentoringComments);
     });
   }, []);
 
@@ -88,7 +82,7 @@ const MentoringAnswer = () => {
           <MentoringAnswerList
             key={idx}
             createdAt={list.createdAt}
-            commentId={list.commentId}
+            mentoringCommentId={list.mentoringCommentId}
             mentoringComment={list.mentoringComment}
             updatedAt={list.updatedAt}
             nickname={list.nickname}
