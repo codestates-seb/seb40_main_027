@@ -29,7 +29,7 @@ const Nickname = () => {
   return (
     <ImgCircle>
       <NicknameArea>
-        <Link to={'users/mypage'}>
+        <Link to="users/mypage">
           <Icon icon="carbon:user-avatar-filled-alt" width="30" height="30" />
         </Link>
         <span>{nickname}</span>
