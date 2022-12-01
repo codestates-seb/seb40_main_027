@@ -2,8 +2,17 @@ import styled from 'styled-components';
 import ReactQuill from 'react-quill';
 import { StyledBackgroundButton } from '../Button/BackgroundButton';
 
+export const ContainerViewAnswer = styled.div`
+  @media screen and (max-width: 414px) {
+    overflow-y: scroll;
+  }
+`;
+
 export const QuillContent = styled.div`
+  bottom: 0;
+
   border: 2px solid var(--greenSub);
+  position: relative;
   border-radius: 10px;
   height: 16vh;
 
@@ -14,8 +23,10 @@ export const QuillContent = styled.div`
   }
 
   @media screen and (max-width: 414px) {
+    bottom: 0;
     border: 4px solid var(--greenSub);
-    height: 17vh;
+
+    height: 100%;
   }
 `;
 export const QuillArea = styled(ReactQuill)`
@@ -28,7 +39,7 @@ export const QuillArea = styled(ReactQuill)`
   }
 `;
 
-export const SubmitButtton = styled(StyledBackgroundButton)`
+export const SubmitButton = styled(StyledBackgroundButton)`
   width: 6rem;
   height: 2rem;
   margin-right: 2rem;
@@ -40,7 +51,6 @@ export const SubmitButtton = styled(StyledBackgroundButton)`
 
 export const ViewAnswer = styled.div`
   @media screen and (max-width: 414px) {
-    overflow-y: scroll;
-    height: 30vh;
+    height: 100%;
   }
 `;
