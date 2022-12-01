@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router';
 import 'react-quill/dist/quill.snow.css';
-import { getComment } from '../../utils/api/getApi';
+import { getComment } from '../../utils/api/answerAPI';
 import { useRecoilState } from 'recoil';
 import { mentoringListData } from '../../atoms/index';
 import MentoringAnswerList from './MentoringAnswerList';
@@ -16,7 +16,7 @@ interface mentoringAnswerListProps {
   nickname: string;
 }
 
-export interface MentoringanswerList extends Array<mentoringAnswerListProps> {}
+export interface mentoringAnswerList extends Array<mentoringAnswerListProps> {}
 
 const MentoringAnswer = () => {
   const { id } = useParams();
@@ -36,13 +36,16 @@ const MentoringAnswer = () => {
   };
 
   const AsyncFunction = async () => {
-    axios.defaults.withCredentials = true;
     try {
       await postComment();
       const getAwait = await getComment('mentoring', `${id}`);
       setMentoringAnswerList(getAwait.data.data.mentoringComments);
-    } catch {
-      console.log('err');
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        console.log(error);
+      }
     }
   };
 
@@ -52,7 +55,6 @@ const MentoringAnswer = () => {
   };
 
   useEffect(() => {
-    axios.defaults.withCredentials = true;
     axios({
       method: 'get',
       url: `/mentoring/${id}`,
@@ -63,7 +65,7 @@ const MentoringAnswer = () => {
   }, []);
 
   return (
-    <>
+    <S.ContainerViewAnswer>
       <S.ViewAnswer>
         {mentoringanswerList?.map((list, idx) => (
           <MentoringAnswerList
@@ -77,12 +79,12 @@ const MentoringAnswer = () => {
         ))}
       </S.ViewAnswer>
       <S.QuillContent>
-        <S.QuillArea theme="snow" value={mentoringAnswerContents} onChange={(e) => setMentoringnAnswerContents(e)} />
+        <S.QuillArea theme="snow" value={mentoringAnswerContents} onChange={setMentoringnAnswerContents} />
         <div className="btn-area">
-          <S.SubmitButtton onClick={SummitAnswerBtn}>등록</S.SubmitButtton>
+          <S.SubmitButton onClick={SummitAnswerBtn}>등록</S.SubmitButton>
         </div>
       </S.QuillContent>
-    </>
+    </S.ContainerViewAnswer>
   );
 };
 
