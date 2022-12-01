@@ -22,7 +22,7 @@ const Forum = () => {
         {pageType === undefined && forumType === 'study' ? <ForumCards /> : null}
         {pageType === undefined && forumType === 'mentoring' ? <ForumCards /> : null}
         {/^\d+$/.test(pageType) ? <ForumDetail /> : null}
-        {pageType === 'write' ? <ForumWrite /> : null}
+        {pageType === 'write' || pageType === 'update' ? <ForumWrite /> : null}
       </S.FlexContainer>
     </S.PageWrapper>
   );
