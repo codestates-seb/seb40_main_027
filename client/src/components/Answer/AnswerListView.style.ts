@@ -6,7 +6,7 @@ export const AnswerTextContent = styled.div`
   border-bottom: 1px solid black;
   padding-left: 1rem;
 
-  &:nth-last-child(1) {
+  &:last-child(1) {
     border: none;
   }
 `;
@@ -52,7 +52,6 @@ export const NameZone = styled.span`
 `;
 
 export const TextArea = styled.div`
-  /* height: 5vh; */
   margin-left: 1rem;
   overflow: hidden;
 `;
