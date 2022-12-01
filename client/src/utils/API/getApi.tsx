@@ -1,12 +1,24 @@
 import axios from 'axios';
+const access = localStorage.getItem('access');
 
 export const getComment = (url: string, id: string) => {
   return axios({
     method: 'get',
     url: `/${url}/${id}`,
-    // headers: {
-    //   Authorization:
-    //     'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTczNzAwNSwiZXhwIjoxNjY5ODIzNDA1fQ.AykpiUvJlzmcTWT7x2iMKPbPo0y9cCIVzqhiMECTGFKAMKg171ropdOZjpB_lLbV7m6AkQBlYPbIahmpmPGcdQ',
-    // },
   });
+};
+
+export const deleteComment = (id: string, url: string) => {
+  return axios({
+    method: 'delete',
+    url: `/${url}/comment/${id}`,
+    headers: {
+      Authorization: access,
+    },
+  })
+    .then(() => {
+      alert('삭제하시겠습니까?');
+    })
+
+    .catch(() => console.log('err'));
 };
