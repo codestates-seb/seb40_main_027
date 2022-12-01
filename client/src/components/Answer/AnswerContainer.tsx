@@ -1,6 +1,6 @@
 import * as S from './AnswerListView.style';
 import { Icon } from '@iconify/react';
-import { formatDistanceToNow, format } from 'date-fns';
+import { formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
 
 interface HandlerProps {
