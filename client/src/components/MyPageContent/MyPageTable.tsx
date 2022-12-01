@@ -22,7 +22,7 @@ const MyPageTable = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [offset, setOffset] = useState(0);
-
+  const access = localStorage.getItem('access');
   const linkTableHandler = (id: number) => {
     navigate(`/bootcamp/${id}`);
   };
@@ -35,13 +35,11 @@ const MyPageTable = () => {
   };
 
   useEffect(() => {
-    axios.defaults.withCredentials = true;
     axios({
       method: 'get',
       url: 'mypage/bootcampLike',
       headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTc5Mzk4OSwiZXhwIjoxNjY5ODgwMzg5fQ.jwHPEroDLyZmiL2TRvYuvaED2bCmDwsXUs3QL1nA8QVoU9Kkr2nmJd5vSlHdOr5ak9hKHOf3Vj65Ffe_gIUdnQ',
+        Authorization: access,
       },
     }).then((res) => {
       const { data } = res;
@@ -80,7 +78,6 @@ const MyPageTable = () => {
                 )}
               </td> */}
             </tr>
-            // </div>
           );
         })}
       </tbody>
