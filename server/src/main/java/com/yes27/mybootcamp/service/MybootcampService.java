@@ -4,7 +4,11 @@ import com.yes27.bootcamp.entity.BootCamp;
 import com.yes27.bootcamp.service.BootcampService;
 import com.yes27.member.entity.Member;
 import com.yes27.mybootcamp.entity.Mybootcamp;
+import com.yes27.mybootcamp.entity.MybootcampMapping;
 import com.yes27.mybootcamp.repository.MybootcampRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -42,11 +46,13 @@ public class MybootcampService {
     }
 
     //목록 조회
-    public List<BootCamp> getMybootcamp(Member member) {
+    public Page<MybootcampMapping> getMybootcamp(Member member, int page, int size) {
         Sort sort =sortBymybootcampId();
-        List<Mybootcamp> findBootcamp = this.mybootcampRepository.findAllByMemberAndVote(member, 1,sort);
-        List<BootCamp> myBootcamp = (List)findBootcamp.stream().map(Mybootcamp::getBootCamp).collect(Collectors.toList());
-        return myBootcamp;
+//        List<Mybootcamp> findBootcamp = this.mybootcampRepository.findAllByMemberAndVote(member, 1,sort);
+//        List<MybootcampMapping> findBootcamp = this.mybootcampRepository.findAllByMemberAndVote(member, 1,pagealbe);
+        return this.mybootcampRepository.findAllByMemberAndVote(member, 1, PageRequest.of(page,size, Sort.by("mybootcampId").descending()));
+//        List<BootCamp> myBootcamp = (List)findBootcamp.stream().map(Mybootcamp::getBootCamp).collect(Collectors.toList());
+
     }
 
     private Sort sortBymybootcampId() {

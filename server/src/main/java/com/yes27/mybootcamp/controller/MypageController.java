@@ -4,13 +4,18 @@ import com.yes27.bootcamp.dto.BootcampDto;
 import com.yes27.bootcamp.entity.BootCamp;
 import com.yes27.member.entity.Member;
 import com.yes27.member.service.MemberService;
+import com.yes27.mybootcamp.entity.MybootcampMapping;
 import com.yes27.mybootcamp.mapper.MybootcampMapper;
 import com.yes27.mybootcamp.service.MybootcampService;
+import com.yes27.response.MultiResponseDto;
 import com.yes27.response.SingleResponseDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,10 +35,12 @@ public class MypageController {
     }
 
     @GetMapping
-    public ResponseEntity getMy(HttpServletRequest request) {
+    public ResponseEntity getMy(HttpServletRequest request,
+                                @RequestParam int page, int size) {
         Member findMember = this.memberService.findMember(request);
-        List<BootCamp> mybootcampList = this.mybootcampService.getMybootcamp(findMember);
-        List<BootcampDto.Response> response = this.mybootcampMapper.bootcampToMyBootcampResponse(mybootcampList);
-        return new ResponseEntity(new SingleResponseDto(response), HttpStatus.OK);
+        Page<MybootcampMapping> pageMybootcamp = this.mybootcampService.getMybootcamp(findMember, page-1, size);
+        List<MybootcampMapping> mybootcampMappings = pageMybootcamp.getContent();
+        List<BootcampDto.Response> response = this.mybootcampMapper.bootcampToMyBootcampResponse(mybootcampMappings);
+        return new ResponseEntity(new MultiResponseDto<>(response,pageMybootcamp), HttpStatus.OK);
     }
 }
