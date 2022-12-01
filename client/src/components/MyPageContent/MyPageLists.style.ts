@@ -43,9 +43,13 @@ export const PostInfoView = styled.div`
 export const UserLikeIconList = styled.span`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  width: 15%;
+  justify-content: flex-end;
+  width: 40%;
+  font-size: 0.7rem;
 
+  & > * {
+    margin-left: 0.5rem;
+  }
   @media screen and (max-width: 414px) {
     width: 35vw;
   }
