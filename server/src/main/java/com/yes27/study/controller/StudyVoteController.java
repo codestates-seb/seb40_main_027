@@ -66,7 +66,7 @@ public class StudyVoteController {
             throw new BusinessLogicException(ExceptionCode.VOTE_ERROR);
         }
 
-        return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.CREATED);
+        return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
     }
 
 
