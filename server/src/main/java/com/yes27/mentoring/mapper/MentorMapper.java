@@ -1,6 +1,8 @@
 package com.yes27.mentoring.mapper;
 
 
+import com.yes27.member.dto.MemberDto;
+import com.yes27.member.entity.Member;
 import com.yes27.member.mapper.MemberMapper;
 import com.yes27.mentoring.dto.MentorDto;
 import com.yes27.mentoring.entity.Mentor;
@@ -22,14 +24,31 @@ public interface MentorMapper {
 
     MentorDto.MentoringResponse mentorToMentoringResponseDto(Mentor mentor);
 
-    List<MentorDto.Response> mentorsToMentorResponseDtos(List<Mentor> mentors);
+    default List<MentorDto.Response> mentorsToMentorResponseDtos(List<Mentor> mentors){
+        return mentors.stream()
+                .map(mentoring -> MentorDto.Response
+                        .builder()
+                        .mentoringId(mentoring.getMentoringId())
+                        .mentoringTitle(mentoring.getMentoringTitle())
+                        .mentoringContent(mentoring.getMentoringContent())
+                        .createdAt(mentoring.getCreatedAt())
+                        .updatedAt(mentoring.getUpdatedAt())
+                        .tagName(mentoring.getTagName())
+                        .view(mentoring.getView())
+                        .totalVotes(mentoring.getTotalVotes())
+                        .tagName(mentoring.getTagName())
+                        .member(memberTomemberResponse(mentoring.getMember()))
+                                .build())
+                .collect(Collectors.toList());
+
+    }
 
     //게시판에 대한 댓글
     default List<CommentDto.Response> mentoringToMentoringCommentResponse(List<Comment> comments){
         return comments.stream()
                 .map(mentoringComment -> CommentDto.Response
                         .builder()
-                        .commentId(mentoringComment.getCommentId())
+                        .mentoringCommentId(mentoringComment.getMentoringCommentId())
                         .mentoringComment(mentoringComment.getMentoringComment())
                         .createdAt(mentoringComment.getCreatedAt())
                         .updatedAt(mentoringComment.getUpdatedAt())
@@ -37,21 +56,30 @@ public interface MentorMapper {
                         .build())
                 .collect(Collectors.toList());
     }
-
+    default MemberDto.PatchResponse memberTomemberResponse(Member member){
+        MemberDto.PatchResponse memberResponse = new MemberDto.PatchResponse();
+        memberResponse.setMemberId(member.getMemberId());
+        memberResponse.setEmail(member.getEmail());
+        memberResponse.setNickname(member.getNickname());
+        return memberResponse;
+    }
     //멘토링 상세 페이지
     default MentorDto.MentorsResponse mentoringToMentoringDetailsResponse(Mentor mentoring){
         List<Comment> comments = mentoring.getComments();
+
 
         MentorDto.MentorsResponse mentorsResponse = new MentorDto.MentorsResponse();
         mentorsResponse.setMentoringId(mentoring.getMentoringId());
         mentorsResponse.setMentoringContent(mentoring.getMentoringContent());
         mentorsResponse.setMentoringTitle(mentoring.getMentoringTitle());
-        mentorsResponse.setViewCount(mentoring.getViewCount());
+        mentorsResponse.setView(mentoring.getView());
         mentorsResponse.setCreatedAt(mentoring.getCreatedAt());
         mentorsResponse.setUpdatedAt(mentoring.getUpdatedAt());
         mentorsResponse.setTotalVotes(mentoring.getTotalVotes());
-        mentorsResponse.setComments(mentoringToMentoringCommentResponse(comments));
+        mentorsResponse.setMentoringComments(mentoringToMentoringCommentResponse(comments));
+        mentorsResponse.setTagName(mentoring.getTagName());
         mentorsResponse.setVote(mentoring.getVote());
+        mentorsResponse.setMember(memberTomemberResponse(mentoring.getMember()));
         return mentorsResponse;
     }
 
@@ -72,7 +100,7 @@ public interface MentorMapper {
         mentorMypageResponse.setMentoringId(mentor.getMentoringId());
         mentorMypageResponse.setMentoringTitle(mentor.getMentoringTitle());
         mentorMypageResponse.setMentoringContent(mentor.getMentoringContent());
-        mentorMypageResponse.setView(mentor.getViewCount());
+        mentorMypageResponse.setView(mentor.getView());
         mentorMypageResponse.setTotalVotes(mentor.getTotalVotes());
         mentorMypageResponse.setTagName(mentor.getTagName());
         mentorMypageResponse.setCreatedAt(mentor.getCreatedAt());

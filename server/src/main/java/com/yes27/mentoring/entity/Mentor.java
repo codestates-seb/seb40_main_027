@@ -39,7 +39,7 @@ public class Mentor extends BaseEntity {
     private int vote; // 좋아요 유무
 
     @Column
-    private int viewCount;
+    private int view;
 
     @OneToMany(mappedBy = "mentor", cascade = CascadeType.REMOVE)
     private List<Comment> comments = new ArrayList<>();
@@ -51,6 +51,8 @@ public class Mentor extends BaseEntity {
     @OneToMany(mappedBy = "mentor", cascade = CascadeType.REMOVE)
     private List<MentoringVote> mentoringVote;
 
+    @OneToMany(mappedBy = "mentor", cascade = CascadeType.REMOVE)
+    private List<MentorView> mentorViews;
 //    @OneToMany(mappedBy = "mentor",  cascade = CascadeType.REMOVE)
 //    private List<MentoringVote> mentoringVotes;
 

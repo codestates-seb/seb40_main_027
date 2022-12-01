@@ -1,27 +1,21 @@
-package com.yes27.mentoringcomment.entity;
+package com.yes27.mentoring.entity;
 
 
-import com.yes27.BaseEntity;
 import com.yes27.member.entity.Member;
 import com.yes27.mentoring.entity.Mentor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Setter
 @Getter
-@NoArgsConstructor
 @Entity
-public class Comment extends BaseEntity {
+public class MentorView {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long mentoringCommentId;
-
-    @Column(nullable = false, columnDefinition = "Text")
-    private String mentoringComment;
+    private Long mentorViewId;
 
     @ManyToOne
     @JoinColumn(name = "MENTOR_MENTORINGID")
@@ -30,4 +24,6 @@ public class Comment extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "MEBER_ID")
     private Member member;
+
+
 }

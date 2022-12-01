@@ -59,8 +59,8 @@ public class MentorController {
                                         HttpServletRequest request){
         Member member = memberService.findMember(request);
         Mentor mentor = mapper.mentorPatchDtoToMentor(mentorPatchDto);
-
-        MentorDto.MentoringResponse response = mapper.mentorToMentoringResponseDto(mentorService.update(mentorId,mentor, member));
+        mentor.setMentoringId(mentorId);
+        MentorDto.MentoringResponse response = mapper.mentorToMentoringResponseDto(mentorService.update(mentor, member));
 
         return new ResponseEntity(new SingleResponseDto<>(response), HttpStatus.OK);
     }
@@ -69,9 +69,14 @@ public class MentorController {
     @GetMapping("/{mentorId}")
     public ResponseEntity getMentor(@PathVariable("mentorId") @Positive long mentorId,
                                     HttpServletRequest request){
-        Member member = memberService.findMember(request);
-        MentorDto.MentorsResponse response = mapper.mentoringToMentoringDetailsResponse(mentorService.isVote(mentorId,member));
-//            MentorDto.MentorsResponse response = mapper.mentoringToMentoringDetailsResponse(mentorService.findMentor(mentorId));
+        MentorDto.MentorsResponse response = null;
+        try {
+            String email = request.getUserPrincipal().getName();
+            Member member = memberService.findVerifiedMemberByEmail(email);
+            response = mapper.mentoringToMentoringDetailsResponse(mentorService.isVote(mentorId, member));
+        }catch(NullPointerException e){
+            response = mapper.mentoringToMentoringDetailsResponse(mentorService.findMentor(mentorId));
+        }
         return new ResponseEntity(new SingleResponseDto<>(response), HttpStatus.OK);
     }
 
@@ -88,26 +93,6 @@ public class MentorController {
         Page<Mentor> pageMentors = mentorService.findMentors(page - 1, size , sort);
         List<Mentor> mentors = pageMentors.getContent();
         return new ResponseEntity(new MultiResponseDto<>(mapper.mentorsToMentorResponseDtos(mentors),pageMentors),HttpStatus.OK);
-    }
-
-
-
-    //전체 게시글 조회(좋아요 많은 순 정렬)
-//    @GetMapping
-//    public ResponseEntity getVoteMentors(@Positive @RequestParam int page,
-//                                     @Positive @RequestParam int size,
-//                                     @RequestParam String sort){
-//        Page<Mentor> pageMentors = mentorService.findMentors(page-1,size, sort);
-//        List<Mentor> mentors = pageMentors.getContent();
-//
-//        return new ResponseEntity(new MultiResponseDto<>(mapper.mentorsToMentorResponseDtos(mentors),pageMentors),HttpStatus.OK);
-//
-//    }
-    @PostMapping("/{mentorId}/completion")
-    public ResponseEntity postTag(@PathVariable("mentorId") long mentorId, HttpServletRequest request){
-        Member member = memberService.findMember(request);
-        MentorDto.MentoringResponse response = mapper.mentorToMentoringResponseDto(mentorService.comletionTag(mentorId,member));
-     return new ResponseEntity(new SingleResponseDto<>(response),HttpStatus.OK);
     }
 
     @DeleteMapping("/{mentorId}")

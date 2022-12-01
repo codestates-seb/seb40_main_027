@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MybootcampRepository extends JpaRepository<Mybootcamp, Long> {
-    Optional<Mybootcamp> findByBootCampAndMember(BootCamp var1, Member var2);
-    List<Mybootcamp> findAllByMemberAndVote(Member var1, int var2,Sort sort);
+    Optional<Mybootcamp> findByBootCampAndMember(BootCamp bootCamp, Member member);
+    List<Mybootcamp> findAllByMemberAndVote(Member member, int vote,Sort sort);
 
 }

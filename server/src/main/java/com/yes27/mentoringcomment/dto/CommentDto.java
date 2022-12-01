@@ -32,11 +32,10 @@ public class CommentDto {
     @Builder
     @AllArgsConstructor
     public static class Response{
-        private long commentId;
+        private long mentoringCommentId;
         private String mentoringComment;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
-//        private Member member;
         private String nickname;
 
 

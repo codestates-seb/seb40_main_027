@@ -1,6 +1,7 @@
 package com.yes27.member.entity;
 
 import com.yes27.mentoring.entity.Mentor;
+import com.yes27.mentoring.entity.MentorView;
 import com.yes27.mentoringLike.entity.MentoringVote;
 import com.yes27.mentoringcomment.entity.Comment;
 import com.yes27.mybootcamp.entity.Mybootcamp;
@@ -56,6 +57,8 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Mybootcamp> mybootcamps = new ArrayList<>();
 
+    @OneToMany(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<MentorView> mentorViews = new ArrayList<>();
     public void addStudyComment(StudyComment studyComment) {
         this.studyComments.add(studyComment);
         if (studyComment.getMember() != this) {

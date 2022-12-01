@@ -1,5 +1,7 @@
 package com.yes27.mentoring.dto;
 
+import com.yes27.member.dto.MemberDto;
+import com.yes27.member.entity.Member;
 import com.yes27.mentoringLike.entity.MentoringVote;
 import com.yes27.mentoringcomment.dto.CommentDto;
 import com.yes27.postscript.dto.PostscriptDto;
@@ -34,6 +36,9 @@ public class MentorDto {
 
         @NotBlank
         private String mentoringContent;
+
+        @NotBlank
+        private String tagName;
     }
 
     @Builder
@@ -44,16 +49,19 @@ public class MentorDto {
         private Long mentoringId;
         private String mentoringTitle;
         private String mentoringContent;
-        private int viewCount;
+        private int view;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
         private int totalVotes;
         private String tagName;
+        private MemberDto.PatchResponse member;
     }
 
-    @Builder
+    @Setter
     @Getter
     @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
     public static class MentoringResponse{
 
         private Long mentoringId;
@@ -70,13 +78,14 @@ public class MentorDto {
         private Long mentoringId;
         private String mentoringTitle;
         private String mentoringContent;
-        private int viewCount;
+        private int view;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
         private String tagName;
         private int totalVotes;
         private int vote;
-        private List<CommentDto.Response> comments;
+        private List<CommentDto.Response> mentoringComments;
+        private MemberDto.PatchResponse member;
 
 
     }

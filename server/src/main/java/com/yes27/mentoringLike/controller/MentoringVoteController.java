@@ -34,12 +34,11 @@ public class MentoringVoteController {
         this.mentorService = mentorService;
     }
 
+    //게시글 좋아요
     @PostMapping
     public ResponseEntity postVote(@PathVariable("mentoringId") @Positive Long mentoringId,
                                    @RequestParam int vote,
                                    HttpServletRequest request){
-//        String email = request.getUserPrincipal().getName();
-//        Member member = memberService.findVerifiedMemberByEmail(email);
         Member member = memberService.findMember(request);
         Mentor mentor = mentorService.findVerifiedMentor(mentoringId);
         MentoringVoteDto.Response response = mapper.mentoringToVoteResponseDto(mentoringVoteService.upVote(mentor,member,vote));
