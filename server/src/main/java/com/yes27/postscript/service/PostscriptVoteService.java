@@ -41,24 +41,33 @@ public class PostscriptVoteService {
         voteResponseDto.setPostscriptId(postscriptId);
 
 
-        int voteResult = 0;
+        int sumVote = 0;
 
-        if(vote ==1){
+        if (vote == 1) {
+            sumVote = 1;
+            if (findVote.getVote() == 1) {
+                sumVote = 0;
+            }
             findVote.setVote(1);
-            voteResult = getTotalVotes(postscript)+1;
+            //좋아요 취소
         } else if (vote == 0) {
             findVote.setVote(0);
-            if(getTotalVotes(postscript)>0){
-                voteResult = getTotalVotes(postscript)-1;
+            if (getTotalVotes(postscript) > 0) {
+                sumVote = -1;
             }
-        }
 
-        findVote.setTotalVotes(voteResult);
+        }
+        int totalVote = getTotalVotes(postscript) + sumVote;
+        findVote.setTotalVotes(totalVote);
         findVote.setPostscript(postscript);
         findVote.setMember(member);
-        postscriptService.updateTotalVotes(postscript, voteResult);
+        postscriptService.updateTotalVotes(postscript, totalVote);
         return postscriptVoteRepository.save(findVote);
-
+    }
+        public int getTotalVotes(Postscript postscript){
+            int totalVotes = postscriptVoteRepository.findTotalVoteValue(postscript);
+            return totalVotes;
+        }
 //        Member member = memberService.getLoginMember();
 //
 //        PostscriptVote postscriptVote = postscriptVoteRepository.findByPostscriptAndMember(
@@ -80,12 +89,6 @@ public class PostscriptVoteService {
 //            postscriptService.refreshVotes(postscriptId);
 //            return postscriptVote;
 //        }
-    }
-
-    public int getTotalVotes(Postscript postscriptId) {
-        int totalVotes = postscriptVoteRepository.findTotalVoteValue(postscriptId);
-        return totalVotes;
-    }
 
     // 멤버가 투표했는지 여부
     public PostscriptVote findVote(Postscript postscript, Member member){

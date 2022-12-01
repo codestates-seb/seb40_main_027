@@ -4,6 +4,7 @@ import com.yes27.member.entity.Member;
 import com.yes27.mentoring.entity.Mentor;
 import com.yes27.mentoringLike.entity.MentoringVote;
 import com.yes27.postscripcomment.entity.PostscriptComment;
+import com.yes27.postscript.entity.PostscriptView;
 import com.yes27.postscript.entity.PostscriptVote;
 import com.yes27.postscript.entity.Tag;
 //import com.yes27.postscript.repository.TagRepository;
@@ -31,20 +32,25 @@ public class PostscriptService {
     private final PostscriptVoteService postscriptVoteService;
 //    private final TagRepository tagRepository;
     private final PostscriptVoteRepository postscriptVoteRepository;
+    private final PostscriptViewService postscriptViewService;
 
 
     public PostscriptService(PostscriptRepository postscriptRepository,
                              @Lazy PostscriptVoteService postscriptVoteService,
-                             PostscriptVoteRepository postscriptVoteRepository
+                             PostscriptVoteRepository postscriptVoteRepository,
+                             PostscriptViewService postscriptViewService
 //                             ,TagRepository tagRepository
     ) {
         this.postscriptRepository = postscriptRepository;
         this.postscriptVoteService = postscriptVoteService;
         this.postscriptVoteRepository=postscriptVoteRepository;
 //        this.tagRepository = tagRepository;
+        this.postscriptViewService= postscriptViewService;
     }
 
     public Postscript createPostscript(Postscript postscript) {
+        postscript.setView(0);
+
         return postscriptRepository.save(postscript);
     }
 

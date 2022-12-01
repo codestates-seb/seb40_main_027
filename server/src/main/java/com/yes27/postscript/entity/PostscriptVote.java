@@ -25,7 +25,7 @@ public class PostscriptVote extends BaseEntity {
     private int totalVotes;
 
     @ManyToOne
-    @JoinColumn(name = "POSTSCRIPT_ID")
+    @JoinColumn(name = "POSTSCRIPT")
     private Postscript postscript;
 
     @ManyToOne
