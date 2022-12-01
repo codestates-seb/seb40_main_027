@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class PostscriptComment extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long postscriptCommentId;
 
     @Column(nullable = false)
