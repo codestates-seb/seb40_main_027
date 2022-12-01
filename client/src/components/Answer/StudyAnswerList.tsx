@@ -4,7 +4,7 @@ import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
 import { useState } from 'react';
 import { useParams } from 'react-router';
-import { getComment, deleteComment } from '../../utils/api/getApi';
+import { getComment, deleteComment } from '../../utils/api/answerAPI';
 import { useSetRecoilState } from 'recoil';
 import { studyListData } from '../../atoms/index';
 import * as S from './AnswerListView.style';
@@ -41,26 +41,32 @@ const StudyAnswerList = ({ createdAt, studyCommentId, updatedAt, studyComment, n
   };
 
   const patchAsync = async () => {
-    axios.defaults.withCredentials = true;
     try {
       await patchComment();
       const getAwait = await getComment('study', `${id}`);
 
       setAnswerList(getAwait.data.data.studyComments);
-    } catch {
-      console.log('err');
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        console.log(error);
+      }
     }
   };
 
   const deleteAsync = async () => {
-    axios.defaults.withCredentials = true;
     try {
       await deleteComment(`${studyCommentId}`, 'study');
       const getAwait = await getComment('study', `${id}`);
 
       setAnswerList(getAwait.data.data.studyComments);
-    } catch {
-      console.log('err');
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        console.log(error);
+      }
     }
   };
 
@@ -68,7 +74,6 @@ const StudyAnswerList = ({ createdAt, studyCommentId, updatedAt, studyComment, n
     e.preventDefault();
     patchAsync();
     setIsPatch(!isPatch);
-    setCommentValue('');
   };
 
   const deleteHandler = (e: React.MouseEvent<HTMLElement>) => {
@@ -80,8 +85,8 @@ const StudyAnswerList = ({ createdAt, studyCommentId, updatedAt, studyComment, n
     <S.AnswerTextContent>
       {isPatch ? (
         <div>
-          <ReactQuill theme="snow" value={commentValue} onChange={setCommentValue} />
-          <QuillContainer PatchHanlder={PatchHanlder} editHandler={editHandler} />
+          <ReactQuill theme="snow" value={commentValue} onChange={setCommentValue} placeholder={`${studyComment}`} />
+          <QuillContainer patchHandler={PatchHanlder} editHandler={editHandler} />
         </div>
       ) : (
         <div>
