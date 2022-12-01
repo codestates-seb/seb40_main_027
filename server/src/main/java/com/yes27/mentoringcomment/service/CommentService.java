@@ -32,13 +32,9 @@ public class CommentService {
         return commentRespository.save(comment);
     }
 
-    public Comment update(Long mentorId, Comment comment, Long commentId, Member member){
-        verifyMentor(mentorId);
-        Comment findComment = findVerifiedMemberComment(commentId,member);
-//        Comment findComment = findVerifiedComment(commentId);
+    public Comment update(Comment comment,Member member){
+        Comment findComment = findVerifiedMemberComment(comment.getMentoringCommentId(), member);
         findComment.setMentoringComment(comment.getMentoringComment());
-//        findComment.setUpdatedAt(LocalDateTime.now());
-
         return commentRespository.save(findComment);
     }
 
@@ -47,11 +43,11 @@ public class CommentService {
     }
 
     private Comment findVerifiedMemberComment(Long commentId, Member member) {
-        Optional<Comment> optionalComment = commentRespository.findByCommentIdAndMember(commentId, member);
+        Optional<Comment> optionalComment = commentRespository.findByMentoringCommentIdAndMember(commentId, member);
         if(optionalComment.isPresent()){
             return optionalComment.get();
         }else {
-            throw new BusinessLogicException(ExceptionCode.MENTOR_NOT_FOUND);
+            throw new BusinessLogicException(ExceptionCode.COMMENT_NOT_FOUND);
         }
 
     }

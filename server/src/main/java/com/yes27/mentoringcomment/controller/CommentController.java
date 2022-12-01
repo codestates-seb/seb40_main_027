@@ -18,7 +18,7 @@ import javax.validation.constraints.Positive;
 
 @RestController
 @Validated
-@RequestMapping("/mentoring/{mentoringId}/comment")
+@RequestMapping("/mentoring")
 public class CommentController {
 
     private final CommentService commentService;
@@ -32,46 +32,34 @@ public class CommentController {
         this.mapper = mapper;
     }
 
-    @PostMapping
+    @PostMapping("/{mentoringId}/comment")
     public ResponseEntity addComment(@PathVariable("mentoringId") @Positive long mentoringId,
                                      @Valid @RequestBody CommentDto.Post commentPostDto,
                                      HttpServletRequest request){
-        String email = request.getUserPrincipal().getName();
-        Member member = memberService.findVerifiedMemberByEmail(email);
+        Member findMember = memberService.findMember(request);
         Comment comment = mapper.commentPostDtoToComment(commentPostDto);
-        CommentDto.commmentResponse response = mapper.commentToCommentsResponseDto(commentService.create(mentoringId,comment,member));
+        CommentDto.commmentResponse response = mapper.commentToCommentsResponseDto(commentService.create(mentoringId,comment,findMember));
 
-        return new ResponseEntity(new SingleResponseDto<>(response), HttpStatus.CREATED);
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 
-    @PatchMapping("/{commentId}")
+    @PatchMapping("comment/{commentId}")
     public ResponseEntity updateComment(@PathVariable("commentId") @Positive long commentId,
-                                     @PathVariable("mentoringId") @Positive long mentoringId,
-                                     @RequestBody CommentDto.Patch commentPatchDto,
+                                    @Valid @RequestBody CommentDto.Patch commentPatchDto,
                                         HttpServletRequest request ){
-        String email = request.getUserPrincipal().getName();
-        Member member = memberService.findVerifiedMemberByEmail(email);
+        Member findMember = memberService.findMember(request);
         Comment comment = mapper.commentPatchDtoToComment(commentPatchDto);
-        CommentDto.commmentResponse response = mapper.commentToCommentsResponseDto(commentService.update(mentoringId,comment,commentId,member));
+        comment.setMentoringCommentId(commentId);
+        CommentDto.commmentResponse response = mapper.commentToCommentsResponseDto(commentService.update(comment,findMember));
 
-        return new ResponseEntity(new SingleResponseDto<>(response), HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
-//    @GetMapping("/{commentId}")
-//    public ResponseEntity getComment(@PathVariable("commentId") @Positive long commentId,
-//                                        @PathVariable("mentoringId") long mentoringId){
-//        CommentDto.Response response = mapper.commentToCommentResponseDto(commentService.findComment(commentId));
-//
-//        return new ResponseEntity(HttpStatus.OK);
-//    }
-
-    @DeleteMapping("/{commentId}")
-    public ResponseEntity deleteComment(@PathVariable("mentoringId") @Positive long mentoringId,
-                                        @PathVariable("commentId") @Positive long commentId,
+    @DeleteMapping("comment/{commentId}")
+    public ResponseEntity deleteComment(@PathVariable("commentId") @Positive long commentId,
                                         HttpServletRequest request){
-        String email = request.getUserPrincipal().getName();
-        Member member = memberService.findVerifiedMemberByEmail(email);
-        commentService.delete(commentId, member);
+        Member findMember = memberService.findMember(request);
+        commentService.delete(commentId, findMember);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }
