@@ -29,7 +29,6 @@ const UserProfile = () => {
   const [userUpdate, setUserUpdate] = useState<RespondsBodyUser | undefined>();
 
   const MyProfileSubmit: SubmitHandler<IFormInput> = (data) => {
-    axios.defaults.withCredentials = true;
     axios({
       method: 'patch',
       url: '/users',
