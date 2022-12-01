@@ -18,8 +18,11 @@ public class PostscriptVote extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postscriptVoteId;
 
-    @Column
-    private int vote = 0;
+    @Column(nullable = false)
+    private int vote;
+
+    @Column(nullable = false)
+    private int totalVotes;
 
     @ManyToOne
     @JoinColumn(name = "POSTSCRIPT_ID")

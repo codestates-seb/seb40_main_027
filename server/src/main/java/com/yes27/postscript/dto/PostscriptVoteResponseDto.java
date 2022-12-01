@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PostscriptVoteResponseDto {
 
-    private long postscriptId;
+    private Long postscriptId;
     private long vote;
-    private long totalVotes;
+    private long totalVotes; //확정
 }
