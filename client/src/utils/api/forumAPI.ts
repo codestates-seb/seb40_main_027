@@ -30,6 +30,8 @@ export const readPost = async (url: string, setPost: React.Dispatch<any>) => {
     }
 
     setPost(res.data.data);
+
+    return res.data.data;
   } catch (err) {
     console.error(err);
   }

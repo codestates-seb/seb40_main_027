@@ -6,9 +6,9 @@ import { InlineIcon } from '@iconify/react';
 import DOMPurify from 'dompurify';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
+import { readPost } from '../../utils/api/forumAPI';
 
 interface PropsType {
   page?: number;
@@ -24,27 +24,10 @@ const ForumDetail = ({ page = 1 }: PropsType) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getData = async (url: string) => {
-      try {
-        const res = await axios.get(url, {
-          headers: {
-            Authorization:
-              'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoidGVzdDJAZ21haWwuY29tIiwic3ViIjoidGVzdDJAZ21haWwuY29tIiwiaWF0IjoxNjY5Nzg3Mjg5LCJleHAiOjE2Njk4NzM2ODl9.iTqpksEC-YTOqfesAnVqjGZqzMlBN732i-ltyakkTDgYOrwDOBIy_J0WWyBrkOxUwzesHfW7TNK8iGMDysGpaw',
-          },
-        });
-
-        if (Math.floor(res.status / 100) !== 2) {
-          throw new Error(`${res.status}`);
-        }
-
-        setPost(res.data.data);
-        setCreatedAt(`${formatDistanceToNow(new Date(res.data.data.createdAt), { locale: ko })} 전`);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    getData(`/${forumType}/${id}`);
+    const url = `/${forumType}/${id}`;
+    readPost(url, setPost).then((res) => {
+      setCreatedAt(`${formatDistanceToNow(new Date(res.createdAt), { locale: ko })} 전`);
+    });
   }, []);
 
   const handleClick = () => {
