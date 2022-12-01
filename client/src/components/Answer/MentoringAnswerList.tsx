@@ -4,7 +4,7 @@ import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
 import { useState, useMemo } from 'react';
 import { useParams } from 'react-router';
-import { getComment } from '../../utils/API/getApi';
+import { getComment, deleteComment } from '../../utils/api/getApi';
 import { useSetRecoilState } from 'recoil';
 import { mentoringListData } from '../../atoms/index';
 import * as S from './AnswerListView.style';
@@ -12,7 +12,7 @@ import { AnswerViewContainer, QuillContainer } from './AnswerContainer';
 
 interface mentoringAnswerListProps {
   createdAt: string;
-  commentId: number;
+  mentoringCommentId: number;
   mentoringComment: string;
   updatedAt: string;
   nickname: string;
@@ -20,16 +20,15 @@ interface mentoringAnswerListProps {
 
 const MentoringAnswerList = ({
   createdAt,
-  commentId,
+  mentoringCommentId,
   updatedAt,
   mentoringComment,
   nickname,
 }: mentoringAnswerListProps) => {
   const [isPatch, setIsPatch] = useState<boolean>(false);
   const [commentValue, setCommentValue] = useState('');
-  // const [answerList, setAnswerList] = useRecoilState(mentoringListData);
   const setAnswerList = useSetRecoilState(mentoringListData);
-
+  const access = localStorage.getItem('access');
   const { id } = useParams();
 
   const modules = useMemo(
@@ -54,26 +53,12 @@ const MentoringAnswerList = ({
   const patchComment = () => {
     return axios({
       method: 'patch',
-      url: `/mentoring/${id}/comment/${commentId}`,
+      url: `/mentoring/comment/${mentoringCommentId}`,
       data: { mentoringComment: commentValue },
       headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTczNzAwNSwiZXhwIjoxNjY5ODIzNDA1fQ.AykpiUvJlzmcTWT7x2iMKPbPo0y9cCIVzqhiMECTGFKAMKg171ropdOZjpB_lLbV7m6AkQBlYPbIahmpmPGcdQ',
+        Authorization: access,
       },
     });
-  };
-
-  const deleteComment = () => {
-    return axios({
-      method: 'delete',
-      url: `/mentoring/${id}/comment/${commentId}`,
-      headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTczNzAwNSwiZXhwIjoxNjY5ODIzNDA1fQ.AykpiUvJlzmcTWT7x2iMKPbPo0y9cCIVzqhiMECTGFKAMKg171ropdOZjpB_lLbV7m6AkQBlYPbIahmpmPGcdQ',
-      },
-    })
-      .then(() => {})
-      .catch(() => console.log('err'));
   };
 
   const patchAsync = async () => {
@@ -82,7 +67,7 @@ const MentoringAnswerList = ({
       const patchAwait = await patchComment();
       const getAwait = await getComment('mentoring', `${id}`);
 
-      setAnswerList(getAwait.data.data.comments);
+      setAnswerList(getAwait.data.data.mentoringComments);
     } catch {
       console.log('err');
     }
@@ -91,10 +76,10 @@ const MentoringAnswerList = ({
   const deleteAsync = async () => {
     axios.defaults.withCredentials = true;
     try {
-      const deleteAwait = await deleteComment();
+      const deleteAwait = await deleteComment(`${mentoringCommentId}`, 'mentoring');
       const getAwait = await getComment('mentoring', `${id}`);
 
-      setAnswerList(getAwait.data.data.comments);
+      setAnswerList(getAwait.data.data.mentoringComments);
     } catch {
       console.log('err');
     }
