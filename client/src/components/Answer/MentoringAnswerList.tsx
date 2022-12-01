@@ -4,7 +4,7 @@ import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
 import { useState } from 'react';
 import { useParams } from 'react-router';
-import { getComment, deleteComment } from '../../utils/api/getApi';
+import { getComment, deleteComment } from '../../utils/api/answerAPI';
 import { useSetRecoilState } from 'recoil';
 import { mentoringListData } from '../../atoms/index';
 import * as S from './AnswerListView.style';
@@ -47,26 +47,32 @@ const MentoringAnswerList = ({
   };
 
   const patchAsync = async () => {
-    axios.defaults.withCredentials = true;
     try {
       await patchComment();
       const getAwait = await getComment('mentoring', `${id}`);
 
       setAnswerList(getAwait.data.data.mentoringComments);
-    } catch {
-      console.log('err');
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        console.log(error);
+      }
     }
   };
 
   const deleteAsync = async () => {
-    axios.defaults.withCredentials = true;
     try {
       await deleteComment(`${mentoringCommentId}`, 'mentoring');
       const getAwait = await getComment('mentoring', `${id}`);
 
       setAnswerList(getAwait.data.data.mentoringComments);
-    } catch {
-      console.log('err');
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        console.log(error);
+      }
     }
   };
 
@@ -86,8 +92,13 @@ const MentoringAnswerList = ({
     <S.AnswerTextContent>
       {isPatch ? (
         <div>
-          <ReactQuill theme="snow" value={commentValue} onChange={setCommentValue} />
-          <QuillContainer PatchHanlder={PatchHanlder} editHandler={editHandler} />
+          <ReactQuill
+            theme="snow"
+            value={commentValue}
+            onChange={setCommentValue}
+            placeholder={`${mentoringComment}`}
+          />
+          <QuillContainer patchHandler={PatchHanlder} editHandler={editHandler} />
         </div>
       ) : (
         <div>
