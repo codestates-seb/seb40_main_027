@@ -1,49 +1,80 @@
 import Banner from '../components/Banner';
 import * as S from './BootCampDetail.style';
-import { DataType, DetailTable } from '../components/Table/DetailTable';
+import { DetailTable } from '../components/Table/DetailTable';
 import { BootDetailButton } from '../components/Button';
 import { GREEN_MAIN, RED_BOOT_DETAIL_HEART } from '../assets/constant/COLOR';
-import { useGetBootSpecificTable } from '../hooks/useBootTable';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const BootCampDetail = () => {
-  // const [data, setData] = useState({});
-  // const [check, setCheck] = useState(false);
-
-  let data = useGetBootSpecificTable();
-  console.log(data);
-  const dataKeys: Array<string> = Object.keys(data);
+  const [items, setItems] = useState({
+    bootcampId: 1,
+    title: '',
+    beginRegisterDate: '',
+    finalRegisterDate: '',
+    duration: '',
+    onOff: '',
+    totalCost: '',
+    superviser: '',
+    satisfaction: '',
+    trTime: '',
+    site: '',
+    weekendStatus: '',
+    startDate: '',
+    endDate: '',
+    process: '',
+    vote: 0,
+  });
+  const [check, setCheck] = useState(false);
+  const { pathname } = useLocation();
+  const pathId: string = pathname.split('/')[2];
+  const dataKeys: Array<string> = Object.keys(items);
   const halfIdx = Math.floor(dataKeys.length / 2);
 
-  // 찜하기 기능 - 11월30일 찜 이후 vote가 수정되는지 체크 필요
+  /** 첫 렌더링 그리고 onClick이벤트 발생하여 check의 값이 전환될 때 api통신 **/
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `/bootcamp/${pathId}`,
+      headers: {
+        Authorization: localStorage.getItem('access'),
+      },
+    })
+      .then((resopnse) => {
+        setItems(resopnse.data.data);
+      })
+      .catch((err) => alert(err));
+  }, [check]);
+
+  /** 찜하기 기능 **/
   const onClick = () => {
-    const likeStatus = data.vote;
+    const likeStatus = items.vote;
     let param = 0;
     likeStatus === 0 ? (param = 1) : (param = 0);
     axios({
       method: 'post',
-      url: `/bootcamp/votes/${data.bootcampId}?vote=${param}`,
+      url: `/bootcamp/votes/${items.bootcampId}?vote=${param}`,
       headers: {
         Authorization: localStorage.getItem('access'),
       },
     })
       .then(() => {
-        // setCheck(!check);
         alert(param === 1 ? '찜 되었습니다.' : '찜 취소되었습니다.');
+        setCheck(!check);
       })
       .catch((err) => alert(err));
   };
 
   return (
     <>
-      <Banner text={`${data.process}`} pageType="other" />
+      <Banner text={`${items.process}`} pageType="other" />
       <S.PageWrap>
         <S.MiddleSection>
-          <a href={`https://${data.site}`} target="_blank" rel="noopener noreferrer">
+          <a href={`${items.site}`} target="_blank" rel="noopener noreferrer">
             <BootDetailButton text="홈 페이지" icon="ant-design:home-outlined" iconColor={GREEN_MAIN} />
           </a>
-          {data.vote === 0 ? (
+          {items.vote === 0 ? (
             <BootDetailButton
               text="찜 "
               icon="mdi:cards-heart-outline"
@@ -55,7 +86,7 @@ const BootCampDetail = () => {
           )}
         </S.MiddleSection>
         <section>
-          <DetailTable data={data} halfIdx={halfIdx} dataKeys={dataKeys} />
+          <DetailTable data={items} halfIdx={halfIdx} dataKeys={dataKeys} />
         </section>
       </S.PageWrap>
     </>

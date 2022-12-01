@@ -18,7 +18,7 @@ export const useGetBootTable = () => {
 };
 
 /** 뒤에 숫자를 나중에 받아오는 코드가 필요 **/
-export const useGetBootSpecificTable = () => {
+export const useGetBootSpecificTable = (pathId: string) => {
   const [data, setData] = useState({
     bootcampId: 1,
     title: '',
@@ -40,7 +40,7 @@ export const useGetBootSpecificTable = () => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: '/bootcamp/2',
+      url: `/bootcamp/${pathId}`,
       headers: {
         Authorization: localStorage.getItem('access'),
       },
