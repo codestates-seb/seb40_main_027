@@ -11,7 +11,7 @@ import * as S from './ForumAnswer.style';
 interface studyAnswerListProps {
   createdAt: string;
   studyCommentId: number;
-  comment: string;
+  studyComment: string;
   updatedAt: string;
   nickname: string;
 }
@@ -71,10 +71,10 @@ const StudyAnswer = () => {
     axios({
       method: 'get',
       url: `/study/${id}`,
-      headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTczNzAwNSwiZXhwIjoxNjY5ODIzNDA1fQ.AykpiUvJlzmcTWT7x2iMKPbPo0y9cCIVzqhiMECTGFKAMKg171ropdOZjpB_lLbV7m6AkQBlYPbIahmpmPGcdQ',
-      },
+      // headers: {
+      //   Authorization:
+      //     'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTczNzAwNSwiZXhwIjoxNjY5ODIzNDA1fQ.AykpiUvJlzmcTWT7x2iMKPbPo0y9cCIVzqhiMECTGFKAMKg171ropdOZjpB_lLbV7m6AkQBlYPbIahmpmPGcdQ',
+      // },
     }).then((res) => {
       console.log(res);
       const { data } = res;
@@ -91,7 +91,7 @@ const StudyAnswer = () => {
             key={idx}
             createdAt={list.createdAt}
             studyCommentId={list.studyCommentId}
-            studyComment={list.comment}
+            studyComment={list.studyComment}
             updatedAt={list.updatedAt}
             nickname={list.nickname}
           ></StudyAnswerList>
