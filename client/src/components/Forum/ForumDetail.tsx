@@ -112,8 +112,8 @@ const ForumDetail = () => {
             </S.Form>
           </S.NewCommentContainer> */}
 
-          <ForumArticlesAnswer />
-          {/* <StudyAnswer /> */}
+          {/* <ForumArticlesAnswer /> */}
+          <StudyAnswer />
           {/* <MentoringAnswer /> */}
         </S.CommentsContainer>
       </S.ContentContainer>
