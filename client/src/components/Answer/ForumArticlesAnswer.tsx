@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import AnswerListView from './AnswerListView';
 import { useParams } from 'react-router';
@@ -23,20 +23,6 @@ const ForumArticlesAnswer = () => {
   const [answerContents, setAnswerContents] = useState('');
   const [answerList, setAnswerList] = useRecoilState(answerListData);
   const access = localStorage.getItem('access');
-  const modules = useMemo(
-    () => ({
-      toolbar: {
-        container: [
-          ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-          [{ size: ['small', false, 'large', 'huge'] }, { color: [] }],
-          [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }, { align: [] }],
-          ['image', 'video'],
-        ],
-        handlers: {},
-      },
-    }),
-    []
-  );
 
   const postComment = () => {
     return axios({
@@ -52,7 +38,7 @@ const ForumArticlesAnswer = () => {
   const AsyncFunction = async () => {
     axios.defaults.withCredentials = true;
     try {
-      const postAwait = await postComment();
+      await postComment();
       const getAwait = await getComment('postscript', `${id}`);
       setAnswerList(getAwait.data.data.postscriptComments);
     } catch {
