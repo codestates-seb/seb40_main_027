@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.section`
+  width: 100%;
+
   & > *:first-child {
     margin-bottom: calc(20 / 16 * 1rem);
   }

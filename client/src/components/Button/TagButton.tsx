@@ -60,44 +60,48 @@ const tags = [
 ];
 
 const findColor = (text: string) => {
-  return tags.filter((tag) => tag.text === text)[0].color ?? GREEN_MAIN;
+  return tags.filter((tag) => tag.text === text)[0]?.color ?? GREEN_MAIN;
 };
 
 interface PropsType {
   text: string;
   color?: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 /** 색상 적용 순서: color 속성 > text에 따른 기본 색상 > GREEN_MAIN */
-export const BigBorderTagButton = ({ text, color }: PropsType) => {
+export const BigBorderTagButton = ({ text, color, onClick }: PropsType) => {
   return (
-    <StyledBigBorderButton color={color ? color : findColor(text) ? findColor(text) : GREEN_MAIN}>
+    <StyledBigBorderButton color={color ? color : findColor(text) ? findColor(text) : GREEN_MAIN} onClick={onClick}>
       {text}
     </StyledBigBorderButton>
   );
 };
 
 /** 색상 적용 순서: color 속성 > text에 따른 기본 색상 > GREEN_MAIN */
-export const SmallBorderTagButton = ({ text, color }: PropsType) => {
+export const SmallBorderTagButton = ({ text, color, onClick }: PropsType) => {
   return (
-    <StyledSmallBorderButton color={color ? color : findColor(text) ? findColor(text) : GREEN_MAIN}>
+    <StyledSmallBorderButton color={color ? color : findColor(text) ? findColor(text) : GREEN_MAIN} onClick={onClick}>
       {text}
     </StyledSmallBorderButton>
   );
 };
 
 /** 색상 적용 순서: color 속성 > text에 따른 기본 색상 > GREEN_MAIN */
-export const BigBackgroundTagButton = ({ text, color }: PropsType) => {
+export const BigBackgroundTagButton = ({ text, color, onClick }: PropsType) => {
   return (
-    <StyledBigBackgroundButton color={color ? color : findColor(text) ? findColor(text) : GREEN_MAIN}>
+    <StyledBigBackgroundButton color={color ? color : findColor(text) ? findColor(text) : GREEN_MAIN} onClick={onClick}>
       {text}
     </StyledBigBackgroundButton>
   );
 };
 
-export const SmallBackgroundTagButton = ({ text, color }: PropsType) => {
+export const SmallBackgroundTagButton = ({ text, color, onClick }: PropsType) => {
   return (
-    <StyledSmallBackgroundButton color={color ? color : findColor(text) ? findColor(text) : GREEN_MAIN}>
+    <StyledSmallBackgroundButton
+      color={color ? color : findColor(text) ? findColor(text) : GREEN_MAIN}
+      onClick={onClick}
+    >
       {text}
     </StyledSmallBackgroundButton>
   );
