@@ -58,19 +58,17 @@ const MyPageList = () => {
   const [postPerPage] = useState(10);
   const indexOfLastPost = page * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
-
+  const access = localStorage.getItem('access');
   const handlePostPage = (page: number) => {
     setPage(page);
   };
 
   useEffect(() => {
-    axios.defaults.withCredentials = true;
     axios({
       method: 'get',
       url: '/users/mypage/writing',
       headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTc5Mzk4OSwiZXhwIjoxNjY5ODgwMzg5fQ.jwHPEroDLyZmiL2TRvYuvaED2bCmDwsXUs3QL1nA8QVoU9Kkr2nmJd5vSlHdOr5ak9hKHOf3Vj65Ffe_gIUdnQ',
+        Authorization: access,
       },
     }).then((res) => {
       const { data } = res;
