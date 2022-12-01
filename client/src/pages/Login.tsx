@@ -2,7 +2,7 @@ import * as S from './Login.style';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import logo from '../assets/image/logo.png';
 import { LogPageBtn } from '../components/Button';
-import { userLogin } from '../utils/api/userAPI';
+import { userLogin } from '../utils/API/userAPI';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { logUser } from '../atoms';
