@@ -8,7 +8,6 @@ import com.yes27.mentoring.entity.Mentor;
 import com.yes27.mentoring.repository.MentorRepository;
 import com.yes27.mentoringLike.entity.MentoringVote;
 import com.yes27.mentoringLike.repository.MentoringLikeRepository;
-import com.yes27.mentoringLike.service.MentoringVoteService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -22,10 +21,13 @@ import java.util.Optional;
 public class MentorService {
     private final MentorRepository mentorRepository;
 
+    private final MentorViewService mentorviewService;
+
     private final MentoringLikeRepository mentoringLikeRepository;
 
-    public MentorService(MentorRepository mentorRepository, MentoringLikeRepository mentoringLikeRepository) {
+    public MentorService(MentorRepository mentorRepository, MentorViewService mentorviewService, MentoringLikeRepository mentoringLikeRepository) {
         this.mentorRepository = mentorRepository;
+        this.mentorviewService = mentorviewService;
         this.mentoringLikeRepository = mentoringLikeRepository;
     }
 
@@ -33,7 +35,7 @@ public class MentorService {
 
     public Mentor create(Mentor mentor, Member member){
         mentor.setMentoringId(mentor.getMentoringId());
-        mentor.setViewCount(0);
+        mentor.setView(0);
         mentor.setMember(member);
 
         return mentorRepository.save(mentor);
@@ -41,22 +43,16 @@ public class MentorService {
 
 
 
-    public Mentor update(Long mentoringId, Mentor mentor, Member member){
-        Mentor findMentor = findVerifiedMentorMember(mentoringId, member);
+    public Mentor update(Mentor mentor, Member member){
+        Mentor findMentor = findVerifiedMentorMember(mentor.getMentoringId(), member);
         Optional.ofNullable(mentor.getMentoringTitle())
                 .ifPresent(title -> findMentor.setMentoringTitle(title));
         Optional.ofNullable(mentor.getMentoringContent())
                 .ifPresent(content -> findMentor.setMentoringContent(content));
         Optional.ofNullable(mentor.getTagName())
-                .ifPresent(tag -> findMentor.setTagName(tag));
+                .ifPresent(tagName -> findMentor.setTagName(tagName));
         return mentorRepository.save(findMentor);
 
-    }
-
-    public Mentor comletionTag(Long mentoringId, Member member){
-        Mentor findMentor = findVerifiedMentorMember(mentoringId, member);
-        findMentor.setTagName("모집 완료");
-        return mentorRepository.save(findMentor);
     }
 
     public Mentor findVerifiedMentorMember(Long mentoringId, Member member) {
@@ -75,39 +71,25 @@ public class MentorService {
     }
 
     public Page<Mentor> findMentors(int page, int size, String sort){
-        return mentorRepository.findAll(PageRequest.of(page,size, Sort.by(sort).descending()));
+        return mentorRepository.findAll(PageRequest.of(page,size, Sort.by(Sort.Order.desc(sort), Sort.Order.desc("mentoringId"))));
 
     }
-
+    //로그인 하지 않은 경우 상세조회
     public Mentor findMentor(Long mentoringId){
-        Mentor findMentor = findVerifiedMentor((mentoringId));
-        findMentor.setViewCount(findMentor.getViewCount() + 1);
-//        findMentor.setTotalVotes(findTotle(findMentor));
-        return mentorRepository.save(findMentor);
+        return findVerifiedMentor((mentoringId));
     }
 
     //좋아요 수
-//    private int findTotle(Mentor mentor) {
-//        int totalvotes = mentoringLikeRepository.findMax(mentor);
-//        return totalvotes;
-//    }
-
-    //좋아요 수, 좋아요 유무
-//    public Mentor updateTotal(Mentor mentor,int votetotal, int like){
-//        Mentor findMentor = findVerifiedMentor(mentor.getMentoringId());
-//        findMentor.setTotalVotes(votetotal);
-//        findMentor.setVote(like);
-//        return mentorRepository.save(findMentor);
-//    }
-
     public Mentor updateTotal(Mentor mentor,int votetotal) {
         Mentor findMentor = findVerifiedMentor(mentor.getMentoringId());
         findMentor.setTotalVotes(votetotal);
         return mentorRepository.save(findMentor);
     }
+
+    //로그인 한 경우
     public Mentor isVote(Long mentoringId, Member member){
         Mentor findMentor = findVerifiedMentor(mentoringId);
-        findMentor.setViewCount(findMentor.getViewCount() + 1);
+        findMentor.setView(findMentor.getView() + mentorviewService.addView(findMentor, member));
         Optional<MentoringVote> findVote = mentoringLikeRepository.findByMentorAndMember(findMentor,member);
         if(findVote.isPresent()){
             findMentor.setVote(findVote.get().getVote());
@@ -116,6 +98,7 @@ public class MentorService {
         }
         return mentorRepository.save(findMentor);
     }
+
 
     public Mentor findVerifiedMentor(Long mentoringId) {
         Optional<Mentor> optionalMentor = mentorRepository.findById(mentoringId);

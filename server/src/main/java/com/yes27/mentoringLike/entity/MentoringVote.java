@@ -25,6 +25,7 @@ public class MentoringVote {
 
     @Column(nullable = false)
     private int totalVotes;
+
     //좋아요 게시판 식별자
     @ManyToOne
     @JoinColumn(name = "MENTOR_MENTORINGID")

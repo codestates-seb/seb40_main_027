@@ -26,19 +26,25 @@ public class MentoringVoteService {
 
     public MentoringVote upVote(Mentor mentor, Member member, int vote){
         MentoringVote findvote = findVote(mentor,member);
-        int voteresult = 0;
+        int sumVote = 0;
         // 좋아요
         if(vote == 1){
+            sumVote = 1;
+            if(findvote.getVote() == 1){
+                sumVote = 0;
+            }
             findvote.setVote(1);
-            voteresult = totalVotes(mentor) + 1;
+//            voteresult = totalVotes(mentor) + 1;
         }
         // 취소
         else if(vote == 0){
             findvote.setVote(0);
             if(totalVotes(mentor) > 0) {
-                voteresult = totalVotes(mentor) - 1;
+                sumVote = -1;
+//                voteresult = totalVotes(mentor) - 1;
             }
         }
+        int voteresult = totalVotes(mentor)+sumVote;
         findvote.setTotalVotes(voteresult);
         findvote.setMentor(mentor);
         findvote.setMember(member);
