@@ -7,9 +7,6 @@ import { useParams } from 'react-router';
 import { getComment } from '../../utils/API/getApi';
 import { useSetRecoilState } from 'recoil';
 import { answerListData } from '../../atoms/index';
-import { formatDistanceToNow, format } from 'date-fns';
-import { ko } from 'date-fns/locale';
-import { Calculate } from '../Calculate';
 import * as S from './AnswerListView.style';
 import { AnswerViewContainer, QuillContainer } from './AnswerContainer';
 
@@ -26,13 +23,6 @@ const AnswerListView = ({ createdAt, postCommentId, updatedAt, postscriptComment
   const [commentValue, setCommentValue] = useState('');
   // const [answerList, setAnswerList] = useRecoilState(answerListData);
   const setAnswerList = useSetRecoilState(answerListData);
-
-  const ds = new Date(createdAt);
-  const d = format(ds, 'yyyy.MM.dd HH:mm:ss');
-
-  let timels = Calculate(createdAt);
-  const createTime = formatDistanceToNow(new Date(d), { locale: ko });
-  // const updateTime = formatDistanceToNow(new Date(updatedAt), { locale: ko });
 
   const { id } = useParams();
 
