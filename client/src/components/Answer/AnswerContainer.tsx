@@ -4,15 +4,15 @@ import { formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
 
 interface HandlerProps {
-  PatchHanlder: (e: React.MouseEvent<HTMLElement>) => void;
+  patchHandler: (e: React.MouseEvent<HTMLElement>) => void;
   editHandler: () => void;
 }
 
-export const QuillContainer = ({ PatchHanlder, editHandler }: HandlerProps) => {
+export const QuillContainer = ({ patchHandler, editHandler }: HandlerProps) => {
   return (
     <S.ButtonArea>
-      <S.OkButton onClick={PatchHanlder}>완료</S.OkButton>
-      <S.OkButton color={'red'} onClick={editHandler}>
+      <S.OkButton onClick={patchHandler}>완료</S.OkButton>
+      <S.OkButton color="red" onClick={editHandler}>
         취소
       </S.OkButton>
     </S.ButtonArea>
