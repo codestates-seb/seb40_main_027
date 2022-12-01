@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router';
 import 'react-quill/dist/quill.snow.css';
@@ -23,20 +23,6 @@ const StudyAnswer = () => {
   const [studyAnswerContents, setStudynAnswerContents] = useState('');
   const [studyanswerList, setStudyAnswerList] = useRecoilState(studyListData);
   const access = localStorage.getItem('access');
-  const modules = useMemo(
-    () => ({
-      toolbar: {
-        container: [
-          ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-          [{ size: ['small', false, 'large', 'huge'] }, { color: [] }],
-          [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }, { align: [] }],
-          ['image', 'video'],
-        ],
-        handlers: {},
-      },
-    }),
-    []
-  );
 
   const postComment = () => {
     return axios({
@@ -52,7 +38,7 @@ const StudyAnswer = () => {
   const AsyncFunction = async () => {
     axios.defaults.withCredentials = true;
     try {
-      const postAwait = await postComment();
+      await postComment();
       const getAwait = await getComment('study', `${id}`);
       setStudyAnswerList(getAwait.data.data.studyComments);
     } catch {
