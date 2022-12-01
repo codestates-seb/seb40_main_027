@@ -18,7 +18,7 @@ export const useGetBootTable = () => {
 };
 
 /** 뒤에 숫자를 나중에 받아오는 코드가 필요 **/
-export const useGetBootSpecificTable = (): DataType => {
+export const useGetBootSpecificTable = () => {
   const [data, setData] = useState({
     bootcampId: 1,
     title: '',

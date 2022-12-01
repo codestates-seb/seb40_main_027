@@ -1,13 +1,17 @@
 import Banner from '../components/Banner';
 import * as S from './BootCampDetail.style';
-import { DetailTable } from '../components/Table/DetailTable';
+import { DataType, DetailTable } from '../components/Table/DetailTable';
 import { BootDetailButton } from '../components/Button';
 import { GREEN_MAIN, RED_BOOT_DETAIL_HEART } from '../assets/constant/COLOR';
 import { useGetBootSpecificTable } from '../hooks/useBootTable';
 import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 const BootCampDetail = () => {
-  const data = useGetBootSpecificTable();
+  // const [data, setData] = useState({});
+  // const [check, setCheck] = useState(false);
+
+  let data = useGetBootSpecificTable();
   console.log(data);
   const dataKeys: Array<string> = Object.keys(data);
   const halfIdx = Math.floor(dataKeys.length / 2);
@@ -24,7 +28,10 @@ const BootCampDetail = () => {
         Authorization: localStorage.getItem('access'),
       },
     })
-      .then(() => alert(param === 1 ? '찜 되었습니다.' : '찜 취소되었습니다.'))
+      .then(() => {
+        // setCheck(!check);
+        alert(param === 1 ? '찜 되었습니다.' : '찜 취소되었습니다.');
+      })
       .catch((err) => alert(err));
   };
 
@@ -36,12 +43,16 @@ const BootCampDetail = () => {
           <a href={`https://${data.site}`} target="_blank" rel="noopener noreferrer">
             <BootDetailButton text="홈 페이지" icon="ant-design:home-outlined" iconColor={GREEN_MAIN} />
           </a>
-          <BootDetailButton
-            text="찜 "
-            icon="mdi:cards-heart-outline"
-            iconColor={RED_BOOT_DETAIL_HEART}
-            onClick={onClick}
-          />
+          {data.vote === 0 ? (
+            <BootDetailButton
+              text="찜 "
+              icon="mdi:cards-heart-outline"
+              iconColor={RED_BOOT_DETAIL_HEART}
+              onClick={onClick}
+            />
+          ) : (
+            <BootDetailButton text="찜 " icon="mdi:cards-heart" iconColor={RED_BOOT_DETAIL_HEART} onClick={onClick} />
+          )}
         </S.MiddleSection>
         <section>
           <DetailTable data={data} halfIdx={halfIdx} dataKeys={dataKeys} />
