@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import MyPageLists from './MyPageLists';
 import axios from 'axios';
-import { SetStateAction, useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import MyPagePagination from '../Pagination/MyPagePagination';
 
 const ListContent = styled.div`
-  height: 90vh;
-
+  height: 100vh;
+  overflow: scroll;
   .list-line {
     display: flex;
     width: 100%;
@@ -55,7 +55,7 @@ const MyPageList = () => {
   const [currentPosts, setCurrentPosts] = useState<PropsAnswerType[]>();
   const [emailPost, setEmailPost] = useState('');
   const [page, setPage] = useState(1);
-  const [postPerPage] = useState(7);
+  const [postPerPage] = useState(10);
   const indexOfLastPost = page * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
 
@@ -88,7 +88,7 @@ const MyPageList = () => {
       setCurrentPosts(MaxPage);
     });
   }, [page, indexOfFirstPost, indexOfLastPost]);
-  console.log(emailPost);
+
   return (
     <ListContent>
       <div className="list-line">
