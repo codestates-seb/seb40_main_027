@@ -2,7 +2,7 @@ import axios from 'axios';
 import DOMPurify from 'dompurify';
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router';
 import { getComment, deleteComment } from '../../utils/api/getApi';
 import { useSetRecoilState } from 'recoil';
@@ -31,21 +31,6 @@ const MentoringAnswerList = ({
   const access = localStorage.getItem('access');
   const { id } = useParams();
 
-  const modules = useMemo(
-    () => ({
-      toolbar: {
-        container: [
-          ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-          [{ size: ['small', false, 'large', 'huge'] }, { color: [] }],
-          [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }, { align: [] }],
-          ['image', 'video'],
-        ],
-        handlers: {},
-      },
-    }),
-    []
-  );
-
   const editHandler = () => {
     setIsPatch(!isPatch);
   };
@@ -64,7 +49,7 @@ const MentoringAnswerList = ({
   const patchAsync = async () => {
     axios.defaults.withCredentials = true;
     try {
-      const patchAwait = await patchComment();
+      await patchComment();
       const getAwait = await getComment('mentoring', `${id}`);
 
       setAnswerList(getAwait.data.data.mentoringComments);
@@ -76,7 +61,7 @@ const MentoringAnswerList = ({
   const deleteAsync = async () => {
     axios.defaults.withCredentials = true;
     try {
-      const deleteAwait = await deleteComment(`${mentoringCommentId}`, 'mentoring');
+      await deleteComment(`${mentoringCommentId}`, 'mentoring');
       const getAwait = await getComment('mentoring', `${id}`);
 
       setAnswerList(getAwait.data.data.mentoringComments);
