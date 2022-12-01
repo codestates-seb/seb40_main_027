@@ -19,6 +19,5 @@ export const deleteComment = (id: string, url: string) => {
     .then(() => {
       alert('삭제하시겠습니까?');
     })
-
-    .catch(() => console.log('err'));
+    .catch((err) => console.log(err));
 };
