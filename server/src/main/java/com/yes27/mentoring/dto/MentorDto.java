@@ -49,7 +49,7 @@ public class MentorDto {
         private Long mentoringId;
         private String mentoringTitle;
         private String mentoringContent;
-        private int view;
+        private Integer view;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
         private int totalVotes;
@@ -78,7 +78,7 @@ public class MentorDto {
         private Long mentoringId;
         private String mentoringTitle;
         private String mentoringContent;
-        private int view;
+        private Integer view;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
         private String tagName;
@@ -97,7 +97,7 @@ public class MentorDto {
         private Long mentoringId;
         private String mentoringTitle;
         private String mentoringContent;
-        private int view;
+        private Integer view;
         private int totalVotes;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
