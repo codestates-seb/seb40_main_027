@@ -106,21 +106,12 @@ public class MemberController {
 //        return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponse(member)), HttpStatus.OK);
 //    }
 
-    @GetMapping("/mypage/uerInfo")
+    @GetMapping("/mypage/userInfo")
     public ResponseEntity getMember() {
         Member member = memberService.getLoginMember();
 
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponse2(member)), HttpStatus.OK);
     }
-
-
-//    @GetMapping("/mypage/bootcampLike")
-//    public ResponseEntity getLikeSchedule(HttpServletRequest request) {
-//        Member member = findMemberByHeader(request);
-//
-//
-//        return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponse(member)), HttpStatus.OK);
-//    }
 
     @GetMapping("/mypage/writing")
     public ResponseEntity getWriting(HttpServletRequest request) {

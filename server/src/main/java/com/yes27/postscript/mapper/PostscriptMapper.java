@@ -130,7 +130,7 @@ public interface PostscriptMapper {
 
         postscriptResponse.setVote(postscript.getTotalVotes());
 
-        postscriptResponse.setPostscriptStatus(postscript.getPostscriptStatus());
+//        postscriptResponse.setPostscriptStatus(postscript.getPostscriptStatus());
 
         // Member 관계 추가
         Member member = postscript.getMember();//질문 작성자 정보 추가

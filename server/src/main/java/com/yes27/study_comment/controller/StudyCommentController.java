@@ -57,7 +57,8 @@ public class StudyCommentController {
 
         StudyComment createdComment = studyCommentService.createComment(studyComment);
 
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.commentToCommentResponse(createdComment)), HttpStatus.CREATED);
+//        return new ResponseEntity<>(new SingleResponseDto<>(mapper.commentToCommentResponse(createdComment)), HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     // TODO studyId 제거
@@ -77,7 +78,8 @@ public class StudyCommentController {
 
         StudyComment updatedStudyComment = studyCommentService.updateComment(findStudyComment);
 
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.commentToCommentResponse(updatedStudyComment)), HttpStatus.OK);
+//        return new ResponseEntity<>(new SingleResponseDto<>(mapper.commentToCommentResponse(updatedStudyComment)), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // TODO studyId 제거

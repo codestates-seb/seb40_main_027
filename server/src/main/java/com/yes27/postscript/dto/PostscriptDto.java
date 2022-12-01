@@ -70,7 +70,7 @@ public class PostscriptDto {
         private Long postscriptId;
         private String postscriptTitle;
         private String postscriptContent;
-        private Postscript.PostscriptStatus postscriptStatus;
+//        private Postscript.PostscriptStatus postscriptStatus;
         private Integer vote; // 좋아요 -> 투표
         private Integer View;
         private LocalDateTime createdAt;
