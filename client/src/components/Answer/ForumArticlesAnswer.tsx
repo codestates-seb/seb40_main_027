@@ -45,7 +45,7 @@ const ForumArticlesAnswer = () => {
       data: { postscriptComment: answerContents },
       headers: {
         Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTcwNDAyMSwiZXhwIjoxNjY5NzkwNDIxfQ.ipJnckImRyPfR9kXlDI3Kajkp-M3RZzFUHBDpdxBK1Teu0kV8wjyHxh6WET_fckelUSByRdh7QDTZOnqA8FFXg',
+          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTc5MzU0MSwiZXhwIjoxNjY5ODc5OTQxfQ.lJXMhZA5QPmHfSANCVdXNbHSOEQJwG-W5YXWG5hJrXOIR4fKIGE-SzAon6y5K8RZEtbhzCQJl1ahkvCZPtV9AQ',
       },
     });
   };
@@ -55,7 +55,7 @@ const ForumArticlesAnswer = () => {
     try {
       const postAwait = await postComment();
       const getAwait = await getComment('postscript', `${id}`);
-      setAnswerList(getAwait.data.postComments);
+      setAnswerList(getAwait.data.postscriptComments);
     } catch {
       console.log('err');
     }
@@ -73,7 +73,7 @@ const ForumArticlesAnswer = () => {
       url: `/postscript/${id}`,
     }).then((res) => {
       const { data } = res;
-      setAnswerList(data.postComments);
+      setAnswerList(data.postscriptComments);
     });
   }, []);
 
