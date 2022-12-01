@@ -28,7 +28,7 @@ const ForumArticles = () => {
 
   return (
     <S.Container>
-      <ForumContentHeader forumType={forumType} />
+      <ForumContentHeader url={`/${forumType}?page=${page}&size=10`} setPosts={setPosts} />
 
       <main>
         {posts.map((post: any) => (
