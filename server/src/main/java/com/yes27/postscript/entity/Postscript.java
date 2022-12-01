@@ -38,6 +38,9 @@ public class Postscript extends BaseEntity {
     @Column(length = 5, nullable = false)
     private Integer totalVotes = 0;
 
+    @Column(nullable = false)
+    private int vote; // 좋아요 유무
+
     // 조회수
     @Column(length = 5, nullable = false)
     private Integer view = 0;

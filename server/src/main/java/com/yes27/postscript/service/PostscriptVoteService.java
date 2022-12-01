@@ -1,11 +1,17 @@
 package com.yes27.postscript.service;
 
+import com.yes27.exception.BusinessLogicException;
+import com.yes27.exception.ExceptionCode;
 import com.yes27.member.entity.Member;
 import com.yes27.member.service.MemberService;
+import com.yes27.postscript.dto.PostscriptVoteResponseDto;
+import com.yes27.postscript.entity.Postscript;
 import com.yes27.postscript.entity.PostscriptVote;
 import com.yes27.postscript.repository.PostscriptVoteRepository;
 import com.yes27.postscript.repository.PostscriptRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class PostscriptVoteService {
@@ -14,43 +20,83 @@ public class PostscriptVoteService {
     private PostscriptVoteRepository postscriptVoteRepository;
 
     private MemberService memberService;
+    private PostscriptRepository postscriptRepository;
 
     public PostscriptVoteService(PostscriptService postscriptService,
                                  PostscriptVoteRepository postscriptVoteRepository,
-                                 MemberService memberService) {
+                                 MemberService memberService,
+                                 PostscriptRepository postscriptRepository) {
 
         this.postscriptService = postscriptService;
         this.postscriptVoteRepository = postscriptVoteRepository;
         this.memberService = memberService;
+        this.postscriptRepository = postscriptRepository;
     }
 
-    public PostscriptVote votePostscript(long postscriptId, int vote) {
+    public PostscriptVote votePostscript(Postscript postscript,Member member, int vote, long postscriptId) {
 
-        Member member = memberService.getLoginMember();
+        PostscriptVote findVote = findVote(postscript, member);
+        Postscript postscript1 = findVerifiedPostscript(postscriptId);
+        PostscriptVoteResponseDto voteResponseDto = new PostscriptVoteResponseDto();
+        voteResponseDto.setPostscriptId(postscriptId);
 
-        PostscriptVote postscriptVote = postscriptVoteRepository.findByPostscriptAndMember(
-                postscriptService.findVerifiedPostscript(postscriptId), member);
 
+        int voteResult = 0;
 
-        if (postscriptVote == null) {
-            PostscriptVote newVote = new PostscriptVote();
-            newVote.addPostscript(postscriptService.findVerifiedPostscript(postscriptId));
-            newVote.setVote(vote);
-            newVote.addMember(member);
-            postscriptVoteRepository.save(newVote);
-            postscriptService.refreshVotes(postscriptId);
-            return newVote;
-
-        } else {
-            postscriptVote.setVote(vote);
-            postscriptVoteRepository.save(postscriptVote);
-            postscriptService.refreshVotes(postscriptId);
-            return postscriptVote;
+        if(vote ==1){
+            findVote.setVote(1);
+            voteResult = getTotalVotes(postscript)+1;
+        } else if (vote == 0) {
+            findVote.setVote(0);
+            if(getTotalVotes(postscript)>0){
+                voteResult = getTotalVotes(postscript)-1;
+            }
         }
+
+        findVote.setTotalVotes(voteResult);
+        findVote.setPostscript(postscript);
+        findVote.setMember(member);
+        postscriptService.updateTotalVotes(postscript, voteResult);
+        return postscriptVoteRepository.save(findVote);
+
+//        Member member = memberService.getLoginMember();
+//
+//        PostscriptVote postscriptVote = postscriptVoteRepository.findByPostscriptAndMember(
+//                postscriptService.findVerifiedPostscript(postscriptId), member);
+//
+//
+//        if (postscriptVote == null) {
+//            PostscriptVote newVote = new PostscriptVote();
+//            newVote.addPostscript(postscriptService.findVerifiedPostscript(postscriptId));
+//            newVote.setVote(vote);
+//            newVote.addMember(member);
+//            postscriptVoteRepository.save(newVote);
+//            postscriptService.refreshVotes(postscriptId);
+//            return newVote;
+//
+//        } else {
+//            postscriptVote.setVote(vote);
+//            postscriptVoteRepository.save(postscriptVote);
+//            postscriptService.refreshVotes(postscriptId);
+//            return postscriptVote;
+//        }
     }
 
-    public int getVotes(long postscriptId) {
-        int votes = postscriptVoteRepository.findVoteValue(postscriptId);
-        return votes;
+    public int getTotalVotes(Postscript postscriptId) {
+        int totalVotes = postscriptVoteRepository.findTotalVoteValue(postscriptId);
+        return totalVotes;
+    }
+
+    // 멤버가 투표했는지 여부
+    public PostscriptVote findVote(Postscript postscript, Member member){
+        Optional<PostscriptVote> optionalPostscriptVote = postscriptVoteRepository.findByPostscriptAndMember(postscript, member);
+        PostscriptVote findVote = optionalPostscriptVote.orElseGet(()->new PostscriptVote());
+        return findVote;
+    }
+
+    public Postscript findVerifiedPostscript(Long postscriptId){
+        Optional<Postscript> optionalPostscript=postscriptRepository.findById(postscriptId);
+        Postscript findPostscript = optionalPostscript.orElseThrow(()->new BusinessLogicException(ExceptionCode.POSTSCRIPT_NOT_FOUND));
+        return findPostscript;
     }
 }

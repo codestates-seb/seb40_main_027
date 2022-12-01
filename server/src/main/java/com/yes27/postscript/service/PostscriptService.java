@@ -1,9 +1,13 @@
 package com.yes27.postscript.service;
 
 import com.yes27.member.entity.Member;
+import com.yes27.mentoring.entity.Mentor;
+import com.yes27.mentoringLike.entity.MentoringVote;
 import com.yes27.postscripcomment.entity.PostscriptComment;
+import com.yes27.postscript.entity.PostscriptVote;
 import com.yes27.postscript.entity.Tag;
 //import com.yes27.postscript.repository.TagRepository;
+import com.yes27.postscript.repository.PostscriptVoteRepository;
 import org.springframework.context.annotation.Lazy;
 import com.yes27.exception.BusinessLogicException;
 import com.yes27.exception.ExceptionCode;
@@ -26,14 +30,17 @@ public class PostscriptService {
     private final PostscriptRepository postscriptRepository;
     private final PostscriptVoteService postscriptVoteService;
 //    private final TagRepository tagRepository;
+    private final PostscriptVoteRepository postscriptVoteRepository;
 
 
     public PostscriptService(PostscriptRepository postscriptRepository,
-                             @Lazy PostscriptVoteService postscriptVoteService
+                             @Lazy PostscriptVoteService postscriptVoteService,
+                             PostscriptVoteRepository postscriptVoteRepository
 //                             ,TagRepository tagRepository
     ) {
         this.postscriptRepository = postscriptRepository;
         this.postscriptVoteService = postscriptVoteService;
+        this.postscriptVoteRepository=postscriptVoteRepository;
 //        this.tagRepository = tagRepository;
     }
 
@@ -108,12 +115,12 @@ public class PostscriptService {
         return updatedPostscript;
     }
 
-    // 좋아요 수 새로 갱신
-    public void refreshVotes(long postscriptId) {
-        Postscript postscript = findVerifiedPostscript(postscriptId);
-        postscript.setTotalVotes(postscriptVoteService.getVotes(postscriptId));
-        postscriptRepository.save(postscript);
-    }
+//    // 좋아요 수 새로 갱신
+//    public void refreshVotes(long postscriptId) {
+//        Postscript postscript = findVerifiedPostscript(postscriptId);
+//        postscript.setTotalVotes(postscriptVoteService.getTotalVotes(postscriptId));
+//        postscriptRepository.save(postscript);
+//    }
 
     public Member findPostscriptWriter(long postscriptId) {
         // 질문 작성자만 질문을 수정, 삭제할 수 있도록 질문의 작성자를 찾는 메서드
@@ -128,7 +135,6 @@ public class PostscriptService {
     }
 
 
-    @Transactional(readOnly = true)
     public Postscript findVerifiedPostscript(long postscriptId) { // 유효한 질문인지 확인
         Optional<Postscript> optionalQuestion = postscriptRepository.findById(postscriptId);
         Postscript findPostscript = optionalQuestion.orElseThrow(
@@ -139,4 +145,23 @@ public class PostscriptService {
         } // 해당 글 없거나 삭제된 경우 ExceptionCode 발생
         return findPostscript;
     }
+
+    public Postscript updateTotalVotes(Postscript postscript, int voteTotal){
+        Postscript findPostscript = findVerifiedPostscript(postscript.getPostscriptId());
+        findPostscript.setTotalVotes(voteTotal);
+        return postscriptRepository.save(findPostscript);
+    }
+
+    public Postscript isVote(Long postscriptId, Member member){
+        Postscript findPostscript = findVerifiedPostscript(postscriptId);
+        Optional<PostscriptVote> findVote = postscriptVoteRepository.findByPostscriptAndMember(findPostscript,member);
+        if(findVote.isPresent()){
+            findPostscript.setVote(findVote.get().getVote());
+        }else{
+            findPostscript.setVote(0);
+        }
+        return postscriptRepository.save(findPostscript);
+    }
+
+
 }
