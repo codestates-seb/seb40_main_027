@@ -4,7 +4,7 @@ import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
 import { useState, useMemo } from 'react';
 import { useParams } from 'react-router';
-import { getComment } from '../../utils/API/getApi';
+import { getComment, deleteComment } from '../../utils/api/getApi';
 import { useSetRecoilState } from 'recoil';
 import { studyListData } from '../../atoms/index';
 import * as S from './AnswerListView.style';
@@ -21,8 +21,8 @@ interface studyAnswerListProps {
 const StudyAnswerList = ({ createdAt, studyCommentId, updatedAt, studyComment, nickname }: studyAnswerListProps) => {
   const [isPatch, setIsPatch] = useState<boolean>(false);
   const [commentValue, setCommentValue] = useState('');
-  // const [answerList, setAnswerList] = useRecoilState(studyListData);
   const setAnswerList = useSetRecoilState(studyListData);
+  const access = localStorage.getItem('access');
   const { id } = useParams();
 
   const modules = useMemo(
@@ -50,23 +50,9 @@ const StudyAnswerList = ({ createdAt, studyCommentId, updatedAt, studyComment, n
       url: `/study/comment/${studyCommentId}`,
       data: { studyComment: commentValue },
       headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTczNzAwNSwiZXhwIjoxNjY5ODIzNDA1fQ.AykpiUvJlzmcTWT7x2iMKPbPo0y9cCIVzqhiMECTGFKAMKg171ropdOZjpB_lLbV7m6AkQBlYPbIahmpmPGcdQ',
+        Authorization: access,
       },
     });
-  };
-
-  const deleteComment = () => {
-    return axios({
-      method: 'delete',
-      url: `/study/comment/${studyCommentId}`,
-      headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTczNzAwNSwiZXhwIjoxNjY5ODIzNDA1fQ.AykpiUvJlzmcTWT7x2iMKPbPo0y9cCIVzqhiMECTGFKAMKg171ropdOZjpB_lLbV7m6AkQBlYPbIahmpmPGcdQ',
-      },
-    })
-      .then(() => {})
-      .catch(() => console.log('err'));
   };
 
   const patchAsync = async () => {
@@ -84,7 +70,7 @@ const StudyAnswerList = ({ createdAt, studyCommentId, updatedAt, studyComment, n
   const deleteAsync = async () => {
     axios.defaults.withCredentials = true;
     try {
-      const deleteAwait = await deleteComment();
+      const deleteAwait = await deleteComment(`${studyCommentId}`, 'study');
       const getAwait = await getComment('study', `${id}`);
 
       setAnswerList(getAwait.data.data.studyComments);
@@ -95,7 +81,6 @@ const StudyAnswerList = ({ createdAt, studyCommentId, updatedAt, studyComment, n
 
   const PatchHanlder = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    //수정에서 403오류 발생
     patchAsync();
     setIsPatch(!isPatch);
     setCommentValue('');
