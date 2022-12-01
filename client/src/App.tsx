@@ -30,7 +30,7 @@ function App() {
         <Route path="/users/mypage" element={<MyPage />} />
         <Route path="/test" element={<Test />} />
         <Route path="/bootcamp" element={<BootCamp />} />
-        <Route path="/bootcamp/1" element={<BootCampDetail />} />
+        <Route path="/bootcamp/:id" element={<BootCampDetail />} />
         <Route path="/postscript" element={<Forum />} />
         <Route path="/postscript/:id" element={<Forum />} />
         <Route path="/postscript/write" element={<Forum />} />
