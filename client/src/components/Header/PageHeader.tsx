@@ -1,11 +1,11 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import logo from '../../assets/image/logo.png';
 import Nickname from './Nickname';
 import { Icon } from '@iconify/react';
 import { RegisterButton, LoginButton } from '../Button/index';
-import { useRecoilState } from 'recoil';
-import { sideBarFloading } from '../../atoms/index';
+
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { logUser, sideBarFloading } from '../../atoms/index';
 import { Link } from 'react-router-dom';
 
 const PageMenu = styled.header`
@@ -73,13 +73,14 @@ const LoginSignHeaderButton = styled.span`
 `;
 
 const PageHeader = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const { isLog } = useRecoilValue(logUser);
   const [isCollapse, setIsCollapse] = useRecoilState(sideBarFloading);
 
-  const clickLogin = () => {
-    //임의로 오류안나게하기 위해 넣은 함수
-    setIsLogin(!isLogin);
-  };
+  /** 일단 윤경님 코드 살려놨습니다. 나중에 로그아웃 구현하실 때 필요없으시면 삭제해주시면 됩니다.  **/
+  // const clickLogin = () => {
+  //   //임의로 오류안나게하기 위해 넣은 함수
+  //   setIsLogin(!isLogin);
+  // };
 
   const CollapseHandler = () => {
     //상태변하게 하기위하여
@@ -92,22 +93,28 @@ const PageHeader = () => {
         <span className="hamburger">
           <Icon icon="mdi:menu" onClick={CollapseHandler} />
         </span>
-        <img src={logo} alt="logo" />
+        <HeaderLink to={'/'}>
+          <img src={logo} alt="logo" />
+        </HeaderLink>
         <HeaderLink to={'/test'}>적성검사</HeaderLink>
         <HeaderLink to={'/'}>로드맵</HeaderLink>
         <HeaderLink to={'/bootcamp'}>학원일정</HeaderLink>
         <HeaderLink to={'/postscript'}>수료후기</HeaderLink>
         <HeaderLink to={'/study'}>스터디모집</HeaderLink>
         <HeaderLink to={'/mentoring'}>멘토링</HeaderLink>
-        {isLogin ? (
-          <LoginSignHeaderButton>
-            <LoginButton onClick={clickLogin} />
-            <RegisterButton />
-          </LoginSignHeaderButton>
-        ) : (
+        {isLog ? (
           <span>
             <Nickname />
           </span>
+        ) : (
+          <LoginSignHeaderButton>
+            <Link to="/users/login">
+              <LoginButton />
+            </Link>
+            <Link to="/users/signup">
+              <RegisterButton />
+            </Link>
+          </LoginSignHeaderButton>
         )}
       </div>
     </PageMenu>

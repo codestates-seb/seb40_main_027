@@ -1,4 +1,7 @@
 import { atom } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
+
+const { persistAtom } = recoilPersist();
 import { IanswerList } from '../components/Answer/ForumArticlesAnswer';
 import { StudyanswerList } from '../components/Answer/StudyAnswer';
 import { MentoringanswerList } from '../components/Answer/MentoringAnswer';
@@ -18,9 +21,14 @@ export const noContent = atom({
   default: 0,
 });
 
-export const isLogin = atom({
-  key: 'isLogin',
-  default: false,
+export const logUser = atom({
+  key: 'logUser',
+  default: {
+    isLog: false,
+    memberRole: '',
+    nickname: '',
+  },
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const answerListData = atom<IanswerList>({

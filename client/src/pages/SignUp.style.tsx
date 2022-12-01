@@ -4,7 +4,7 @@ import theme from '../styles/theme';
 export const Wrap = styled.div`
   width: 100vw;
   max-width: 1920px;
-  height: calc(100vh - 16px);
+  height: 100vh;
   max-height: 1080px;
   display: flex;
   flex-direction: column;
@@ -28,13 +28,22 @@ export const FormWrap = styled.div`
   height: 60%;
   font-size: 30px;
   form {
+    box-sizing: content-box;
     border: 1px solid var(--greenMain);
     margin-top: 2%;
     width: 100%;
     height: 100%;
   }
   @media ${theme.mobile} {
-    height: 45%;
+    height: 60%;
+    width: 69%;
+    form {
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: baseline;
+      align-items: center;
+      flex-direction: column;
+    }
   }
 `;
 
@@ -77,14 +86,18 @@ export const TypeSection = styled.div`
       input {
         width: 100%;
         height: 40%;
-        margin: 3% 0 10% 0;
+        margin: 3% 0 6% 0;
         font-size: 1.3rem;
       }
     }
   }
   @media ${theme.mobile} {
+    flex-direction: column;
     input {
       font-size: 1.3vh !important;
+    }
+    label {
+      box-sizing: content-box;
     }
   }
 `;
@@ -99,11 +112,26 @@ export const CustomH2 = styled.h2`
   }
 `;
 
+export const ErrMsg = styled.p`
+  color: var(--redBootDetailHeart);
+  width: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8vw;
+  word-wrap: break-word;
+  @media ${theme.mobile} {
+    width: 230px;
+    margin-left: 0.6rem;
+    /* margin-top: -0.5rem; */
+    margin-bottom: 0.5rem;
+  }
+`;
+
 export const AgreeForm = styled.div`
   border: 1px solid var(--greenMain);
-  width: 90% !important;
+  width: 90%;
   height: 90% !important;
-  margin-top: 0 !important;
   margin-right: 4%;
   display: none;
   img {
@@ -122,7 +150,20 @@ export const AgreeForm = styled.div`
     margin-bottom: 1rem;
   }
   @media ${theme.mobile} {
-    display: none !important;
+    border: none;
+    margin: 0 4% 0 0;
+    img {
+      display: none;
+    }
+    h2 {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    div {
+      font-size: 0.5rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0;
+    }
   }
 `;
 export const SubmitSection = styled.div`
