@@ -67,10 +67,10 @@ const SelectButton = styled.button`
   }
 `;
 const LoadMap = () => {
-  const [isSelect, setIsSelect] = useState<number>(0);
+  const [linkSelect, setLinkSelect] = useState<number>(0);
 
   const LoadMapBtn = (id: number) => {
-    setIsSelect(id);
+    setLinkSelect(id);
   };
   const Loadmapmenu = [
     { id: 1, text: 'frontend' },
@@ -90,9 +90,11 @@ const LoadMap = () => {
           <SelectButton
             key={el.id}
             onClick={() => LoadMapBtn(el.id)}
-            className={isSelect === el.id ? 'select-btn' : 'nonselect-btn'}
+            className={linkSelect === el.id ? 'select-btn' : 'nonselect-btn'}
           >
-            <a href={`https://roadmap.sh/${el.text}`}>{el.text}</a>
+            <a href={`https://roadmap.sh/${el.text}`} target="_blank" rel="noreferrer">
+              {el.text}
+            </a>
           </SelectButton>
         ))}
       </ButtonContent>
