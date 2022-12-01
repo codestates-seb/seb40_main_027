@@ -7,8 +7,7 @@ export const PostLinkMyPage = styled(Link)`
 `;
 
 export const PostMyPageContent = styled.div`
-  height: 12%;
-  padding: calc(20 / 16 * 1rem);
+  padding: calc(20 / 19 * 1rem) 0 0 calc(20 / 19 * 1rem);
   width: 50vw;
   border-bottom: 1px solid var(--grayContentsBorder);
   @media screen and (max-width: 414px) {
@@ -49,8 +48,9 @@ export const UserLikeIconList = styled.span`
 
   & > * {
     margin-left: 0.5rem;
+    margin-left: 0.3rem;
   }
   @media screen and (max-width: 414px) {
-    width: 35vw;
+    width: 55vw;
   }
 `;
