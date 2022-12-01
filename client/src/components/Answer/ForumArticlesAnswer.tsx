@@ -3,7 +3,7 @@ import axios from 'axios';
 import AnswerListView from './AnswerListView';
 import { useParams } from 'react-router';
 import 'react-quill/dist/quill.snow.css';
-import { getComment } from '../../utils/api/getApi';
+import { getComment } from '../../utils/api/answerAPI';
 import { useRecoilState } from 'recoil';
 import { answerListData } from '../../atoms/index';
 import * as S from './ForumAnswer.style';
@@ -16,7 +16,7 @@ interface answerListProps {
   nickname: string;
 }
 
-export interface IanswerList extends Array<answerListProps> {}
+export interface iAnswerList extends Array<answerListProps> {}
 
 const ForumArticlesAnswer = () => {
   const { id } = useParams();
@@ -36,13 +36,16 @@ const ForumArticlesAnswer = () => {
   };
 
   const AsyncFunction = async () => {
-    axios.defaults.withCredentials = true;
     try {
       await postComment();
       const getAwait = await getComment('postscript', `${id}`);
       setAnswerList(getAwait.data.data.postscriptComments);
-    } catch {
-      console.log('err');
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        console.log(error);
+      }
     }
   };
 
@@ -52,7 +55,6 @@ const ForumArticlesAnswer = () => {
   };
 
   useEffect(() => {
-    axios.defaults.withCredentials = true;
     axios({
       method: 'get',
       url: `/postscript/${id}`,
@@ -63,7 +65,7 @@ const ForumArticlesAnswer = () => {
   }, []);
 
   return (
-    <>
+    <S.ContainerViewAnswer>
       <S.ViewAnswer>
         {answerList?.map((list, idx) => (
           <AnswerListView
@@ -77,12 +79,12 @@ const ForumArticlesAnswer = () => {
         ))}
       </S.ViewAnswer>
       <S.QuillContent>
-        <S.QuillArea theme="snow" value={answerContents} onChange={(e) => setAnswerContents(e)} />
+        <S.QuillArea theme="snow" value={answerContents} onChange={setAnswerContents} />
         <div className="btn-area">
-          <S.SubmitButtton onClick={SummitAnswerBtn}>등록</S.SubmitButtton>
+          <S.SubmitButton onClick={SummitAnswerBtn}>등록</S.SubmitButton>
         </div>
       </S.QuillContent>
-    </>
+    </S.ContainerViewAnswer>
   );
 };
 
