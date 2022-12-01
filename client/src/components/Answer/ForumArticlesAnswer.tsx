@@ -3,14 +3,14 @@ import axios from 'axios';
 import AnswerListView from './AnswerListView';
 import { useParams } from 'react-router';
 import 'react-quill/dist/quill.snow.css';
-import { getComment } from '../../utils/API/getApi';
+import { getComment } from '../../utils/api/getApi';
 import { useRecoilState } from 'recoil';
 import { answerListData } from '../../atoms/index';
 import * as S from './ForumAnswer.style';
 
 interface answerListProps {
   createdAt: string;
-  postCommentId: number;
+  postscriptCommentId: number;
   postscriptComment: string;
   updatedAt: string;
   nickname: string;
@@ -22,7 +22,7 @@ const ForumArticlesAnswer = () => {
   const { id } = useParams();
   const [answerContents, setAnswerContents] = useState('');
   const [answerList, setAnswerList] = useRecoilState(answerListData);
-
+  const access = localStorage.getItem('access');
   const modules = useMemo(
     () => ({
       toolbar: {
@@ -44,8 +44,7 @@ const ForumArticlesAnswer = () => {
       url: `/postscript/${id}/comment`,
       data: { postscriptComment: answerContents },
       headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImVtYWlsIjoiYWJjZEBnbWFpbC5jb20iLCJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsImlhdCI6MTY2OTc5MzU0MSwiZXhwIjoxNjY5ODc5OTQxfQ.lJXMhZA5QPmHfSANCVdXNbHSOEQJwG-W5YXWG5hJrXOIR4fKIGE-SzAon6y5K8RZEtbhzCQJl1ahkvCZPtV9AQ',
+        Authorization: access,
       },
     });
   };
@@ -55,7 +54,7 @@ const ForumArticlesAnswer = () => {
     try {
       const postAwait = await postComment();
       const getAwait = await getComment('postscript', `${id}`);
-      setAnswerList(getAwait.data.postscriptComments);
+      setAnswerList(getAwait.data.data.postscriptComments);
     } catch {
       console.log('err');
     }
@@ -73,7 +72,7 @@ const ForumArticlesAnswer = () => {
       url: `/postscript/${id}`,
     }).then((res) => {
       const { data } = res;
-      setAnswerList(data.postscriptComments);
+      setAnswerList(data.data.postscriptComments);
     });
   }, []);
 
@@ -84,7 +83,7 @@ const ForumArticlesAnswer = () => {
           <AnswerListView
             key={idx}
             createdAt={list.createdAt}
-            postCommentId={list.postCommentId}
+            postscriptCommentId={list.postscriptCommentId}
             postscriptComment={list.postscriptComment}
             updatedAt={list.updatedAt}
             nickname={list.nickname}
