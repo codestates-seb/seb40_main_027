@@ -44,22 +44,22 @@ public class CommentController {
     }
 
     @PatchMapping("comment/{commentId}")
-    public ResponseEntity updateComment(@PathVariable("commentId") @Positive long commentId,
+    public ResponseEntity updateComment(@PathVariable("commentId") @Positive long mentoringCommentId,
                                     @Valid @RequestBody CommentDto.Patch commentPatchDto,
                                         HttpServletRequest request ){
         Member findMember = memberService.findMember(request);
         Comment comment = mapper.commentPatchDtoToComment(commentPatchDto);
-        comment.setMentoringCommentId(commentId);
+        comment.setMentoringCommentId(mentoringCommentId);
        commentService.update(comment,findMember);
 
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @DeleteMapping("comment/{commentId}")
-    public ResponseEntity deleteComment(@PathVariable("commentId") @Positive long commentId,
+    public ResponseEntity deleteComment(@PathVariable("commentId") @Positive long mentoringCommentId,
                                         HttpServletRequest request){
         Member findMember = memberService.findMember(request);
-        commentService.delete(commentId, findMember);
+        commentService.delete(mentoringCommentId, findMember);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }

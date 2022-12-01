@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class Comment extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long mentoringCommentId;
 
     @Column(nullable = false, columnDefinition = "Text")
