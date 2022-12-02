@@ -57,13 +57,9 @@ export const UserProfileUpdateBody = styled.div`
 `;
 
 export const PictureProfile = styled.span`
-  height: 10vh;
-  width: 70%;
   display: flex;
-  border: 1px solid var(--blackTextNormal);
-  margin: 0% 0% 1% 15%;
+  margin: 0% 8% 1% 15%;
   @media screen and (max-width: 414px) {
-    height: 100%;
     margin: 0 1rem 0 0;
   }
 `;
