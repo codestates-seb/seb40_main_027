@@ -27,12 +27,12 @@ export const TableSchedule = styled.table`
     tr:nth-child(even) {
       background: var(--grayBoardAreaBorder);
     }
-    td:nth-child(1) {
-      border: none;
-      text-align: center;
-      padding: 0%;
+
+    td:last-child {
       display: flex;
       justify-content: center;
+      align-items: center;
+      border: none;
     }
   }
 
