@@ -2,9 +2,9 @@ import Banner from '../components/Banner';
 import { FilterButton } from '../components/Button';
 import SearchBar from '../components/SearchBar/SearchBar';
 import * as S from './BootCamp.style';
-import { Table, TestTable } from '../components/Table/Table';
+import { MobileTable, Table } from '../components/Table/Table';
 import Loading from '../components/Loading/Loading';
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import axios from 'axios';
 
@@ -16,18 +16,12 @@ const BootCamp = () => {
   const [ref, inView] = useInView({
     threshold: 0,
   });
-  // useEffect(() => {
-  //   axios.get(`/bootcamp?page=${page}&size=10&sort=finalRegisterDate`).then((res) => {
-  //     console.log('then render');
-  //     setItems(items.concat(res.data.data));
-  //   });
-  // }, []);
 
   const getItems = useCallback(async (page: any) => {
     setLoading(true);
     await axios.get(`/bootcamp?page=${page}&size=10&sort=finalRegisterDate`).then((res) => {
       console.log('then render');
-      setItems(items.concat(res.data.data));
+      setItems((items) => items.concat(res.data.data));
     });
     setLoading(false);
   }, []);
@@ -40,6 +34,8 @@ const BootCamp = () => {
     if (inView && !loading) {
       if (page < 19) {
         setPage(page + 1);
+      } else if (page === 19) {
+        setLoading(false);
       }
     }
   }, [inView, loading]);
@@ -57,8 +53,9 @@ const BootCamp = () => {
       </S.MiddleDiv>
       <div>
         <Table data={items} />
+        <MobileTable data={items} />
       </div>
-      <div ref={ref}>{inView ? <Loading /> : null}</div>
+      <S.RefDiv ref={ref}>{inView && loading ? <Loading /> : null}</S.RefDiv>
     </S.PageWrap>
   );
 };

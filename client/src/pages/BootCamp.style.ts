@@ -19,7 +19,7 @@ export const MiddleDiv = styled.div`
   width: 60vw;
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 3%;
+  margin-bottom: 1%;
   div {
     display: flex;
     justify-content: flex-end;
@@ -28,4 +28,8 @@ export const MiddleDiv = styled.div`
   @media ${theme.mobile} {
     display: none;
   }
+`;
+
+export const RefDiv = styled.div`
+  height: 20px;
 `;
