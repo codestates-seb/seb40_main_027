@@ -15,7 +15,7 @@ const BootCamp = () => {
       <S.MiddleSection>
         <div>
           <SearchBar />
-          <FilterButton url="url" setPosts={setPosts} />
+          <FilterButton pageType="bootcamp" url={`/bootcamp?page=1&size=10`} setPosts={setPosts} />
         </div>
       </S.MiddleSection>
       <section>
