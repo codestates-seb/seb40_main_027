@@ -5,7 +5,7 @@ const { persistAtom } = recoilPersist();
 import { IAnswerList } from '../components/Answer/ForumArticlesAnswer';
 import { StudyAnswerList } from '../components/Answer/StudyAnswer';
 import { MentoringAnswerList } from '../components/Answer/MentoringAnswer';
-
+import { BootDataList } from '../components/MyPageContent/MyPageTable';
 export const sideBarFloading = atom({
   key: 'sideBarFloading',
   default: false,
@@ -46,7 +46,7 @@ export const mentoringListData = atom<MentoringAnswerList>({
   default: [],
 });
 
-export const bootListMyPage = atom({
+export const bootListMyPage = atom<BootDataList>({
   key: 'bootListMyPage',
   default: [],
 });
