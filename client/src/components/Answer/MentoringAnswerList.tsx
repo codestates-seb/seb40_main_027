@@ -76,7 +76,7 @@ const MentoringAnswerList = ({
     }
   };
 
-  const PatchHanlder = (e: React.MouseEvent<HTMLElement>) => {
+  const patchHanlder = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     patchAsync();
     setIsPatch(!isPatch);
@@ -98,7 +98,7 @@ const MentoringAnswerList = ({
             onChange={setCommentValue}
             placeholder={`${mentoringComment}`}
           />
-          <QuillContainer patchHandler={PatchHanlder} editHandler={editHandler} />
+          <QuillContainer patchHandler={patchHanlder} editHandler={editHandler} />
         </div>
       ) : (
         <div>
