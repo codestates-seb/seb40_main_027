@@ -11,6 +11,7 @@ export const BootLikeButton = () => {
 
   const handleCancel = (event: any) => {
     event.stopPropagation();
+    aysncFunc();
   };
 
   const getBtn = () => {
@@ -39,7 +40,6 @@ export const BootLikeButton = () => {
 
   const likeButtonHandler = (e: any, idx: number) => {
     aysncFunc();
-    handleCancel(e);
   };
 
   return (
