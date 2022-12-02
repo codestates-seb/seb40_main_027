@@ -53,7 +53,6 @@ export interface propsAnswerList extends Array<PropsAnswerType> {}
 const MyPageList = () => {
   const [totalPost, setTotalPost] = useState(0);
   const [currentPosts, setCurrentPosts] = useState<PropsAnswerType[]>();
-  const [emailPost, setEmailPost] = useState('');
   const [page, setPage] = useState(1);
   const [postPerPage] = useState(10);
   const indexOfLastPost = page * postPerPage;
@@ -76,14 +75,13 @@ const MyPageList = () => {
       const postS = data.data.studies;
       const postM = data.data.mentor;
       // const Maxarr = [...data.data.studies, ...sWritingList, ...mWritingList];
-      setEmailPost(data.data.nickname);
-      const Maxarr: propsAnswerList = [...postP, ...postS, ...postM].sort(
+      const maxArr: propsAnswerList = [...postP, ...postS, ...postM].sort(
         (a, b) => +new Date(b.createdAt) - +new Date(a.createdAt)
       );
 
       setTotalPost(postP.length + postM.length + postS.length);
-      const MaxPage = Maxarr.slice(indexOfFirstPost, indexOfLastPost);
-      setCurrentPosts(MaxPage);
+      const maxPage = maxArr.slice(indexOfFirstPost, indexOfLastPost);
+      setCurrentPosts(maxPage);
     });
   }, [page, indexOfFirstPost, indexOfLastPost]);
 
