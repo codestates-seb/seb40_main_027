@@ -1,9 +1,7 @@
-import { Icon } from '@iconify/react';
 import * as S from './MyPageTable.style';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useCallback, useEffect, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
+import { useEffect, useState } from 'react';
 
 interface BootData {
   id: number;
