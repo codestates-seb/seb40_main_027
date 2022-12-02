@@ -70,7 +70,7 @@ const StudyAnswerList = ({ createdAt, studyCommentId, updatedAt, studyComment, n
     }
   };
 
-  const PatchHanlder = (e: React.MouseEvent<HTMLElement>) => {
+  const patchHanlder = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     patchAsync();
     setIsPatch(!isPatch);
@@ -86,7 +86,7 @@ const StudyAnswerList = ({ createdAt, studyCommentId, updatedAt, studyComment, n
       {isPatch ? (
         <div>
           <ReactQuill theme="snow" value={commentValue} onChange={setCommentValue} placeholder={`${studyComment}`} />
-          <QuillContainer patchHandler={PatchHanlder} editHandler={editHandler} />
+          <QuillContainer patchHandler={patchHanlder} editHandler={editHandler} />
         </div>
       ) : (
         <div>
