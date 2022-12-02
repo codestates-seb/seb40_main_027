@@ -27,3 +27,8 @@ export const logUser = atom({
   },
   effects_UNSTABLE: [persistAtom],
 });
+
+export const bootListMyPage = atom({
+  key: 'bootListMyPage',
+  default: [],
+});
