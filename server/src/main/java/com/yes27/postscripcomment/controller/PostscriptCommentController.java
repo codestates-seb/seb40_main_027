@@ -31,13 +31,14 @@ public class PostscriptCommentController {
 
     private final MemberService memberService;
     private final MemberMapper memberMapper;
+
     public PostscriptCommentController(MemberService memberService,
                                        MemberMapper memberMapper,
                                        PostscriptCommentService postscriptCommentService,
                                        PostscriptCommentMapper postscriptCommentMapper,
                                        PostscriptCommentRepository postscriptCommentRepository,
                                        PostscriptService postscriptService
-                                       ){
+    ) {
 
 
         this.postscriptCommentMapper = postscriptCommentMapper;
@@ -48,57 +49,64 @@ public class PostscriptCommentController {
         this.memberMapper = memberMapper;
     }
 
+    /** 게시글 댓글 작성
+     *
+     * @param postscriptId
+     * @param postscriptCommentPostDto
+     * @return
+     */
     @PostMapping("/{postscript-Id}/comment")
     public ResponseEntity postPostComment(@PathVariable("postscript-Id") @Positive @NotNull long postscriptId,
                                           @Valid @RequestBody PostscriptCommentDto.Post postscriptCommentPostDto) {
 
 
-        PostscriptComment postscriptComment = postscriptCommentMapper.postCommentPostToPostComment(postscriptId,postscriptService,postscriptCommentPostDto,memberService);
-        postscriptCommentService.createPostComment(postscriptId,postscriptComment);
-
-
-//        postCommentToPostCommentPostResponseDto2
-//        return new  ResponseEntity<>(
-////                new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentResponseDto(postscriptComment, memberMapper)), HttpStatus.CREATED);
-//                new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentPostResponseDto2(postscriptComment)), HttpStatus.CREATED);
+        PostscriptComment postscriptComment = postscriptCommentMapper.postCommentPostToPostComment(postscriptId, postscriptService, postscriptCommentPostDto, memberService);
+        postscriptCommentService.createPostComment(postscriptId, postscriptComment);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    /** 게시글 댓글 수정
+     *
+     * @param postscriptCommentId
+     * @param postscriptCommentPatchDto
+     * @return
+     */
     @PatchMapping("/comment/{postscriptCommentId}")
     public ResponseEntity patchPostComment(@PathVariable("postscriptCommentId") @Positive long postscriptCommentId,
-//                                           @PathVariable("postscript-Id") @Positive long postscriptId,
-                                           @Valid @RequestBody PostscriptCommentDto.Patch postscriptCommentPatchDto){
+                                           @Valid @RequestBody PostscriptCommentDto.Patch postscriptCommentPatchDto) {
 
-//        PostscriptComment postscriptComment = postscriptCommentMapper.postCommentPatchToPostComment(postscriptCommentService, postscriptCommentPatchDto, memberService);
-//        postscriptComment.setPostscriptCommentId(postscriptCommentId);
-//        postscriptCommentService.updatePostComment(postscriptComment);
 
         postscriptCommentPatchDto.setPostscriptCommentId(postscriptCommentId);
         PostscriptComment postscriptComment = postscriptCommentMapper.postCommentPatchToPostComment(postscriptCommentService, postscriptCommentPatchDto, memberService);
 
         PostscriptComment updatedPostscriptComment = postscriptCommentService.updatePostComment(postscriptComment);
 
-//        return new ResponseEntity<>(
-////                new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentResponseDto(updatedPostscriptComment, memberMapper)), HttpStatus.OK);
-//        new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentPostResponseDto2(postscriptComment)), HttpStatus.CREATED);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /** 작성된 댓글만 조회
+     *
+     * @param postscriptCommentId
+     * @return
+     */
     @GetMapping("/comment/{postscriptCommentId}")
-    public ResponseEntity getPostComment(@PathVariable("postscriptCommentId")@Positive long postscriptCommentId
-//                                         @PathVariable("postscript-Id") @Positive long postscriptId
-                                         ){
+    public ResponseEntity getPostComment(@PathVariable("postscriptCommentId") @Positive long postscriptCommentId
+    ) {
 
         PostscriptComment postscriptComment = postscriptCommentService.findPostComment(postscriptCommentId);
-//        PostscriptComment updatedPostComment = postscriptCommentService.updatePostComment(postscriptId, postscriptComment);
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentResponseDto(postscriptComment,memberMapper)), HttpStatus.OK);
+                new SingleResponseDto<>(postscriptCommentMapper.postCommentToPostCommentResponseDto(postscriptComment, memberMapper)), HttpStatus.OK);
 
     }
 
+    /** 댓글 삭제
+     *
+     * @param postscriptCommentId
+     * @return
+     */
     @DeleteMapping("/comment/{postscriptCommentId}")
-    public ResponseEntity deletePostComment(@PathVariable("postscriptCommentId")@Positive long postscriptCommentId){
+    public ResponseEntity deletePostComment(@PathVariable("postscriptCommentId") @Positive long postscriptCommentId) {
         Member member = memberService.getLoginMember();
         postscriptCommentService.deletePostComment(postscriptCommentId, member.getMemberId());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

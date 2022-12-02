@@ -17,21 +17,21 @@ public class PostscriptDto {
     @Setter
     public static class Post {  // 부트캠프 선택 후기 등록
 
-            @NotBlank(message = "선택 조언 및 후기의 제목을 적어주세요")
-            private String postscriptTitle;
+        @NotBlank(message = "선택 조언 및 후기의 제목을 적어주세요")
+        private String postscriptTitle;
 
-            @NotBlank(message = "선택 조언 및 후기의 내용을 적어주세요")
-            private String postscriptContent;
+        @NotBlank(message = "선택 조언 및 후기의 내용을 적어주세요")
+        private String postscriptContent;
 
-            @NotBlank(message = "부트캠프 조언, 후기 중 골라주세요")
-            private String tagName;
+        @NotBlank(message = "부트캠프 조언, 후기 중 골라주세요")
+        private String tagName;
 
-            private Long memberId;
-        }
+        private Long memberId;
+    }
 
     @Getter
     @Setter
-    public static class Patch{ // 선택후기 수정
+    public static class Patch { // 선택후기 수정
 
         private Long postscriptId;
         private String postscriptTitle;
@@ -50,15 +50,12 @@ public class PostscriptDto {
         private Long postscriptId;
         private String postscriptTitle;
         private String postscriptContent;
-//        private Postscript.PostscriptStatus postscriptStatus;
         private Integer totalVotes; // 좋아요 -> 투표
         private Integer View;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
-//        private List<PostscriptCommentDto.Response> postComments; // 댓글
         private String tagName; // 태그
         private MemberDto.Response2 member; //유저 추가
-//        private MemberSubset member; //유저 추가
     }
 
     @Getter
@@ -70,7 +67,6 @@ public class PostscriptDto {
         private Long postscriptId;
         private String postscriptTitle;
         private String postscriptContent;
-//        private Postscript.PostscriptStatus postscriptStatus;
         private Integer vote; // 좋아요 -> 투표  -> total X
         private Integer totalVotes;
         private Integer View;
@@ -81,6 +77,7 @@ public class PostscriptDto {
         private MemberDto.Response2 member; //유저 추가
 
     }
+
     @Getter
     @Setter
     public static class PostscriptPostResponse {  // 선택후기 등록 post response

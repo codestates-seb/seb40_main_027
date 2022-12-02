@@ -40,6 +40,13 @@ public class PostscriptVoteController {
         this.postscriptService = postscriptService;
     }
 
+    /** 좋아요 표시 기능 -> 1 좋아요 추가/ 0 좋아요 초기화
+     *
+     * @param postscriptId
+     * @param vote
+     * @param request
+     * @return
+     */
     @PostMapping("/votes/{postscript-Id}")
     public ResponseEntity votePostscript(@PathVariable("postscript-Id") @Positive Long postscriptId,
                                          @RequestParam(value = "vote") int vote,

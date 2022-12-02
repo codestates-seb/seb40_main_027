@@ -32,7 +32,4 @@ public class Tag {
     @JoinColumn(name = "POSTSCRIPT_ID")
     private Postscript postscript;
 
-    public void addPostscript(Postscript postscript) {
-        this.postscript = postscript;
-    }
 }

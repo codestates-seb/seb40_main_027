@@ -1,13 +1,6 @@
 package com.yes27.postscript.service;
 
 import com.yes27.member.entity.Member;
-import com.yes27.mentoring.entity.Mentor;
-import com.yes27.mentoringLike.entity.MentoringVote;
-import com.yes27.postscripcomment.entity.PostscriptComment;
-import com.yes27.postscript.entity.PostscriptView;
-import com.yes27.postscript.entity.PostscriptVote;
-import com.yes27.postscript.entity.Tag;
-//import com.yes27.postscript.repository.TagRepository;
 import com.yes27.postscript.repository.PostscriptVoteRepository;
 import org.springframework.context.annotation.Lazy;
 import com.yes27.exception.BusinessLogicException;
@@ -18,10 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +20,7 @@ public class PostscriptService {
 
     private final PostscriptRepository postscriptRepository;
     private final PostscriptVoteService postscriptVoteService;
-//    private final TagRepository tagRepository;
+    //    private final TagRepository tagRepository;
     private final PostscriptVoteRepository postscriptVoteRepository;
     private final PostscriptViewService postscriptViewService;
 
@@ -43,9 +33,9 @@ public class PostscriptService {
     ) {
         this.postscriptRepository = postscriptRepository;
         this.postscriptVoteService = postscriptVoteService;
-        this.postscriptVoteRepository=postscriptVoteRepository;
+        this.postscriptVoteRepository = postscriptVoteRepository;
 //        this.tagRepository = tagRepository;
-        this.postscriptViewService= postscriptViewService;
+        this.postscriptViewService = postscriptViewService;
     }
 
     public Postscript createPostscript(Postscript postscript) {
@@ -54,21 +44,15 @@ public class PostscriptService {
         return postscriptRepository.save(postscript);
     }
 
-//    public Postscript findPostscript(long postscriptId) {
-//        Postscript findPostscript = findVerifiedPostscript(postscriptId);
-//        findPostscript.setView(findPostscript.getView() + 1); //조회수 1증가
-//        postscriptRepository.save(findPostscript);
-//        return findPostscript;
-//    }
-
     public Postscript NotLoginView(long postscriptId) {
         Postscript findPostscript = findVerifiedPostscript(postscriptId);
         postscriptRepository.save(findPostscript);
         return findPostscript;
     }
-    public Postscript LoginView(long postscriptId, Member member){
+
+    public Postscript LoginView(long postscriptId, Member member) {
         Postscript findPostscript = findVerifiedPostscript(postscriptId);
-        findPostscript.setView(findPostscript.getView()+postscriptViewService.addView(findPostscript,member));
+        findPostscript.setView(findPostscript.getView() + postscriptViewService.addView(findPostscript, member));
         return postscriptRepository.save(findPostscript);
     }
 
@@ -78,7 +62,7 @@ public class PostscriptService {
 
         long writerPostscriptId = findWritePostscriptId(postscriptId);
 
-        if(memberId != writerPostscriptId){
+        if (memberId != writerPostscriptId) {
             throw new BusinessLogicException(ExceptionCode.ACCESS_DENIED_MEMBER);
         }
         findPostscript.setPostscriptStatus(Postscript.PostscriptStatus.POSTSCRIPT_NOT_EXIST);
@@ -86,16 +70,6 @@ public class PostscriptService {
     }
 
 
-//    public Page<Postscript> findPostscripts(int page, int size, String sort) {
-//
-//        Page<Postscript> findAllPostscript = postscriptRepository.findAllByPostscriptStatus(
-////                PageRequest.of(page, size, Sort.by(sort).descending()),
-//                PageRequest.of(page, size, Sort.by(sort).descending()),
-//                                         //Sort.by(Sort.Order.desc("totalVotes"), Sort.Order.desc("postscriptId"))
-//                Postscript.PostscriptStatus.POSTSCRIPT_EXIST);
-//
-//        return findAllPostscript;
-//    }
     //1기준 최신순 -> postscriptId
     public Page<Postscript> findLatestPostscripts(int page, int size) {
 
@@ -107,7 +81,7 @@ public class PostscriptService {
     }
 
     // 1기준 views/votes/  -> 2기준 최신순.
-    public Page<Postscript> findSortPostscripts (int page, int size, String sort) {
+    public Page<Postscript> findSortPostscripts(int page, int size, String sort) {
 
         Page<Postscript> findAllPostscript = postscriptRepository.findAllByPostscriptStatus(
                 PageRequest.of(page, size, Sort.by(Sort.Order.desc(sort), Sort.Order.desc("postscriptId"))),
@@ -122,45 +96,19 @@ public class PostscriptService {
     }
 
     public Postscript updatePostscript(Postscript postscript) { // 수정
-//        Postscript findPostscript = findVerifiedPostscript(postscript.getPostscriptId());
-//
-//        Optional.ofNullable(postscript.getPostscriptTitle())
-//                .ifPresent(findPostscript::setPostscriptTitle);
-//
-//        Optional.ofNullable(postscript.getPostscriptContent())
-//                .ifPresent(findPostscript::setPostscriptContent);
-//
-//        findPostscript.setUpdatedAt(LocalDateTime.now());
 
         Postscript findPostscript = findVerifiedPostscript(postscript.getPostscriptId());
         findPostscript.setPostscriptTitle(postscript.getPostscriptTitle());
         findPostscript.setPostscriptContent(postscript.getPostscriptContent());
         findPostscript.setTagName(postscript.getTagName());
 
-//        List<Tag> tagList = postscript.getTags();
-//        Optional.ofNullable(tagList)
-//                .ifPresent(findPostscript::setTags);
-////        findPostscript.setTags(postscript.getTags());
-//
-//
-//        if (tagList != null) {
-//            for (Tag tag : tagList)
-//                tagRepository.save(tag);
-//        }
-
         Postscript updatedPostscript = postscriptRepository.save(findPostscript);
         return updatedPostscript;
     }
 
-//    // 좋아요 수 새로 갱신
-//    public void refreshVotes(long postscriptId) {
-//        Postscript postscript = findVerifiedPostscript(postscriptId);
-//        postscript.setTotalVotes(postscriptVoteService.getTotalVotes(postscriptId));
-//        postscriptRepository.save(postscript);
-//    }
 
     public Member findPostscriptWriter(long postscriptId) {
-        // 질문 작성자만 질문을 수정, 삭제할 수 있도록 질문의 작성자를 찾는 메서드
+        // 질문 작성자만 질문을 수정, 삭제할 수 있도록 질문 작성자를 찾는 메서드
         Postscript findPostscript = findVerifiedPostscript(postscriptId);
         return findPostscript.getMember();
     }
@@ -177,30 +125,17 @@ public class PostscriptService {
         Postscript findPostscript = optionalQuestion.orElseThrow(
                 () -> new BusinessLogicException(ExceptionCode.POSTSCRIPT_NOT_FOUND));
 
-        if(findPostscript.getPostscriptStatus() == Postscript.PostscriptStatus.POSTSCRIPT_NOT_EXIST) {
+        if (findPostscript.getPostscriptStatus() == Postscript.PostscriptStatus.POSTSCRIPT_NOT_EXIST) {
             throw new BusinessLogicException(ExceptionCode.POSTSCRIPT_NOT_FOUND);
         } // 해당 글 없거나 삭제된 경우 ExceptionCode 발생
         return findPostscript;
     }
 
-    public Postscript updateTotalVotes(Postscript postscript, int voteTotal, int vote){
+    public Postscript updateTotalVotes(Postscript postscript, int voteTotal, int vote) {
         Postscript findPostscript = findVerifiedPostscript(postscript.getPostscriptId());
         findPostscript.setTotalVotes(voteTotal);
         findPostscript.setVote(vote);
         return postscriptRepository.save(findPostscript);
     }
-
-//    public Postscript notLogin(Long postscriptId, Member member){
-//        Postscript findPostscript = findVerifiedPostscript(postscriptId);
-//        findPostscript.setView(findPostscript.getView()+postscriptViewService.addView(findPostscript,member));
-//        Optional<PostscriptVote> findVote = postscriptVoteRepository.findByPostscriptAndMember(findPostscript,member);
-//        if(findVote.isPresent()){
-//            findPostscript.setVote(findVote.get().getVote());
-//        }else{
-//            findPostscript.setVote(0);
-//        }
-//        return postscriptRepository.save(findPostscript);
-//    }
-
 
 }

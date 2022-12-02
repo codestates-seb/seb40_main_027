@@ -29,7 +29,6 @@ public class PostscriptCommentDto {
 
         private Long postscriptCommentId;
 
-//        @NotBlank(message = "댓글을 입력하세요.")
         private String postscriptComment;
 
     }
