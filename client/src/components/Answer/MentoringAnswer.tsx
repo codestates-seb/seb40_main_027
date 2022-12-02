@@ -21,7 +21,7 @@ export interface MentoringAnswerList extends Array<MentoringAnswerListProps> {}
 const MentoringAnswer = () => {
   const { id } = useParams();
   const [mentoringAnswerContents, setMentoringnAnswerContents] = useState('');
-  const [mentoringanswerList, setMentoringAnswerList] = useRecoilState(mentoringListData);
+  const [mentoringAnswerList, setMentoringAnswerList] = useRecoilState(mentoringListData);
   const access = localStorage.getItem('access');
 
   const postComment = () => {
@@ -67,9 +67,9 @@ const MentoringAnswer = () => {
   return (
     <S.ContainerViewAnswer>
       <S.ViewAnswer>
-        {mentoringanswerList?.map((list, idx) => (
+        {mentoringAnswerList?.map((list) => (
           <MentoringAnswerList
-            key={idx}
+            key={list.mentoringCommentId}
             createdAt={list.createdAt}
             mentoringCommentId={list.mentoringCommentId}
             mentoringComment={list.mentoringComment}
