@@ -5,11 +5,12 @@ import { GRAY_CONTENTS_BORDER } from '../../assets/constant/COLOR';
 import { readAllPosts } from '../../utils/api/forumAPI';
 
 interface PropsType {
+  pageType: string;
   url: string;
   setPosts: React.Dispatch<any>;
 }
 
-export const FilterButton = ({ url, setPosts }: PropsType) => {
+export const FilterButton = ({ pageType, url, setPosts }: PropsType) => {
   const forumType = url.split('/')[1].split('?')[0];
   const CONDITIONS = [
     {
@@ -33,7 +34,9 @@ export const FilterButton = ({ url, setPosts }: PropsType) => {
   const [current, setCurrent] = useState(CONDITIONS[0]);
 
   const dropdownHandler = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+    if (pageType !== 'bootcamp') {
+      setIsDropdownOpen(!isDropdownOpen);
+    }
   };
 
   const handleCurrent = (id: number) => {
