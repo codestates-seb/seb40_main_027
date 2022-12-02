@@ -20,21 +20,27 @@ export const QuillContainer = ({ patchHandler, editHandler }: HandlerProps) => {
 };
 
 interface AnswerViewProps {
-  nick: string;
-  updateAt: string;
-  createAt: string;
+  nickname: string;
+  updatedAt: string;
+  createdAt: string;
   editHandler: () => void;
   deleteHandler: (e: React.MouseEvent<HTMLElement>) => void;
 }
-export const AnswerViewContainer = ({ nick, updateAt, createAt, editHandler, deleteHandler }: AnswerViewProps) => {
-  const createTime = formatDistanceToNow(new Date(createAt), { addSuffix: true, locale: ko });
-  const updateTime = formatDistanceToNow(new Date(updateAt), { addSuffix: true, locale: ko });
+export const AnswerViewContainer = ({
+  nickname,
+  updatedAt,
+  createdAt,
+  editHandler,
+  deleteHandler,
+}: AnswerViewProps) => {
+  const createTime = formatDistanceToNow(new Date(createdAt), { addSuffix: true, locale: ko });
+  const updateTime = formatDistanceToNow(new Date(updatedAt), { addSuffix: true, locale: ko });
   return (
     <S.UserAnswerInfo>
       <S.TimeOrName>
         <S.NameZone>
           <Icon icon="carbon:user-avatar-filled-alt" width="20" height="15" />
-          {nick}
+          {nickname}
         </S.NameZone>
         <span>{createTime !== updateTime ? <span>{updateTime}</span> : createTime} </span>
       </S.TimeOrName>
