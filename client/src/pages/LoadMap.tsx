@@ -47,8 +47,10 @@ const ButtonContent = styled.div`
 `;
 const SelectButton = styled.button`
   margin: 10vh 0 20vh 1rem;
-  width: ${(props) => (props.className === 'select-btn' ? '35vw' : '30vw')};
-  height: ${(props) => (props.className === 'select-btn' ? '35vh' : '30vh')};
+  /* width: ${(props) => (props.className === 'select-btn' ? '35vw' : '30vw')};
+  height: ${(props) => (props.className === 'select-btn' ? '35vh' : '30vh')}; */
+  width: 30vw;
+  height: 30vh;
   border: 2px solid var(--greenMain);
   border-radius: 20px;
   font-size: 6rem;
@@ -59,8 +61,10 @@ const SelectButton = styled.button`
   }
 
   @media screen and (max-width: 414px) {
-    width: ${(props) => (props.className === 'select-btn' ? '90vw' : '80vw')};
-    height: ${(props) => (props.className === 'select-btn' ? '23vh' : '20vh')};
+    /* width: ${(props) => (props.className === 'select-btn' ? '90vw' : '80vw')};
+    height: ${(props) => (props.className === 'select-btn' ? '23vh' : '20vh')}; */
+    width: 80vw;
+    height: 20vh;
     font-size: 2rem;
     margin: 0;
     margin-bottom: 1rem;
