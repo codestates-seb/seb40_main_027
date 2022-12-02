@@ -20,8 +20,8 @@ export interface StudyAnswerList extends Array<StudyAnswerListProps> {}
 
 const StudyAnswer = () => {
   const { id } = useParams();
-  const [studyAnswerContents, setStudynAnswerContents] = useState('');
-  const [studyanswerList, setStudyAnswerList] = useRecoilState(studyListData);
+  const [studyAnswerContents, setStudyAnswerContents] = useState('');
+  const [studyAnswerList, setStudyAnswerList] = useRecoilState(studyListData);
   const access = localStorage.getItem('access');
 
   const postComment = () => {
@@ -51,7 +51,7 @@ const StudyAnswer = () => {
 
   const SummitAnswerBtn = () => {
     asyncFunction();
-    setStudynAnswerContents('');
+    setStudyAnswerContents('');
   };
 
   useEffect(() => {
@@ -69,7 +69,7 @@ const StudyAnswer = () => {
   return (
     <S.ContainerViewAnswer>
       <S.ViewAnswer>
-        {studyanswerList?.map((list) => (
+        {studyAnswerList?.map((list) => (
           <StudyAnswerList
             key={list.studyCommentId}
             createdAt={list.createdAt}
@@ -81,7 +81,7 @@ const StudyAnswer = () => {
         ))}
       </S.ViewAnswer>
       <S.QuillContent>
-        <S.QuillArea theme="snow" value={studyAnswerContents} onChange={setStudynAnswerContents} />
+        <S.QuillArea theme="snow" value={studyAnswerContents} onChange={setStudyAnswerContents} />
         <div className="btn-area">
           <S.SubmitButton onClick={SummitAnswerBtn}>등록</S.SubmitButton>
         </div>
