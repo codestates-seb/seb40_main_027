@@ -61,7 +61,8 @@ public class PostscriptVoteService {
         findVote.setTotalVotes(totalVote);
         findVote.setPostscript(postscript);
         findVote.setMember(member);
-        postscriptService.updateTotalVotes(postscript, totalVote);
+        findVote.setVote(vote);
+        postscriptService.updateTotalVotes(postscript, totalVote,vote);
         return postscriptVoteRepository.save(findVote);
     }
         public int getTotalVotes(Postscript postscript){

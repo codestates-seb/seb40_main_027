@@ -21,7 +21,7 @@ public class PostscriptViewService {
     public int addView(Postscript postscript, Member member){
         int findView = findVerifiedMemberPostscript(postscript,member);
         if(findView==0){
-            return 1;
+            return 0;
         }
 
         PostscriptView postscriptView=new PostscriptView();
