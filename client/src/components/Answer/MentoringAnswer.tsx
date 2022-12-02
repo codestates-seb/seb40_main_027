@@ -35,7 +35,7 @@ const MentoringAnswer = () => {
     });
   };
 
-  const AsyncFunction = async () => {
+  const asyncFunction = async () => {
     try {
       await postComment();
       const getAwait = await getComment('mentoring', `${id}`);
@@ -50,7 +50,7 @@ const MentoringAnswer = () => {
   };
 
   const SummitAnswerBtn = () => {
-    AsyncFunction();
+    asyncFunction();
     setMentoringnAnswerContents('');
   };
 
