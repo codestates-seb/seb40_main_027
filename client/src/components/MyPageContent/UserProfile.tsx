@@ -95,7 +95,9 @@ const UserProfile = () => {
           <S.ProfileUpdateButton onClick={onClickUpdate}>
             <Icon icon="ph:gear-six-duotone" width="25" height="25" />
           </S.ProfileUpdateButton>
-          <S.PictureProfile></S.PictureProfile>
+          <S.PictureProfile>
+            <Icon icon="carbon:user-avatar-filled-alt" width="100%" height="100%" color="gray" />
+          </S.PictureProfile>
           <div className="user-info">
             email
             <S.UserInfoFormEmail>{userUpdate ? userUpdate.data.email : 'a'}</S.UserInfoFormEmail>
