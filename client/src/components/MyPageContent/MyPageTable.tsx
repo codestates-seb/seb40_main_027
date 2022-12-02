@@ -1,4 +1,3 @@
-import { Icon } from '@iconify/react';
 import * as S from './MyPageTable.style';
 import { useNavigate } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
@@ -26,6 +25,7 @@ const MyPageTable = () => {
   const navigate = useNavigate();
   const access = localStorage.getItem('access');
 
+  const access = localStorage.getItem('access');
   const linkTableHandler = (id: number) => {
     navigate(`/bootcamp/${id}`);
   };

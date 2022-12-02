@@ -8,7 +8,10 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import { readPost } from '../../utils/api/forumAPI';
+import { readPost, votePost } from '../../utils/api/forumAPI';
+import StudyAnswer from '../Answer/StudyAnswer';
+import ForumArticlesAnswer from '../Answer/ForumArticlesAnswer';
+import MentoringAnswer from '../Answer/MentoringAnswer';
 
 interface PropsType {
   page?: number;
@@ -32,6 +35,22 @@ const ForumDetail = ({ page = 1 }: PropsType) => {
 
   const handleClick = () => {
     navigate(`/${forumType}?page=${page}`);
+  };
+
+  const handleLike = async () => {
+    if (post.vote === 0) {
+      const voteUrl = `/${forumType}/votes/${id}?vote=1`;
+      await votePost(voteUrl);
+    }
+    if (post.vote === 1) {
+      const voteUrl = `/${forumType}/votes/${id}?vote=0`;
+      await votePost(voteUrl);
+    }
+
+    const readUrl = `/${forumType}/${id}`;
+    readPost(readUrl, setPost).then((res) => {
+      setCreatedAt(formatDistanceToNow(new Date(res.createdAt), { addSuffix: true, locale: ko }));
+    });
   };
 
   return (
@@ -68,38 +87,21 @@ const ForumDetail = ({ page = 1 }: PropsType) => {
             }}
           />
           <S.LikeContainer>
-            <span>
+            <S.LikeButton onClick={handleLike} like={post.vote}>
               <InlineIcon icon="akar-icons:heart" />
               <span>{post.totalVotes}</span>
-            </span>
+            </S.LikeButton>
             <span>{post[`${forumType}Comments`].length}개의 댓글</span>
           </S.LikeContainer>
 
           <S.CommentsContainer>
-            {post[`${forumType}Comments`].map((comment: any) => (
-              <S.CommentContainer key={comment.postCommentId}>
-                <S.CommentInfoContainer>
-                  <ForumWrittenInfo position="left" author={comment.nickname} createdAt={comment.createdAt} />
-                  <MoreButton buttonType="comment" forumType={forumType} id={comment[`${forumType}CommentId`]} />
-                </S.CommentInfoContainer>
-                <div>{comment[`${forumType}Comment`]}</div>
-              </S.CommentContainer>
-            ))}
-
-            <S.NewCommentContainer>
-              <div>
-                <ForumWrittenInfo position="left" author="지금 로그인한 사람" />
-                <span>0 / 500</span>
-              </div>
-              <S.Form>
-                <label>
-                  <textarea placeholder="댓글을 남겨주세요." />
-                </label>
-                <div>
-                  <BackgroundOtherButton text="등록" color={GREEN_MAIN} />
-                </div>
-              </S.Form>
-            </S.NewCommentContainer>
+            {forumType === 'postscript' ? (
+              <ForumArticlesAnswer />
+            ) : forumType === 'study' ? (
+              <StudyAnswer />
+            ) : (
+              <MentoringAnswer />
+            )}
           </S.CommentsContainer>
         </S.ContentContainer>
       )}

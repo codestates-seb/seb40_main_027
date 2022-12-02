@@ -22,7 +22,7 @@ const SideBar = () => {
                   <Link to={'/test'}>적성검사</Link>
                 </S.SideBarMenu>
                 <S.SideBarMenu>
-                  <Link to={'/'}>로드맵</Link>
+                  <Link to={'/loadmap'}>로드맵</Link>
                 </S.SideBarMenu>
                 <S.SideBarMenu>
                   <Link to={'/test'}>학원일정</Link>
