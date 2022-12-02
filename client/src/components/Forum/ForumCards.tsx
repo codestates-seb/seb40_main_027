@@ -28,7 +28,7 @@ const ForumCards = () => {
 
   return (
     <S.Container>
-      <ForumContentHeader forumType={forumType} />
+      <ForumContentHeader url={`/${forumType}?page=${page}&size=9`} setPosts={setPosts} />
 
       <S.MainContainer>
         {posts.map((post: any) => (

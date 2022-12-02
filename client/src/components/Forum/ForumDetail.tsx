@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import { readPost } from '../../utils/api/forumAPI';
+import { readPost, votePost } from '../../utils/api/forumAPI';
 
 interface PropsType {
   page?: number;
@@ -32,6 +32,22 @@ const ForumDetail = ({ page = 1 }: PropsType) => {
 
   const handleClick = () => {
     navigate(`/${forumType}?page=${page}`);
+  };
+
+  const handleLike = async () => {
+    if (post.vote === 0) {
+      const voteUrl = `/${forumType}/votes/${id}?vote=1`;
+      await votePost(voteUrl);
+    }
+    if (post.vote === 1) {
+      const voteUrl = `/${forumType}/votes/${id}?vote=0`;
+      await votePost(voteUrl);
+    }
+
+    const readUrl = `/${forumType}/${id}`;
+    readPost(readUrl, setPost).then((res) => {
+      setCreatedAt(formatDistanceToNow(new Date(res.createdAt), { addSuffix: true, locale: ko }));
+    });
   };
 
   return (
@@ -68,10 +84,10 @@ const ForumDetail = ({ page = 1 }: PropsType) => {
             }}
           />
           <S.LikeContainer>
-            <span>
+            <S.LikeButton onClick={handleLike} like={post.vote}>
               <InlineIcon icon="akar-icons:heart" />
               <span>{post.totalVotes}</span>
-            </span>
+            </S.LikeButton>
             <span>{post[`${forumType}Comments`].length}개의 댓글</span>
           </S.LikeContainer>
 
