@@ -53,7 +53,6 @@ export const TableLink = styled(Link)`
 `;
 
 export const LikeButton = styled.button`
-  border: none;
   background-color: rgba(0, 0, 0, 0);
   margin: 0;
 `;
