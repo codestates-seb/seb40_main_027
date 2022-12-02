@@ -67,9 +67,9 @@ const ForumArticlesAnswer = () => {
   return (
     <S.ContainerViewAnswer>
       <S.ViewAnswer>
-        {answerList?.map((list, idx) => (
+        {answerList?.map((list) => (
           <AnswerListView
-            key={idx}
+            key={list.postscriptCommentId}
             createdAt={list.createdAt}
             postscriptCommentId={list.postscriptCommentId}
             postscriptComment={list.postscriptComment}
