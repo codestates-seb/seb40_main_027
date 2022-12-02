@@ -20,7 +20,7 @@ export interface MentoringAnswerList extends Array<MentoringAnswerListProps> {}
 
 const MentoringAnswer = () => {
   const { id } = useParams();
-  const [mentoringAnswerContents, setMentoringnAnswerContents] = useState('');
+  const [mentoringAnswerContents, setMentoringAnswerContents] = useState('');
   const [mentoringAnswerList, setMentoringAnswerList] = useRecoilState(mentoringListData);
   const access = localStorage.getItem('access');
 
@@ -51,7 +51,7 @@ const MentoringAnswer = () => {
 
   const SummitAnswerBtn = () => {
     asyncFunction();
-    setMentoringnAnswerContents('');
+    setMentoringAnswerContents('');
   };
 
   useEffect(() => {
@@ -79,7 +79,7 @@ const MentoringAnswer = () => {
         ))}
       </S.ViewAnswer>
       <S.QuillContent>
-        <S.QuillArea theme="snow" value={mentoringAnswerContents} onChange={setMentoringnAnswerContents} />
+        <S.QuillArea theme="snow" value={mentoringAnswerContents} onChange={setMentoringAnswerContents} />
         <div className="btn-area">
           <S.SubmitButton onClick={SummitAnswerBtn}>등록</S.SubmitButton>
         </div>
