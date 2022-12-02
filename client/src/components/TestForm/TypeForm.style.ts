@@ -3,7 +3,11 @@ import styled from 'styled-components';
 export const FormStyled = styled.div`
   display: flex;
   height: 100%;
-  margin-top: 10%;
+  & > * {
+    margin-top: 2rem;
+  }
+
+  justify-content: center;
   @media screen and (max-width: 414px) {
     margin: 0;
     width: 80vw;
@@ -16,6 +20,7 @@ export const QuestionContentForm = styled.div`
   border-radius: 10px;
   display: flex;
   justify-content: center;
+
   flex-direction: column;
   font-weight: bold;
   margin: 0px;
@@ -69,21 +74,22 @@ export const NumberBorder = styled.span`
 
 export const FormCaseView = styled.div`
   //전체적인 크기
-  height: 60vh;
-
+  /* height: 60vh; */
+  margin-top: 5rem;
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 0px;
+  /* margin: 0px; */
 
   @media screen and (max-width: 414px) {
     height: 50vh;
+    margin: 0;
   }
 `;
 
 export const SContentForm = styled.div`
   //글씨 위치
-  margin: 0.5rem 0 0.5rem 0;
+  margin: 0.5rem 0 2rem 0;
   font-size: 1.3rem;
   height: 50px;
 
