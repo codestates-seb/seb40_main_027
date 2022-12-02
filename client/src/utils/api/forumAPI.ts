@@ -111,3 +111,21 @@ export const deletePost = async (url: string, navigate: NavigateFunction) => {
     console.error(err);
   }
 };
+
+export const votePost = async (url: string) => {
+  const access = localStorage.getItem('access');
+
+  try {
+    const res = await axios.post(url, null, {
+      headers: {
+        Authorization: access,
+      },
+    });
+
+    if (res.status !== 200) {
+      throw new Error(`${res.status}`);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};

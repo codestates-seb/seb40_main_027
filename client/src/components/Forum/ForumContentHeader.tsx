@@ -4,10 +4,13 @@ import SearchBar from '../SearchBar/SearchBar';
 import { MENTORING_TAGS, POSTSCRIPT_TAGS, STUDY_TAGS } from '../../assets/constant/TAG';
 
 interface PropsType {
-  forumType: string;
+  url: string;
+  setPosts: React.Dispatch<any>;
 }
 
-const ForumContentHeader = ({ forumType }: PropsType) => {
+const ForumContentHeader = ({ url, setPosts }: PropsType) => {
+  const forumType = url.split('/')[1].split('?')[0];
+
   return (
     <S.ContentHeader>
       <S.TagsContainer>
@@ -23,7 +26,7 @@ const ForumContentHeader = ({ forumType }: PropsType) => {
       </S.TagsContainer>
       <S.OtherContainer>
         <SearchBar />
-        <FilterButton />
+        <FilterButton url={url} setPosts={setPosts} />
         <WriteButton forumType={forumType} />
       </S.OtherContainer>
     </S.ContentHeader>

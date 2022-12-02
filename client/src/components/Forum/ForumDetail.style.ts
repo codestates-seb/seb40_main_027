@@ -79,16 +79,30 @@ export const Content = styled.p`
 export const LikeContainer = styled.div`
   padding: calc(10 / 16 * 1rem) calc(20 / 16 * 1rem);
 
-  & > span:not(:last-child) {
+  & > *:not(:last-child) {
     margin-right: calc(20 / 16 * 1rem);
-  }
-
-  & > span > *:not(:last-child) {
-    margin-right: 0.2rem;
   }
 
   @media screen and (max-width: 414px) {
     padding: calc(10 / 16 * 1rem);
+  }
+`;
+
+interface PropsType {
+  like: number;
+}
+
+export const LikeButton = styled.button<PropsType>`
+  background-color: var(--whiteBackground);
+  border: 0;
+  font-size: 16px;
+
+  & > *:not(:last-child) {
+    margin-right: 0.2rem;
+  }
+
+  & > svg > path {
+    fill: ${(props) => (props.like === 1 ? 'var(--redBootDetailHeart)' : 'none')};
   }
 `;
 
