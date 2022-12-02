@@ -10,7 +10,7 @@ import { studyListData } from '../../atoms/index';
 import * as S from './AnswerListView.style';
 import { AnswerViewContainer, QuillContainer } from './AnswerContainer';
 
-interface studyAnswerListProps {
+interface StudyAnswerListProps {
   createdAt: string;
   studyCommentId: number;
   studyComment: string;
@@ -18,7 +18,7 @@ interface studyAnswerListProps {
   nickname: string;
 }
 
-const StudyAnswerList = ({ createdAt, studyCommentId, updatedAt, studyComment, nickname }: studyAnswerListProps) => {
+const StudyAnswerList = ({ createdAt, studyCommentId, updatedAt, studyComment, nickname }: StudyAnswerListProps) => {
   const [isPatch, setIsPatch] = useState<boolean>(false);
   const [commentValue, setCommentValue] = useState('');
   const setAnswerList = useSetRecoilState(studyListData);

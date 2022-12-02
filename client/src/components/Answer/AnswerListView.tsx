@@ -10,7 +10,7 @@ import { answerListData } from '../../atoms/index';
 import * as S from './AnswerListView.style';
 import { AnswerViewContainer, QuillContainer } from './AnswerContainer';
 
-interface answerListProps {
+interface AnswerListProps {
   createdAt: string;
   postscriptCommentId: number;
   postscriptComment: string;
@@ -24,7 +24,7 @@ const AnswerListView = ({
   updatedAt,
   postscriptComment,
   nickname,
-}: answerListProps) => {
+}: AnswerListProps) => {
   const [isPatch, setIsPatch] = useState<boolean>(false);
   const [commentValue, setCommentValue] = useState('');
   const setAnswerList = useSetRecoilState(answerListData);

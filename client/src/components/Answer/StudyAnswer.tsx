@@ -8,7 +8,7 @@ import { studyListData } from '../../atoms/index';
 import StudyAnswerList from './StudyAnswerList';
 import * as S from './ForumAnswer.style';
 
-interface studyAnswerListProps {
+interface StudyAnswerListProps {
   createdAt: string;
   studyCommentId: number;
   studyComment: string;
@@ -16,7 +16,7 @@ interface studyAnswerListProps {
   nickname: string;
 }
 
-export interface studyAnswerList extends Array<studyAnswerListProps> {}
+export interface StudyAnswerList extends Array<StudyAnswerListProps> {}
 
 const StudyAnswer = () => {
   const { id } = useParams();
@@ -69,9 +69,9 @@ const StudyAnswer = () => {
   return (
     <S.ContainerViewAnswer>
       <S.ViewAnswer>
-        {studyanswerList?.map((list, idx) => (
+        {studyanswerList?.map((list) => (
           <StudyAnswerList
-            key={idx}
+            key={list.studyCommentId}
             createdAt={list.createdAt}
             studyCommentId={list.studyCommentId}
             studyComment={list.studyComment}

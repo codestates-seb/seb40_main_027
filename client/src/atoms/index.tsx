@@ -2,9 +2,9 @@ import { atom } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
 
 const { persistAtom } = recoilPersist();
-import { iAnswerList } from '../components/Answer/ForumArticlesAnswer';
-import { studyAnswerList } from '../components/Answer/StudyAnswer';
-import { mentoringAnswerList } from '../components/Answer/MentoringAnswer';
+import { IAnswerList } from '../components/Answer/ForumArticlesAnswer';
+import { StudyAnswerList } from '../components/Answer/StudyAnswer';
+import { MentoringAnswerList } from '../components/Answer/MentoringAnswer';
 
 export const sideBarFloading = atom({
   key: 'sideBarFloading',
@@ -31,17 +31,17 @@ export const logUser = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
-export const answerListData = atom<iAnswerList>({
+export const answerListData = atom<IAnswerList>({
   key: 'answerListData',
   default: [],
 });
 
-export const studyListData = atom<studyAnswerList>({
+export const studyListData = atom<StudyAnswerList>({
   key: 'studyListData',
   default: [],
 });
 
-export const mentoringListData = atom<mentoringAnswerList>({
+export const mentoringListData = atom<MentoringAnswerList>({
   key: 'mentoringListData',
   default: [],
 });

@@ -8,7 +8,7 @@ import { mentoringListData } from '../../atoms/index';
 import MentoringAnswerList from './MentoringAnswerList';
 import * as S from './ForumAnswer.style';
 
-interface mentoringAnswerListProps {
+interface MentoringAnswerListProps {
   createdAt: string;
   mentoringCommentId: number;
   mentoringComment: string;
@@ -16,7 +16,7 @@ interface mentoringAnswerListProps {
   nickname: string;
 }
 
-export interface mentoringAnswerList extends Array<mentoringAnswerListProps> {}
+export interface MentoringAnswerList extends Array<MentoringAnswerListProps> {}
 
 const MentoringAnswer = () => {
   const { id } = useParams();

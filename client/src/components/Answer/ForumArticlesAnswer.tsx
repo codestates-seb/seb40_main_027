@@ -8,7 +8,7 @@ import { useRecoilState } from 'recoil';
 import { answerListData } from '../../atoms/index';
 import * as S from './ForumAnswer.style';
 
-interface answerListProps {
+interface AnswerListProps {
   createdAt: string;
   postscriptCommentId: number;
   postscriptComment: string;
@@ -16,7 +16,7 @@ interface answerListProps {
   nickname: string;
 }
 
-export interface iAnswerList extends Array<answerListProps> {}
+export interface IAnswerList extends Array<AnswerListProps> {}
 
 const ForumArticlesAnswer = () => {
   const { id } = useParams();

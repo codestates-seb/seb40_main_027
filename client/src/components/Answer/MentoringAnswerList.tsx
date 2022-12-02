@@ -10,7 +10,7 @@ import { mentoringListData } from '../../atoms/index';
 import * as S from './AnswerListView.style';
 import { AnswerViewContainer, QuillContainer } from './AnswerContainer';
 
-interface mentoringAnswerListProps {
+interface MentoringAnswerListProps {
   createdAt: string;
   mentoringCommentId: number;
   mentoringComment: string;
@@ -24,7 +24,7 @@ const MentoringAnswerList = ({
   updatedAt,
   mentoringComment,
   nickname,
-}: mentoringAnswerListProps) => {
+}: MentoringAnswerListProps) => {
   const [isPatch, setIsPatch] = useState<boolean>(false);
   const [commentValue, setCommentValue] = useState('');
   const setAnswerList = useSetRecoilState(mentoringListData);
