@@ -24,11 +24,11 @@ const MyPageTable = () => {
     navigate(`/bootcamp/${id}`);
   };
 
-  const getItem = async () => {
-    await axios.get('mypage/bootcampLike').then((res) => {
-      setBootList(res.data.data);
-    });
-  };
+  // const getItem = async () => {
+  //   await axios.get('mypage/bootcampLike').then((res) => {
+  //     setBootList(res.data.data);
+  //   });
+  // };
 
   useEffect(() => {
     axios({
