@@ -17,8 +17,9 @@ const ImgBanner = styled.div`
   margin-bottom: 5vh;
 
   img {
-    width: 65%;
+    width: 55%;
     height: 20vh;
+    margin-top: 0;
   }
   @media screen and (max-width: 414px) {
     display: none;
