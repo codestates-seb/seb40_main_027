@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import MyPageLists from './MyPageLists';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import MyPagePagination from '../Pagination/MyPagePagination';
+import MyPagePagination from '../Pagination/PagePagination';
 
 const ListContent = styled.div`
   height: 100vh;
@@ -74,7 +74,6 @@ const MyPageList = () => {
       const postP = data.data.postscript;
       const postS = data.data.studies;
       const postM = data.data.mentor;
-      // const Maxarr = [...data.data.studies, ...sWritingList, ...mWritingList];
       const maxArr: propsAnswerList = [...postP, ...postS, ...postM].sort(
         (a, b) => +new Date(b.createdAt) - +new Date(a.createdAt)
       );
