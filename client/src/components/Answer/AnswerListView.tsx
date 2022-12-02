@@ -76,7 +76,7 @@ const AnswerListView = ({
     }
   };
 
-  const patchHanlder = (e: React.MouseEvent<HTMLElement>) => {
+  const patchHandler = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     patchAsync();
     setIsPatch(!isPatch);
@@ -98,14 +98,14 @@ const AnswerListView = ({
             onChange={setCommentValue}
             placeholder={`${postscriptComment}`}
           />
-          <QuillContainer patchHandler={patchHanlder} editHandler={editHandler} />
+          <QuillContainer patchHandler={patchHandler} editHandler={editHandler} />
         </div>
       ) : (
         <div>
           <AnswerViewContainer
-            nick={nickname}
-            updateAt={updatedAt}
-            createAt={createdAt}
+            nickname={nickname}
+            updatedAt={updatedAt}
+            createdAt={createdAt}
             editHandler={editHandler}
             deleteHandler={deleteHandler}
           />
