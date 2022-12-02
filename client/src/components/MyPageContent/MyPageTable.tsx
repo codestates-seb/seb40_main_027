@@ -1,11 +1,12 @@
 import * as S from './MyPageTable.style';
 import { useNavigate } from 'react-router-dom';
-import { useInView } from 'react-intersection-observer';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
 import { BootLikeButton } from './BootLikeButton';
+import { useRecoilState } from 'recoil';
+import { bootListMyPage } from '../../atoms/index';
 
-interface BootData {
+interface BootDataProps {
   bootcampId: number;
   title: string;
   beginRegisterDate: string;
@@ -16,54 +17,22 @@ interface BootData {
   onOff: boolean;
 }
 
+export interface BootDataList extends Array<BootDataProps> {}
+
 const columns = ['이름', '등록일', '수료일', '과정', '총비용', '온/오프라인', '찜'];
 const MyPageTable = () => {
-  const [bootList, setBootList] = useState<BootData[]>();
-  const [loading, setLoading] = useState(false);
-  const [offset, setOffset] = useState(0);
-  const [likeBtn, setLikeBtn] = useState(1);
+  const [bootList, setBootList] = useRecoilState(bootListMyPage);
   const navigate = useNavigate();
   const access = localStorage.getItem('access');
 
-  const access = localStorage.getItem('access');
   const linkTableHandler = (id: number) => {
     navigate(`/bootcamp/${id}`);
   };
 
-  const handleCancel = (event: any) => {
-    event.stopPropagation();
-  };
-  const getItem = () => {
-    setLoading(true);
-    return axios.get('mypage/bootcampLike').then((res) => {
-      setBootList(res.data.data);
-    });
-  };
-
-  const postLikeBtn = () => {
-    return axios({
-      method: 'post',
-      url: '/bootcamp/votes/{bootcampId}',
-      headers: {
-        Authorization: access,
-      },
-    });
-  };
-
-  // const handlerLikeBtn = async () => {
-  //   try {
-  //     await postLikeBtn();
-  //     const getItemList = await getItem();
-  //     setBootList(getItemList.data.data);
-  //   } catch {
-  //     console.log('err');
-  //   }
-  // };
-
   useEffect(() => {
     axios({
       method: 'get',
-      url: `/users/mypage/bootcampLike?page=1&size=10`,
+      url: `/users/mypage/bootcampLike?page=1&size=10`, //무한스크롤 구현을 안해서 1페이지만 불러옴
       headers: {
         Authorization: access,
       },
@@ -91,12 +60,9 @@ const MyPageTable = () => {
               <td>{item.finalRegisterDate}</td>
               <td>{item.process}</td>
               <td>{item.totalCost}</td>
-
               <td>{item.onOff}</td>
               <td>
-                {/* <button type="button" onClick={(event) => handleCancel(event)}> */}
-                <BootLikeButton />
-                {/* </button> */}
+                <BootLikeButton bootcampId={item.bootcampId} />
               </td>
             </tr>
           );
