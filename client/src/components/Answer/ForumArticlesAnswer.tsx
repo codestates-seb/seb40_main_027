@@ -35,7 +35,7 @@ const ForumArticlesAnswer = () => {
     });
   };
 
-  const AsyncFunction = async () => {
+  const asyncFunction = async () => {
     try {
       await postComment();
       const getAwait = await getComment('postscript', `${id}`);
@@ -50,7 +50,7 @@ const ForumArticlesAnswer = () => {
   };
 
   const SummitAnswerBtn = () => {
-    AsyncFunction();
+    asyncFunction();
     setAnswerContents('');
   };
 
