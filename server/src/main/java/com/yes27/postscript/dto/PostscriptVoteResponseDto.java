@@ -12,6 +12,6 @@ import lombok.Setter;
 public class PostscriptVoteResponseDto {
 
     private long postscriptId;
-    private long vote;
-    private long totalVotes; //확정
+    private long vote;  // 투표 했는지 여부 했으면1/안했으면
+    private long totalVotes; //총 투표수
 }

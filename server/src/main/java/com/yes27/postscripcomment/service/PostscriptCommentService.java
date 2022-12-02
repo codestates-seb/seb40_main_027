@@ -36,26 +36,15 @@ public class PostscriptCommentService {
         return postscriptCommentRepository.save(postscriptComment);
     }
 
-    // 댓글 수정
-//    public PostscriptComment updatePostComment(PostscriptComment postscriptComment) {
-//
-//        PostscriptComment findPostComment = findVerifiedPostscriptComment(postscriptComment.getPostCommentId());
-//        Optional.ofNullable(postscriptComment.getPostscriptComment())
-//                .ifPresent(findPostComment::setPostscriptComment);
-////        findPostComment.setUpdatedAt(LocalDateTime.now());
-//
-//        PostscriptComment updatedPostComment = postscriptCommentRepository.save(postscriptComment);
-//        return updatedPostComment;
-//    }
-
+    //댓글 수정
     public PostscriptComment updatePostComment(PostscriptComment postscriptComment) {
-//   Long postscriptId,      verifyPostscript(postscriptId);
         PostscriptComment findPostComment = findPostComment(postscriptComment.getPostscriptCommentId());
         findPostComment.setPostscriptComment(postscriptComment.getPostscriptComment());
 
         return postscriptCommentRepository.save(findPostComment);
     }
 
+    // postscript 댓글 찾기
     public PostscriptComment findPostComment(long postscriptCommentId) {
 
         PostscriptComment findPostComment = findVerifiedPostscriptComment(postscriptCommentId);
@@ -64,6 +53,7 @@ public class PostscriptCommentService {
         return findPostComment;
     }
 
+    // 댓글 존재 여부 검사
     public PostscriptComment findVerifiedPostscriptComment(long postscriptCommentId) {
         Optional<PostscriptComment> optionalPostscriptComment = postscriptCommentRepository.findById(postscriptCommentId);
         PostscriptComment findPostComment = optionalPostscriptComment.orElseThrow(() ->
@@ -84,16 +74,12 @@ public class PostscriptCommentService {
         postscriptCommentRepository.delete(postscriptComment);
     }
 
+    // 댓글 작성자 Id 찾기
     public long findWritePostCommentId(long postscriptCommentId) {
-        // 질문 작성자 아이디 찾는 메서드
         PostscriptComment postscriptComment = findVerifiedPostComment(postscriptCommentId);
         return postscriptComment.getMember().getMemberId();
     }
-
-    public List<PostscriptComment> findPostCommentAll() {
-        return new ArrayList<>(postscriptCommentRepository.findAll());
-    }
-
+    // 댓글 작성자 Member 찾기
     public Member findPostscriptCommentWriter(long postscriptCommentId) {
         PostscriptComment findPostscriptComment = findVerifiedPostscriptComment(postscriptCommentId);
         return findPostscriptComment.getMember();

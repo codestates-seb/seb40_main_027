@@ -16,7 +16,7 @@ public class PostscriptView {
     private Long postscriptViewId;
 
     @ManyToOne
-    @JoinColumn(name="POSTSCRIPT_POSTSCRIPT")
+    @JoinColumn(name = "POSTSCRIPT_POSTSCRIPT")
     private Postscript postscript;
 
     @ManyToOne

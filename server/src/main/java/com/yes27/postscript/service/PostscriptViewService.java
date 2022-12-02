@@ -13,18 +13,18 @@ public class PostscriptViewService {
 
     private final PostscriptViewRepository postscriptViewRepository;
 
-    public PostscriptViewService(PostscriptViewRepository postscriptViewRepository){
+    public PostscriptViewService(PostscriptViewRepository postscriptViewRepository) {
         this.postscriptViewRepository = postscriptViewRepository;
     }
 
 
-    public int addView(Postscript postscript, Member member){
-        int findView = findVerifiedMemberPostscript(postscript,member);
-        if(findView==0){
+    public int addView(Postscript postscript, Member member) {
+        int findView = findVerifiedMemberPostscript(postscript, member);
+        if (findView == 0) {
             return 0;
         }
 
-        PostscriptView postscriptView=new PostscriptView();
+        PostscriptView postscriptView = new PostscriptView();
         postscriptView.setPostscript(postscript);
         postscriptView.setMember(member);
         postscriptViewRepository.save(postscriptView);
@@ -32,9 +32,9 @@ public class PostscriptViewService {
     }
 
 
-    public int findVerifiedMemberPostscript(Postscript postscript,Member member){
-        Optional<PostscriptView> optionalPostscriptView = postscriptViewRepository.findByPostscriptAndMember(postscript,member);
-        if(optionalPostscriptView.isPresent()){
+    public int findVerifiedMemberPostscript(Postscript postscript, Member member) {
+        Optional<PostscriptView> optionalPostscriptView = postscriptViewRepository.findByPostscriptAndMember(postscript, member);
+        if (optionalPostscriptView.isPresent()) {
             return 0;
         } else {
             return 1;

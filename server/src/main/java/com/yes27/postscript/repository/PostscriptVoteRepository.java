@@ -15,8 +15,6 @@ public interface PostscriptVoteRepository extends JpaRepository<PostscriptVote, 
     //멤버 추가
     Optional<PostscriptVote> findByPostscriptAndMember(Postscript postscript, Member member);
 
-    List<PostscriptVote> findAllByPostscript(long postscriptId);
-
     @Query("SELECT Count(*) from PostscriptVote v where v.postscript = :postscriptId and vote=1")
     int findTotalVoteValue(@Param("postscriptId") Postscript postscriptId);
 

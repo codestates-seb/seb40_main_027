@@ -24,7 +24,6 @@ public interface PostscriptCommentMapper {
 
         PostscriptComment postscriptComment = new PostscriptComment();
 
-//        Member member = memberService.getLoginMember();
         postscriptComment.setPostscriptComment(postscriptCommentPostDto.getPostscriptComment());
         postscriptComment.setPostscript(postscriptService.findVerifiedPostscript(postscriptId));
         postscriptComment.setMember(memberService.getLoginMember());
@@ -39,14 +38,9 @@ public interface PostscriptCommentMapper {
                                                             MemberService memberService) {
 
 
-        if (memberService.getLoginMember().getMemberId() !=postscriptCommentService.findPostscriptCommentWriter(postscriptCommentPatchDto.getPostscriptCommentId()).getMemberId()) { //해당 유저가 쓴 질문글 아니므로 수정 삭제 불가
+        if (memberService.getLoginMember().getMemberId() != postscriptCommentService.findPostscriptCommentWriter(postscriptCommentPatchDto.getPostscriptCommentId()).getMemberId()) { //해당 유저가 쓴 질문글 아니므로 수정 삭제 불가
             throw new BusinessLogicException(ExceptionCode.ACCESS_DENIED_MEMBER);
         }
-//        Member member = memberService.getLoginMember();
-//        if (member.getMemberId() !=
-//                postscriptCommentService.findPostscriptCommentWriter(postscriptCommentPatchDto.getPostCommentId()).getMemberId()) { //본인외 답 수정 삭제 불가
-//            throw new BusinessLogicException(ExceptionCode.ACCESS_DENIED_MEMBER);
-//        }
 
         PostscriptComment postscriptComment = new PostscriptComment();
 
@@ -65,18 +59,11 @@ public interface PostscriptCommentMapper {
                 postscriptComment.getCreatedAt(),
                 postscriptComment.getUpdatedAt(),
                 postscriptComment.getMember().getNickname()
-//                postscriptComment.setMember(memberMapper.memberToMemberResponse(member));
+
 
         );
         return postCommentResponseDto;
-//        postCommentResponseDto.setPostCommentId(postscriptComment.getPostCommentId());
-//        postCommentResponseDto.setPostCommentContent(postscriptComment.getPostCommentContent());
-//        postCommentResponseDto.setCreatedAt(postscriptComment.getCreatedAt());
-//        postCommentResponseDto.setUpdatedAt(postscriptComment.getUpdatedAt());
-//        postCommentResponseDto.setPostscriptId(postscriptComment.getPostscript().getPostscriptId());
 
     }
-
-    PostscriptCommentDto.postCommentResponse postCommentToPostCommentPostResponseDto2(PostscriptComment postscriptComment);
 
 }

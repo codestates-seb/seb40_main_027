@@ -33,10 +33,10 @@ public class PostscriptVoteService {
         this.postscriptRepository = postscriptRepository;
     }
 
-    public PostscriptVote votePostscript(Postscript postscript,Member member, int vote, long postscriptId) {
+
+    public PostscriptVote votePostscript(Postscript postscript, Member member, int vote, long postscriptId) {
 
         PostscriptVote findVote = findVote(postscript, member);
-        Postscript postscript1 = findVerifiedPostscript(postscriptId);
         PostscriptVoteResponseDto voteResponseDto = new PostscriptVoteResponseDto();
         voteResponseDto.setPostscriptId(postscriptId);
 
@@ -62,45 +62,19 @@ public class PostscriptVoteService {
         findVote.setPostscript(postscript);
         findVote.setMember(member);
         findVote.setVote(vote);
-        postscriptService.updateTotalVotes(postscript, totalVote,vote);
+        postscriptService.updateTotalVotes(postscript, totalVote, vote);
         return postscriptVoteRepository.save(findVote);
     }
-        public int getTotalVotes(Postscript postscript){
-            int totalVotes = postscriptVoteRepository.findTotalVoteValue(postscript);
-            return totalVotes;
-        }
-//        Member member = memberService.getLoginMember();
-//
-//        PostscriptVote postscriptVote = postscriptVoteRepository.findByPostscriptAndMember(
-//                postscriptService.findVerifiedPostscript(postscriptId), member);
-//
-//
-//        if (postscriptVote == null) {
-//            PostscriptVote newVote = new PostscriptVote();
-//            newVote.addPostscript(postscriptService.findVerifiedPostscript(postscriptId));
-//            newVote.setVote(vote);
-//            newVote.addMember(member);
-//            postscriptVoteRepository.save(newVote);
-//            postscriptService.refreshVotes(postscriptId);
-//            return newVote;
-//
-//        } else {
-//            postscriptVote.setVote(vote);
-//            postscriptVoteRepository.save(postscriptVote);
-//            postscriptService.refreshVotes(postscriptId);
-//            return postscriptVote;
-//        }
 
-    // 멤버가 투표했는지 여부
-    public PostscriptVote findVote(Postscript postscript, Member member){
-        Optional<PostscriptVote> optionalPostscriptVote = postscriptVoteRepository.findByPostscriptAndMember(postscript, member);
-        PostscriptVote findVote = optionalPostscriptVote.orElseGet(()->new PostscriptVote());
-        return findVote;
+    public int getTotalVotes(Postscript postscript) {
+        int totalVotes = postscriptVoteRepository.findTotalVoteValue(postscript);
+        return totalVotes;
     }
 
-    public Postscript findVerifiedPostscript(Long postscriptId){
-        Optional<Postscript> optionalPostscript=postscriptRepository.findById(postscriptId);
-        Postscript findPostscript = optionalPostscript.orElseThrow(()->new BusinessLogicException(ExceptionCode.POSTSCRIPT_NOT_FOUND));
-        return findPostscript;
+    // 멤버가 투표했는지 여부
+    public PostscriptVote findVote(Postscript postscript, Member member) {
+        Optional<PostscriptVote> optionalPostscriptVote = postscriptVoteRepository.findByPostscriptAndMember(postscript, member);
+        PostscriptVote findVote = optionalPostscriptVote.orElseGet(() -> new PostscriptVote());
+        return findVote;
     }
 }

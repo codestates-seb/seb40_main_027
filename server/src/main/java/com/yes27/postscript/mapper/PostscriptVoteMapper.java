@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface PostscriptVoteMapper {
 
-    default PostscriptVoteResponseDto postscriptToVoteResponseDto (PostscriptVote postscriptVote){
+    default PostscriptVoteResponseDto postscriptToVoteResponseDto(PostscriptVote postscriptVote) {
         PostscriptVoteResponseDto postscriptVoteResponseDto = new PostscriptVoteResponseDto();
         postscriptVoteResponseDto.setPostscriptId(postscriptVote.getPostscript().getPostscriptId());
         postscriptVoteResponseDto.setVote(postscriptVote.getVote());
@@ -16,5 +16,4 @@ public interface PostscriptVoteMapper {
 
         return postscriptVoteResponseDto;
     }
-//    PostscriptVoteResponseDto postscriptToVoteResponseDto(PostscriptVote postscriptVote);
 }

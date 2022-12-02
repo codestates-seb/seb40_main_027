@@ -13,6 +13,6 @@ public interface PostscriptRepository extends JpaRepository<Postscript, Long> {
 
     Page<Postscript> findAllByPostscriptStatus(Pageable pageable, Postscript.PostscriptStatus postscriptStatus);
 
-    List<Postscript> findAllByMemberAndPostscriptStatus(Member member,Postscript.PostscriptStatus postscriptStatus);
+    List<Postscript> findAllByMemberAndPostscriptStatus(Member member, Postscript.PostscriptStatus postscriptStatus);
 
 }
