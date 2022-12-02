@@ -72,7 +72,7 @@ const LoadMap = () => {
   const loadMapBtn = (id: number) => {
     setLinkSelect(id);
   };
-  const LoadMapMenu = [
+  const loadMapMenu = [
     { id: 1, text: 'frontend' },
     { id: 2, text: 'backend' },
   ];
@@ -86,7 +86,7 @@ const LoadMap = () => {
       </ImgMobile>
 
       <ButtonContent>
-        {LoadMapMenu.map((el) => (
+        {loadMapMenu.map((el) => (
           <SelectButton
             key={el.id}
             onClick={() => loadMapBtn(el.id)}
