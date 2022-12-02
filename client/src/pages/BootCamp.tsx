@@ -1,12 +1,12 @@
-import Banner from '../components/Banner';
-import { FilterButton } from '../components/Button';
-import SearchBar from '../components/SearchBar/SearchBar';
 import * as S from './BootCamp.style';
-import { MobileTable, Table } from '../components/Table/Table';
-import Loading from '../components/Loading/Loading';
+import axios from 'axios';
 import { useState, useCallback, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import axios from 'axios';
+import Banner from '../components/Banner';
+import Loading from '../components/Loading/Loading';
+import SearchBar from '../components/SearchBar/SearchBar';
+import { FilterButton } from '../components/Button';
+import { MobileTable, Table } from '../components/Table/Table';
 
 const BootCamp = () => {
   const [items, setItems] = useState([]);
