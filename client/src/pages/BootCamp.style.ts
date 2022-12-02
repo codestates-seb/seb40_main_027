@@ -15,7 +15,7 @@ export const PageWrap = styled.div`
   }
 `;
 
-export const MiddleSection = styled.section`
+export const MiddleDiv = styled.div`
   width: 60vw;
   display: flex;
   justify-content: flex-end;

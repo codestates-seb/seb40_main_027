@@ -3,6 +3,7 @@ import { useRecoilValue } from 'recoil';
 import { logUser } from '../../atoms';
 import Logout from '../Button/Logout';
 import { Icon } from '@iconify/react';
+import { Link } from 'react-router-dom';
 
 const ImgCircle = styled.span`
   height: 4rem;
@@ -28,7 +29,9 @@ const Nickname = () => {
   return (
     <ImgCircle>
       <NicknameArea>
-        <Icon icon="carbon:user-avatar-filled-alt" width="30" height="30" />
+        <Link to="users/mypage">
+          <Icon icon="carbon:user-avatar-filled-alt" width="30" height="30" />
+        </Link>
         <span>{nickname}</span>
       </NicknameArea>
       <LogoutArea>

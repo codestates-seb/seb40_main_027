@@ -12,6 +12,7 @@ const BootCamp = () => {
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [posts, setPosts] = useState<any>([]);
   const [ref, inView] = useInView({
     threshold: 0,
   });
@@ -48,14 +49,13 @@ const BootCamp = () => {
       <section>
         <Banner text="부트캠프 / 학원일정" pageType="other" />
       </section>
-      <S.MiddleSection>
+      <S.MiddleDiv>
         <div>
           <SearchBar />
-          <FilterButton />
+          {/* <FilterButton url="url" setPosts={setPosts} /> */}
         </div>
-      </S.MiddleSection>
+      </S.MiddleDiv>
       <div>
-        {/* <TestTable data={items} /> */}
         <Table data={items} />
       </div>
       <div ref={ref}>{inView ? <Loading /> : null}</div>
