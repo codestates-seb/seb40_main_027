@@ -50,7 +50,7 @@ public class PostscriptDto {
         private Long postscriptId;
         private String postscriptTitle;
         private String postscriptContent;
-        private Postscript.PostscriptStatus postscriptStatus;
+//        private Postscript.PostscriptStatus postscriptStatus;
         private Integer totalVotes; // 좋아요 -> 투표
         private Integer View;
         private LocalDateTime createdAt;
@@ -65,13 +65,14 @@ public class PostscriptDto {
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class PostscriptResponse2 {  // 게시글 상세 조회 response
+    public static class PostscriptDetailResponse {  // 게시글 상세 조회 response
 
         private Long postscriptId;
         private String postscriptTitle;
         private String postscriptContent;
 //        private Postscript.PostscriptStatus postscriptStatus;
         private Integer vote; // 좋아요 -> 투표  -> total X
+        private Integer totalVotes;
         private Integer View;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;

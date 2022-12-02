@@ -23,6 +23,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
+
 @RestController
 @RequestMapping("/postscript")
 @Validated
@@ -37,23 +38,23 @@ public class PostscriptController {
     public PostscriptController(PostscriptService postscriptService,
                                 PostscriptMapper postscriptMapper,
                                 MemberService memberService,
-                                MemberMapper memberMapper){
+                                MemberMapper memberMapper) {
 
         this.postscriptService = postscriptService;
-        this.postscriptMapper =postscriptMapper;
+        this.postscriptMapper = postscriptMapper;
         this.memberService = memberService;
         this.memberMapper = memberMapper;
     }
 
     @PostMapping //선택 조언, 후기 글 게시
-    public ResponseEntity postPostscript(@Valid @RequestBody PostscriptDto.Post postscriptPostDto){
+    public ResponseEntity postPostscript(@Valid @RequestBody PostscriptDto.Post postscriptPostDto) {
 
 
-    Postscript postscript = postscriptService.createPostscript(
-            postscriptMapper.postscriptPostDtoToPostscript(postscriptPostDto,memberService));
+        Postscript postscript = postscriptService.createPostscript(
+                postscriptMapper.postscriptPostDtoToPostscript(postscriptPostDto, memberService));
 
-    return new ResponseEntity<>(
-            new SingleResponseDto<>(postscriptMapper.postscriptToPostscriptResponse2(postscript)), HttpStatus.CREATED);
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(postscriptMapper.postscriptToPostscriptResponse2(postscript)), HttpStatus.CREATED);
 //            new SingleResponseDto<>(postscriptMapper.postscriptToPostscriptResponseDto(postscript,memberMapper)), HttpStatus.CREATED);
     }
 
@@ -61,7 +62,7 @@ public class PostscriptController {
     public ResponseEntity patchPostscript(@PathVariable("postscript-Id") @Positive long postscriptId,
                                           @Valid @RequestBody PostscriptDto.Patch postscriptPatchDto) {
         postscriptPatchDto.setPostscriptId(postscriptId);
-        Postscript postscript = postscriptMapper.postscriptPatchDtoToPostscript(postscriptService, postscriptPatchDto, memberService,postscriptId);
+        Postscript postscript = postscriptMapper.postscriptPatchDtoToPostscript(postscriptService, postscriptPatchDto, memberService, postscriptId);
 
         Postscript updatedPostscript = postscriptService.updatePostscript(postscript);
 
@@ -70,24 +71,60 @@ public class PostscriptController {
 //                new SingleResponseDto<>(postscriptMapper.postscriptToPostscriptResponseDto(postscript,memberMapper)), HttpStatus.CREATED);
     }
 
+//    @GetMapping("/{postscript-Id}") //특정 조언,후기 조회 -> 댓글 포함하고 작성한글 조회, 글 작성후 다시 보여주는 곳, 게시글 상세 조회
+//    public ResponseEntity getPostscript(@PathVariable("postscript-Id") @Positive long postscriptId){
+//
+////        PostscriptDto.PostscriptResponse2 response = postscriptMapper.postscriptToPostscriptResponseDto2(postscriptService.findPostscript(postscriptId), memberMapper);
+//          Postscript postscript = postscriptService.findPostscript(postscriptId);
+//
+//        return new ResponseEntity<>(
+//                new SingleResponseDto<>(postscriptMapper.postscriptToPostscriptDetailResponseDto(postscript, memberMapper)), HttpStatus.OK);
+//    }
+
     @GetMapping("/{postscript-Id}") //특정 조언,후기 조회 -> 댓글 포함하고 작성한글 조회, 글 작성후 다시 보여주는 곳, 게시글 상세 조회
-    public ResponseEntity getPostscript(@PathVariable("postscript-Id") @Positive long postscriptId){
+    public ResponseEntity getPostscript(@PathVariable("postscript-Id") @Positive long postscriptId,
+                                        HttpServletRequest request) {
+        PostscriptDto.PostscriptDetailResponse responseDto = null;
+        try {
+            String email = request.getUserPrincipal().getName();
+            Member member = memberService.findVerifiedMemberByEmail(email);
+            responseDto = postscriptMapper.postscriptToPostscriptDetailResponseDto(postscriptService.LoginView(postscriptId, member), memberMapper);
+        } catch (NullPointerException e) {
+            responseDto = postscriptMapper.postscriptToPostscriptDetailResponseDto(postscriptService.NotLoginView(postscriptId), memberMapper);
+        }
 
-        PostscriptDto.PostscriptResponse2 response = postscriptMapper.postscriptToPostscriptResponseDto2(postscriptService.findPostscript(postscriptId), memberMapper);
-
-        return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(responseDto), HttpStatus.OK);
     }
 
+    //    @GetMapping //작성된 전체 조언,후기 조회 -> 댓글 제외하고 조회되게
+//    public ResponseEntity getPostscripts(@Positive @RequestParam(value="page", defaultValue="1") int page,
+//                                         @Positive @RequestParam(value="size", defaultValue="10") int size,
+//                                         @RequestParam(value="sort", defaultValue="postscriptId") String sort) {
+//        Page<Postscript> pagePostscripts = postscriptService.findPostscripts(page-1, size, sort);
+//        List<Postscript> postscripts = pagePostscripts.getContent();
+//
+//
+//        return new ResponseEntity<>(
+//                new MultiResponseDto<>(postscriptMapper.postscriptsToPostscriptResponseDtos(postscripts, memberMapper), pagePostscripts),HttpStatus.OK);
+//    }
     @GetMapping //작성된 전체 조언,후기 조회 -> 댓글 제외하고 조회되게
-    public ResponseEntity getPostscripts(@Positive @RequestParam(value="page", defaultValue="1") int page,
-                                         @Positive @RequestParam(value="size", defaultValue="10") int size,
-                                         @RequestParam(value="sort", defaultValue="postscriptId") String sort) {
-        Page<Postscript> pagePostscripts = postscriptService.findPostscripts(page-1, size, sort);
+    public ResponseEntity getPostscripts(@Positive @RequestParam(value = "page", defaultValue = "1") int page,
+                                         @Positive @RequestParam(value = "size", defaultValue = "10") int size,
+                                         @RequestParam(value = "sort") String sort) {
+        if (sort == null) {
+            Page<Postscript> pagePostscripts = postscriptService.findLatestPostscripts(page - 1, size);
+            List<Postscript> postscripts = pagePostscripts.getContent();
+            return new ResponseEntity<>(
+                    new MultiResponseDto<>(postscriptMapper.postscriptsToPostscriptResponseDtos(postscripts, memberMapper), pagePostscripts), HttpStatus.OK);
+        }
+
+        Page<Postscript> pagePostscripts = postscriptService.findSortPostscripts(page - 1, size, sort);
         List<Postscript> postscripts = pagePostscripts.getContent();
 
 
-        return new ResponseEntity<>(new MultiResponseDto<>(
-                postscriptMapper.postscriptsToPostscriptResponseDtos(postscripts, memberMapper), pagePostscripts),HttpStatus.OK);
+        return new ResponseEntity<>(
+                new MultiResponseDto<>(postscriptMapper.postscriptsToPostscriptResponseDtos(postscripts, memberMapper), pagePostscripts), HttpStatus.OK);
     }
 
 

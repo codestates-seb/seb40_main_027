@@ -5,6 +5,8 @@ import com.yes27.exception.ExceptionCode;
 import com.yes27.member.entity.Member;
 import com.yes27.member.mapper.MemberMapper;
 import com.yes27.member.service.MemberService;
+import com.yes27.mentoring.dto.MentorDto;
+import com.yes27.mentoring.entity.Mentor;
 import com.yes27.postscripcomment.dto.PostscriptCommentDto;
 import com.yes27.postscripcomment.entity.PostscriptComment;
 import com.yes27.postscript.dto.PostscriptDto;
@@ -100,7 +102,7 @@ public interface PostscriptMapper {
 
         postscriptResponse.setTotalVotes(postscript.getTotalVotes());
 
-        postscriptResponse.setPostscriptStatus(postscript.getPostscriptStatus());
+//        postscriptResponse.setPostscriptStatus(postscript.getPostscriptStatus());
 
         // Member 관계 추가
         Member member = postscript.getMember();//질문 작성자 정보 추가
@@ -118,38 +120,37 @@ public interface PostscriptMapper {
         return postscriptResponse;
     }
 
-    default PostscriptDto.PostscriptResponse2 postscriptToPostscriptResponseDto2(Postscript postscript, MemberMapper memberMapper) {
+    // 게시글 상세 조회 일반
+    default PostscriptDto.PostscriptDetailResponse postscriptToPostscriptDetailResponseDto(Postscript postscript, MemberMapper memberMapper) {
 
         List<PostscriptComment> postscriptComments = postscript.getPostComments();
 
-        PostscriptDto.PostscriptResponse2 postscriptResponse = new PostscriptDto.PostscriptResponse2();
+        PostscriptDto.PostscriptDetailResponse postscriptResponse = new PostscriptDto.PostscriptDetailResponse();
         postscriptResponse.setPostscriptId(postscript.getPostscriptId());
         postscriptResponse.setPostscriptTitle(postscript.getPostscriptTitle());
         postscriptResponse.setPostscriptContent(postscript.getPostscriptContent());
         postscriptResponse.setView(postscript.getView());
 
         postscriptResponse.setVote(postscript.getVote()); // 좋아요 유무 표현
-
-//        postscriptResponse.setPostscriptStatus(postscript.getPostscriptStatus());
+        postscriptResponse.setTotalVotes(postscript.getTotalVotes()); //전체 투표수
 
         // Member 관계 추가
         Member member = postscript.getMember();//질문 작성자 정보 추가
         postscriptResponse.setMember(memberMapper.memberToMemberResponse2(member));
 
         // 태그
-//        postscriptResponse.setTags(tagsToTagResponseDtos(postscript.getTags()).stream().distinct().collect(Collectors.toList()));
         postscriptResponse.setTagName(postscript.getTagName());
         // 댓글
         postscriptResponse.setPostscriptComments(postscriptToPostscriptCommentResponse(postscriptComments));
 
         postscriptResponse.setCreatedAt(postscript.getCreatedAt());
+
         postscriptResponse.setUpdatedAt(postscript.getUpdatedAt());
 
         return postscriptResponse;
     }
 
     PostscriptDto.PostscriptPostResponse postscriptToPostscriptResponse2(Postscript postscript);
-    PostscriptDto.PostscriptPostResponse postscriptToPostscriptResponse3(Postscript postscript);
 
     // Mypage 조회용
     default List<PostscriptDto.PostscriptMypageResponse> postscriptToMypageResponse(List<Postscript> postscripts, MemberMapper memberMapper) {
@@ -176,12 +177,7 @@ public interface PostscriptMapper {
         postscriptMypageResponse.setTotalVotes(postscript.getTotalVotes());
 
 
-
-        // 태그
-//        postscriptResponse.setTags(tagsToTagResponseDtos(postscript.getTags()).stream().distinct().collect(Collectors.toList()));
         postscriptMypageResponse.setTagName(postscript.getTagName());
-        // 댓글
-//        postscriptResponse.setPostComments(postscriptToPostscriptCommentResponse(postscriptComments));
 
         postscriptMypageResponse.setCreatedAt(postscript.getCreatedAt());
         postscriptMypageResponse.setUpdatedAt(postscript.getUpdatedAt());
