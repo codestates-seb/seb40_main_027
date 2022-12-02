@@ -42,8 +42,7 @@ const MyPageLists = ({
 }: PropsType) => {
   const setLogStatus = useRecoilValue(logUser);
   const createTime = formatDistanceToNow(new Date(createdAt), { addSuffix: true, locale: ko });
-  // const updateTime = formatDistanceToNow(new Date(updatedAt ? updatedAt : new Date()), { addSuffix: true, locale: ko });
-
+  //updatedAt은 배포하셨다고 하셨는데 적용이 안되어 있음
   return (
     <S.PostMyPageContent>
       <S.PostLinkMyPage
@@ -51,7 +50,11 @@ const MyPageLists = ({
       >
         <SmallBorderTagButton text={tagName} />
         <S.MyPageListsTitle>{studyTitle || mentoringTitle || postscriptTitle}</S.MyPageListsTitle>
-        <S.MyPageListsContent>{studyContent || mentoringContent || postscriptContent}</S.MyPageListsContent>
+        <S.MyPageListsContent>
+          {studyContent?.replace(/<[^>]*>?/g, ' ') ||
+            mentoringContent?.replace(/<[^>]*>?/g, ' ') ||
+            postscriptContent?.replace(/<[^>]*>?/g, ' ')}
+        </S.MyPageListsContent>
         <S.PostInfoView>
           <S.UserLikeIconList>
             <span>
