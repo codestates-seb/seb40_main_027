@@ -79,15 +79,6 @@ const ForumDetail = ({ page = 1 }: PropsType) => {
           </S.LikeContainer>
 
           <S.CommentsContainer>
-            {/* {post[`${forumType}Comments`].map((comment: any) => (
-              <S.CommentContainer key={comment.postCommentId}>
-                <S.CommentInfoContainer>
-                  <ForumWrittenInfo position="left" author={comment.nickname} createdAt={comment.createdAt} />
-                  <MoreButton buttonType="comment" forumType={forumType} id={comment[`${forumType}CommentId`]} />
-                </S.CommentInfoContainer>
-                <div>{comment[`${forumType}Comment`]}</div>
-              </S.CommentContainer>
-            ))} */}
             {forumType === 'postscript' ? (
               <ForumArticlesAnswer />
             ) : forumType === 'study' ? (
