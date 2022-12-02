@@ -24,11 +24,9 @@ export const TestTable = ({ data }: any) => {
   return (
     <div>
       {data.map((el: any, idx: any) => (
-        <>
-          <Link to={`/bootcamp/${el.bootcampId}`} key={idx}>
-            <div>{el.bootcampId}</div>
-          </Link>
-        </>
+        <Link to={`/bootcamp/${el.bootcampId}`} key={idx}>
+          <div>{el.bootcampId}</div>
+        </Link>
       ))}
     </div>
   );

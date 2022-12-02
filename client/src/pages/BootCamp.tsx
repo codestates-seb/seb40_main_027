@@ -52,7 +52,7 @@ const BootCamp = () => {
       <S.MiddleDiv>
         <div>
           <SearchBar />
-          {/* <FilterButton url="url" setPosts={setPosts} /> */}
+          <FilterButton url="url" setPosts={setPosts} />
         </div>
       </S.MiddleDiv>
       <div>
