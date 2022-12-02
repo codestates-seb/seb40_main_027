@@ -26,7 +26,7 @@ const ForumContentHeader = ({ url, setPosts }: PropsType) => {
       </S.TagsContainer>
       <S.OtherContainer>
         <SearchBar />
-        <FilterButton url={url} setPosts={setPosts} />
+        <FilterButton pageType="forum" url={url} setPosts={setPosts} />
         <WriteButton forumType={forumType} />
       </S.OtherContainer>
     </S.ContentHeader>
