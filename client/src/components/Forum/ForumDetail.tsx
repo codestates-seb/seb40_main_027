@@ -9,6 +9,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { readPost, votePost } from '../../utils/api/forumAPI';
+import StudyAnswer from '../Answer/StudyAnswer';
+import ForumArticlesAnswer from '../Answer/ForumArticlesAnswer';
+import MentoringAnswer from '../Answer/MentoringAnswer';
 
 interface PropsType {
   page?: number;
@@ -92,30 +95,13 @@ const ForumDetail = ({ page = 1 }: PropsType) => {
           </S.LikeContainer>
 
           <S.CommentsContainer>
-            {post[`${forumType}Comments`].map((comment: any) => (
-              <S.CommentContainer key={comment.postCommentId}>
-                <S.CommentInfoContainer>
-                  <ForumWrittenInfo position="left" author={comment.nickname} createdAt={comment.createdAt} />
-                  <MoreButton buttonType="comment" forumType={forumType} id={comment[`${forumType}CommentId`]} />
-                </S.CommentInfoContainer>
-                <div>{comment[`${forumType}Comment`]}</div>
-              </S.CommentContainer>
-            ))}
-
-            <S.NewCommentContainer>
-              <div>
-                <ForumWrittenInfo position="left" author="지금 로그인한 사람" />
-                <span>0 / 500</span>
-              </div>
-              <S.Form>
-                <label>
-                  <textarea placeholder="댓글을 남겨주세요." />
-                </label>
-                <div>
-                  <BackgroundOtherButton text="등록" color={GREEN_MAIN} />
-                </div>
-              </S.Form>
-            </S.NewCommentContainer>
+            {forumType === 'postscript' ? (
+              <ForumArticlesAnswer />
+            ) : forumType === 'study' ? (
+              <StudyAnswer />
+            ) : (
+              <MentoringAnswer />
+            )}
           </S.CommentsContainer>
         </S.ContentContainer>
       )}

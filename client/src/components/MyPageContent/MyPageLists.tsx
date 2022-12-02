@@ -2,39 +2,67 @@ import { InlineIcon } from '@iconify/react';
 import * as S from './MyPageLists.style';
 import { formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
+import { useRecoilValue } from 'recoil';
+import { logUser } from '../../atoms/index';
+import { Icon } from '@iconify/react';
+import { SmallBorderTagButton } from '../Button';
 
 interface PropsType {
-  list: {
-    postscriptId?: number;
-    postscriptTitle: string;
-    postscriptContent: string;
-    view: number;
-    like: number;
-    user: {
-      userId: number;
-      name: string;
-      userEmail: string;
-    };
-    createdAt: string;
-    updatedAt?: string;
-  };
+  mentoringId?: number;
+  mentoringTitle?: string;
+  mentoringContent?: string;
+  postscriptId?: number;
+  postscriptTitle?: string;
+  postscriptContent?: string;
+  studyId?: number;
+  studyTitle?: string;
+  studyContent?: string;
+  totalVotes: number;
+  createdAt: string;
+  updatedAt: string;
+  tagName: string;
+  view: number;
 }
 
-const MyPageLists = ({ list }: PropsType) => {
-  const createTime = formatDistanceToNow(new Date(list.createdAt), { locale: ko });
-  const updateTime = formatDistanceToNow(new Date(list.updatedAt ? list.updatedAt : new Date()), { locale: ko });
+const MyPageLists = ({
+  studyId,
+  studyTitle,
+  studyContent,
+  postscriptId,
+  postscriptTitle,
+  postscriptContent,
+  mentoringId,
+  mentoringTitle,
+  mentoringContent,
+  totalVotes,
+  createdAt,
+  updatedAt,
+  tagName,
+  view,
+}: PropsType) => {
+  const setLogStatus = useRecoilValue(logUser);
+  const createTime = formatDistanceToNow(new Date(createdAt), { addSuffix: true, locale: ko });
+  // const updateTime = formatDistanceToNow(new Date(updatedAt ? updatedAt : new Date()), { addSuffix: true, locale: ko });
+
   return (
     <S.PostMyPageContent>
-      <S.PostLinkMyPage to={`/postscript/${list.postscriptId}`}>
-        <S.MyPageListsTitle>{list.postscriptTitle}</S.MyPageListsTitle>
-        <S.MyPageListsContent>{list.postscriptContent}</S.MyPageListsContent>
+      <S.PostLinkMyPage
+        to={postscriptId ? `/postscript/${postscriptId}` : studyId ? `/study/${studyId}` : `/mentoring/${mentoringId}`}
+      >
+        <SmallBorderTagButton text={tagName} />
+        <S.MyPageListsTitle>{studyTitle || mentoringTitle || postscriptTitle}</S.MyPageListsTitle>
+        <S.MyPageListsContent>{studyContent || mentoringContent || postscriptContent}</S.MyPageListsContent>
         <S.PostInfoView>
           <S.UserLikeIconList>
-            {list.view ? <span>조회{list.view}</span> : null}
-            {list.updatedAt ? <div> {updateTime}</div> : <div> {createTime}</div>}
+            <span>
+              <Icon icon="carbon:user-avatar-filled-alt" width="25" height="12" />
+            </span>
+            {setLogStatus.nickname}
+            {view ? <span>조회{view}</span> : null}
+            <span>{createTime}</span>
             <div>
               <InlineIcon icon="akar-icons:heart" />
-              {list.like}
+              {totalVotes}
             </div>
           </S.UserLikeIconList>
         </S.PostInfoView>
