@@ -6,7 +6,7 @@ export const AnswerTextContent = styled.div`
   border-bottom: 1px solid black;
   padding-left: 1rem;
 
-  &:last-child(1) {
+  &:last-child {
     border: none;
   }
 `;
@@ -23,7 +23,7 @@ export const TimeOrName = styled.div`
   justify-content: space-between;
   margin-top: 0.5rem;
 
-  span:nth-last-child(1) {
+  span:last-child {
     margin-left: 1rem;
     margin-top: 0;
     align-items: flex-start;
