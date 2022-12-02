@@ -47,8 +47,6 @@ const ButtonContent = styled.div`
 `;
 const SelectButton = styled.button`
   margin: 10vh 0 20vh 1rem;
-  /* width: ${(props) => (props.className === 'select-btn' ? '35vw' : '30vw')};
-  height: ${(props) => (props.className === 'select-btn' ? '35vh' : '30vh')}; */
   width: 30vw;
   height: 30vh;
   border: 2px solid var(--greenMain);
@@ -61,8 +59,6 @@ const SelectButton = styled.button`
   }
 
   @media screen and (max-width: 414px) {
-    /* width: ${(props) => (props.className === 'select-btn' ? '90vw' : '80vw')};
-    height: ${(props) => (props.className === 'select-btn' ? '23vh' : '20vh')}; */
     width: 80vw;
     height: 20vh;
     font-size: 2rem;
@@ -73,10 +69,10 @@ const SelectButton = styled.button`
 const LoadMap = () => {
   const [linkSelect, setLinkSelect] = useState<number>(0);
 
-  const LoadMapBtn = (id: number) => {
+  const loadMapBtn = (id: number) => {
     setLinkSelect(id);
   };
-  const Loadmapmenu = [
+  const LoadMapMenu = [
     { id: 1, text: 'frontend' },
     { id: 2, text: 'backend' },
   ];
@@ -90,10 +86,10 @@ const LoadMap = () => {
       </ImgMobile>
 
       <ButtonContent>
-        {Loadmapmenu.map((el) => (
+        {LoadMapMenu.map((el) => (
           <SelectButton
             key={el.id}
-            onClick={() => LoadMapBtn(el.id)}
+            onClick={() => loadMapBtn(el.id)}
             className={linkSelect === el.id ? 'select-btn' : 'nonselect-btn'}
           >
             <a href={`https://roadmap.sh/${el.text}`} target="_blank" rel="noreferrer">
