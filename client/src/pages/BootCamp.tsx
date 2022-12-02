@@ -11,10 +11,11 @@ import { MobileTable, Table } from '../components/Table/Table';
 const BootCamp = () => {
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState<number>();
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState<any>([]);
   const [ref, inView] = useInView({
-    threshold: 0,
+    threshold: 1,
   });
 
   const getItems = useCallback(async (page: any) => {
@@ -22,6 +23,7 @@ const BootCamp = () => {
     await axios.get(`/bootcamp?page=${page}&size=10&sort=finalRegisterDate`).then((res) => {
       console.log('then render');
       setItems((items) => items.concat(res.data.data));
+      setTotalPages(res.data.pageInfo.totalPages);
     });
     setLoading(false);
   }, []);
@@ -32,9 +34,9 @@ const BootCamp = () => {
 
   useEffect(() => {
     if (inView && !loading) {
-      if (page < 19) {
+      if (page < totalPages!) {
         setPage(page + 1);
-      } else if (page === 19) {
+      } else if (page === totalPages) {
         setLoading(false);
       }
     }
