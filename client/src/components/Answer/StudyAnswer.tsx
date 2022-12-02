@@ -35,7 +35,7 @@ const StudyAnswer = () => {
     });
   };
 
-  const AsyncFunction = async () => {
+  const asyncFunction = async () => {
     try {
       await postComment();
       const getAwait = await getComment('study', `${id}`);
@@ -50,7 +50,7 @@ const StudyAnswer = () => {
   };
 
   const SummitAnswerBtn = () => {
-    AsyncFunction();
+    asyncFunction();
     setStudynAnswerContents('');
   };
 
