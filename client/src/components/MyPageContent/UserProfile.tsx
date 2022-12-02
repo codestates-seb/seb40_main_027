@@ -1,9 +1,11 @@
 import { Icon } from '@iconify/react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Withdrawal from '../Withdrawal';
 import * as S from './UserProfile.style';
+import { useRecoilValue } from 'recoil';
+import { logUser } from '../../atoms/index';
 
 interface IFormInput {
   nickname: String;
@@ -18,6 +20,11 @@ interface RespondsBodyUser {
   };
 }
 
+interface UserInfoProps {
+  memberId: number;
+  email: string;
+  nickname: string;
+}
 const UserProfile = () => {
   const {
     register,
@@ -27,7 +34,27 @@ const UserProfile = () => {
   } = useForm<IFormInput>({ mode: 'onBlur' });
   const [updateProfile, setUpdateProfile] = useState<boolean>(false);
   const [userUpdate, setUserUpdate] = useState<RespondsBodyUser | undefined>();
+  const usersInfo = useRecoilValue(logUser);
+  const access = localStorage.getItem('access');
+  const [userInfo, setUserInfo] = useState<UserInfoProps>();
 
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: '/users/mypage/userInfo',
+      headers: {
+        Authorization: access,
+      },
+    })
+      .then((res) => {
+        const { data } = res;
+        setUserInfo(data.data);
+      })
+      .catch(() => {
+        console.log('err');
+      });
+  }, []);
+  console.log(userInfo);
   const MyProfileSubmit: SubmitHandler<IFormInput> = (data) => {
     axios({
       method: 'patch',
@@ -65,7 +92,7 @@ const UserProfile = () => {
                 },
               })}
             />
-            <div>{errors.email?.message}</div>
+            <S.ErrorMessage>{errors.email?.message}</S.ErrorMessage>
             <label htmlFor="nickname">nickname</label>
             <S.InputProfileForm
               {...register('nickname', {
@@ -75,7 +102,7 @@ const UserProfile = () => {
                 },
               })}
             />
-            <div>{errors.nickname?.message}</div>
+            <S.ErrorMessage>{errors.nickname?.message}</S.ErrorMessage>
             <label htmlFor="password">비밀번호</label>
             <S.InputProfileForm
               {...register('password', {
@@ -85,7 +112,7 @@ const UserProfile = () => {
                 },
               })}
             />
-            <div>{errors.password?.message}</div>
+            <S.ErrorMessage>{errors.password?.message}</S.ErrorMessage>
 
             <input type="submit" />
           </S.FromInputProFile>
@@ -100,8 +127,9 @@ const UserProfile = () => {
           </S.PictureProfile>
           <div className="user-info">
             email
-            <S.UserInfoFormEmail>{userUpdate ? userUpdate.data.email : 'a'}</S.UserInfoFormEmail>
-            nickname<S.UserInfoFormEmail>{userUpdate ? userUpdate.data.nickname : 'a'}</S.UserInfoFormEmail>
+            <S.UserInfoFormEmail>{userUpdate ? userUpdate.data.email : userInfo?.email}</S.UserInfoFormEmail>
+            nickname
+            <S.UserInfoFormEmail>{userUpdate ? userUpdate.data.nickname : userInfo?.nickname}</S.UserInfoFormEmail>
           </div>
         </S.UserProfileUpdateBody>
       )}
