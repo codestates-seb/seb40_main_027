@@ -76,7 +76,7 @@ const AnswerListView = ({
     }
   };
 
-  const PatchHanlder = (e: React.MouseEvent<HTMLElement>) => {
+  const patchHanlder = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     patchAsync();
     setIsPatch(!isPatch);
@@ -98,7 +98,7 @@ const AnswerListView = ({
             onChange={setCommentValue}
             placeholder={`${postscriptComment}`}
           />
-          <QuillContainer patchHandler={PatchHanlder} editHandler={editHandler} />
+          <QuillContainer patchHandler={patchHanlder} editHandler={editHandler} />
         </div>
       ) : (
         <div>
