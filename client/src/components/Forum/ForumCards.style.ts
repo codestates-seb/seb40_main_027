@@ -82,3 +82,7 @@ export const MainContainer = styled.main`
     display: block;
   }
 `;
+
+export const RefDiv = styled.div`
+  height: 20px;
+`;
