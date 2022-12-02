@@ -18,15 +18,13 @@ const columns = ['이름', '등록일', '교육기간', '과정', '총 비용', 
 const MyPageTable = () => {
   const [bootList, setBootList] = useState<BootData[]>();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-  const [offset, setOffset] = useState(0);
+
   const access = localStorage.getItem('access');
   const linkTableHandler = (id: number) => {
     navigate(`/bootcamp/${id}`);
   };
 
   const getItem = async () => {
-    setLoading(true);
     await axios.get('mypage/bootcampLike').then((res) => {
       setBootList(res.data.data);
     });
