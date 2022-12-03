@@ -3,6 +3,7 @@ import theme from '../styles/theme';
 
 export const PageWrap = styled.div`
   width: 100vw;
+  min-height: 1080px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -31,5 +32,6 @@ export const MiddleDiv = styled.div`
 `;
 
 export const RefDiv = styled.div`
-  height: 20px;
+  bottom: 0;
+  height: 100%;
 `;

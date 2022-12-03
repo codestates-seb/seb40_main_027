@@ -42,10 +42,23 @@ export const Detail = styled.div`
           font-size: 4vw;
         }
         :first-child {
-          margin-left: calc(100vh / 50);
+          margin-left: calc(100vh / 70);
+          width: 50%;
         }
         :last-child {
-          margin-right: calc(100vh / 60);
+          margin-right: calc(100vh / 70);
+          max-width: 50%;
+        }
+        a {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-left: 0;
+          width: 100%;
+          > span {
+            width: 70%;
+            word-wrap: break-word;
+          }
         }
       }
     }
@@ -56,7 +69,7 @@ export const Detail = styled.div`
 `;
 
 export const RowHeader = styled.div`
-  width: 65%;
+  width: 70%;
   height: 20%;
   border: 1px solid var(--greenMain);
   font-size: 1.12vw;
