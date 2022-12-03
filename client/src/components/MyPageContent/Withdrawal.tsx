@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import * as S from './Withdrawal.style';
-
+import Swal from 'sweetalert2';
 const Withdrawal = () => {
   const navigate = useNavigate();
 
@@ -13,7 +13,13 @@ const Withdrawal = () => {
       })
         .then(() => {
           navigate('/');
-          alert('회원탈퇴가 되었습니다');
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: '탈퇴되었습니다',
+            showConfirmButton: false,
+            timer: 1500,
+          });
         })
         .catch(() => console.log('err'));
     }
