@@ -2,10 +2,8 @@ import { Icon } from '@iconify/react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Withdrawal from '../Withdrawal';
+import Withdrawal from './Withdrawal';
 import * as S from './UserProfile.style';
-import { useRecoilValue } from 'recoil';
-import { logUser } from '../../atoms/index';
 
 interface IFormInput {
   nickname: String;
@@ -34,7 +32,6 @@ const UserProfile = () => {
   } = useForm<IFormInput>({ mode: 'onBlur' });
   const [updateProfile, setUpdateProfile] = useState<boolean>(false);
   const [userUpdate, setUserUpdate] = useState<RespondsBodyUser | undefined>();
-  const usersInfo = useRecoilValue(logUser);
   const access = localStorage.getItem('access');
   const [userInfo, setUserInfo] = useState<UserInfoProps>();
 
@@ -50,11 +47,11 @@ const UserProfile = () => {
         const { data } = res;
         setUserInfo(data.data);
       })
-      .catch(() => {
-        console.log('err');
+      .catch((err) => {
+        console.log(`"err":${err}`);
       });
   }, []);
-  console.log(userInfo);
+
   const MyProfileSubmit: SubmitHandler<IFormInput> = (data) => {
     axios({
       method: 'patch',
@@ -67,14 +64,15 @@ const UserProfile = () => {
         setUpdateProfile(!updateProfile);
         reset();
       })
-      .catch(() => console.log('err'));
+      .catch((err) => {
+        console.log(`"err":${err}`);
+      });
   };
 
   const onClickUpdate = () => {
     setUpdateProfile(!updateProfile);
   };
 
-  //밑에 보이는 칸에 기존로그인 정보가 있으면 그걸 넣고 만약 변경시 새로운 데이터가 들어가는 조건문을 로그인이 구현시 짜줄예정
   return (
     <S.MyProfileView>
       {updateProfile ? (
