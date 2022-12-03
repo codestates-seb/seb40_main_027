@@ -57,6 +57,9 @@ const UserProfile = () => {
       method: 'patch',
       url: '/users',
       data: { data },
+      headers: {
+        Authorization: access,
+      },
     })
       .then((res) => {
         const dataType = res.data;
