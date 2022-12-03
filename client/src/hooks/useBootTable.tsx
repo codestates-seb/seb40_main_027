@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { DataType } from '../components/Table/DetailTable';
 
 export const useGetBootTable = () => {
   const [data, setData] = useState('');
@@ -46,7 +45,6 @@ export const useGetBootSpecificTable = (pathId: string) => {
       },
     })
       .then((resopnse) => {
-        console.log(resopnse.data);
         setData(resopnse.data.data);
       })
       .catch((err) => alert(err));
