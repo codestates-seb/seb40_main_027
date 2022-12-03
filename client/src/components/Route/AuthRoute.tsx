@@ -15,11 +15,7 @@ const AuthoRoute = () => {
     }
   }, []);
 
-  return (
-    <div>
-      <Outlet />
-    </div>
-  );
+  return <Outlet />;
 };
 
 export default AuthoRoute;

@@ -34,18 +34,18 @@ function App() {
         <Route path="/bootcamp/1" element={<BootCampDetail />} />
         <Route path="/postscript" element={<Forum />} />
         <Route path="/postscript/:id" element={<Forum />} />
-        <Route path="/postscript/update" element={<Forum />} />
         <Route path="/study" element={<Forum />} />
         <Route path="/study/:id" element={<Forum />} />
-        <Route path="/study/update" element={<Forum />} />
         <Route path="/mentoring" element={<Forum />} />
         <Route path="/mentoring/:id" element={<Forum />} />
-        <Route path="/mentoring/update" element={<Forum />} />
         <Route path="/*" element={<PageNotFound />} />
         <Route element={<AuthoRoute />}>
-          <Route path="/study/write" element={<Forum />} />
+          <Route path="/postscript/update" element={<Forum />} />
+          <Route path="/mentoring/update" element={<Forum />} />
+          <Route path="/study/update" element={<Forum />} />
           <Route path="/postscript/write" element={<Forum />} />
           <Route path="/mentoring/write" element={<Forum />} />
+          <Route path="/study/write" element={<Forum />} />
           <Route path="/users/mypage" element={<MyPage />} />
         </Route>
       </Routes>
