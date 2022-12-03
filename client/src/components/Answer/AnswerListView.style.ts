@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import QuillContentBody from '../../styles/QuillContentBody.style';
 import { StyledBackgroundButton } from '../Button/BackgroundButton';
 import { StyledBorderButton } from '../Button/BorderButton';
 
@@ -51,7 +52,7 @@ export const NameZone = styled.span`
   flex-direction: row;
 `;
 
-export const TextArea = styled.div`
+export const TextArea = styled(QuillContentBody)`
   margin-left: 1rem;
   overflow: hidden;
 `;
