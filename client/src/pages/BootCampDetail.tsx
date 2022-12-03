@@ -40,8 +40,8 @@ const BootCampDetail = () => {
         Authorization: localStorage.getItem('access'),
       },
     })
-      .then((resopnse) => {
-        setItems(resopnse.data.data);
+      .then((response) => {
+        setItems(response.data.data);
       })
       .catch((err) => alert(err));
   }, [check]);

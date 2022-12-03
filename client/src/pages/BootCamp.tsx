@@ -19,13 +19,12 @@ const BootCamp = () => {
   });
 
   const getItems = useCallback(async (page: number) => {
-    await setLoading(true);
+    setLoading(true);
     await axios.get(`/bootcamp?page=${page}&size=10&sort=finalRegisterDate`).then((res) => {
-      console.log('i am', page);
       setItems((items) => items.concat(res.data.data));
       setTotalPages(res.data.pageInfo.totalPages);
     });
-    await setLoading(false);
+    setLoading(false);
   }, []);
 
   useEffect(() => {

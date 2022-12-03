@@ -1,12 +1,10 @@
 import axios from 'axios';
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
 import { useInView } from 'react-intersection-observer';
 import * as S from './MyPageTable.style';
 import Loading from '../Loading/Loading';
 import { BootLikeButton } from './BootLikeButton';
-import { bootListMyPage } from '../../atoms/index';
 
 interface BootDataProps {
   bootcampId: number;
@@ -39,7 +37,7 @@ const MyPageTable = () => {
   };
 
   const getItems = useCallback(async (page: number) => {
-    await setLoading(true);
+    setLoading(true);
 
     await axios({
       method: 'get',
@@ -48,12 +46,11 @@ const MyPageTable = () => {
         Authorization: access,
       },
     }).then((res) => {
-      console.log('i am', page);
       setBootList((bootList) => bootList.concat(res.data.data));
       setTotalPages(res.data.pageInfo.totalPages);
     });
 
-    await setLoading(false);
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -97,8 +94,8 @@ const MyPageTable = () => {
             );
           })}
         </tbody>
-        <S.RefDiv ref={ref}>{inView && loading ? <Loading /> : null}</S.RefDiv>
       </S.TableSchedule>
+      <S.RefDiv ref={ref}>{inView && loading ? <Loading /> : null}</S.RefDiv>
     </>
   );
 };

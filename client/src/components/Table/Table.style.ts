@@ -1,4 +1,3 @@
-import { ContentWrapper } from './../../pages/Forum.style';
 import styled from 'styled-components';
 import theme from '../../styles/theme';
 import { Link } from 'react-router-dom';

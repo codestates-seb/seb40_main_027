@@ -19,7 +19,6 @@ export const readAllPosts = async (url: string, setPosts: React.Dispatch<any>, s
 export const getAllPostsInfinite = async (
   url: string,
   setPosts: React.Dispatch<any>,
-  posts: any,
   setTotalPages: React.Dispatch<any>
 ) => {
   try {
@@ -28,7 +27,6 @@ export const getAllPostsInfinite = async (
     if (res.status !== 200) {
       throw new Error(`${res.status}`);
     }
-    console.log(res.data.pageInfo.totalPages);
     setPosts((posts: any) => posts.concat(res.data.data));
     setTotalPages(res.data.pageInfo.totalPages);
   } catch (err) {

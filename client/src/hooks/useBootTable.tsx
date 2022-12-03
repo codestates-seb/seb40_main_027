@@ -8,8 +8,8 @@ export const useGetBootTable = () => {
     method: 'get',
     url: '/bootcamp/page=1&size=10&sort=beginRegisterDate',
   })
-    .then((resopnse) => {
-      setData(resopnse.data);
+    .then((response) => {
+      setData(response.data);
     })
     .catch((err) => alert(err));
 
@@ -44,8 +44,8 @@ export const useGetBootSpecificTable = (pathId: string) => {
         Authorization: localStorage.getItem('access'),
       },
     })
-      .then((resopnse) => {
-        setData(resopnse.data.data);
+      .then((response) => {
+        setData(response.data.data);
       })
       .catch((err) => alert(err));
   }, []);
