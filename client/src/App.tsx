@@ -37,17 +37,17 @@ function App() {
         <Route path="/postscript/update" element={<Forum />} />
         <Route path="/study" element={<Forum />} />
         <Route path="/study/:id" element={<Forum />} />
+        <Route path="/study/update" element={<Forum />} />
+        <Route path="/mentoring" element={<Forum />} />
+        <Route path="/mentoring/:id" element={<Forum />} />
+        <Route path="/mentoring/update" element={<Forum />} />
+        <Route path="/*" element={<PageNotFound />} />
         <Route element={<AuthoRoute />}>
           <Route path="/study/write" element={<Forum />} />
           <Route path="/postscript/write" element={<Forum />} />
           <Route path="/mentoring/write" element={<Forum />} />
           <Route path="/users/mypage" element={<MyPage />} />
         </Route>
-        <Route path="/study/update" element={<Forum />} />
-        <Route path="/mentoring" element={<Forum />} />
-        <Route path="/mentoring/:id" element={<Forum />} />
-        <Route path="/mentoring/update" element={<Forum />} />
-        <Route path="/*" element={<PageNotFound />} />
       </Routes>
       {pathname === '/users/login' || pathname === '/users/signup' ? null : <Footer />}
     </>
