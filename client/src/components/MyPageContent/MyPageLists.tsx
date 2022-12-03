@@ -1,10 +1,9 @@
-import { InlineIcon } from '@iconify/react';
+import { InlineIcon, Icon } from '@iconify/react';
 import * as S from './MyPageLists.style';
 import { formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { useRecoilValue } from 'recoil';
 import { logUser } from '../../atoms/index';
-import { Icon } from '@iconify/react';
 import { SmallBorderTagButton } from '../Button';
 
 interface PropsType {
@@ -42,7 +41,7 @@ const MyPageLists = ({
 }: PropsType) => {
   const setLogStatus = useRecoilValue(logUser);
   const createTime = formatDistanceToNow(new Date(createdAt), { addSuffix: true, locale: ko });
-  //updatedAt은 배포하셨다고 하셨는데 적용이 안되어 있음
+
   return (
     <S.PostMyPageContent>
       <S.PostLinkMyPage
