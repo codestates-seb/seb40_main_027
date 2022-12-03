@@ -1,5 +1,6 @@
 import axios from 'axios';
 const access = localStorage.getItem('access');
+import Swal from 'sweetalert2';
 
 export const getComment = (url: string, id: string) => {
   return axios({
@@ -17,7 +18,12 @@ export const deleteComment = (id: string, url: string) => {
     },
   })
     .then(() => {
-      alert('삭제하시겠습니까?');
+      Swal.fire({
+        text: '삭제하시겠습니까?',
+        showCancelButton: true,
+        confirmButtonColor: 'var(--greenMain)',
+        cancelButtonColor: 'var(--grayContentsBorder)',
+      });
     })
     .catch((err) => console.log(err));
 };
