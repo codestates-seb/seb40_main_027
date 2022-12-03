@@ -10,6 +10,7 @@ import com.yes27.auth.jwt.JwtVerificationFilter;
 import com.yes27.auth.utils.CustomAuthorityUtils;
 import com.yes27.member.repository.MemberRepository;
 import java.util.Arrays;
+import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -23,8 +24,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 public class SecurityConfig {
@@ -46,6 +45,8 @@ public class SecurityConfig {
             .and()
             .csrf().disable()
 //            .cors(withDefaults())
+            .cors().configurationSource(corsConfigurationSource())  // cors 관련 추가
+            .and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)  // 항상 세션 생성하지 않도록 구성
             .and()
             .formLogin().disable()
@@ -94,13 +95,19 @@ public class SecurityConfig {
     }
 
     @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PATCH", "DELETE"));
-
+    public CorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.addAllowedHeader("*");
+        configuration.addAllowedMethod("*");
+//        configuration.addAllowedOriginPattern("*");
+//        configuration.addAllowedOrigin("https://api.mozzidev.com");
+        configuration.addAllowedOrigin("http://bootlamp.s3-website.ap-northeast-2.amazonaws.com");
+//        configuration.addAllowedOrigin("http://localhost:8080");
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedMethods(List.of("GET", "POST", "DELETE", "PATCH"));
         source.registerCorsConfiguration("/**", configuration);
+
         return source;
     }
 }
