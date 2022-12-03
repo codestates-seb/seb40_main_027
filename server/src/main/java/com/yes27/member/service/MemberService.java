@@ -53,9 +53,6 @@ public class MemberService {
 
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     public Member updateMember(Member member, MemberDto.Patch patchDto) {
-        verifyExistsEmail(patchDto.getEmail());
-
-        Optional.ofNullable(patchDto.getEmail()).ifPresent(email -> member.setEmail(email));
         Optional.ofNullable(patchDto.getNickname()).ifPresent(nickname -> member.setNickname(nickname));
         Optional.ofNullable(patchDto.getPassword()).ifPresent(password -> member.setPassword(passwordEncoder.encode(password)));
 
