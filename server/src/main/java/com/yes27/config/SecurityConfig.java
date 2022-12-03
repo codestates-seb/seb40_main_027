@@ -45,7 +45,7 @@ public class SecurityConfig {
             .headers().frameOptions().sameOrigin()
             .and()
             .csrf().disable()
-            .cors(withDefaults())
+//            .cors(withDefaults())
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)  // 항상 세션 생성하지 않도록 구성
             .and()
             .formLogin().disable()
