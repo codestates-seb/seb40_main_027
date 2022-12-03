@@ -1,16 +1,16 @@
-import { useState } from 'react';
 import * as S from './StartForm.style';
 import WarningWindow from './WarningWindow';
+import { useRecoilState } from 'recoil';
+import { isStart } from '../../atoms/index';
 
 const StartForm = () => {
-  const [isStart, setIsStart] = useState<boolean>(false);
-
+  const [isStarting, setIsStarting] = useRecoilState(isStart);
   const StartHandler = () => {
-    setIsStart(!isStart);
+    setIsStarting(!isStarting);
   };
   return (
     <S.StartFormView>
-      {isStart ? (
+      {isStarting ? (
         <WarningWindow />
       ) : (
         <S.StartView>
