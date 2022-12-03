@@ -21,6 +21,10 @@ export const noContent = atom({
   default: 0,
 });
 
+export const isStart = atom({
+  key: 'isStart',
+  default: false,
+});
 export const logUser = atom({
   key: 'logUser',
   default: {
