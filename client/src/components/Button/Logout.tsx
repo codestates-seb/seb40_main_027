@@ -6,7 +6,6 @@ import * as S from './Logout.style';
 
 const Logout = () => {
   const navigate = useNavigate();
-  const { pathname } = useLocation();
   const setLogStatus = useSetRecoilState(logUser);
 
   const LogoutHandler = () => {
@@ -26,7 +25,7 @@ const Logout = () => {
           });
           localStorage.removeItem('access');
           localStorage.removeItem('refresh');
-          navigate(`${pathname}`);
+          navigate('/');
           alert('로그아웃이 되었습니다');
         })
         .catch(() => console.log('err'));
