@@ -18,6 +18,7 @@ const HeaderContent = styled.header`
   }
 
   img {
+    padding-top: 0.5rem;
     width: 150px;
     height: 60px;
   }
