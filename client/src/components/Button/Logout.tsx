@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { logUser } from '../../atoms';
 import * as S from './Logout.style';
