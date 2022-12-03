@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { InlineIcon } from '@iconify/react';
 import { StyledBackgroundButton } from './BackgroundButton';
+import { useNavigate } from 'react-router-dom';
 
 const StyledButton = styled(StyledBackgroundButton)`
   width: 96px;
@@ -30,9 +31,19 @@ const StyledButton = styled(StyledBackgroundButton)`
   }
 `;
 
-export const WriteButton = () => {
+interface PropsType {
+  forumType: string;
+}
+
+export const WriteButton = ({ forumType }: PropsType) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/${forumType}/write`);
+  };
+
   return (
-    <StyledButton>
+    <StyledButton onClick={handleClick}>
       <InlineIcon icon="bi:pencil" />
       <span>작성하기</span>
     </StyledButton>

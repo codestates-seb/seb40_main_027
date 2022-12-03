@@ -3,116 +3,111 @@ import { BackgroundOtherButton, SmallBorderTagButton, MoreButton } from '../Butt
 import { GRAY_LIST_FILL, GREEN_MAIN } from '../../assets/constant/COLOR';
 import ForumWrittenInfo from './ForumWrittenInfo';
 import { InlineIcon } from '@iconify/react';
+import DOMPurify from 'dompurify';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { formatDistanceToNow } from 'date-fns';
+import { ko } from 'date-fns/locale';
+import { readPost, votePost } from '../../utils/api/forumAPI';
+import StudyAnswer from '../Answer/StudyAnswer';
+import ForumArticlesAnswer from '../Answer/ForumArticlesAnswer';
+import MentoringAnswer from '../Answer/MentoringAnswer';
 
-const ForumDetail = () => {
-  /** 더미 데이터 */
-  const post = {
-    postscriptId: 0,
-    postscriptTitle: '코드스테이츠 프론트엔드 후기',
-    postscriptContent:
-      '<p>안녕하세요. 코드스테이츠 프론트엔드 부트캠프 후기입니다. 저는 수료 후 네카라쿠배 중 1곳에 취업했습니다.</p><h3>부트캠프 활용 꿀팁</h3><p>동기들과의 스터디에 적극 참여하세요.<br>매일 알고리즘 문제 1개 이상 풀기</p>',
-    postscriptTags: ['부트캠프 후기', '개발 공부법'],
-    view: 32,
-    like: 2,
-    user: {
-      userId: 0,
-      name: '홍길동',
-      userEmail: 'hong@gmail.com',
-    },
-    createdAt: '22.11.09 15:00',
-    updatedAt: '22.11.09 15:03',
-    comment: [
-      {
-        postscriptCommentId: 0,
-        postscriptComment: '부캠 후기 게시판 첫 번째 댓글',
-        user: {
-          user_Id: 1,
-          nickname: '홍길동',
-          email: 'hong@gmail.com',
-        },
-        createdAt: '22.11.09 15:10',
-        updatedAt: '22.11.09 15:11',
-      },
-      {
-        postscriptCommentId: 1,
-        postscriptComment: '부캠 후기 게시판 두 번째 댓글',
-        user: {
-          user_Id: 2,
-          nickname: '김코딩',
-          email: 'kim@gmail.com',
-        },
-        createdAt: '22.11.09 15:30',
-        updatedAt: '22.11.09 15:33',
-      },
-    ],
+interface PropsType {
+  page?: number;
+}
+
+const ForumDetail = ({ page = 1 }: PropsType) => {
+  const [post, setPost] = useState<any>(undefined);
+  const [createdAt, setCreatedAt] = useState<string | undefined>(undefined);
+
+  const { pathname } = useLocation();
+  const [, forumType, id] = pathname.split('/');
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const url = `/${forumType}/${id}`;
+    readPost(url, setPost).then((res) => {
+      setCreatedAt(formatDistanceToNow(new Date(res.createdAt), { addSuffix: true, locale: ko }));
+    });
+  }, []);
+
+  const handleClick = () => {
+    navigate(`/${forumType}?page=${page}`);
+  };
+
+  const handleLike = async () => {
+    if (post.vote === 0) {
+      const voteUrl = `/${forumType}/votes/${id}?vote=1`;
+      await votePost(voteUrl);
+    }
+    if (post.vote === 1) {
+      const voteUrl = `/${forumType}/votes/${id}?vote=0`;
+      await votePost(voteUrl);
+    }
+
+    const readUrl = `/${forumType}/${id}`;
+    readPost(readUrl, setPost).then((res) => {
+      setCreatedAt(formatDistanceToNow(new Date(res.createdAt), { addSuffix: true, locale: ko }));
+    });
   };
 
   return (
     <S.Container>
       <S.ContentHeader>
-        <BackgroundOtherButton text="목록" color={GRAY_LIST_FILL} />
+        <BackgroundOtherButton text="목록" color={GRAY_LIST_FILL} onClick={handleClick} />
       </S.ContentHeader>
 
-      <S.ContentContainer>
-        <S.TitleInfoContainer>
-          <S.TagsContainer>
-            {post.postscriptTags.map((tag, index) => (
-              <SmallBorderTagButton key={index} text={tag} />
-            ))}
-          </S.TagsContainer>
-          <S.TitleContainer>
-            <S.Title>{post.postscriptTitle}</S.Title>
-            <MoreButton />
-          </S.TitleContainer>
-          <ForumWrittenInfo
-            position="left"
-            author={post.user.name}
-            createdAt={post.createdAt}
-            view={post.view}
-            like={post.like}
+      {post && (
+        <S.ContentContainer>
+          <S.TitleInfoContainer>
+            <S.TagsContainer>
+              <SmallBorderTagButton text={post.tagName} />
+            </S.TagsContainer>
+            <S.TitleContainer>
+              <S.Title>{post[`${forumType}Title`]}</S.Title>
+              <MoreButton
+                buttonType="post"
+                forumType={forumType}
+                id={post[`${forumType}Id`]}
+                tagName={post.tagName}
+                title={post[`${forumType}Title`]}
+                content={post[`${forumType}Content`]}
+                author={post.member.nickname}
+              />
+            </S.TitleContainer>
+            <ForumWrittenInfo position="left" author={post.member.nickname} createdAt={createdAt} view={post.view} />
+          </S.TitleInfoContainer>
+
+          <S.Content
+            className="forum-content"
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(post[`${forumType}Content`]),
+            }}
           />
-        </S.TitleInfoContainer>
+          <S.LikeContainer>
+            <S.LikeButton onClick={handleLike} like={post.vote}>
+              <InlineIcon icon="akar-icons:heart" />
+              <span>{post.totalVotes}</span>
+            </S.LikeButton>
+            <span>{post[`${forumType}Comments`].length}개의 댓글</span>
+          </S.LikeContainer>
 
-        <S.Content>{post.postscriptContent}</S.Content>
-
-        <S.LikeContainer>
-          <span>
-            <InlineIcon icon="akar-icons:heart" />
-            <span>{post.like}</span>
-          </span>
-          <span>{post.comment.length}개의 댓글</span>
-        </S.LikeContainer>
-
-        <S.CommentsContainer>
-          {post.comment.map((comment) => (
-            <S.CommentContainer key={comment.postscriptCommentId}>
-              <S.CommentInfoContainer>
-                <ForumWrittenInfo position="left" author={comment.user.nickname} createdAt={comment.createdAt} />
-                <MoreButton />
-              </S.CommentInfoContainer>
-              <div>{comment.postscriptComment}</div>
-            </S.CommentContainer>
-          ))}
-
-          <S.NewCommentContainer>
-            <div>
-              <ForumWrittenInfo position="left" author="지금 로그인한 사람" />
-              <span>0 / 500</span>
-            </div>
-            <S.Form>
-              <label>
-                <textarea placeholder="댓글을 남겨주세요." />
-              </label>
-              <div>
-                <BackgroundOtherButton text="등록" color={GREEN_MAIN} />
-              </div>
-            </S.Form>
-          </S.NewCommentContainer>
-        </S.CommentsContainer>
-      </S.ContentContainer>
+          <S.CommentsContainer>
+            {forumType === 'postscript' ? (
+              <ForumArticlesAnswer />
+            ) : forumType === 'study' ? (
+              <StudyAnswer />
+            ) : (
+              <MentoringAnswer />
+            )}
+          </S.CommentsContainer>
+        </S.ContentContainer>
+      )}
 
       <S.ContentHeader>
-        <BackgroundOtherButton text="목록" color={GRAY_LIST_FILL} />
+        <BackgroundOtherButton text="목록" color={GRAY_LIST_FILL} onClick={handleClick} />
       </S.ContentHeader>
     </S.Container>
   );

@@ -11,6 +11,7 @@ import Forum from './pages/Forum';
 import PrivateRoute from './components/Route/PrivateRoute';
 import MainHeader from './components/Header/MainHeader';
 import PageNotFound from './pages/PageNotFound';
+import LoadMap from './pages/LoadMap';
 import PageHeaderSide from './components/Header/PageHeaderSide';
 
 function App() {
@@ -29,17 +30,21 @@ function App() {
         <Route path="/users/signup" element={<SignUp />} />
         <Route path="/users/mypage" element={<MyPage />} />
         <Route path="/test" element={<Test />} />
+        <Route path="/loadmap" element={<LoadMap />} />
         <Route path="/bootcamp" element={<BootCamp />} />
         <Route path="/bootcamp/1" element={<BootCampDetail />} />
         <Route path="/postscript" element={<Forum />} />
         <Route path="/postscript/:id" element={<Forum />} />
         <Route path="/postscript/write" element={<Forum />} />
+        <Route path="/postscript/update" element={<Forum />} />
         <Route path="/study" element={<Forum />} />
         <Route path="/study/:id" element={<Forum />} />
         <Route path="/study/write" element={<Forum />} />
+        <Route path="/study/update" element={<Forum />} />
         <Route path="/mentoring" element={<Forum />} />
         <Route path="/mentoring/:id" element={<Forum />} />
         <Route path="/mentoring/write" element={<Forum />} />
+        <Route path="/mentoring/update" element={<Forum />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
       {pathname === '/users/login' || pathname === '/users/signup' ? null : <Footer />}

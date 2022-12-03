@@ -42,7 +42,7 @@ export const ProfileUpdateButton = styled.button`
 export const UserProfileUpdateBody = styled.div`
   //프로필 전체크기
   width: 100%;
-  height: 30vh;
+  height: 40vh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -51,13 +51,13 @@ export const UserProfileUpdateBody = styled.div`
 
   @media screen and (max-width: 414px) {
     justify-content: center;
-    height: 20vh;
+    height: 30vh;
     flex-direction: row;
   }
 `;
 
 export const PictureProfile = styled.span`
-  height: 20vh;
+  height: 10vh;
   width: 70%;
   display: flex;
   border: 1px solid var(--blackTextNormal);

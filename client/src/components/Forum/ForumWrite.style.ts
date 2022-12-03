@@ -46,6 +46,16 @@ export const TagsContainer = styled.div`
   }
 `;
 
+export const Form = styled.form`
+  & > *:not(:last-child) {
+    border-bottom: 1px solid var(--grayContentsBorder);
+  }
+
+  .ql-editor {
+    height: 40vh;
+  }
+`;
+
 export const ContentTextarea = styled.textarea`
   width: 100%;
   height: calc(500 / 16 * 1rem);
