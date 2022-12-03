@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { NavigateFunction } from 'react-router-dom';
 
-export const readAllPosts = async (url: string, setPosts: React.Dispatch<any>) => {
+export const readAllPosts = async (url: string, setPosts: React.Dispatch<any>, setPostsPage?: any) => {
   try {
     const res = await axios.get(url);
 
@@ -10,6 +10,7 @@ export const readAllPosts = async (url: string, setPosts: React.Dispatch<any>) =
     }
 
     setPosts(res.data.data);
+    setPostsPage(res.data.pageInfo.totalElements);
   } catch (err) {
     console.error(err);
   }

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { StyledBorderButton } from '../components/Button/BorderButton';
+import { StyledBorderButton } from '../Button/BorderButton';
 
 export const WithdrawalButton = styled(StyledBorderButton)`
   width: 84px;

@@ -59,7 +59,6 @@ const StudyAnswer = () => {
       method: 'get',
       url: `/study/${id}`,
     }).then((res) => {
-      console.log(res);
       const { data } = res;
 
       setStudyAnswerList(data.data.studyComments);

@@ -1,10 +1,13 @@
 import * as S from './MyPageTable.style';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { BootLikeButton } from './BootLikeButton';
+import { useRecoilState } from 'recoil';
+import { bootListMyPage } from '../../atoms/index';
 
-interface BootData {
-  id: number;
+interface BootDataProps {
+  bootcampId: number;
   title: string;
   beginRegisterDate: string;
   finalRegisterDate: string;
@@ -14,26 +17,22 @@ interface BootData {
   onOff: boolean;
 }
 
-const columns = ['이름', '등록일', '교육기간', '과정', '총 비용', '온/오프라인', '찜'];
-const MyPageTable = () => {
-  const [bootList, setBootList] = useState<BootData[]>();
-  const navigate = useNavigate();
+export interface BootDataList extends Array<BootDataProps> {}
 
+const columns = ['이름', '등록일', '수료일', '과정', '총비용', '온/오프라인', '찜'];
+const MyPageTable = () => {
+  const [bootList, setBootList] = useRecoilState(bootListMyPage);
+  const navigate = useNavigate();
   const access = localStorage.getItem('access');
+
   const linkTableHandler = (id: number) => {
     navigate(`/bootcamp/${id}`);
   };
 
-  // const getItem = async () => {
-  //   await axios.get('mypage/bootcampLike').then((res) => {
-  //     setBootList(res.data.data);
-  //   });
-  // };
-
   useEffect(() => {
     axios({
       method: 'get',
-      url: 'mypage/bootcampLike',
+      url: `/users/mypage/bootcampLike?page=1&size=10`, //무한스크롤 구현을 안해서 1페이지만 불러옴
       headers: {
         Authorization: access,
       },
@@ -55,24 +54,16 @@ const MyPageTable = () => {
       <tbody>
         {bootList?.map((item) => {
           return (
-            <tr key={item.id} onClick={() => linkTableHandler(item.id)}>
+            <tr key={item.bootcampId} onClick={() => linkTableHandler(item.bootcampId)}>
               <td>{item.title} </td>
               <td>{item.beginRegisterDate}</td>
               <td>{item.finalRegisterDate}</td>
               <td>{item.process}</td>
               <td>{item.totalCost}</td>
               <td>{item.onOff}</td>
-              {/* <td>
-                {item.vote === true ? (
-                  <span>
-                    <S.LikeButton>
-                      <Icon icon="ic:round-star" color="#fbb3b3" width="30" height="30" />
-                    </S.LikeButton>
-                  </span>
-                ) : (
-                  <Icon icon="ic:round-star-border" color="#fbb3b3" width="30" height="30" />
-                )}
-              </td> */}
+              <td>
+                <BootLikeButton bootcampId={item.bootcampId} />
+              </td>
             </tr>
           );
         })}

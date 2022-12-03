@@ -1,8 +1,8 @@
 import { Icon } from '@iconify/react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Withdrawal from '../Withdrawal';
+import Withdrawal from './Withdrawal';
 import * as S from './UserProfile.style';
 
 interface IFormInput {
@@ -18,6 +18,11 @@ interface RespondsBodyUser {
   };
 }
 
+interface UserInfoProps {
+  memberId: number;
+  email: string;
+  nickname: string;
+}
 const UserProfile = () => {
   const {
     register,
@@ -27,6 +32,25 @@ const UserProfile = () => {
   } = useForm<IFormInput>({ mode: 'onBlur' });
   const [updateProfile, setUpdateProfile] = useState<boolean>(false);
   const [userUpdate, setUserUpdate] = useState<RespondsBodyUser | undefined>();
+  const access = localStorage.getItem('access');
+  const [userInfo, setUserInfo] = useState<UserInfoProps>();
+
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: '/users/mypage/userInfo',
+      headers: {
+        Authorization: access,
+      },
+    })
+      .then((res) => {
+        const { data } = res;
+        setUserInfo(data.data);
+      })
+      .catch((err) => {
+        console.log(`"err":${err}`);
+      });
+  }, []);
 
   const MyProfileSubmit: SubmitHandler<IFormInput> = (data) => {
     axios({
@@ -40,14 +64,15 @@ const UserProfile = () => {
         setUpdateProfile(!updateProfile);
         reset();
       })
-      .catch(() => console.log('err'));
+      .catch((err) => {
+        console.log(`"err":${err}`);
+      });
   };
 
   const onClickUpdate = () => {
     setUpdateProfile(!updateProfile);
   };
 
-  //밑에 보이는 칸에 기존로그인 정보가 있으면 그걸 넣고 만약 변경시 새로운 데이터가 들어가는 조건문을 로그인이 구현시 짜줄예정
   return (
     <S.MyProfileView>
       {updateProfile ? (
@@ -65,7 +90,7 @@ const UserProfile = () => {
                 },
               })}
             />
-            <div>{errors.email?.message}</div>
+            <S.ErrorMessage>{errors.email?.message}</S.ErrorMessage>
             <label htmlFor="nickname">nickname</label>
             <S.InputProfileForm
               {...register('nickname', {
@@ -75,7 +100,7 @@ const UserProfile = () => {
                 },
               })}
             />
-            <div>{errors.nickname?.message}</div>
+            <S.ErrorMessage>{errors.nickname?.message}</S.ErrorMessage>
             <label htmlFor="password">비밀번호</label>
             <S.InputProfileForm
               {...register('password', {
@@ -85,7 +110,7 @@ const UserProfile = () => {
                 },
               })}
             />
-            <div>{errors.password?.message}</div>
+            <S.ErrorMessage>{errors.password?.message}</S.ErrorMessage>
 
             <input type="submit" />
           </S.FromInputProFile>
@@ -95,11 +120,14 @@ const UserProfile = () => {
           <S.ProfileUpdateButton onClick={onClickUpdate}>
             <Icon icon="ph:gear-six-duotone" width="25" height="25" />
           </S.ProfileUpdateButton>
-          <S.PictureProfile></S.PictureProfile>
+          <S.PictureProfile>
+            <Icon icon="carbon:user-avatar-filled-alt" width="100%" height="100%" color="gray" />
+          </S.PictureProfile>
           <div className="user-info">
             email
-            <S.UserInfoFormEmail>{userUpdate ? userUpdate.data.email : 'a'}</S.UserInfoFormEmail>
-            nickname<S.UserInfoFormEmail>{userUpdate ? userUpdate.data.nickname : 'a'}</S.UserInfoFormEmail>
+            <S.UserInfoFormEmail>{userUpdate ? userUpdate.data.email : userInfo?.email}</S.UserInfoFormEmail>
+            nickname
+            <S.UserInfoFormEmail>{userUpdate ? userUpdate.data.nickname : userInfo?.nickname}</S.UserInfoFormEmail>
           </div>
         </S.UserProfileUpdateBody>
       )}
