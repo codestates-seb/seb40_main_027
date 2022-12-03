@@ -7,7 +7,6 @@ import * as S from './UserProfile.style';
 
 interface IFormInput {
   nickname?: string;
-  email?: string;
   password?: String;
 }
 
@@ -54,7 +53,7 @@ const UserProfile = () => {
     axios({
       method: 'patch',
       url: '/users',
-      data: { nickname: data.nickname, email: data.email, password: data.password },
+      data: { nickname: data.nickname, password: data.password },
       headers: {
         Authorization: access,
       },
@@ -82,16 +81,6 @@ const UserProfile = () => {
             <Icon icon="ph:gear-six-duotone" width="25" height="25" />
           </S.ProfileUpdateButton>
           <S.FromInputProFile onSubmit={handleSubmit(MyProfileSubmit)}>
-            <label htmlFor="email">email</label>
-            <S.InputProfileForm
-              {...register('email', {
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
-                  message: '이메일 형식으로 입력해주세요',
-                },
-              })}
-            />
-            <S.ErrorMessage>{errors.email?.message}</S.ErrorMessage>
             <label htmlFor="nickname">nickname</label>
             <S.InputProfileForm
               {...register('nickname', {
@@ -126,7 +115,7 @@ const UserProfile = () => {
           </S.PictureProfile>
           <div className="user-info">
             email
-            <S.UserInfoFormEmail>{userUpdate ? userUpdate?.email : userInfo?.email}</S.UserInfoFormEmail>
+            <S.UserInfoFormEmail>{userInfo?.email}</S.UserInfoFormEmail>
             nickname
             <S.UserInfoFormEmail>{userUpdate ? userUpdate?.nickname : userInfo?.nickname}</S.UserInfoFormEmail>
           </div>
