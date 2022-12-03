@@ -6,21 +6,19 @@ import Withdrawal from './Withdrawal';
 import * as S from './UserProfile.style';
 
 interface IFormInput {
-  nickname: String;
-  email: String;
+  nickname?: string;
+  email?: string;
   password?: String;
 }
 
 interface RespondsBodyUser {
-  data: {
-    email: String;
-    nickname: String;
-  };
+  email?: string;
+  nickname: string;
 }
 
 interface UserInfoProps {
   memberId: number;
-  email: string;
+  email?: string;
   nickname: string;
 }
 const UserProfile = () => {
@@ -56,14 +54,14 @@ const UserProfile = () => {
     axios({
       method: 'patch',
       url: '/users',
-      data: { data },
+      data: { nickname: data.nickname, email: data.email, password: data.password },
       headers: {
         Authorization: access,
       },
     })
       .then((res) => {
-        const dataType = res.data;
-        setUserUpdate(dataType);
+        const { data } = res;
+        setUserUpdate(data.data);
         setUpdateProfile(!updateProfile);
         reset();
       })
@@ -128,9 +126,9 @@ const UserProfile = () => {
           </S.PictureProfile>
           <div className="user-info">
             email
-            <S.UserInfoFormEmail>{userUpdate ? userUpdate.data.email : userInfo?.email}</S.UserInfoFormEmail>
+            <S.UserInfoFormEmail>{userUpdate ? userUpdate?.email : userInfo?.email}</S.UserInfoFormEmail>
             nickname
-            <S.UserInfoFormEmail>{userUpdate ? userUpdate.data.nickname : userInfo?.nickname}</S.UserInfoFormEmail>
+            <S.UserInfoFormEmail>{userUpdate ? userUpdate?.nickname : userInfo?.nickname}</S.UserInfoFormEmail>
           </div>
         </S.UserProfileUpdateBody>
       )}
