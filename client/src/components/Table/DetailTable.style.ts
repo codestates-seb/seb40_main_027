@@ -13,7 +13,7 @@ export const Detail = styled.div`
     flex-direction: column;
   }
   > div {
-    width: 100%;
+    width: 50%;
     height: 100%;
     display: flex;
     flex-direction: column;
