@@ -61,3 +61,7 @@ export const LikeButton = styled.button`
   height: 100%;
   margin: 0;
 `;
+
+export const RefDiv = styled.div`
+  bottom: 0;
+`;
