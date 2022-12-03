@@ -41,6 +41,64 @@ export const readPost = async (url: string, setPost: React.Dispatch<any>) => {
   }
 };
 
+interface HotPost {
+  id: string;
+  title: string;
+}
+
+export const readHotPosts = async (forumType: string, setHotPosts: React.Dispatch<HotPost[]>) => {
+  const url = `/${forumType}?page=1&size=5&sort=totalVotes`;
+
+  try {
+    const res = await axios.get(url);
+
+    if (res.status !== 200) {
+      throw new Error(`${res.status}`);
+    }
+
+    const posts = res.data.data.map((post: any) => {
+      return {
+        id: post[`${forumType}Id`],
+        title: post[`${forumType}Title`],
+      };
+    });
+
+    setHotPosts(posts);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+interface ImminentBootCamp {
+  id: string;
+  process: string;
+  finalRegisterDate: string;
+}
+
+export const readImminentBootCamps = async (setImminentBootCamps: React.Dispatch<ImminentBootCamp[]>) => {
+  const url = `/bootcamp?page=1&size=3&sort=finalRegisterDate`;
+
+  try {
+    const res = await axios.get(url);
+
+    if (res.status !== 200) {
+      throw new Error(`${res.status}`);
+    }
+
+    const bootCamps = res.data.data.map((bootCamp: any) => {
+      return {
+        id: bootCamp.bootcampId,
+        process: bootCamp.process,
+        finalRegisterDate: bootCamp.finalRegisterDate,
+      };
+    });
+
+    setImminentBootCamps(bootCamps);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 interface RequestBody {
   title?: string;
   content?: string;

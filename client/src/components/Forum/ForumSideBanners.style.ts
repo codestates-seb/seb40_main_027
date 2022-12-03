@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { GRAY_CONTENTS_BORDER, WHITE_BACKGROUND } from '../../assets/constant/COLOR';
+import { Link } from 'react-router-dom';
 
 export const Aside = styled.aside`
   line-height: 130%;
@@ -40,4 +41,12 @@ export const Li = styled.li`
   :not(:last-child) {
     margin-bottom: calc(10 / 16 * 1rem);
   }
+`;
+
+export const A = styled.a`
+  text-decoration: none;
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
 `;
