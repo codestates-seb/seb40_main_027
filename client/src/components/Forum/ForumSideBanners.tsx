@@ -1,22 +1,32 @@
+import { useEffect, useState } from 'react';
 import { RED_IMMINENT_BOOT_CAMPS, YELLOW_HOT_POSTS } from '../../assets/constant/COLOR';
+import { readHotPosts } from '../../utils/api/forumAPI';
 import * as S from './ForumSideBanners.style';
 
-const HotPostscriptsBanner = () => {
-  /** 더미 데이터 */
-  const hotPostscriptTitles = [
-    '코드스테이츠 후기',
-    '네카라쿠배 개발자가 알려주는 공부법',
-    '3위 게시글',
-    '4위 게시글',
-    '5위 게시글',
-  ];
+interface PropsType {
+  forumType: string;
+}
+
+interface HotPost {
+  id: string;
+  title: string;
+}
+
+const HotPostsBanner = ({ forumType }: PropsType) => {
+  const [hotPosts, setHotPosts] = useState<HotPost[]>([]);
+
+  useEffect(() => {
+    readHotPosts(forumType, setHotPosts);
+  });
 
   return (
     <S.DivContainer color={YELLOW_HOT_POSTS}>
-      <S.H3>월간 인기 게시물</S.H3>
+      <S.H3>인기 게시글</S.H3>
       <ol>
-        {hotPostscriptTitles.map((title, idx) => (
-          <S.Li key={idx}>{title}</S.Li>
+        {hotPosts.map((post: HotPost) => (
+          <S.Li key={post.id}>
+            <S.A href={`/${forumType}/${post.id}`}>{post.title}</S.A>
+          </S.Li>
         ))}
       </ol>
     </S.DivContainer>
@@ -67,10 +77,10 @@ const TendencyTestBanner = () => {
   );
 };
 
-const ForumSideBanners = () => {
+const ForumSideBanners = ({ forumType }: PropsType) => {
   return (
     <S.Aside>
-      <HotPostscriptsBanner />
+      <HotPostsBanner forumType={forumType} />
       <ImminentBootCampsBanner />
       <TendencyTestBanner />
     </S.Aside>

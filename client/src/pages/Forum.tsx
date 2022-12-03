@@ -17,7 +17,7 @@ const Forum = () => {
       {forumType === 'study' ? <Banner text="스터디" pageType="post" /> : null}
       {forumType === 'mentoring' ? <Banner text="멘토링" pageType="post" /> : null}
       <S.FlexContainer>
-        <ForumSideBanners />
+        <ForumSideBanners forumType={forumType} />
         {pageType === undefined && forumType === 'postscript' ? <ForumArticles /> : null}
         {pageType === undefined && forumType === 'study' ? <ForumCards /> : null}
         {pageType === undefined && forumType === 'mentoring' ? <ForumCards /> : null}

@@ -41,3 +41,7 @@ export const Li = styled.li`
     margin-bottom: calc(10 / 16 * 1rem);
   }
 `;
+
+export const A = styled.a`
+  text-decoration: none;
+`;
