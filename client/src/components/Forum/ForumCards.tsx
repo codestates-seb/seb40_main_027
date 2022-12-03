@@ -19,7 +19,7 @@ const ForumCards = () => {
   const { pathname } = useLocation();
   const forumType = pathname.split('/')[1];
 
-  const getPosts = useCallback(async (page: any) => {
+  const getPosts = useCallback(async (page: number) => {
     setLoading(true);
     const url = `/${forumType}?page=${page}&size=9&sort=${forumType}Id`;
     getAllPostsInfinite(url, setPosts, posts, setTotalPages);

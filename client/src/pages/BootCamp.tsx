@@ -6,10 +6,10 @@ import Banner from '../components/Banner';
 import Loading from '../components/Loading/Loading';
 import SearchBar from '../components/SearchBar/SearchBar';
 import { FilterButton } from '../components/Button';
-import { MobileTable, Table } from '../components/Table/Table';
+import { BootData, MobileTable, Table } from '../components/Table/Table';
 
 const BootCamp = () => {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<BootData[]>([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState<number>();
   const [loading, setLoading] = useState(false);

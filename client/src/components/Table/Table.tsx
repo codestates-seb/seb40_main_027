@@ -2,7 +2,7 @@ import * as S from './Table.style';
 import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import { Link } from 'react-router-dom';
 
-interface BootData {
+export interface BootData {
   bootcampId: number;
   title: string;
   beginRegisterDate: string;
