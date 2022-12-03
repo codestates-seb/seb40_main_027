@@ -11,6 +11,10 @@ export const FormStyled = styled.div`
   @media screen and (max-width: 414px) {
     margin: 0;
     width: 80vw;
+
+    & > * {
+      margin-top: 0;
+    }
   }
 `;
 
@@ -74,12 +78,10 @@ export const NumberBorder = styled.span`
 
 export const FormCaseView = styled.div`
   //전체적인 크기
-  /* height: 60vh; */
   margin-top: 5rem;
   display: flex;
   align-items: center;
   flex-direction: column;
-  /* margin: 0px; */
 
   @media screen and (max-width: 414px) {
     height: 50vh;
