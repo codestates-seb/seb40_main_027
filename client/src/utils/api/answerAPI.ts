@@ -17,13 +17,6 @@ export const deleteComment = (id: string, url: string) => {
       Authorization: access,
     },
   })
-    .then(() => {
-      Swal.fire({
-        text: '삭제하시겠습니까?',
-        showCancelButton: true,
-        confirmButtonColor: 'var(--greenMain)',
-        cancelButtonColor: 'var(--grayContentsBorder)',
-      });
-    })
+    .then(() => {})
     .catch((err) => console.log(err));
 };
