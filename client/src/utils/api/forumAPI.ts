@@ -66,6 +66,36 @@ export const readHotPosts = async (forumType: string, setHotPosts: React.Dispatc
   }
 };
 
+interface ImminentBootCamp {
+  id: string;
+  process: string;
+  finalRegisterDate: string;
+}
+
+export const readImminentBootCamps = async (setImminentBootCamps: React.Dispatch<ImminentBootCamp[]>) => {
+  const url = `/bootcamp?page=1&size=3&sort=finalRegisterDate`;
+
+  try {
+    const res = await axios.get(url);
+
+    if (res.status !== 200) {
+      throw new Error(`${res.status}`);
+    }
+
+    const bootCamps = res.data.data.map((bootCamp: any) => {
+      return {
+        id: bootCamp.bootcampId,
+        process: bootCamp.process,
+        finalRegisterDate: bootCamp.finalRegisterDate,
+      };
+    });
+
+    setImminentBootCamps(bootCamps);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 interface RequestBody {
   title?: string;
   content?: string;

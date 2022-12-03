@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { RED_IMMINENT_BOOT_CAMPS, YELLOW_HOT_POSTS } from '../../assets/constant/COLOR';
-import { readHotPosts } from '../../utils/api/forumAPI';
+import { readHotPosts, readImminentBootCamps } from '../../utils/api/forumAPI';
 import * as S from './ForumSideBanners.style';
 
 interface PropsType {
@@ -33,31 +33,29 @@ const HotPostsBanner = ({ forumType }: PropsType) => {
   );
 };
 
+interface ImminentBootCamp {
+  id: string;
+  process: string;
+  finalRegisterDate: string;
+}
+
 const ImminentBootCampsBanner = () => {
-  /** 더미 데이터 */
-  const imminentBootCamps = [
-    {
-      title: '코드스테이츠 프론트엔드',
-      final_register_date: '2022-11-20',
-    },
-    {
-      title: '항해99 백엔드',
-      final_register_date: '2022-11-23',
-    },
-    {
-      title: '코드스테이츠 백엔드',
-      final_register_date: '2022-11-27',
-    },
-  ];
+  const [imminentBootCamps, setImminentBootCamps] = useState<ImminentBootCamp[]>([]);
+
+  useEffect(() => {
+    readImminentBootCamps(setImminentBootCamps);
+  });
 
   return (
     <S.DivContainer color={RED_IMMINENT_BOOT_CAMPS}>
       <S.H3>접수 마감 임박</S.H3>
       <ol>
-        {imminentBootCamps.map((camp, idx) => (
-          <S.Li key={idx}>
-            <div>{camp.title}</div>
-            <div>{camp.final_register_date} 마감</div>
+        {imminentBootCamps.map((bootCamp) => (
+          <S.Li key={bootCamp.id}>
+            <S.A href={`/bootcamp/${bootCamp.id}`}>
+              <div>{bootCamp.process}</div>
+              <div>{bootCamp.finalRegisterDate} 마감</div>
+            </S.A>
           </S.Li>
         ))}
       </ol>
