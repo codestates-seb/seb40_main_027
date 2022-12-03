@@ -19,6 +19,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
+@CrossOrigin(origins = {"http://bootlamp.s3-website.ap-northeast-2.amazonaws.com",
+    "http://ec2-3-38-21-95.ap-northeast-2.compute.amazonaws.com:8080"})
 @RestController
 @Validated
 @RequestMapping("/postscript")

@@ -27,6 +27,8 @@ import javax.validation.constraints.Positive;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = {"http://bootlamp.s3-website.ap-northeast-2.amazonaws.com",
+    "http://ec2-3-38-21-95.ap-northeast-2.compute.amazonaws.com:8080"})
 @RestController
 @RequestMapping("/mentoring")
 @Validated
