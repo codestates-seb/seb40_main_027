@@ -12,7 +12,7 @@ import MainHeader from './components/Header/MainHeader';
 import PageNotFound from './pages/PageNotFound';
 import LoadMap from './pages/LoadMap';
 import PageHeaderSide from './components/Header/PageHeaderSide';
-import AuthLayout from './components/Route/AuthLayout';
+import AuthoRoute from './components/Route/AuthRoute';
 
 function App() {
   const { pathname } = useLocation();
@@ -37,7 +37,7 @@ function App() {
         <Route path="/postscript/update" element={<Forum />} />
         <Route path="/study" element={<Forum />} />
         <Route path="/study/:id" element={<Forum />} />
-        <Route element={<AuthLayout />}>
+        <Route element={<AuthoRoute />}>
           <Route path="/study/write" element={<Forum />} />
           <Route path="/postscript/write" element={<Forum />} />
           <Route path="/mentoring/write" element={<Forum />} />
