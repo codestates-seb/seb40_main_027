@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export const TableWrap = styled.table`
   width: 60vw;
   min-width: 960px;
-  font-size: 1.2vw;
+  font-size: 1vw;
   thead {
     font-weight: bold;
     background-color: var(--greenSub);

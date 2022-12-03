@@ -72,7 +72,7 @@ export const RowHeader = styled.div`
   width: 70%;
   height: 20%;
   border: 1px solid var(--greenMain);
-  font-size: 1.12vw;
+  font-size: 1vw;
   border-radius: 20px;
   display: flex;
   justify-content: center;
