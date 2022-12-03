@@ -13,19 +13,19 @@ const BootCamp = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState<number>();
   const [loading, setLoading] = useState(false);
-  const [posts, setPosts] = useState<any>([]);
+  const [posts, setPosts] = useState([]);
   const [ref, inView] = useInView({
     threshold: 1,
   });
 
-  const getItems = useCallback(async (page: any) => {
-    setLoading(true);
+  const getItems = useCallback(async (page: number) => {
+    await setLoading(true);
     await axios.get(`/bootcamp?page=${page}&size=10&sort=finalRegisterDate`).then((res) => {
-      console.log('then render');
+      console.log('i am', page);
       setItems((items) => items.concat(res.data.data));
       setTotalPages(res.data.pageInfo.totalPages);
     });
-    setLoading(false);
+    await setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -50,7 +50,11 @@ const BootCamp = () => {
       <S.MiddleDiv>
         <div>
           <SearchBar />
-          <FilterButton pageType="bootcamp" url={`/bootcamp?page=1&size=10`} setPosts={setPosts} />
+          <FilterButton
+            pageType="bootcamp"
+            url={`/bootcamp?page=${page}&size=10&sort=finalRegisterDate`}
+            setPosts={setPosts}
+          />
         </div>
       </S.MiddleDiv>
       <div>
