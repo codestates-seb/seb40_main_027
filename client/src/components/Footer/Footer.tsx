@@ -6,6 +6,10 @@ const FooterWrapper = styled.footer`
   border-top: 1px solid var(--grayHeaderBorder);
   display: flex;
   justify-content: center;
+
+  a {
+    text-decoration: none;
+  }
   .footer-inner {
     width: 1160px;
     display: flex;
