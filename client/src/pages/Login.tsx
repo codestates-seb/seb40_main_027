@@ -27,7 +27,9 @@ const Login = () => {
   return (
     <S.LoginWrapp>
       <div className="login-inner">
-        <img src={logo} alt="logo" />
+        <Link to="/">
+          <img src={logo} alt="logo" />
+        </Link>
         <div className="form-wrap">
           <form onSubmit={handleSubmit(onSubmit)}>
             <label>
