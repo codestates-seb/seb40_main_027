@@ -40,23 +40,6 @@ const ForumCards = () => {
     }
   }, [inView, loading]);
 
-  // let page = searchParams.get('page');
-
-  // const { pathname } = useLocation();
-  // const forumType = pathname.split('/')[1];
-
-  // useEffect(() => {
-  //   if (page === null) {
-  //     setSearchParams({
-  //       page: '1',
-  //     });
-  //     page = '1';
-  //   }
-
-  //   const url = `/${forumType}?page=${page}&size=9&sort=${forumType}Id`;
-  //   readAllPosts(url, setPosts);
-  // }, []);
-
   return (
     <S.Container>
       <ForumContentHeader url={`/${forumType}?page=${page}&size=9`} setPosts={setPosts} />

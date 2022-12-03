@@ -104,16 +104,3 @@ const MyPageTable = () => {
 };
 
 export default MyPageTable;
-
-// useEffect(() => {
-//   axios({
-//     method: 'get',
-//     url: `/users/mypage/bootcampLike?page=1&size=10`, //무한스크롤 구현을 안해서 1페이지만 불러옴
-//     headers: {
-//       Authorization: access,
-//     },
-//   }).then((res) => {
-//     const { data } = res;
-//     setBootList(data.data);
-//   });
-// }, []);
