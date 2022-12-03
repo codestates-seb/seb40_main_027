@@ -3,7 +3,6 @@ import { useState } from 'react';
 import EndForm from './EndForm';
 import { useRecoilState } from 'recoil';
 import { yesContent, noContent } from '../../atoms/index';
-//이미지 바꿀것이라 연습용사진입니다.
 import Pra1 from '../../assets/image/pra1.png';
 import * as S from './TypeForm.style';
 

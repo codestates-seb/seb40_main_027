@@ -3,7 +3,6 @@ import logo from '../../assets/image/logo.png';
 import Nickname from './Nickname';
 import { Icon } from '@iconify/react';
 import { RegisterButton, LoginButton } from '../Button/index';
-
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { logUser, sideBarFloading } from '../../atoms/index';
 import { Link } from 'react-router-dom';
@@ -76,14 +75,7 @@ const PageHeader = () => {
   const { isLog } = useRecoilValue(logUser);
   const [isCollapse, setIsCollapse] = useRecoilState(sideBarFloading);
 
-  /** 일단 윤경님 코드 살려놨습니다. 나중에 로그아웃 구현하실 때 필요없으시면 삭제해주시면 됩니다.  **/
-  // const clickLogin = () => {
-  //   //임의로 오류안나게하기 위해 넣은 함수
-  //   setIsLogin(!isLogin);
-  // };
-
   const CollapseHandler = () => {
-    //상태변하게 하기위하여
     setIsCollapse(!isCollapse);
   };
 

@@ -1,42 +1,44 @@
-import Pagination from '../Pagination';
 import ForumArticle from './ForumArticle';
 import * as S from './ForumArticles.style';
 import { useEffect, useState } from 'react';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import ForumContentHeader from './ForumContentHeader';
+import PagePagination from '../Pagination/PagePagination';
 import { readAllPosts } from '../../utils/api/forumAPI';
 
 const ForumArticles = () => {
   const [posts, setPosts] = useState<any>([]);
-  const [searchParams, setSearchParams] = useSearchParams();
-  let page = searchParams.get('page');
-
+  const [postsPage, setPostsPage] = useState(0);
+  const [page, setPage] = useState(1);
+  const postPerPage = 10;
   const { pathname } = useLocation();
   const forumType = pathname.split('/')[1];
 
-  useEffect(() => {
-    if (page === null) {
-      setSearchParams({
-        page: '1',
-      });
-      page = '1';
-    }
+  const handlePagePost = (page: number) => {
+    setPage(page);
+  };
 
-    const url = `/${forumType}?page=${page}&size=10&sort=${forumType}Id`;
-    readAllPosts(url, setPosts);
-  }, []);
+  useEffect(() => {
+    const url = `/${forumType}?page=${page}&size=${postPerPage}&sort=${forumType}Id`;
+    readAllPosts(url, setPosts, setPostsPage);
+  }, [page, postPerPage]);
 
   return (
     <S.Container>
-      <ForumContentHeader url={`/${forumType}?page=${page}&size=10`} setPosts={setPosts} />
+      <ForumContentHeader url={`/${forumType}?page=${page}&size=${postPerPage}`} setPosts={setPosts} />
 
       <main>
-        {posts.map((post: any) => (
-          <ForumArticle key={post[`${forumType}Id`]} forumType={forumType} post={post} />
-        ))}
+        {posts &&
+          posts.map((post: any) => <ForumArticle key={post[`${forumType}Id`]} forumType={forumType} post={post} />)}
       </main>
 
-      <Pagination />
+      <PagePagination
+        totalCount={postsPage}
+        page={page}
+        postPerPage={postPerPage}
+        pageRangeDisplayed={5}
+        handlePageChange={handlePagePost}
+      />
     </S.Container>
   );
 };

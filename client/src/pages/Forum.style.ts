@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 export const PageWrapper = styled.div`
   width: 100vw;
+  height: 100vh;
+  overflow: auto;
 
   & > * {
     margin-bottom: calc(20 / 16 * 1rem);
