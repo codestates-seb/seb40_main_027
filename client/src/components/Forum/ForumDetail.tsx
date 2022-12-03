@@ -1,6 +1,6 @@
 import * as S from './ForumDetail.style';
 import { BackgroundOtherButton, SmallBorderTagButton, MoreButton } from '../Button';
-import { GRAY_LIST_FILL, GREEN_MAIN } from '../../assets/constant/COLOR';
+import { GRAY_LIST_FILL } from '../../assets/constant/COLOR';
 import ForumWrittenInfo from './ForumWrittenInfo';
 import { InlineIcon } from '@iconify/react';
 import DOMPurify from 'dompurify';
@@ -81,7 +81,6 @@ const ForumDetail = ({ page = 1 }: PropsType) => {
           </S.TitleInfoContainer>
 
           <S.Content
-            className="forum-content"
             dangerouslySetInnerHTML={{
               __html: DOMPurify.sanitize(post[`${forumType}Content`]),
             }}

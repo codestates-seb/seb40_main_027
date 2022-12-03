@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import QuillContentBody from '../../styles/QuillContentBody.style';
 
 export const Container = styled.section`
   width: 100%;
@@ -68,7 +69,7 @@ export const Title = styled.h3`
   font-size: calc(20 / 16 * 1rem);
 `;
 
-export const Content = styled.p`
+export const Content = styled(QuillContentBody)`
   padding: calc(20 / 16 * 1rem);
 
   @media screen and (max-width: 414px) {
