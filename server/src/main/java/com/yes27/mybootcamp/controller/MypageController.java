@@ -22,8 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-@CrossOrigin(origins = {"http://bootlamp.s3-website.ap-northeast-2.amazonaws.com",
-    "http://ec2-3-38-21-95.ap-northeast-2.compute.amazonaws.com:8080"})
 @RestController
 @RequestMapping("users/mypage/bootcampLike")
 public class MypageController {
