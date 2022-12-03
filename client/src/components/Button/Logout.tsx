@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { logUser } from '../../atoms';
 import * as S from './Logout.style';
+import Swal from 'sweetalert2';
 
 const Logout = () => {
   const navigate = useNavigate();
@@ -27,7 +28,12 @@ const Logout = () => {
           localStorage.removeItem('access');
           localStorage.removeItem('refresh');
           navigate(`${pathname}`);
-          alert('로그아웃이 되었습니다');
+          Swal.fire({
+            icon: 'success',
+            title: '로그아웃 되었습니다',
+            showConfirmButton: false,
+            timer: 1500,
+          });
         })
         .catch(() => console.log('err'));
     }
