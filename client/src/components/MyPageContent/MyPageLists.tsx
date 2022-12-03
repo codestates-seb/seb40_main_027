@@ -1,10 +1,9 @@
-import { InlineIcon } from '@iconify/react';
+import { InlineIcon, Icon } from '@iconify/react';
 import * as S from './MyPageLists.style';
 import { formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { useRecoilValue } from 'recoil';
 import { logUser } from '../../atoms/index';
-import { Icon } from '@iconify/react';
 import { SmallBorderTagButton } from '../Button';
 
 interface PropsType {
@@ -42,7 +41,6 @@ const MyPageLists = ({
 }: PropsType) => {
   const setLogStatus = useRecoilValue(logUser);
   const createTime = formatDistanceToNow(new Date(createdAt), { addSuffix: true, locale: ko });
-  // const updateTime = formatDistanceToNow(new Date(updatedAt ? updatedAt : new Date()), { addSuffix: true, locale: ko });
 
   return (
     <S.PostMyPageContent>
@@ -51,7 +49,11 @@ const MyPageLists = ({
       >
         <SmallBorderTagButton text={tagName} />
         <S.MyPageListsTitle>{studyTitle || mentoringTitle || postscriptTitle}</S.MyPageListsTitle>
-        <S.MyPageListsContent>{studyContent || mentoringContent || postscriptContent}</S.MyPageListsContent>
+        <S.MyPageListsContent>
+          {studyContent?.replace(/<[^>]*>?/g, ' ') ||
+            mentoringContent?.replace(/<[^>]*>?/g, ' ') ||
+            postscriptContent?.replace(/<[^>]*>?/g, ' ')}
+        </S.MyPageListsContent>
         <S.PostInfoView>
           <S.UserLikeIconList>
             <span>
