@@ -71,7 +71,7 @@ public class BootcampService {
 
     public Page<BootCamp> findBootscamp(int page, int size, String sort){
         if(sort.equals("finalRegisterDate")){
-            return bootcampRepository.findAll(PageRequest.of(page, size, Sort.by(sort).ascending()));
+            return bootcampRepository.findAllByBeginRegisterDate("모집중",PageRequest.of(page, size, Sort.by(sort).ascending()));
         }
         return bootcampRepository.findAll(PageRequest.of(page, size, Sort.by(sort).descending()));
     }
