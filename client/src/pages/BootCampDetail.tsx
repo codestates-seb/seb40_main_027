@@ -32,7 +32,6 @@ const BootCampDetail = () => {
   const dataKeys: Array<string> = Object.keys(items);
   const halfIdx = Math.floor(dataKeys.length / 2);
 
-  /** 첫 렌더링 그리고 onClick이벤트 발생하여 check의 값이 전환될 때 api통신 **/
   useEffect(() => {
     axios({
       method: 'get',
@@ -47,7 +46,6 @@ const BootCampDetail = () => {
       .catch((err) => alert(err));
   }, [check]);
 
-  /** 찜하기 기능 **/
   const onClick = () => {
     const likeStatus = items.vote;
     let param = 0;
