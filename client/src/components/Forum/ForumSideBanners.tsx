@@ -67,9 +67,11 @@ const TendencyTestBanner = () => {
   return (
     <S.DivContainer>
       <S.H3>
-        내 개발 성향이
-        <br />
-        궁금하다면?
+        <S.StyledLink to="/test">
+          내 개발 성향이
+          <br />
+          궁금하다면?
+        </S.StyledLink>
       </S.H3>
     </S.DivContainer>
   );
