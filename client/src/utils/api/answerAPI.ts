@@ -1,6 +1,5 @@
 import axios from 'axios';
 const access = localStorage.getItem('access');
-import Swal from 'sweetalert2';
 
 export const getComment = (url: string, id: string) => {
   return axios({
@@ -17,6 +16,8 @@ export const deleteComment = (id: string, url: string) => {
       Authorization: access,
     },
   })
-    .then(() => {})
+    .then(() => {
+      alert('삭제하시겠습니까?');
+    })
     .catch((err) => console.log(err));
 };
