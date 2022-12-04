@@ -85,9 +85,9 @@ const PageHeader = () => {
         <span className="hamburger">
           <Icon icon="mdi:menu" onClick={CollapseHandler} />
         </span>
-        <HeaderLink to={'/'}>
+        <Link to="/">
           <img src={logo} alt="logo" />
-        </HeaderLink>
+        </Link>
         <HeaderLink to={'/test'}>적성검사</HeaderLink>
         <HeaderLink to={'/loadmap'}>로드맵</HeaderLink>
         <HeaderLink to={'/bootcamp'}>학원일정</HeaderLink>
