@@ -6,6 +6,7 @@ import com.yes27.study.entity.Study;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,6 +29,7 @@ public class StudyComment extends BaseEntity {
     private Long studyCommentId;
 
     @NotBlank
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String studyComment;
 
     @ManyToOne
