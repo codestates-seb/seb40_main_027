@@ -10,6 +10,7 @@ export const Wrap = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   img {
     margin-top: -5%;
     width: 240px;
@@ -23,13 +24,19 @@ export const Wrap = styled.div`
   }
 `;
 
+export const LogoDiv = styled.div`
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+`;
+
 export const FormWrap = styled.div`
   width: 60%;
   height: 60%;
   font-size: 30px;
   form {
     box-sizing: content-box;
-    border: 2px solid var(--greenMain);
+    border: 1px solid var(--greenMain);
     border-radius: 10px;
     margin-top: 2%;
     width: 100%;
