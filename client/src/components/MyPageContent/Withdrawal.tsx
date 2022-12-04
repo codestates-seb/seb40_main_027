@@ -4,15 +4,21 @@ import * as S from './Withdrawal.style';
 import Swal from 'sweetalert2';
 const Withdrawal = () => {
   const navigate = useNavigate();
-
+  const access = localStorage.getItem('access');
   const WithdrawalHandler = () => {
+    const access = localStorage.getItem('access');
     if (window.confirm('회원탈퇴를 하시겠습니까?')) {
       axios({
         method: 'delete',
         url: '/users',
+        headers: {
+          Authorization: access,
+        },
       })
         .then(() => {
           navigate('/');
+          localStorage.removeItem('access');
+          localStorage.removeItem('refresh');
           Swal.fire({
             position: 'top-end',
             icon: 'success',
