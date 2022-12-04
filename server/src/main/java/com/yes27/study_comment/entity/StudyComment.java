@@ -29,7 +29,7 @@ public class StudyComment extends BaseEntity {
     private Long studyCommentId;
 
     @NotBlank
-    @Column(nullable = false, columnDefinition = "TEXT")
+//    @Column(nullable = false, columnDefinition = "TEXT")
     private String studyComment;
 
     @ManyToOne
