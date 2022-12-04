@@ -4,7 +4,7 @@ import * as S from './Withdrawal.style';
 import Swal from 'sweetalert2';
 const Withdrawal = () => {
   const navigate = useNavigate();
-  const access = localStorage.getItem('access');
+
   const WithdrawalHandler = () => {
     const access = localStorage.getItem('access');
     if (window.confirm('회원탈퇴를 하시겠습니까?')) {
@@ -27,7 +27,9 @@ const Withdrawal = () => {
             timer: 1500,
           });
         })
-        .catch(() => console.log('err'));
+        .catch((err) => {
+          console.log(`"err":${err}`);
+        });
     }
   };
 
