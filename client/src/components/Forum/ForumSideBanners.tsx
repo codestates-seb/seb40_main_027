@@ -17,7 +17,7 @@ const HotPostsBanner = ({ forumType }: PropsType) => {
 
   useEffect(() => {
     readHotPosts(forumType, setHotPosts);
-  });
+  }, []);
 
   return (
     <S.DivContainer color={YELLOW_HOT_POSTS}>
@@ -44,7 +44,7 @@ const ImminentBootCampsBanner = () => {
 
   useEffect(() => {
     readImminentBootCamps(setImminentBootCamps);
-  });
+  }, []);
 
   return (
     <S.DivContainer color={RED_IMMINENT_BOOT_CAMPS}>
