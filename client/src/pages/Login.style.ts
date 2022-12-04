@@ -22,7 +22,7 @@ export const LoginWrapp = styled.div`
       box-sizing: border-box;
       font-size: 30px;
       form {
-        border: 4px solid var(--greenMain);
+        border: 2px solid var(--greenMain);
         border-radius: 10px;
         padding: calc(100vh * 0.1) calc(100vw * 0.12);
         display: flex;
@@ -64,6 +64,7 @@ export const LoginWrapp = styled.div`
         font-size: 20px;
         max-width: 414px;
         form {
+          border: 1px solid var(--greenMain);
           padding: calc(100vh * 0.8 * 0.1) calc(100vw * 0.8 * 0.15);
           div {
             margin-left: 0.6rem;
