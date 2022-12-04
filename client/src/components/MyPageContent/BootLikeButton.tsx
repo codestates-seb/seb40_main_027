@@ -18,7 +18,6 @@ export const BootLikeButton = ({ bootcampId }: BootDataProps) => {
   const handleCancel = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     aysncFunc();
     event.stopPropagation();
-    window.location.reload();
   };
 
   const getBtn = () => {
