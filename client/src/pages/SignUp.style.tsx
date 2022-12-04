@@ -29,7 +29,7 @@ export const FormWrap = styled.div`
   font-size: 30px;
   form {
     box-sizing: content-box;
-    border: 4px solid var(--greenMain);
+    border: 2px solid var(--greenMain);
     border-radius: 10px;
     margin-top: 2%;
     width: 100%;
