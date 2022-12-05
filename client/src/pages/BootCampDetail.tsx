@@ -1,11 +1,13 @@
-import Banner from '../components/Banner';
+import axios from 'axios';
 import * as S from './BootCampDetail.style';
+import { useLocation } from 'react-router-dom';
+import Banner from '../components/Banner';
 import { DetailTable } from '../components/Table/DetailTable';
 import { BootDetailButton } from '../components/Button';
 import { GREEN_MAIN, RED_BOOT_DETAIL_HEART } from '../assets/constant/COLOR';
-import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { logUser } from '../atoms';
 
 const BootCampDetail = () => {
   const [items, setItems] = useState({
@@ -26,6 +28,7 @@ const BootCampDetail = () => {
     process: '',
     vote: 0,
   });
+  const { isLog } = useRecoilValue(logUser);
   const [check, setCheck] = useState(false);
   const { pathname } = useLocation();
   const pathId: string = pathname.split('/')[2];
@@ -47,21 +50,24 @@ const BootCampDetail = () => {
   }, [check]);
 
   const onClick = () => {
-    const likeStatus = items.vote;
-    let param = 0;
-    likeStatus === 0 ? (param = 1) : (param = 0);
-    axios({
-      method: 'post',
-      url: `/bootcamp/votes/${items.bootcampId}?vote=${param}`,
-      headers: {
-        Authorization: localStorage.getItem('access'),
-      },
-    })
-      .then(() => {
-        alert(param === 1 ? '찜 되었습니다.' : '찜 취소되었습니다.');
-        setCheck(!check);
+    if (!isLog) return alert('로그인 후에 사용가능합니다.');
+    else {
+      const likeStatus = items.vote;
+      let param = 0;
+      likeStatus === 0 ? (param = 1) : (param = 0);
+      axios({
+        method: 'post',
+        url: `/bootcamp/votes/${items.bootcampId}?vote=${param}`,
+        headers: {
+          Authorization: localStorage.getItem('access'),
+        },
       })
-      .catch((err) => alert(err));
+        .then(() => {
+          alert(param === 1 ? '찜 되었습니다.' : '찜 취소되었습니다.');
+          setCheck(!check);
+        })
+        .catch((err) => alert(err));
+    }
   };
 
   return (
