@@ -2,6 +2,8 @@ import * as S from './AnswerListView.style';
 import { Icon } from '@iconify/react';
 import { formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
+import { useRecoilValue } from 'recoil';
+import { logUser } from '../../atoms';
 
 interface HandlerProps {
   patchHandler: (e: React.MouseEvent<HTMLElement>) => void;
@@ -26,6 +28,7 @@ interface AnswerViewProps {
   editHandler: () => void;
   deleteHandler: (e: React.MouseEvent<HTMLElement>) => void;
 }
+
 export const AnswerViewContainer = ({
   nickname,
   updatedAt,
@@ -35,6 +38,10 @@ export const AnswerViewContainer = ({
 }: AnswerViewProps) => {
   const createTime = formatDistanceToNow(new Date(createdAt), { addSuffix: true, locale: ko });
   const updateTime = formatDistanceToNow(new Date(updatedAt), { addSuffix: true, locale: ko });
+
+  const logUserNickname = useRecoilValue(logUser).nickname;
+  const logUserMemberRole = useRecoilValue(logUser).memberRole;
+
   return (
     <S.UserAnswerInfo>
       <S.TimeOrName>
@@ -45,12 +52,14 @@ export const AnswerViewContainer = ({
         <span>{createTime !== updateTime ? <span>{updateTime}</span> : createTime} </span>
       </S.TimeOrName>
 
-      <div>
-        <S.AnswerButton onClick={editHandler}>수정</S.AnswerButton>
-        <S.AnswerButton color="red" onClick={deleteHandler}>
-          삭제
-        </S.AnswerButton>
-      </div>
+      {nickname === logUserNickname || logUserMemberRole === 'admin' ? (
+        <div>
+          <S.AnswerButton onClick={editHandler}>수정</S.AnswerButton>
+          <S.AnswerButton color="red" onClick={deleteHandler}>
+            삭제
+          </S.AnswerButton>
+        </div>
+      ) : null}
     </S.UserAnswerInfo>
   );
 };
