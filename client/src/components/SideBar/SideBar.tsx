@@ -25,7 +25,7 @@ const SideBar = () => {
                   <Link to={'/loadmap'}>로드맵</Link>
                 </S.SideBarMenu>
                 <S.SideBarMenu>
-                  <Link to={'/test'}>학원일정</Link>
+                  <Link to={'/bootcamp'}>학원일정</Link>
                 </S.SideBarMenu>
                 <S.SideBarMenu>
                   <Link to={'/postscript'}>수료후기</Link>

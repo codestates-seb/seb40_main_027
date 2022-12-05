@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const ScheduleContent = styled.div`
-  height: 80vh;
+  height: 100vh;
   width: 100%;
+  overflow: auto;
 
   .schedule-line {
     display: flex;

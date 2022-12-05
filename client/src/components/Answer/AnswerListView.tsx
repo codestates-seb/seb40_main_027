@@ -92,12 +92,7 @@ const AnswerListView = ({
     <S.AnswerTextContent>
       {isPatch ? (
         <div>
-          <ReactQuill
-            theme="snow"
-            value={commentValue}
-            onChange={setCommentValue}
-            placeholder={`${postscriptComment}`}
-          />
+          <ReactQuill theme="snow" value={commentValue} onChange={setCommentValue} />
           <QuillContainer patchHandler={patchHandler} editHandler={editHandler} />
         </div>
       ) : (

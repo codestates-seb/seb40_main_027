@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
-import { logUser } from '../../atoms';
+import { updateMyPage, logUser } from '../../atoms/index';
 import Logout from '../Button/Logout';
 import { Icon } from '@iconify/react';
 import { Link } from 'react-router-dom';
@@ -26,13 +26,15 @@ const NicknameArea = styled.div`
 `;
 const Nickname = () => {
   const { nickname } = useRecoilValue(logUser);
+  const nick = useRecoilValue(updateMyPage);
+
   return (
     <ImgCircle>
       <NicknameArea>
         <Link to="users/mypage">
           <Icon icon="carbon:user-avatar-filled-alt" width="30" height="30" />
         </Link>
-        <span>{nickname}</span>
+        <span>{nick.nickname ? nick.nickname : nickname}</span>
       </NicknameArea>
       <LogoutArea>
         <Logout />

@@ -4,23 +4,21 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Withdrawal from './Withdrawal';
 import * as S from './UserProfile.style';
+import { useRecoilState } from 'recoil';
+import { updateMyPage } from '../../atoms/index';
 
 interface IFormInput {
-  nickname: String;
-  email: String;
+  nickname?: string;
   password?: String;
 }
 
 interface RespondsBodyUser {
-  data: {
-    email: String;
-    nickname: String;
-  };
+  nickname: string;
 }
 
 interface UserInfoProps {
   memberId: number;
-  email: string;
+  email?: string;
   nickname: string;
 }
 const UserProfile = () => {
@@ -31,7 +29,7 @@ const UserProfile = () => {
     reset,
   } = useForm<IFormInput>({ mode: 'onBlur' });
   const [updateProfile, setUpdateProfile] = useState<boolean>(false);
-  const [userUpdate, setUserUpdate] = useState<RespondsBodyUser | undefined>();
+  const [userUpdate, setUserUpdate] = useRecoilState<RespondsBodyUser>(updateMyPage);
   const access = localStorage.getItem('access');
   const [userInfo, setUserInfo] = useState<UserInfoProps>();
 
@@ -56,11 +54,14 @@ const UserProfile = () => {
     axios({
       method: 'patch',
       url: '/users',
-      data: { data },
+      data: { nickname: data.nickname, password: data.password },
+      headers: {
+        Authorization: access,
+      },
     })
       .then((res) => {
-        const dataType = res.data;
-        setUserUpdate(dataType);
+        const { data } = res;
+        setUserUpdate(data.data);
         setUpdateProfile(!updateProfile);
         reset();
       })
@@ -81,16 +82,6 @@ const UserProfile = () => {
             <Icon icon="ph:gear-six-duotone" width="25" height="25" />
           </S.ProfileUpdateButton>
           <S.FromInputProFile onSubmit={handleSubmit(MyProfileSubmit)}>
-            <label htmlFor="email">email</label>
-            <S.InputProfileForm
-              {...register('email', {
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
-                  message: '이메일 형식으로 입력해주세요',
-                },
-              })}
-            />
-            <S.ErrorMessage>{errors.email?.message}</S.ErrorMessage>
             <label htmlFor="nickname">nickname</label>
             <S.InputProfileForm
               {...register('nickname', {
@@ -99,16 +90,20 @@ const UserProfile = () => {
                   message: '숫자 및 영어로 3자 이상 10지 이하로 작성해주세요',
                 },
               })}
+              placeholder="닉네임을 입력하세요"
             />
             <S.ErrorMessage>{errors.nickname?.message}</S.ErrorMessage>
             <label htmlFor="password">비밀번호</label>
             <S.InputProfileForm
+              type="password"
               {...register('password', {
                 pattern: {
                   value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{4,20}$/,
                   message: '영어대소문자 및 숫자 및 특수문자 최소 1개씩 포함하여 4-20자입니다',
                 },
               })}
+              placeholder="비밀번호를 입력하세요"
+              autoComplete="off"
             />
             <S.ErrorMessage>{errors.password?.message}</S.ErrorMessage>
 
@@ -125,9 +120,9 @@ const UserProfile = () => {
           </S.PictureProfile>
           <div className="user-info">
             email
-            <S.UserInfoFormEmail>{userUpdate ? userUpdate.data.email : userInfo?.email}</S.UserInfoFormEmail>
+            <S.UserInfoFormEmail>{userInfo?.email}</S.UserInfoFormEmail>
             nickname
-            <S.UserInfoFormEmail>{userUpdate ? userUpdate.data.nickname : userInfo?.nickname}</S.UserInfoFormEmail>
+            <S.UserInfoFormEmail>{userUpdate.nickname ? userUpdate.nickname : userInfo?.nickname}</S.UserInfoFormEmail>
           </div>
         </S.UserProfileUpdateBody>
       )}

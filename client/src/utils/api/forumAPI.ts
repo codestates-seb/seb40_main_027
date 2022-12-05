@@ -10,7 +10,10 @@ export const readAllPosts = async (url: string, setPosts: React.Dispatch<any>, s
     }
 
     setPosts(res.data.data);
-    setPostsPage(res.data.pageInfo.totalElements);
+
+    if (setPostsPage) {
+      setPostsPage(res.data.pageInfo.totalElements);
+    }
   } catch (err) {
     console.error(err);
   }

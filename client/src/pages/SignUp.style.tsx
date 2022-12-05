@@ -10,6 +10,7 @@ export const Wrap = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   img {
     margin-top: -5%;
     width: 240px;
@@ -23,6 +24,12 @@ export const Wrap = styled.div`
   }
 `;
 
+export const LogoDiv = styled.div`
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+`;
+
 export const FormWrap = styled.div`
   width: 60%;
   height: 60%;
@@ -30,6 +37,7 @@ export const FormWrap = styled.div`
   form {
     box-sizing: content-box;
     border: 1px solid var(--greenMain);
+    border-radius: 10px;
     margin-top: 2%;
     width: 100%;
     height: 100%;
@@ -88,6 +96,7 @@ export const TypeSection = styled.div`
         height: 40%;
         margin: 3% 0 6% 0;
         font-size: 1.3rem;
+        border-radius: 10px;
       }
     }
   }

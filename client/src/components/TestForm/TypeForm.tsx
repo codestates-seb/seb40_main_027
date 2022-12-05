@@ -3,7 +3,15 @@ import { useState } from 'react';
 import EndForm from './EndForm';
 import { useRecoilState } from 'recoil';
 import { yesContent, noContent } from '../../atoms/index';
-import Pra1 from '../../assets/image/pra1.png';
+import testImg1 from '../../assets/image/testImg1.png';
+import testImg2 from '../../assets/image/testImg2.png';
+import testImg3 from '../../assets/image/testImg3.png';
+import testImg4 from '../../assets/image/testImg4.png';
+import testImg5 from '../../assets/image/testImg5.png';
+import testImg6 from '../../assets/image/testImg6.png';
+import testImg7 from '../../assets/image/testImg7.png';
+import testImg8 from '../../assets/image/testImg8.png';
+import testImg9 from '../../assets/image/testImg9.png';
 import * as S from './TypeForm.style';
 
 const TypeForm = () => {
@@ -22,8 +30,18 @@ const TypeForm = () => {
     '나는 다양한 사람들과 소통하는 것을 좋아한다.',
     '문제를 생각할 때 혼자 생각해서 도출하는 것을 선호한다',
   ];
-  let aaa = <img src={Pra1} alt="적성검사 이미지" width="100%" height="100%" />; //이미지의 이름은 나중에 정하고 다시 바꿀예정
-  const PictureList = [aaa, aaa, aaa, aaa, aaa, aaa, aaa, aaa, aaa];
+
+  const imgList1 = <img src={testImg1} alt="적성검사 이미지" width="100%" height="100%" />;
+  const imgList2 = <img src={testImg2} alt="적성검사 이미지" width="100%" height="100%" />;
+  const imgList3 = <img src={testImg3} alt="적성검사 이미지" width="100%" height="100%" />;
+  const imgList4 = <img src={testImg4} alt="적성검사 이미지" width="100%" height="100%" />;
+  const imgList5 = <img src={testImg5} alt="적성검사 이미지" width="100%" height="100%" />;
+  const imgList6 = <img src={testImg6} alt="적성검사 이미지" width="100%" height="100%" />;
+  const imgList7 = <img src={testImg7} alt="적성검사 이미지" width="100%" height="100%" />;
+  const imgList8 = <img src={testImg8} alt="적성검사 이미지" width="100%" height="100%" />;
+  const imgList9 = <img src={testImg9} alt="적성검사 이미지" width="100%" height="100%" />;
+
+  const PictureList = [imgList1, imgList2, imgList3, imgList4, imgList5, imgList6, imgList7, imgList8, imgList9];
   const ViewYesHandler = () => {
     setIdNumber(idNumber + 1);
     setIsYes(isYes + 1);

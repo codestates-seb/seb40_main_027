@@ -4,7 +4,7 @@ import logo from '../assets/image/logo.png';
 import icon from '../assets/image/icon.png';
 import { RegisterButton } from '../components/Button';
 import { userSignUp } from '../utils/api/userAPI';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 type SignUpValue = {
   email: string;
@@ -30,7 +30,11 @@ const SignUp = () => {
 
   return (
     <S.Wrap>
-      <img src={logo} alt="logo" />
+      <Link to="/">
+        <S.LogoDiv>
+          <img src={logo} alt="logo" />
+        </S.LogoDiv>
+      </Link>
       <S.FormWrap>
         <S.GreenTxtBrd>회원가입</S.GreenTxtBrd>
         <form onSubmit={handleSubmit(onSubmit)}>
