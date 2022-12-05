@@ -3,7 +3,8 @@ import theme from '../styles/theme';
 
 export const PageWrap = styled.div`
   width: 100vw;
-  height: 100vh;
+  min-height: 1080px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,11 +16,11 @@ export const PageWrap = styled.div`
   }
 `;
 
-export const MiddleSection = styled.section`
+export const MiddleDiv = styled.div`
   width: 60vw;
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 3%;
+  margin-bottom: 1%;
   div {
     display: flex;
     justify-content: flex-end;
@@ -28,4 +29,9 @@ export const MiddleSection = styled.section`
   @media ${theme.mobile} {
     display: none;
   }
+`;
+
+export const RefDiv = styled.div`
+  bottom: 0;
+  height: 100%;
 `;

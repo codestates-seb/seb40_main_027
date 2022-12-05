@@ -1,30 +1,43 @@
-import { useEffect, useState } from 'react';
-import { useLocation, useSearchParams } from 'react-router-dom';
-import { readAllPosts } from '../../utils/api/forumAPI';
-import Pagination from '../Pagination';
-import ForumCard from './ForumCard';
 import * as S from './ForumCards.style';
+import { useEffect, useState, useCallback } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useInView } from 'react-intersection-observer';
+import ForumCard from './ForumCard';
 import ForumContentHeader from './ForumContentHeader';
+import { getAllPostsInfinite } from '../../utils/api/forumAPI';
+import Loading from '../Loading/Loading';
 
 const ForumCards = () => {
   const [posts, setPosts] = useState<any>([]);
-  const [searchParams, setSearchParams] = useSearchParams();
-  let page = searchParams.get('page');
-
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState<number>();
+  const [loading, setLoading] = useState(false);
+  const [ref, inView] = useInView({
+    threshold: 1,
+  });
   const { pathname } = useLocation();
   const forumType = pathname.split('/')[1];
 
-  useEffect(() => {
-    if (page === null) {
-      setSearchParams({
-        page: '1',
-      });
-      page = '1';
-    }
-
-    const url = `/${forumType}?page=${page}&size=10&sort=${forumType}Id`;
-    readAllPosts(url, setPosts);
+  const getPosts = useCallback(async (page: number) => {
+    setLoading(true);
+    const url = `/${forumType}?page=${page}&size=9&sort=${forumType}Id`;
+    getAllPostsInfinite(url, setPosts, setTotalPages);
+    setLoading(false);
   }, []);
+
+  useEffect(() => {
+    getPosts(page);
+  }, [page]);
+
+  useEffect(() => {
+    if (inView && !loading) {
+      if (page < totalPages!) {
+        setPage(page + 1);
+      } else if (page === totalPages) {
+        setLoading(false);
+      }
+    }
+  }, [inView, loading]);
 
   return (
     <S.Container>
@@ -35,8 +48,7 @@ const ForumCards = () => {
           <ForumCard key={post[`${forumType}Id`]} forumType={forumType} post={post} />
         ))}
       </S.MainContainer>
-
-      <Pagination />
+      <S.RefDiv ref={ref}>{inView && loading ? <Loading /> : null}</S.RefDiv>
     </S.Container>
   );
 };

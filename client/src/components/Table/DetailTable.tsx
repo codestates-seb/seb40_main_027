@@ -3,90 +3,95 @@ import * as S from './DetailTable.style';
 // 데이터 확정이 아직 나지 않아서 어떤 데이터 렌더링 될지 한번더 체크 필요
 
 // 통신으로 받아온 데이터의 key값에 해당하는 한글 호출하여 렌더링
-const dict = {
-  title: '기관정보',
-  process: '과정',
-  On_Off: '온/오프라인',
-  total_cost: '총 비용',
-  begin_register_date: '접수일',
-  place: null,
-  final_register_date: '접수마갑일',
-  start_date: '훈련기간',
-  end_date: '훈련기간',
-  duration: '공부기간',
-};
-{
-  /* <div>
-              {keysObj.map((el, idx) =>
-                idx <= Math.ceil(keysObj.length / 2) ? (
-                  <div key={idx}>
-                    <div>
-                      <S.RowHeader>{data[el]}</S.RowHeader>
-                    </div>
-                  </div>
-                ) : null
-              )}
-            </div> */
+
+export interface DataType {
+  [index: string]: string | number;
+  beginRegisterDate: string;
+  bootcampId: number;
+  title: string;
+  finalRegisterDate: string;
+  duration: string;
+  onOff: string;
+  totalCost: string;
+  superviser: string;
+  satisfaction: string;
+  trTime: string;
+  site: string;
+  weekendStatus: string;
+  startDate: string;
+  endDate: string;
+  process: string;
+  vote: string | number;
 }
 
-const data = {
-  name: '코드 스테이츠',
-  date: '10/11-14',
-  On_Off: '온라인',
-  duration: '6개월',
-  total_cost: '무료(국비)',
-  timeTable: '시간표보기',
-  satisfaction: '3',
-  time: '09:00 ~ 18:00',
-  incentives: '월 최대 316,0000d원',
+const keyDict: DataType = {
+  bootcampId: 1,
+  title: '훈련기관명',
+  beginRegisterDate: '접수일',
+  finalRegisterDate: '접수마감일',
+  duration: '기간',
+  onOff: '온/오프라인',
+  totalCost: '총 비용',
+  superviser: '주관부처',
+  satisfaction: '만족도',
+  trTime: '훈련시간',
+  site: '홈패이지 주소',
+  weekendStatus: '주야구분/주말여부',
+  startDate: '개강일',
+  endDate: '종강일',
+  process: '훈련명',
+  vote: '찜여부',
 };
 
-const keysObj: Array<string> = Object.keys(data);
-/** 일단 전부 나열하여 작성, 추후 data확정되면 mapping형태로 한번 refactoring 필요 **/
-const DetailTable = () => {
+interface PropsType {
+  data: DataType;
+  halfIdx: number;
+  dataKeys: Array<string>;
+}
+
+function decider(data: DataType, el: string | number) {
+  if (el === 'duration' && data[el] === '') {
+    const start = data.startDate.substring(2);
+    const end = data.endDate.substring(2);
+    return `${start} ~ ${end}`;
+  } else if (el === 'site') {
+    return (
+      <a href={`${data[el]}`} target="_blank" rel="noopener noreferrer">
+        <span>{data[el]}</span>
+      </a>
+    );
+  } else if (el === 'satisfaction') {
+    return `${data[el]}/5`;
+  } else return data[el];
+}
+
+export const DetailTable = ({ data, halfIdx, dataKeys }: PropsType) => {
   return (
     <S.Detail>
       <div>
-        <div>
-          <div>
-            <S.RowHeader>모집기간</S.RowHeader>
-          </div>
-          <div>{data.date}</div>
-        </div>
-        <div>
-          <div>
-            <S.RowHeader>공부기간</S.RowHeader>
-          </div>
-          <div>{data.duration}</div>
-        </div>
-        <div>
-          <div>
-            <S.RowHeader>온/오프라인</S.RowHeader>
-          </div>
-          <div>{data.On_Off}</div>
-        </div>
+        {dataKeys.map((el: string, idx: number) =>
+          idx <= halfIdx && idx >= 1 && keyDict[el] !== '훈련명' ? (
+            <div key={idx}>
+              <div>
+                <S.RowHeader>{keyDict[el]}</S.RowHeader>
+              </div>
+              <div>{decider(data, el)}</div>
+            </div>
+          ) : null
+        )}
       </div>
       <div>
-        <div>
-          <div>
-            <S.RowHeader>시간표</S.RowHeader>
-          </div>
-          <div>{data.time}</div>
-        </div>
-        <div>
-          <div>
-            <S.RowHeader>수강색 평균 만족도</S.RowHeader>
-          </div>
-          <div>{data.satisfaction}</div>
-        </div>
-        <div>
-          <div>
-            <S.RowHeader>시간</S.RowHeader>
-          </div>
-          <div>{data.time}</div>
-        </div>
+        {dataKeys.map((el: string, idx: number) =>
+          idx > halfIdx && keyDict[el] !== '찜여부' ? (
+            <div key={idx}>
+              <div>
+                <S.RowHeader>{keyDict[el]}</S.RowHeader>
+              </div>
+              <div>{decider(data, el)}</div>
+            </div>
+          ) : null
+        )}
       </div>
     </S.Detail>
   );
 };
-export default DetailTable;
