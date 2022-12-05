@@ -18,23 +18,6 @@ const onClick = () => {
   });
 };
 
-function dDayCounter(income: any, data: any, index: number) {
-  const value = income;
-  if (value === '모집중') {
-    return '발견';
-    // const today = new Date();
-    // const dDay = new Date(data[index].finalRegisterDate);
-    // const gap = dDay.getTime() - today.getTime();
-    // const result = Math.ceil(gap / (1000 * 60 * 60 * 24));
-    // if (result <= 7 && result >= 0) {
-    //   if (result === 0) return 'D-Day';
-    //   return `D-${result}`;
-    // }
-  } else {
-    return income;
-  }
-}
-
 export const Table = ({ data }: any) => {
   const columnHelper = createColumnHelper<BootData>();
   const columns = [
@@ -70,9 +53,7 @@ export const Table = ({ data }: any) => {
             {row.getVisibleCells().map((cell) => (
               <td key={cell.id}>
                 <Link to={`/bootcamp/${data[idx].bootcampId}`} onClick={onClick}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext()) === '모집중'
-                    ? '발견'
-                    : flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </Link>
               </td>
             ))}
