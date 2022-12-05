@@ -22,7 +22,7 @@ const Login = () => {
   } = useForm<LoginValue>({ mode: 'onBlur' });
 
   const onSubmit: SubmitHandler<LoginValue> = async (data) => {
-    await userLogin(data, setLogStatus, navigate, state);
+    userLogin(data, setLogStatus, navigate, state);
   };
 
   return (
