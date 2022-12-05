@@ -1,9 +1,5 @@
 import * as S from './DetailTable.style';
 
-// 데이터 확정이 아직 나지 않아서 어떤 데이터 렌더링 될지 한번더 체크 필요
-
-// 통신으로 받아온 데이터의 key값에 해당하는 한글 호출하여 렌더링
-
 export interface DataType {
   [index: string]: string | number;
   beginRegisterDate: string;
