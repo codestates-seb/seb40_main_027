@@ -24,6 +24,9 @@ export const TableWrap = styled.table`
     }
   }
   tbody {
+    tr:nth-child(even) {
+      background: var(--grayBoardAreaBorder);
+    }
     a {
       text-decoration: none;
     }
