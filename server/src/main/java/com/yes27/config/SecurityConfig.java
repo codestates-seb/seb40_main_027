@@ -98,6 +98,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setExposedHeaders(Arrays.asList("Authorization", "Refresh"));
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
 //        configuration.addAllowedOriginPattern("*");
