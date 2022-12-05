@@ -66,6 +66,7 @@ const HeaderLink = styled(Link)`
     display: none;
   }
 `;
+
 const LoginSignHeaderButton = styled.span`
   display: flex;
   flex-direction: row;
