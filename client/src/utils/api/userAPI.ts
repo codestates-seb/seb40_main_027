@@ -12,8 +12,9 @@ interface LogStatus {
 }
 export const userLogin = (
   submitData: LoginType,
+  setLogStatus: React.Dispatch<React.SetStateAction<LogStatus>>,
   navigate: NavigateFunction,
-  setLogStatus: React.Dispatch<React.SetStateAction<LogStatus>>
+  state: string
 ) => {
   axios({
     method: 'post',
@@ -33,7 +34,11 @@ export const userLogin = (
       const refresh = response.headers.refresh ?? '';
       localStorage.setItem('access', access);
       localStorage.setItem('refresh', refresh);
-      navigate('/');
+      if (state) {
+        navigate(state);
+      } else {
+        navigate('/');
+      }
     })
     .catch((err) => alert(`로그인 실패 ${err}`));
   return 'success';
