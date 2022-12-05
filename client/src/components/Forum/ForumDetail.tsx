@@ -12,6 +12,8 @@ import { readPost, votePost } from '../../utils/api/forumAPI';
 import StudyAnswer from '../Answer/StudyAnswer';
 import ForumArticlesAnswer from '../Answer/ForumArticlesAnswer';
 import MentoringAnswer from '../Answer/MentoringAnswer';
+import { useRecoilValue } from 'recoil';
+import { logUser } from '../../atoms';
 
 interface PropsType {
   page?: number;
@@ -25,6 +27,8 @@ const ForumDetail = ({ page = 1 }: PropsType) => {
   const [, forumType, id] = pathname.split('/');
 
   const navigate = useNavigate();
+
+  const { nickname, memberRole } = useRecoilValue(logUser);
 
   useEffect(() => {
     const url = `/${forumType}/${id}`;
@@ -67,15 +71,17 @@ const ForumDetail = ({ page = 1 }: PropsType) => {
             </S.TagsContainer>
             <S.TitleContainer>
               <S.Title>{post[`${forumType}Title`]}</S.Title>
-              <MoreButton
-                buttonType="post"
-                forumType={forumType}
-                id={post[`${forumType}Id`]}
-                tagName={post.tagName}
-                title={post[`${forumType}Title`]}
-                content={post[`${forumType}Content`]}
-                author={post.member.nickname}
-              />
+              {nickname === post.member.nickname || memberRole === 'admin' ? (
+                <MoreButton
+                  buttonType="post"
+                  forumType={forumType}
+                  id={post[`${forumType}Id`]}
+                  tagName={post.tagName}
+                  title={post[`${forumType}Title`]}
+                  content={post[`${forumType}Content`]}
+                  author={post.member.nickname}
+                />
+              ) : null}
             </S.TitleContainer>
             <ForumWrittenInfo position="left" author={post.member.nickname} createdAt={createdAt} view={post.view} />
           </S.TitleInfoContainer>
