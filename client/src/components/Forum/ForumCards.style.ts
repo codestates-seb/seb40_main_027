@@ -73,7 +73,7 @@ export const OtherContainer = styled.div`
 
 export const MainContainer = styled.main`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: calc(923 / 48 * 1rem) calc(923 / 48 * 1rem) calc(923 / 48 * 1rem);
   grid-template-rows: 1fr 1fr 1fr;
   grid-gap: calc(20 / 16 * 1rem);
   gap: calc(20 / 16 * 1rem);

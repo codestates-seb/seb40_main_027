@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import logo from '../assets/image/logo.png';
 import { LogPageBtn } from '../components/Button';
 import { userLogin } from '../utils/api/userAPI';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { logUser } from '../atoms';
 
@@ -14,6 +14,7 @@ interface LoginValue {
 const Login = () => {
   const setLogStatus = useSetRecoilState(logUser);
   const navigate = useNavigate();
+  const { state } = useLocation();
   const {
     register,
     handleSubmit,
@@ -21,13 +22,15 @@ const Login = () => {
   } = useForm<LoginValue>({ mode: 'onBlur' });
 
   const onSubmit: SubmitHandler<LoginValue> = async (data) => {
-    userLogin(data, navigate, setLogStatus);
+    await userLogin(data, setLogStatus, navigate, state);
   };
 
   return (
     <S.LoginWrapp>
       <div className="login-inner">
-        <img src={logo} alt="logo" />
+        <Link to="/">
+          <img src={logo} alt="logo" />
+        </Link>
         <div className="form-wrap">
           <form onSubmit={handleSubmit(onSubmit)}>
             <label>
