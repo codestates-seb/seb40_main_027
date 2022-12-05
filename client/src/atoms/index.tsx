@@ -54,3 +54,11 @@ export const bootListMyPage = atom<BootDataList>({
   key: 'bootListMyPage',
   default: [],
 });
+
+export const upDateMyPage = atom({
+  key: 'upDateMyPage',
+  default: {
+    nickname: '',
+  },
+  effects_UNSTABLE: [persistAtom],
+});
