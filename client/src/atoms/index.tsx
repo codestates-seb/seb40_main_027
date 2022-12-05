@@ -55,8 +55,8 @@ export const bootListMyPage = atom<BootDataList>({
   default: [],
 });
 
-export const upDateMyPage = atom({
-  key: 'upDateMyPage',
+export const updateMyPage = atom({
+  key: 'updateMyPage',
   default: {
     nickname: '',
   },
