@@ -19,6 +19,24 @@ export const readAllPosts = async (url: string, setPosts: React.Dispatch<any>, s
   }
 };
 
+export const getAllPostsInfinite = async (
+  url: string,
+  setPosts: React.Dispatch<any>,
+  setTotalPages: React.Dispatch<any>
+) => {
+  try {
+    const res = await axios.get(url);
+
+    if (res.status !== 200) {
+      throw new Error(`${res.status}`);
+    }
+    setPosts((posts: any) => posts.concat(res.data.data));
+    setTotalPages(res.data.pageInfo.totalPages);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const readPost = async (url: string, setPost: React.Dispatch<any>) => {
   const access = localStorage.getItem('access');
 
