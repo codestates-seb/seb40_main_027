@@ -31,15 +31,16 @@ const TypeForm = () => {
     '문제를 생각할 때 혼자 생각해서 도출하는 것을 선호한다',
   ];
 
-  const imgList1 = <img src={testImg6} alt="적성검사 이미지" width="100%" height="100%" />;
-  const imgList2 = <img src={testImg7} alt="적성검사 이미지" width="100%" height="100%" />;
-  const imgList3 = <img src={testImg8} alt="적성검사 이미지" width="100%" height="100%" />;
-  const imgList4 = <img src={testImg3} alt="적성검사 이미지" width="100%" height="100%" />;
+  const imgList1 = <img src={testImg1} alt="적성검사 이미지" width="100%" height="100%" />;
+  const imgList2 = <img src={testImg2} alt="적성검사 이미지" width="100%" height="100%" />;
+  const imgList3 = <img src={testImg3} alt="적성검사 이미지" width="100%" height="100%" />;
+  const imgList4 = <img src={testImg4} alt="적성검사 이미지" width="100%" height="100%" />;
   const imgList5 = <img src={testImg5} alt="적성검사 이미지" width="100%" height="100%" />;
-  const imgList6 = <img src={testImg1} alt="적성검사 이미지" width="100%" height="100%" />;
-  const imgList7 = <img src={testImg9} alt="적성검사 이미지" width="100%" height="100%" />;
-  const imgList8 = <img src={testImg2} alt="적성검사 이미지" width="100%" height="100%" />;
-  const imgList9 = <img src={testImg4} alt="적성검사 이미지" width="100%" height="100%" />;
+  const imgList6 = <img src={testImg6} alt="적성검사 이미지" width="100%" height="100%" />;
+  const imgList7 = <img src={testImg7} alt="적성검사 이미지" width="100%" height="100%" />;
+  const imgList8 = <img src={testImg8} alt="적성검사 이미지" width="100%" height="100%" />;
+  const imgList9 = <img src={testImg9} alt="적성검사 이미지" width="100%" height="100%" />;
+
   const PictureList = [imgList1, imgList2, imgList3, imgList4, imgList5, imgList6, imgList7, imgList8, imgList9];
   const ViewYesHandler = () => {
     setIdNumber(idNumber + 1);
