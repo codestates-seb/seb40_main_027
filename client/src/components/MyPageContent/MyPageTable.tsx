@@ -19,7 +19,7 @@ interface BootDataProps {
 
 export interface BootDataList extends Array<BootDataProps> {}
 
-const columns = ['이름', '등록일', '수료일', '과정', '총비용', '온/오프라인', '찜'];
+const columns = ['이름', '접수일', '접수마감일', '과정', '총비용', '온/오프라인', '찜'];
 const MyPageTable = () => {
   const [bootList, setBootList] = useState<BootDataList>([]);
   const [page, setPage] = useState(1);
