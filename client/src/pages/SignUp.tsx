@@ -35,8 +35,6 @@ const SignUp = () => {
           <img src={logo} alt="logo" />
         </S.LogoDiv>
       </Link>
-
-      {/* </S.Logoview> */}
       <S.FormWrap>
         <S.GreenTxtBrd>회원가입</S.GreenTxtBrd>
         <form onSubmit={handleSubmit(onSubmit)}>
