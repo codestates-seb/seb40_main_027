@@ -54,6 +54,8 @@ export const Title = styled.h2`
   margin-left: 0;
   margin-right: 0;
   font-weight: bold;
+  text-align: center;
+  text-align-last: center;
 
   @media ${theme.mobile} {
     width: calc(100% / 3);
