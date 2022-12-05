@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Withdrawal from './Withdrawal';
 import * as S from './UserProfile.style';
+import { useRecoilState } from 'recoil';
+import { upDateMyPage } from '../../atoms/index';
 
 interface IFormInput {
   nickname?: string;
@@ -11,7 +13,6 @@ interface IFormInput {
 }
 
 interface RespondsBodyUser {
-  email?: string;
   nickname: string;
 }
 
@@ -28,7 +29,7 @@ const UserProfile = () => {
     reset,
   } = useForm<IFormInput>({ mode: 'onBlur' });
   const [updateProfile, setUpdateProfile] = useState<boolean>(false);
-  const [userUpdate, setUserUpdate] = useState<RespondsBodyUser | undefined>();
+  const [userUpdate, setUserUpdate] = useRecoilState<RespondsBodyUser>(upDateMyPage);
   const access = localStorage.getItem('access');
   const [userInfo, setUserInfo] = useState<UserInfoProps>();
 
@@ -121,7 +122,7 @@ const UserProfile = () => {
             email
             <S.UserInfoFormEmail>{userInfo?.email}</S.UserInfoFormEmail>
             nickname
-            <S.UserInfoFormEmail>{userUpdate ? userUpdate?.nickname : userInfo?.nickname}</S.UserInfoFormEmail>
+            <S.UserInfoFormEmail>{userUpdate.nickname ? userUpdate?.nickname : userInfo?.nickname}</S.UserInfoFormEmail>
           </div>
         </S.UserProfileUpdateBody>
       )}
