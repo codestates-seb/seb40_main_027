@@ -1,9 +1,8 @@
 import { Icon } from '@iconify/react';
-import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
 const SearchWrapper = styled.form`
-  width: 200px; // 임시 조정(추후 페이지에 따라 조정 또는 리펙토링 필요)
+  width: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,13 +20,15 @@ const SearchWrapper = styled.form`
 `;
 
 const SearchBar = () => {
-  const { register, handleSubmit } = useForm();
-  // 하위 onSubmit함수에서 추후 작성 필요
-  const onSubmit = (data: any) => console.log(data);
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    alert('검색 기능은 아직 구현되지 않았습니다.');
+  };
+
   return (
-    <SearchWrapper onSubmit={handleSubmit(onSubmit)}>
+    <SearchWrapper onSubmit={handleSubmit}>
       <Icon icon="ant-design:search-outlined" />
-      <input type="text" placeholder="검색" {...register('keyword')} />
+      <input type="text" placeholder="검색" />
     </SearchWrapper>
   );
 };
