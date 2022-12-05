@@ -32,8 +32,9 @@ export const userLogin = (
       });
       const access = response.headers.authorization as string;
       const refresh = response.headers.refresh as string;
-      console.log(access);
-      console.log(refresh);
+      console.log('response', response);
+      console.log('access', access);
+      console.log('refresh', refresh);
       localStorage.setItem('access', access);
       localStorage.setItem('refresh', refresh);
       if (state) {
