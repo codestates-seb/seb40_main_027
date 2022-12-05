@@ -122,7 +122,7 @@ const UserProfile = () => {
             email
             <S.UserInfoFormEmail>{userInfo?.email}</S.UserInfoFormEmail>
             nickname
-            <S.UserInfoFormEmail>{userUpdate.nickname ? userUpdate?.nickname : userInfo?.nickname}</S.UserInfoFormEmail>
+            <S.UserInfoFormEmail>{userUpdate.nickname ? userUpdate.nickname : userInfo?.nickname}</S.UserInfoFormEmail>
           </div>
         </S.UserProfileUpdateBody>
       )}
