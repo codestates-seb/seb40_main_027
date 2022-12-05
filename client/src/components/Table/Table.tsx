@@ -93,14 +93,15 @@ export const MobileTable = ({ data }: any) => {
               <div>{`${el.beginRegisterDate}`}</div>
             </S.MobileLeft>
             <S.MobileMiddle to={`/bootcamp/${data[idx].bootcampId}`} onClick={onClick}>
-              <div>{el.process}</div>
               <div>
                 <div>{el.title}</div>
               </div>
+              <div>{el.process}</div>
             </S.MobileMiddle>
             <S.MobileRight>
               <div>
-                <div>{el.totalCost}</div> <div>{el.onOff}</div>
+                <div>{el.onOff}</div>
+                <div>{el.totalCost}</div>
               </div>
             </S.MobileRight>
           </div>

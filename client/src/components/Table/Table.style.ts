@@ -115,6 +115,9 @@ export const MobileComp = styled.div`
     align-items: center;
     width: 90vw;
     height: 160px;
+    :nth-child(odd) {
+      background: var(--grayBoardAreaBorder);
+    }
     > div {
       width: 100%;
       height: 100%;
@@ -128,7 +131,7 @@ export const MobileComp = styled.div`
 `;
 
 export const MobileLeft = styled.div`
-  width: calc(100% / 3);
+  width: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -139,17 +142,19 @@ export const MobileLeft = styled.div`
 
 export const MobileMiddle = styled(Link)`
   text-decoration: none;
-  width: calc(100% / 3);
+  width: 40%;
   display: flex;
   flex-direction: column;
   align-items: center;
   div {
     padding: calc(100% / 15) 0;
-    word-break: break-all;
+    word-break: keep-all;
+    text-align: center;
+    text-align-last: center;
   }
 `;
 export const MobileRight = styled.div`
-  width: calc(100% / 3);
+  width: 30%;
   div {
     padding: calc(100% / 15) 0;
     > div {

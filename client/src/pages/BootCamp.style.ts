@@ -5,15 +5,16 @@ export const PageWrap = styled.div`
   width: 100vw;
   min-height: 1080px;
   height: 100%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
+  h2 {
+    font-size: 1.1rem !important;
+  }
   @media ${theme.mobile} {
     min-height: 667px;
     width: 100vw;
     height: 100vh;
-
     overflow-y: auto;
     flex-direction: column;
     align-items: center;
