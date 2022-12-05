@@ -5,7 +5,7 @@ import axios from 'axios';
 import Withdrawal from './Withdrawal';
 import * as S from './UserProfile.style';
 import { useRecoilState } from 'recoil';
-import { upDateMyPage } from '../../atoms/index';
+import { updateMyPage } from '../../atoms/index';
 
 interface IFormInput {
   nickname?: string;
@@ -29,7 +29,7 @@ const UserProfile = () => {
     reset,
   } = useForm<IFormInput>({ mode: 'onBlur' });
   const [updateProfile, setUpdateProfile] = useState<boolean>(false);
-  const [userUpdate, setUserUpdate] = useRecoilState<RespondsBodyUser>(upDateMyPage);
+  const [userUpdate, setUserUpdate] = useRecoilState<RespondsBodyUser>(updateMyPage);
   const access = localStorage.getItem('access');
   const [userInfo, setUserInfo] = useState<UserInfoProps>();
 
