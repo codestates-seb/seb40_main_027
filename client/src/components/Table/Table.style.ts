@@ -6,12 +6,17 @@ export const TableWrap = styled.table`
   width: 60vw;
   min-width: 960px;
   font-size: 1vw;
+
   thead {
     font-weight: bold;
     background-color: var(--greenSub);
     width: calc(100% / 6);
+    height: 5rem;
+    text-align: center;
+
     th {
       border: 1px solid var(--grayTableBorder);
+      padding-top: calc(100% / 30);
       :before {
         border: 2px solid red;
         border-radius: 5px;
