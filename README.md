@@ -1,6 +1,6 @@
 ## BootLamp
 
-<img width="277" alt="Group 158" src="https://user-images.githubusercontent.com/106054006/205614424-77505812-e7a7-478c-8ff3-ff2bfae39fff.png">
+<img align="center" width="277" alt="Group 158" src="https://user-images.githubusercontent.com/106054006/205614424-77505812-e7a7-478c-8ff3-ff2bfae39fff.png">
 
 Main-project **Yes27!**
 
