@@ -30,10 +30,11 @@ export const userLogin = (
         memberRole: response.data.member_role,
         nickname: response.data.nickname,
       });
-      const access = response.headers.authorization!;
-      const refresh = response.headers.refresh ?? '';
-      localStorage.setItem('access', access);
-      localStorage.setItem('refresh', refresh);
+      console.log(response.headers);
+      const access = response.headers.authorization;
+      const refresh = response.headers.refresh;
+      localStorage.setItem('access', access!);
+      localStorage.setItem('refresh', refresh!);
       if (state) {
         navigate(state);
       } else {
