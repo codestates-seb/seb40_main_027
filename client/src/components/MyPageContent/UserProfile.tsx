@@ -89,16 +89,20 @@ const UserProfile = () => {
                   message: '숫자 및 영어로 3자 이상 10지 이하로 작성해주세요',
                 },
               })}
+              placeholder="닉네임을 입력하세요"
             />
             <S.ErrorMessage>{errors.nickname?.message}</S.ErrorMessage>
             <label htmlFor="password">비밀번호</label>
             <S.InputProfileForm
+              type="password"
               {...register('password', {
                 pattern: {
                   value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{4,20}$/,
                   message: '영어대소문자 및 숫자 및 특수문자 최소 1개씩 포함하여 4-20자입니다',
                 },
               })}
+              placeholder="비밀번호를 입력하세요"
+              autoComplete="off"
             />
             <S.ErrorMessage>{errors.password?.message}</S.ErrorMessage>
 
