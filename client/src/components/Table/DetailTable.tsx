@@ -35,7 +35,7 @@ const keyDict: DataType = {
   superviser: '주관부처',
   satisfaction: '만족도',
   trTime: '훈련시간',
-  site: '홈패이지 주소',
+  site: '홈페이지 주소',
   weekendStatus: '주야구분/주말여부',
   startDate: '개강일',
   endDate: '종강일',
@@ -57,10 +57,11 @@ function decider(data: DataType, el: string | number) {
   } else if (el === 'site') {
     return (
       <a href={`${data[el]}`} target="_blank" rel="noopener noreferrer">
-        <span>{data[el]}</span>
+        <span>홈페이지로 이동</span>
       </a>
     );
   } else if (el === 'satisfaction') {
+    if (`${data[el]}` === '0') return '아직 평가 없음';
     return `${data[el]}/5`;
   } else return data[el];
 }
