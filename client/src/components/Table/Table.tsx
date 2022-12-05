@@ -11,7 +11,6 @@ export interface BootData {
   totalCost: string;
   onOff: string;
 }
-
 const onClick = () => {
   window.scrollTo({
     top: 0,
@@ -19,15 +18,32 @@ const onClick = () => {
   });
 };
 
+function dDayCounter(income: any, data: any, index: number) {
+  const value = income;
+  if (value === '모집중') {
+    return '발견';
+    // const today = new Date();
+    // const dDay = new Date(data[index].finalRegisterDate);
+    // const gap = dDay.getTime() - today.getTime();
+    // const result = Math.ceil(gap / (1000 * 60 * 60 * 24));
+    // if (result <= 7 && result >= 0) {
+    //   if (result === 0) return 'D-Day';
+    //   return `D-${result}`;
+    // }
+  } else {
+    return income;
+  }
+}
+
 export const Table = ({ data }: any) => {
   const columnHelper = createColumnHelper<BootData>();
   const columns = [
-    columnHelper.accessor('title', { header: '이름', maxSize: 10 }),
-    columnHelper.accessor('beginRegisterDate', { header: '접수일', maxSize: 10 }),
-    columnHelper.accessor('finalRegisterDate', { header: '접수마감일', maxSize: 50 }),
-    columnHelper.accessor('process', { header: '과정', maxSize: 50 }),
-    columnHelper.accessor('totalCost', { header: '총 비용', maxSize: 50 }),
-    columnHelper.accessor('onOff', { header: '온/오프라인', maxSize: 50 }),
+    columnHelper.accessor('title', { header: '이름' }),
+    columnHelper.accessor('beginRegisterDate', { header: '접수일' }),
+    columnHelper.accessor('finalRegisterDate', { header: '접수마감일' }),
+    columnHelper.accessor('process', { header: '과정' }),
+    columnHelper.accessor('totalCost', { header: '총 비용' }),
+    columnHelper.accessor('onOff', { header: '온/오프라인' }),
   ];
   const table = useReactTable({
     data,
@@ -54,7 +70,9 @@ export const Table = ({ data }: any) => {
             {row.getVisibleCells().map((cell) => (
               <td key={cell.id}>
                 <Link to={`/bootcamp/${data[idx].bootcampId}`} onClick={onClick}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  {flexRender(cell.column.columnDef.cell, cell.getContext()) === '모집중'
+                    ? '발견'
+                    : flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </Link>
               </td>
             ))}

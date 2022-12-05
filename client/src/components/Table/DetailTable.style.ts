@@ -56,7 +56,10 @@ export const Detail = styled.div`
           margin-left: 0;
           width: 100%;
           > span {
-            width: 70%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
             word-wrap: break-word;
           }
         }
