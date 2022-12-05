@@ -4,6 +4,7 @@ import EndForm from './EndForm';
 import { useRecoilState } from 'recoil';
 import { yesContent, noContent } from '../../atoms/index';
 import Pra1 from '../../assets/image/pra1.png';
+import user2 from '../../assets/image/user2.png';
 import * as S from './TypeForm.style';
 
 const TypeForm = () => {
@@ -22,7 +23,11 @@ const TypeForm = () => {
     '나는 다양한 사람들과 소통하는 것을 좋아한다.',
     '문제를 생각할 때 혼자 생각해서 도출하는 것을 선호한다',
   ];
-  let aaa = <img src={Pra1} alt="적성검사 이미지" width="100%" height="100%" />; //이미지의 이름은 나중에 정하고 다시 바꿀예정
+
+  const imgList = [{ Pra1 }, { user2 }];
+
+  let a = imgList.filter((el, idx) => idx === idNumber)[0];
+  let aaa = <img src={user2} alt="적성검사 이미지" width="100%" height="100%" />; //이미지의 이름은 나중에 정하고 다시 바꿀예정
   const PictureList = [aaa, aaa, aaa, aaa, aaa, aaa, aaa, aaa, aaa];
   const ViewYesHandler = () => {
     setIdNumber(idNumber + 1);
