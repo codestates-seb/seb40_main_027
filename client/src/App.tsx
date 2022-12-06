@@ -10,7 +10,7 @@ import Test from './pages/Test';
 import Forum from './pages/Forum';
 import MainHeader from './components/Header/MainHeader';
 import PageNotFound from './pages/PageNotFound';
-import LoadMap from './pages/LoadMap';
+import RoadMap from './pages/RoadMap';
 import PageHeaderSide from './components/Header/PageHeaderSide';
 import AuthoRoute from './components/Route/AuthRoute';
 
@@ -29,7 +29,7 @@ function App() {
         <Route path="/users/login" element={<Login />} />
         <Route path="/users/signup" element={<SignUp />} />
         <Route path="/test" element={<Test />} />
-        <Route path="/loadmap" element={<LoadMap />} />
+        <Route path="/loadmap" element={<RoadMap />} />
         <Route path="/bootcamp" element={<BootCamp />} />
         <Route path="/bootcamp/:id" element={<BootCampDetail />} />
         <Route path="/postscript" element={<Forum />} />

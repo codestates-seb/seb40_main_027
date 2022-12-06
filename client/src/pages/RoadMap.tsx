@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import LoadMapBanner from '../assets/image/LoadMapBanner.png';
-import LoadMapMobile from '../assets/image/LoadMapMobile.png';
+import RoadMapBanner from '../assets/image/RoadMapBanner.png';
+import RoadMapMobile from '../assets/image/RoadMapMobile.png';
 
-const LoadMapContent = styled.div`
+const RoadMapContent = styled.div`
   height: 90vh;
   display: flex;
   justify-content: center;
@@ -67,30 +67,30 @@ const SelectButton = styled.button`
     margin-bottom: 1rem;
   }
 `;
-const LoadMap = () => {
+const RoadMap = () => {
   const [linkSelect, setLinkSelect] = useState<number>(0);
 
-  const loadMapBtn = (id: number) => {
+  const roadMapBtn = (id: number) => {
     setLinkSelect(id);
   };
-  const loadMapMenu = [
+  const roadMapMenu = [
     { id: 1, text: 'frontend' },
     { id: 2, text: 'backend' },
   ];
   return (
-    <LoadMapContent>
+    <RoadMapContent>
       <ImgBanner>
-        <img src={LoadMapBanner} alt="banner" />
+        <img src={RoadMapBanner} alt="banner" />
       </ImgBanner>
       <ImgMobile>
-        <img src={LoadMapMobile} alt="mobilebanner" />
+        <img src={RoadMapMobile} alt="mobilebanner" />
       </ImgMobile>
 
       <ButtonContent>
-        {loadMapMenu.map((el) => (
+        {roadMapMenu.map((el) => (
           <SelectButton
             key={el.id}
-            onClick={() => loadMapBtn(el.id)}
+            onClick={() => roadMapBtn(el.id)}
             className={linkSelect === el.id ? 'select-btn' : 'nonselect-btn'}
           >
             <a href={`https://roadmap.sh/${el.text}`} target="_blank" rel="noreferrer">
@@ -99,8 +99,8 @@ const LoadMap = () => {
           </SelectButton>
         ))}
       </ButtonContent>
-    </LoadMapContent>
+    </RoadMapContent>
   );
 };
 
-export default LoadMap;
+export default RoadMap;
