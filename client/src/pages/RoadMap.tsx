@@ -1,47 +1,21 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import RoadMapBanner from '../assets/image/RoadMapBanner.png';
-import RoadMapMobile from '../assets/image/RoadMapMobile.png';
+import Banner from '../components/Banner';
 
 const RoadMapContent = styled.div`
   height: 90vh;
   display: flex;
-  justify-content: center;
   flex-direction: column;
-`;
-
-const ImgBanner = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  margin-bottom: 5vh;
-
-  img {
-    width: 55%;
-    height: 20vh;
-    margin-top: 0;
-  }
-  @media screen and (max-width: 414px) {
-    display: none;
-  }
-`;
-
-const ImgMobile = styled.div`
-  display: none;
-  @media screen and (max-width: 414px) {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    margin-bottom: 10vh;
-  }
+  margin-top: 0;
 `;
 
 const ButtonContent = styled.div`
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   @media screen and (max-width: 414px) {
+    margin-top: 25%;
     flex-direction: column;
     flex-wrap: wrap;
   }
@@ -79,13 +53,7 @@ const RoadMap = () => {
   ];
   return (
     <RoadMapContent>
-      <ImgBanner>
-        <img src={RoadMapBanner} alt="banner" />
-      </ImgBanner>
-      <ImgMobile>
-        <img src={RoadMapMobile} alt="mobilebanner" />
-      </ImgMobile>
-
+      <Banner text="로드맵" pageType="road" />
       <ButtonContent>
         {roadMapMenu.map((el) => (
           <SelectButton

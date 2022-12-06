@@ -79,3 +79,20 @@ export const BannerImg = styled.div`
     }
   }
 `;
+
+export const RoadRight = styled.div`
+  width: calc(100% / 3);
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  align-items: flex-end;
+  > img {
+    width: 180px;
+  }
+  @media ${theme.mobile} {
+    > img {
+      width: 95px;
+      height: 45%;
+    }
+  }
+`;
