@@ -89,9 +89,12 @@
 
 <details>
     <summary>contents 6.로드맵</summary>
+    <span>여기에 로드맵 ppt올려주세요</span>
+</details>
 
-<img width="609" alt="스크린샷 2022-12-05 오후 9 54 22" src="https://user-images.githubusercontent.com/106054006/205642475-c69528b0-e50d-4853-a4f6-7b0689ab9959.png">
-
+<details>
+    <summary>sub-contents. 마이페이지</summary>
+    <img width="609" alt="스크린샷 2022-12-05 오후 9 54 22" src="https://user-images.githubusercontent.com/106054006/205642475-c69528b0-e50d-4853-a4f6-7b0689ab9959.png">
 
 </details>
 
