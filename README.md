@@ -98,43 +98,31 @@ Main-project **Yes27!**
 
 <details>
     <summary>contents 1. 적성검사</summary>
-프론트로 갈지 백으로 갈지 고민하는 유저를 위한 재밌고 간단한 테스트
-
-
-<img width="609" alt="스크린샷 2022-12-05 오후 9 09 46" src="https://user-images.githubusercontent.com/106054006/205635572-81c1df4b-4909-4649-9475-3eb6e4d30282.png" >
-
-
-
+    <img width="609" alt="적성검사" src="https://user-images.githubusercontent.com/106054006/205793366-c249fa81-842f-4fd6-84db-200c43e7991c.gif">
 </details>
 
 
 <details>
     <summary>contents 2. 로드맵</summary>
-진로를 정했으면 무엇을 배워야할지 크게 알 수 있는 곳
-
-<img width="609" alt="스크린샷 2022-12-05 오후 9 53 56" src="https://user-images.githubusercontent.com/106054006/205642283-0eb8c03a-f271-4863-8b08-098ffaaa3f9e.png">
+     <img width="609" alt="로드맵" src="https://user-images.githubusercontent.com/106054006/205793319-4199ddd0-a251-4bd9-9101-11a13b52889c.gif">
+</details>
 
 
 </details>
 
 <details>
     <summary>cotents 3&4&5. 수료 후기 & 스터디 & 멘토링 게시판 글 작성하기</summary>
-각 게시판에서 
-
-
-  <img width="609" alt="스크린샷 2022-12-05 오후 9 54 08" src="https://user-images.githubusercontent.com/106054006/205642415-53e57aac-840a-4fb6-a1df-d85fb935c850.png">
-
-
+      <img width="609" alt="게시글 crud" src="https://user-images.githubusercontent.com/106054006/205793074-53c1a848-2abb-4ced-a13f-2514ef56f781.gif">
+      <img width="609" alt="댓글crud구현1" src="https://user-images.githubusercontent.com/106054006/205793309-baad92da-5e75-4062-8290-b98939c59060.gif">
 </details>
 
 
 <details>
     <summary>contents 6.학원일정</summary>
-
-<img width="609" alt="스크린샷 2022-12-05 오후 9 54 22" src="https://user-images.githubusercontent.com/106054006/205642475-c69528b0-e50d-4853-a4f6-7b0689ab9959.png">
-
-
+    <img width="609" alt="학원일정" src="https://user-images.githubusercontent.com/106054006/205793326-25c2c427-24d0-4d16-96a2-cc8437f92b0b.gif">
 </details>
+
+
 
 </div>
 
@@ -151,21 +139,18 @@ Main-project **Yes27!**
 ## 
 추가할 것 
 백엔드의 데이터베이스? 프론트쪽 피그마/피그잼? 사용서설명서? 화면정의서? 고민해보기
-![게시글 crud](https://user-images.githubusercontent.com/106054006/205793074-53c1a848-2abb-4ced-a13f-2514ef56f781.gif)
 
-   
-![댓글crud구현1](https://user-images.githubusercontent.com/106054006/205793309-baad92da-5e75-4062-8290-b98939c59060.gif)
 
 
 ##  Commit convention![로그인:로그아웃](https://user-images.githubusercontent.com/106054006/205793313-ca3eecb6-e1db-4588-afbf-b87f687a1fe5.gif)
-![로드맵](https://user-images.githubusercontent.com/106054006/205793319-4199ddd0-a251-4bd9-9101-11a13b52889c.gif)
-![부트캠프 일정및 찜하기](https://user-images.githubusercontent.com/106054006/205793326-25c2c427-24d0-4d16-96a2-cc8437f92b0b.gif)
+
+
 ![유저정보수정:탈퇴](https://user-images.githubusercontent.com/106054006/205793345-24ce7d9e-ed4e-4caf-af77-7dd0321a6857.gif)
 
 
 </div>![회원가입1](https://user-images.githubusercontent.com/106054006/205793362-bdd0e353-4a68-4d47-8ede-11c9d81a75eb.gif)
   
-![Dec-04-2022 16-16-54](https://user-images.githubusercontent.com/106054006/205793366-c249fa81-842f-4fd6-84db-200c43e7991c.gif)
+
   
 ![Dec-04-2022 17-20-33](https://user-images.githubusercontent.com/106054006/205793383-682f232c-a3f3-46dc-ba56-49feba56c143.gif)
   
