@@ -4,13 +4,14 @@
 
 
 
-Main-project **Yes27!**
+Main-project **<h1>Yes27!</h1>**
 
 **배포링크**:http://bootlamp.s3-website.ap-northeast-2.amazonaws.com/
 
-## Yes27!
-<img width="1112" alt="스크린샷 2022-12-06 오전 2 09 08" src="https://user-images.githubusercontent.com/48895268/205699073-0f213d47-6a88-47e0-89d2-36adc47bffbb.png">
+<img width="1000" alt="스크린샷 2022-12-06 오전 2 09 08" src="https://user-images.githubusercontent.com/48895268/205699073-0f213d47-6a88-47e0-89d2-36adc47bffbb.png">
 
+
+ **<h1>Team</h1>**
 
 <table>
   <tr>
@@ -158,23 +159,23 @@ Main-project **Yes27!**
 ## 사용한 Skills
 
 <div align=center>
-<img width="831" alt="스크린샷 2022-12-03 오후 4 36 19" src="https://user-images.githubusercontent.com/106054006/205793383-682f232c-a3f3-46dc-ba56-49feba56c143.gif">
+<img width="831" alt="스크린샷 2022-12-03 오후 4 36 19" src="https://user-images.githubusercontent.com/106054006/205815796-f6ec2144-2a3f-4f6a-b77a-648008248d54.png">
+
 
   
   <div align=left>
 
 
     
-## 
-추가할 것 
-백엔드의 데이터베이스? 프론트쪽 피그마/피그잼? 사용서설명서? 화면정의서? 고민해보기
+## ERD
+링크 : https://www.notion.so/codestates/ERD-994e4b20856e4c949a909d7e26a94c05
 
 
 
   
 
 
-
+## 컨벤션 
 <div align=center>
 
 |     | type             | instructions                                          |
