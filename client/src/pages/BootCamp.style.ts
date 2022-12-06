@@ -8,9 +8,6 @@ export const PageWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  h2 {
-    font-size: 1.1rem !important;
-  }
   @media ${theme.mobile} {
     min-height: 667px;
     width: 100vw;
@@ -18,6 +15,9 @@ export const PageWrap = styled.div`
     overflow-y: auto;
     flex-direction: column;
     align-items: center;
+    h2 {
+      font-size: 1rem !important;
+    }
   }
 `;
 
