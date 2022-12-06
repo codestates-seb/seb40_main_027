@@ -6,7 +6,7 @@
 
  **<h1>Main-project - Yes27!</h1>**
 
-**배포링크**:http://bootlamp.s3-website.ap-northeast-2.amazonaws.com/
+**배포링크**: http://bootlamp.s3-website.ap-northeast-2.amazonaws.com/
 
 <img width="1000" alt="스크린샷 2022-12-06 오전 2 09 08" src="https://user-images.githubusercontent.com/48895268/205699073-0f213d47-6a88-47e0-89d2-36adc47bffbb.png">
 
@@ -24,12 +24,12 @@
   
 
 </tr>
-      <td align="center">FE김상현👑</td>
-      <td align="center">FE안윤경</td>
-      <td align="center">FE박종원</td>
-    <td align="center">BE김영준</td>
-      <td align="center">BE박준우</td>
-      <td align="center">BE양주윤</td>
+      <td align="center">FE 김상현 👑</td>
+      <td align="center">FE 안윤경</td>
+      <td align="center">FE 박종원</td>
+      <td align="center">BE 김영준</td>
+      <td align="center">BE 박준우</td>
+      <td align="center">BE 양주윤</td>
    
       
 </tr>
@@ -41,26 +41,23 @@
 **<h2>💡 BootLamp란?</h2>**
 
 ```
-어두운 밤길을 밝혀주는 램프처럼 저희가 개발자가 되고 싶은 여러분의 앞길을 밝혀주겠습니다.
-라는 의미의  BootCamp 와 Lamp를 조합하였습니다
+어두운 밤길을 밝혀주는 램프처럼 저희가 개발자가 되고 싶은 여러분의 앞길을 밝혀주겠다는 의미로, Boot Camp와 Lamp를 조합하였습니다.
 ```
 
 **<h2> 💡 어떤 서비스인가요?</h2>**
 
-
-
- 코드스테이츠 수료를 앞둔 우리가 6개월전 그 당시 우리에게 필요했던 정보를 한 곳에 모아
+ 코드스테이츠 수료를 앞둔 우리가 6개월 전 그 당시 우리에게 필요했던 정보를 한 곳에 모아
  부트캠프, 학원들을 찾아다니는 예비 개발자들에게 필요한 정보와 소통 장소를 제공하는 서비스를 기획하였습니다. 
  
  
 **BootLamp**는 기존에 있는 사이트들의 사교육, 국비 학원 정보를 모두 제공할 수 있고,
-학원에 대해 자유롭게 이야기할 수 있는 공간을 제공하기 위해 만든 서비스 입니다.
+학원에 대해 자유롭게 이야기할 수 있는 공간을 제공하기 위해 만든 서비스입니다.
 
-**<h2>💡 어떻게 이용을하나요?</h2>**
+**<h2>💡 어떻게 이용하나요?</h2>**
 
 <details>
-    <summary>contents 1. 학원 일정확인</summary>
-접수중인 학원들을 찾을 수 있고 , 마음에 들면 찜버튼을 이용해 저장을 할 수 있습니다!
+    <summary>contents 1. 학원 일정 확인</summary>
+접수 중인 학원들을 찾을 수 있고, 마음에 들면 찜 버튼을 이용해 저장을 할 수 있습니다!
 
 <img width="609" alt="스크린샷 2022-12-05 오후 9 09 46" src="https://user-images.githubusercontent.com/106054006/205635572-81c1df4b-4909-4649-9475-3eb6e4d30282.png" >
 
@@ -70,7 +67,7 @@
 
 
 <details>
-    <summary>contents 2&3&4.리뷰,스터디,멘토링</summary>
+    <summary>contents 2. 게시판 - 수료 후기 & 스터디 & 멘토링</summary>
 
 <img width="609" alt="스크린샷 2022-12-05 오후 9 53 56" src="https://user-images.githubusercontent.com/106054006/205642283-0eb8c03a-f271-4863-8b08-098ffaaa3f9e.png">
 
@@ -78,7 +75,7 @@
 </details>
 
 <details>
-    <summary>contents 5.적성검사</summary>
+    <summary>contents 3. 적성검사</summary>
 
 
   <img width="609" alt="스크린샷 2022-12-05 오후 9 54 08" src="https://user-images.githubusercontent.com/106054006/205642415-53e57aac-840a-4fb6-a1df-d85fb935c850.png">
@@ -88,7 +85,7 @@
 
 
 <details>
-    <summary>contents 6.로드맵</summary>
+    <summary>contents 4. 로드맵</summary>
     
   <img width="609" alt="스크린샷 2022-12-06 오후 2 29 19" src="https://user-images.githubusercontent.com/106054006/205824421-0522205c-20e5-4fd7-8da4-e012c06ae47d.png">
 
@@ -124,33 +121,33 @@
 
 
 <details>
-    <summary>check 4.학원일정</summary>
+    <summary>check 4. 학원 일정</summary>
     <img width="609" alt="학원일정" src="https://user-images.githubusercontent.com/106054006/205793326-25c2c427-24d0-4d16-96a2-cc8437f92b0b.gif">
 </details>
 
 
 <details>
-    <summary>check 5.마이페이지</summary>
+    <summary>check 5. 마이페이지</summary>
     <img width="609" alt="마이페이지" src="https://user-images.githubusercontent.com/106054006/205793398-85071019-4f4a-4f6b-b581-2f0260e3c06c.gif">
   
 </details>
 
 <details>
-    <summary>check 6.로그인/로그아웃</summary>
+    <summary>check 6. 로그인/로그아웃</summary>
     
    <img width="609" alt="로그인/로그아웃" src="https://user-images.githubusercontent.com/106054006/205793313-ca3eecb6-e1db-4588-afbf-b87f687a1fe5.gif">
    
 </details>
 
 <details>
-    <summary>check 7.회원가입</summary>
+    <summary>check 7. 회원가입</summary>
     
  <img width="609" alt="회원가입" src="https://user-images.githubusercontent.com/106054006/205793362-bdd0e353-4a68-4d47-8ede-11c9d81a75eb.gif" >
  
 </details>
 
 <details>
-    <summary>check 8.유저정보 수정/탈퇴</summary>
+    <summary>check 8. 유저 정보 수정/탈퇴</summary>
     
   <img width="609" alt="학원일정" src="https://user-images.githubusercontent.com/106054006/205793383-682f232c-a3f3-46dc-ba56-49feba56c143.gif">
      
@@ -161,7 +158,7 @@
 
 </div>
 
-## 사용한 Skills
+## 사용한 기술 스택
 
 <div align=center>
 <img width="831" alt="스크린샷 2022-12-03 오후 4 36 19" src="https://user-images.githubusercontent.com/106054006/205815796-f6ec2144-2a3f-4f6a-b77a-648008248d54.png">
@@ -180,23 +177,23 @@
   
 
 
-## 컨벤션 
+## 커밋 메시지 컨벤션 
 <div align=center>
 
-|     | type             | instructions                                          |
-|   ---  | ---------------- | ----------------------------------------------------- |
-|     | feat             | 새로운 기능 추가                                      |
-|     | fix              | 버그 수정                                             |
-|     | docs             | 문서 수정                                             |
-|     | style            | 코드 formatting, 세미콜론(;) 누락 (코드 변경 X)       |
-|     | refactor         | 코드 리팩터링                                         |
-|     | test             |  테스트 코드, 리팩터링 테스트 코드 추가 (코드 변경 X) |
-|     | chore            | 빌드 업무 수정, 패키지 매니저 수정 (코드 변경 X)      |
-|     | design           | CSS 등 사용자 UI 디자인 변경                          |
-|     | comment          | 필요한 주석 추가 및 변경                              |
-|     | rename           | 파일 혹은 폴더명을 수정하거나 옮김                    |
-|     | remove           | 파일을 삭제하는 작업만 수행                           |
-|     | !BREAKING CHANGE | 커다란 API 변경                                       |
-|     | !HOTFIX          | 급하게 치명적인 버그를 고침                           |
+| type             | instructions                                          |
+| ---------------- | ----------------------------------------------------- |
+| feat             | 새로운 기능 추가                                      |
+| fix              | 버그 수정                                             |
+| docs             | 문서 수정                                             |
+| style            | 코드 formatting, 세미콜론(;) 누락 (코드 변경 X)       |
+| refactor         | 코드 리팩터링                                         |
+| test             | 테스트 코드, 리팩터링 테스트 코드 추가 (코드 변경 X) |
+| chore            | 빌드 업무 수정, 패키지 매니저 수정 (코드 변경 X)      |
+| design           | CSS 등 사용자 UI 디자인 변경                          |
+| comment          | 필요한 주석 추가 및 변경                              |
+| rename           | 파일 혹은 폴더명을 수정하거나 옮김                    |
+| remove           | 파일을 삭제하는 작업만 수행                           |
+| !BREAKING CHANGE | 커다란 API 변경                                       |
+| !HOTFIX          | 급하게 치명적인 버그를 고침                           |
 
 </div>
