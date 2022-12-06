@@ -123,13 +123,42 @@ Main-project **Yes27!**
 </details>
 
 
+<details>
+    <summary>contents 7.마이페이지</summary>
+    <img width="609" alt="마이페이지" src="https://user-images.githubusercontent.com/106054006/205793398-85071019-4f4a-4f6b-b581-2f0260e3c06c.gif">
+  
+</details>
+
+<details>
+    <summary>contents 8.로그인/로그아웃</summary>
+    
+   <img width="609" alt="로그인/로그아웃" src="https://user-images.githubusercontent.com/106054006/205793313-ca3eecb6-e1db-4588-afbf-b87f687a1fe5.gif">
+   
+</details>
+
+<details>
+    <summary>contents 9.회원가입</summary>
+    
+ <img width="609" alt="회원가입" src="https://user-images.githubusercontent.com/106054006/205793362-bdd0e353-4a68-4d47-8ede-11c9d81a75eb.gif" >
+ 
+</details>
+
+<details>
+    <summary>contents 10.유저정보 수정/탈퇴</summary>
+    
+  <img width="609" alt="학원일정" src="https://user-images.githubusercontent.com/106054006/205793383-682f232c-a3f3-46dc-ba56-49feba56c143.gif">
+     
+</details>
+
+
+
 
 </div>
 
 ## 사용한 Skills
 
 <div align=center>
-<img width="831" alt="스크린샷 2022-12-03 오후 4 36 19" src="https://user-images.githubusercontent.com/106054006/205590948-aee81a01-b782-4d88-a5aa-3834267ffbbe.png">
+<img width="831" alt="스크린샷 2022-12-03 오후 4 36 19" src="https://user-images.githubusercontent.com/106054006/205793383-682f232c-a3f3-46dc-ba56-49feba56c143.gif">
 
   
   <div align=left>
@@ -142,19 +171,8 @@ Main-project **Yes27!**
 
 
 
-##  Commit convention![로그인:로그아웃](https://user-images.githubusercontent.com/106054006/205793313-ca3eecb6-e1db-4588-afbf-b87f687a1fe5.gif)
-
-
-![유저정보수정:탈퇴](https://user-images.githubusercontent.com/106054006/205793345-24ce7d9e-ed4e-4caf-af77-7dd0321a6857.gif)
-
-
-</div>![회원가입1](https://user-images.githubusercontent.com/106054006/205793362-bdd0e353-4a68-4d47-8ede-11c9d81a75eb.gif)
   
 
-  
-![Dec-04-2022 17-20-33](https://user-images.githubusercontent.com/106054006/205793383-682f232c-a3f3-46dc-ba56-49feba56c143.gif)
-  
-![마이페이지](https://user-images.githubusercontent.com/106054006/205793398-85071019-4f4a-4f6b-b581-2f0260e3c06c.gif)
 
 
 <div align=center>
