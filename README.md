@@ -164,8 +164,11 @@ Main-project **Yes27!**
 
 
 </div>![회원가입1](https://user-images.githubusercontent.com/106054006/205793362-bdd0e353-4a68-4d47-8ede-11c9d81a75eb.gif)
+  
 ![Dec-04-2022 16-16-54](https://user-images.githubusercontent.com/106054006/205793366-c249fa81-842f-4fd6-84db-200c43e7991c.gif)
+  
 ![Dec-04-2022 17-20-33](https://user-images.githubusercontent.com/106054006/205793383-682f232c-a3f3-46dc-ba56-49feba56c143.gif)
+  
 ![마이페이지](https://user-images.githubusercontent.com/106054006/205793398-85071019-4f4a-4f6b-b581-2f0260e3c06c.gif)
 
 
