@@ -11,7 +11,6 @@ export interface BootData {
   totalCost: string;
   onOff: string;
 }
-
 const onClick = () => {
   window.scrollTo({
     top: 0,
@@ -22,12 +21,12 @@ const onClick = () => {
 export const Table = ({ data }: any) => {
   const columnHelper = createColumnHelper<BootData>();
   const columns = [
-    columnHelper.accessor('title', { header: '이름', maxSize: 10 }),
-    columnHelper.accessor('beginRegisterDate', { header: '접수일', maxSize: 10 }),
-    columnHelper.accessor('finalRegisterDate', { header: '접수마감일', maxSize: 50 }),
-    columnHelper.accessor('process', { header: '과정', maxSize: 50 }),
-    columnHelper.accessor('totalCost', { header: '총 비용', maxSize: 50 }),
-    columnHelper.accessor('onOff', { header: '온/오프라인', maxSize: 50 }),
+    columnHelper.accessor('title', { header: '이름' }),
+    columnHelper.accessor('beginRegisterDate', { header: '접수일' }),
+    columnHelper.accessor('finalRegisterDate', { header: '접수마감일' }),
+    columnHelper.accessor('process', { header: '과정' }),
+    columnHelper.accessor('totalCost', { header: '총 비용' }),
+    columnHelper.accessor('onOff', { header: '온/오프라인' }),
   ];
   const table = useReactTable({
     data,
@@ -75,14 +74,15 @@ export const MobileTable = ({ data }: any) => {
               <div>{`${el.beginRegisterDate}`}</div>
             </S.MobileLeft>
             <S.MobileMiddle to={`/bootcamp/${data[idx].bootcampId}`} onClick={onClick}>
-              <div>{el.process}</div>
               <div>
                 <div>{el.title}</div>
               </div>
+              <div>{el.process}</div>
             </S.MobileMiddle>
             <S.MobileRight>
               <div>
-                <div>{el.totalCost}</div> <div>{el.onOff}</div>
+                <div>{el.onOff}</div>
+                <div>{el.totalCost}</div>
               </div>
             </S.MobileRight>
           </div>

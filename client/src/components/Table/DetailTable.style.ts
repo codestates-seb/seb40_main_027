@@ -19,6 +19,9 @@ export const Detail = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    @media ${theme.mobile} {
+      width: 100%;
+    }
     :first-child {
       border-right: 2px solid var(--greenBootDetailBorder);
       @media ${theme.mobile} {
@@ -56,7 +59,10 @@ export const Detail = styled.div`
           margin-left: 0;
           width: 100%;
           > span {
-            width: 70%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
             word-wrap: break-word;
           }
         }

@@ -79,7 +79,7 @@ const Main = () => {
             <Icon icon="fluent:person-question-mark-16-regular" color="var(--greenMain)" width="100%" height="65" />
             <span className="icon-menu-title">적성검사</span>
           </IconContent>
-          <IconContent to={'/loadmap'}>
+          <IconContent to={'/roadmap'}>
             <Icon icon="zondicons:load-balancer" color="var(--greenMain)" width="80%" height="62" />
             <span className="icon-menu-title">로드맵</span>
           </IconContent>

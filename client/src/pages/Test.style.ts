@@ -9,7 +9,7 @@ export const TestContent = styled.div`
   margin: 0 10% 0 10%;
 
   @media screen and (max-width: 414px) {
-    height: 80vh;
+    height: 100vh;
     margin: 0;
   }
 `;

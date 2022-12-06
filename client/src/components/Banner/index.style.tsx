@@ -54,6 +54,8 @@ export const Title = styled.h2`
   margin-left: 0;
   margin-right: 0;
   font-weight: bold;
+  text-align: center;
+  text-align-last: center;
 
   @media ${theme.mobile} {
     width: calc(100% / 3);
@@ -74,6 +76,23 @@ export const BannerImg = styled.div`
     > img {
       width: 40px;
       height: 50%;
+    }
+  }
+`;
+
+export const RoadRight = styled.div`
+  width: calc(100% / 3);
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  align-items: flex-end;
+  > img {
+    width: 180px;
+  }
+  @media ${theme.mobile} {
+    > img {
+      width: 95px;
+      height: 45%;
     }
   }
 `;
