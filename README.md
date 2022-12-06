@@ -59,7 +59,7 @@
 **<h2>💡 어떻게 이용을하나요?</h2>**
 
 <details>
-    <summary>check 1. 학원 일정확인</summary>
+    <summary>contents 1. 학원 일정확인</summary>
 접수중인 학원들을 찾을 수 있고 , 마음에 들면 찜버튼을 이용해 저장을 할 수 있습니다!
 
 <img width="609" alt="스크린샷 2022-12-05 오후 9 09 46" src="https://user-images.githubusercontent.com/106054006/205635572-81c1df4b-4909-4649-9475-3eb6e4d30282.png" >
@@ -70,7 +70,7 @@
 
 
 <details>
-    <summary>check 2.리뷰,스터디,멘토링</summary>
+    <summary>contents 2&3&4.리뷰,스터디,멘토링</summary>
 
 <img width="609" alt="스크린샷 2022-12-05 오후 9 53 56" src="https://user-images.githubusercontent.com/106054006/205642283-0eb8c03a-f271-4863-8b08-098ffaaa3f9e.png">
 
@@ -78,7 +78,7 @@
 </details>
 
 <details>
-    <summary>check 3.적성검사</summary>
+    <summary>contents 5.적성검사</summary>
 
 
   <img width="609" alt="스크린샷 2022-12-05 오후 9 54 08" src="https://user-images.githubusercontent.com/106054006/205642415-53e57aac-840a-4fb6-a1df-d85fb935c850.png">
@@ -88,7 +88,7 @@
 
 
 <details>
-    <summary>check 4.마이페이지</summary>
+    <summary>check 6.로드맵</summary>
 
 <img width="609" alt="스크린샷 2022-12-05 오후 9 54 22" src="https://user-images.githubusercontent.com/106054006/205642475-c69528b0-e50d-4853-a4f6-7b0689ab9959.png">
 
@@ -98,13 +98,13 @@
 **<h2>💡시연 영상</h2>**
 
 <details>
-    <summary>contents 1. 적성검사</summary>
+    <summary>check 1. 적성검사</summary>
     <img width="609" alt="적성검사" src="https://user-images.githubusercontent.com/106054006/205793366-c249fa81-842f-4fd6-84db-200c43e7991c.gif">
 </details>
 
 
 <details>
-    <summary>contents 2. 로드맵</summary>
+    <summary>check 2. 로드맵</summary>
      <img width="609" alt="로드맵" src="https://user-images.githubusercontent.com/106054006/205793319-4199ddd0-a251-4bd9-9101-11a13b52889c.gif">
 </details>
 
@@ -112,40 +112,40 @@
 </details>
 
 <details>
-    <summary>cotents 3&4&5. 수료 후기 & 스터디 & 멘토링 게시판 글 작성하기</summary>
+    <summary>check 3. 수료 후기 & 스터디 & 멘토링 게시판 글 작성하기</summary>
       <img width="609" alt="게시글 crud" src="https://user-images.githubusercontent.com/106054006/205793074-53c1a848-2abb-4ced-a13f-2514ef56f781.gif">
       <img width="609" alt="댓글crud구현1" src="https://user-images.githubusercontent.com/106054006/205793309-baad92da-5e75-4062-8290-b98939c59060.gif">
 </details>
 
 
 <details>
-    <summary>contents 6.학원일정</summary>
+    <summary>check 4.학원일정</summary>
     <img width="609" alt="학원일정" src="https://user-images.githubusercontent.com/106054006/205793326-25c2c427-24d0-4d16-96a2-cc8437f92b0b.gif">
 </details>
 
 
 <details>
-    <summary>contents 7.마이페이지</summary>
+    <summary>check 5.마이페이지</summary>
     <img width="609" alt="마이페이지" src="https://user-images.githubusercontent.com/106054006/205793398-85071019-4f4a-4f6b-b581-2f0260e3c06c.gif">
   
 </details>
 
 <details>
-    <summary>contents 8.로그인/로그아웃</summary>
+    <summary>check 6.로그인/로그아웃</summary>
     
    <img width="609" alt="로그인/로그아웃" src="https://user-images.githubusercontent.com/106054006/205793313-ca3eecb6-e1db-4588-afbf-b87f687a1fe5.gif">
    
 </details>
 
 <details>
-    <summary>contents 9.회원가입</summary>
+    <summary>check 7.회원가입</summary>
     
  <img width="609" alt="회원가입" src="https://user-images.githubusercontent.com/106054006/205793362-bdd0e353-4a68-4d47-8ede-11c9d81a75eb.gif" >
  
 </details>
 
 <details>
-    <summary>contents 10.유저정보 수정/탈퇴</summary>
+    <summary>check 8.유저정보 수정/탈퇴</summary>
     
   <img width="609" alt="학원일정" src="https://user-images.githubusercontent.com/106054006/205793383-682f232c-a3f3-46dc-ba56-49feba56c143.gif">
      
