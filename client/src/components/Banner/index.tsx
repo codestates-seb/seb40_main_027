@@ -34,9 +34,6 @@ const Banner = ({ text, pageType }: PropType) => {
             <img src={pageType === 'post' ? boardimage : bootimage} alt="right-img" />
           </S.BannerImg>
         )}
-        {/* <S.BannerImg>
-          <img src={pageType === 'post' ? boardimage : bootimage} alt="right-img" />
-        </S.BannerImg> */}
       </S.BannerInner>
     </S.BannerWrap>
   );

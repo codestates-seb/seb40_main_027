@@ -29,7 +29,7 @@ function App() {
         <Route path="/users/login" element={<Login />} />
         <Route path="/users/signup" element={<SignUp />} />
         <Route path="/test" element={<Test />} />
-        <Route path="/loadmap" element={<RoadMap />} />
+        <Route path="/roadmap" element={<RoadMap />} />
         <Route path="/bootcamp" element={<BootCamp />} />
         <Route path="/bootcamp/:id" element={<BootCampDetail />} />
         <Route path="/postscript" element={<Forum />} />
