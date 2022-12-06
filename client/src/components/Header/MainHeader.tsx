@@ -18,7 +18,6 @@ const HeaderContent = styled.header`
   }
 
   img {
-    padding-top: 0.5rem;
     width: 150px;
     height: 60px;
   }
@@ -33,7 +32,8 @@ const HeaderContent = styled.header`
       width: 100%;
     }
     img {
-      width: 140px;
+      margin: 0 0.5rem 0 0.5rem;
+      width: 120px;
       height: 60px;
     }
   }
