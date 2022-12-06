@@ -1,6 +1,6 @@
 
 
-<img width="936" alt="Frame 9" src="https://user-images.githubusercontent.com/106054006/205625320-25846281-a3a3-4bb5-989b-ffafb865a411.png">
+<img width="1112" alt="Frame 9" src="https://user-images.githubusercontent.com/106054006/205625320-25846281-a3a3-4bb5-989b-ffafb865a411.png">
 
 
 
@@ -9,6 +9,8 @@ Main-project **Yes27!**
 **배포링크**:http://bootlamp.s3-website.ap-northeast-2.amazonaws.com/
 
 ## Yes27!
+<img width="1112" alt="스크린샷 2022-12-06 오전 2 09 08" src="https://user-images.githubusercontent.com/48895268/205699073-0f213d47-6a88-47e0-89d2-36adc47bffbb.png">
+
 
 <table>
   <tr>
@@ -86,6 +88,48 @@ Main-project **Yes27!**
 
 <details>
     <summary>check 4.마이페이지</summary>
+
+<img width="609" alt="스크린샷 2022-12-05 오후 9 54 22" src="https://user-images.githubusercontent.com/106054006/205642475-c69528b0-e50d-4853-a4f6-7b0689ab9959.png">
+
+
+</details>
+
+**<h2>💡시연 영상</h2>**
+
+<details>
+    <summary>contents 1. 적성검사</summary>
+프론트로 갈지 백으로 갈지 고민하는 유저를 위한 재밌고 간단한 테스트
+
+
+<img width="609" alt="스크린샷 2022-12-05 오후 9 09 46" src="https://user-images.githubusercontent.com/106054006/205635572-81c1df4b-4909-4649-9475-3eb6e4d30282.png" >
+
+
+
+</details>
+
+
+<details>
+    <summary>contents 2. 로드맵</summary>
+진로를 정했으면 무엇을 배워야할지 크게 알 수 있는 곳
+
+<img width="609" alt="스크린샷 2022-12-05 오후 9 53 56" src="https://user-images.githubusercontent.com/106054006/205642283-0eb8c03a-f271-4863-8b08-098ffaaa3f9e.png">
+
+
+</details>
+
+<details>
+    <summary>cotents 3&4&5. 수료 후기 & 스터디 & 멘토링 게시판 글 작성하기</summary>
+각 게시판에서 
+
+
+  <img width="609" alt="스크린샷 2022-12-05 오후 9 54 08" src="https://user-images.githubusercontent.com/106054006/205642415-53e57aac-840a-4fb6-a1df-d85fb935c850.png">
+
+
+</details>
+
+
+<details>
+    <summary>contents 6.학원일정</summary>
 
 <img width="609" alt="스크린샷 2022-12-05 오후 9 54 22" src="https://user-images.githubusercontent.com/106054006/205642475-c69528b0-e50d-4853-a4f6-7b0689ab9959.png">
 
