@@ -151,11 +151,23 @@ Main-project **Yes27!**
 ## 
 추가할 것 
 백엔드의 데이터베이스? 프론트쪽 피그마/피그잼? 사용서설명서? 화면정의서? 고민해보기
+![게시글 crud](https://user-images.githubusercontent.com/106054006/205793074-53c1a848-2abb-4ced-a13f-2514ef56f781.gif)
+
+   
+![댓글crud구현1](https://user-images.githubusercontent.com/106054006/205793309-baad92da-5e75-4062-8290-b98939c59060.gif)
 
 
-##  Commit convention
+##  Commit convention![로그인:로그아웃](https://user-images.githubusercontent.com/106054006/205793313-ca3eecb6-e1db-4588-afbf-b87f687a1fe5.gif)
+![로드맵](https://user-images.githubusercontent.com/106054006/205793319-4199ddd0-a251-4bd9-9101-11a13b52889c.gif)
+![부트캠프 일정및 찜하기](https://user-images.githubusercontent.com/106054006/205793326-25c2c427-24d0-4d16-96a2-cc8437f92b0b.gif)
+![유저정보수정:탈퇴](https://user-images.githubusercontent.com/106054006/205793345-24ce7d9e-ed4e-4caf-af77-7dd0321a6857.gif)
 
-</div>
+
+</div>![회원가입1](https://user-images.githubusercontent.com/106054006/205793362-bdd0e353-4a68-4d47-8ede-11c9d81a75eb.gif)
+![Dec-04-2022 16-16-54](https://user-images.githubusercontent.com/106054006/205793366-c249fa81-842f-4fd6-84db-200c43e7991c.gif)
+![Dec-04-2022 17-20-33](https://user-images.githubusercontent.com/106054006/205793383-682f232c-a3f3-46dc-ba56-49feba56c143.gif)
+![마이페이지](https://user-images.githubusercontent.com/106054006/205793398-85071019-4f4a-4f6b-b581-2f0260e3c06c.gif)
+
 
 <div align=center>
 
