@@ -21,3 +21,24 @@
 | !HOTFIX          | 급하게 치명적인 버그를 고침                       |
 
 </div>
+
+
+## ERD
+**[1] 유저, 역할**
+![member_role](https://user-images.githubusercontent.com/97827368/205203318-90af07c7-b424-446f-a5be-b3df2bd495b7.JPG)
+
+
+**[2] 부트캠프 게시판**
+![poscscript](https://user-images.githubusercontent.com/97827368/205203340-5bc07f88-e030-49cb-83b6-e2c8b18a106e.JPG)
+
+
+**[3] 스터디 게시판**
+![study2](https://user-images.githubusercontent.com/97827368/205223589-e11c52c1-2b49-435e-b180-346a7ecc871e.JPG)
+
+
+**[4] 멘토링 게시판**
+![mentoring](https://user-images.githubusercontent.com/97827368/205203362-dd7d8531-7677-49cb-9ba8-24c50993b577.JPG)
+
+
+**[5] 부트캠프 일정**
+![bootcamp](https://user-images.githubusercontent.com/97827368/205203365-08354548-6220-4559-8dd9-52032658a793.JPG)
