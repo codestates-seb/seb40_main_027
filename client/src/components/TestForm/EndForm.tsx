@@ -47,7 +47,7 @@ const EndForm = () => {
             <img src={flower1} alt="결과" width="100%" />
           </S.FrontPicture>
           <S.ResultBottomFrom>
-            <a href={'https://roadmap.sh/frontend'} target="_blank" rel="noreferrer">
+            <a href={'https://roadmap.sh/backend'} target="_blank" rel="noreferrer">
               추천링크
             </a>
           </S.ResultBottomFrom>
